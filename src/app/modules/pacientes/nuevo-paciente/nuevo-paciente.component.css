@@ -1,0 +1,23 @@
+.container{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.title{
+    margin: auto;
+    margin-top: 10px;
+}
+
+.title h1{
+    font-weight: 600;
+}
+
+.card{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.button{
+    background-color: #60C76E;
+    color: #ffffff;
+}
