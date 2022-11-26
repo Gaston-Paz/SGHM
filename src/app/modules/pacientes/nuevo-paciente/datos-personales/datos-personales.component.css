@@ -18,3 +18,11 @@
 img{
   width: 45%;
 }
+
+.pad-15{
+  padding: 15px 15px 0 15px;
+}
+
+.pad-15-bis{
+  padding: 0 15px 0 15px;
+}
