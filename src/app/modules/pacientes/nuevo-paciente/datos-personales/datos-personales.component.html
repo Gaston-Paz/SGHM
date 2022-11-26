@@ -1,113 +1,166 @@
 <form [formGroup]="form" class="example-form">
+  <div class="col">
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Nombre</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="nombre"
+          placeholder="Nombre del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,1)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.nombre.hasError('required')">
+          Nombre es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
 
-    <div class="col">
-        <div class="row">
-            
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-                <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-                    Ingrese un formato de e-mail válido
-                </mat-error>
-                <mat-error *ngIf="form.controls.mail.hasError('required')">
-                    Email es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
-
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-                <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-                  Ingrese un formato de e-mail válido
-                </mat-error>
-                <mat-error *ngIf="form.controls.mail.hasError('required')">
-                  Email es <strong>obligatorio</strong>
-                </mat-error>
-              </mat-form-field>
-        </div>
-    
-        <div class="row">
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-          <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-            Ingrese un formato de e-mail válido
-          </mat-error>
-          <mat-error *ngIf="form.controls.mail.hasError('required')">
-            Email es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-            <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-              Ingrese un formato de e-mail válido
-            </mat-error>
-            <mat-error *ngIf="form.controls.mail.hasError('required')">
-              Email es <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Apellido</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="apellido"
+          placeholder="Apellido del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,2)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.apellido.hasError('required')">
+          Apellido es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
 
-    
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input
+          type="date"
+          matInput
+          formControlName="fechaNacimiento"
+          placeholder="Fecha de Nacimiento"
+          required="true"
+          (change)="CargarDatosPersonales($event,3)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.fechaNacimiento.hasError('required')">
+          Fecha de Nacimiento es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
 
+      <mat-form-field class="example-full-width">
+        <mat-label>Localidad</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="localidad"
+          placeholder="Localidad del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,8)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.localidad.hasError('required')">
+          Localidad es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
 
+  <div class="col">
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input
+          type="email"
+          matInput
+          formControlName="mail"
+          placeholder="E-mail del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,5)"
+          autocomplete="off"
+        />
+        <mat-error
+          *ngIf="
+            form.controls.mail.hasError('email') &&
+            !form.controls.mail.hasError('required')
+          "
+        >
+          Ingrese un formato de e-mail válido
+        </mat-error>
+        <mat-error *ngIf="form.controls.mail.hasError('required')">
+          Email es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Celular</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="celular"
+          placeholder="Celular del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,4)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.celular.hasError('required')">
+          Email es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
 
-    <div class="col">
-        <div class="row">
-            
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-                <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-                    Ingrese un formato de e-mail válido
-                </mat-error>
-                <mat-error *ngIf="form.controls.mail.hasError('required')">
-                    Email es <strong>obligatorio</strong>
-                </mat-error>
-            </mat-form-field>
+    <div class="row">
+      <mat-form-field class="example-full-width">
+        <mat-label>Ocupación</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="ocupacion"
+          placeholder="Ocupación del paciente"
+          required="true"
+          (change)="CargarDatosPersonales($event,6)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.ocupacion.hasError('required')">
+          Ocupación es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
 
-            <mat-form-field class="example-full-width">
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-                <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-                  Ingrese un formato de e-mail válido
-                </mat-error>
-                <mat-error *ngIf="form.controls.mail.hasError('required')">
-                  Email es <strong>obligatorio</strong>
-                </mat-error>
-              </mat-form-field>
-        </div>
-    
-        <div class="row">
-        <mat-form-field class="example-full-width">
-          <mat-label>Email</mat-label>
-          <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-          <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-            Ingrese un formato de e-mail válido
-          </mat-error>
-          <mat-error *ngIf="form.controls.mail.hasError('required')">
-            Email es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-            <mat-label>Email</mat-label>
-            <input type="email" matInput formControlName="mail" [(ngModel)]="datosPersonales.mail" placeholder="Ex. pat@example.com" required="true">
-            <mat-error *ngIf="form.controls.mail.hasError('email') && !form.controls.mail.hasError('required')">
-              Ingrese un formato de e-mail válido
-            </mat-error>
-            <mat-error *ngIf="form.controls.mail.hasError('required')">
-              Email es <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>¿Cómo nació?</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="nacimiento"
+          placeholder="Ex. pat@example.com"
+          required="true"
+          (change)="CargarDatosPersonales($event,7)"
+          autocomplete="off"
+        />
+        <mat-error *ngIf="form.controls.nacimiento.hasError('required')">
+          ¿Cómo nació? es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
     </div>
 
-    
+    <div class="row">
 
+        <mat-label>Foto</mat-label>
+        <input
+          type="file"
+          formControlName="foto"
+          placeholder="Foto del paciente"
+          (change)="CargarFoto($event)"
+        />
 
+          <img *ngIf="previsualizacionFoto" [src]="previsualizacionFoto" alt="Foto del paciente">
     </div>
 
-  </form>
+
+
+
+  </div>
+</form>

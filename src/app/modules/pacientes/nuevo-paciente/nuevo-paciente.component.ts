@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
   selector: 'app-nuevo-paciente',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevoPacienteComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _servicePacienteNuevo: NuevoPacienteService) { }
 
   ngOnInit(): void {
+  }
+
+  FormValid(){
+    return this._servicePacienteNuevo.FormValid();
   }
 
 }
