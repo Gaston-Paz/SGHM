@@ -1,0 +1,32 @@
+.example-form {
+
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  
+  .example-full-width {
+    width: 48%;
+    /* margin-left: 5px;
+    margin-right: 5px; */
+  }
+
+.date-picker-toogle{
+  margin-left: 525px;
+}
+
+img{
+  width: 45%;
+}
+
+.pad-15{
+  padding: 15px 15px 0 15px;
+}
+
+.pad-15-bis{
+  padding: 0 15px 0 15px;
+}
+
+.mt-20{
+  margin-top: 20px;
+}

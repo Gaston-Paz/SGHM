@@ -21,3 +21,8 @@
     background-color: #60C76E;
     color: #ffffff;
 }
+
+.button-disabled{
+    background-color: #cfebd2;
+    color: #ffffff;
+}

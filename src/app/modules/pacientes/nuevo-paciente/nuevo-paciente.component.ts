@@ -17,4 +17,8 @@ export class NuevoPacienteComponent implements OnInit {
     return this._servicePacienteNuevo.FormValid();
   }
 
+  GuardarPaciente(){
+    this._servicePacienteNuevo.GuardarPaciente();
+  }
+
 }

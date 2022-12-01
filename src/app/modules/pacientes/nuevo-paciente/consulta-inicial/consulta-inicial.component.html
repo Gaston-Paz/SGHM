@@ -1,0 +1,177 @@
+<form [formGroup]="form" class="example-form">
+    <div class="col pad-15">
+      <div class="row">
+        <mat-form-field class="example-full-width">
+          <mat-label>Motivo</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="motivo"
+            placeholder="Motivo de la consulta"
+            required="true"
+            (change)="CargarConsultaInicial($event,9)"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.motivo.hasError('required')">
+            Motivo es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field class="example-full-width">
+          <mat-label>Fecha de Consulta</mat-label>
+          <input
+            type="date"
+            matInput
+            formControlName="fecha"
+            required="true"
+            (change)="CargarConsultaInicial($event,3)"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.fecha.hasError('required')">
+            Fecha es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+  
+      <div class="row">
+        <mat-form-field class="example-full-width">
+            <mat-label>Antigüedad</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="antiguedad"
+              placeholder="Antigüedad"
+              required="true"
+              (change)="CargarConsultaInicial($event,2)"
+              autocomplete="off"
+            />
+            <mat-error *ngIf="form.controls.antiguedad.hasError('required')">
+                Antigüedad es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Localización</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="localizacion"
+            placeholder="Localización"
+            required="true"
+            (change)="CargarConsultaInicial($event,8)"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.localizacion.hasError('required')">
+            Localización es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        
+      </div>
+    </div>
+  
+    <div class="col pad-15-bis">
+      <div class="row">
+        <mat-form-field class="example-full-width">
+            <mat-label>Intensidad</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="intensidad"
+              placeholder="Intensidad"
+              required="true"
+              (change)="CargarConsultaInicial($event,6)"
+              autocomplete="off"
+            />
+            <mat-error *ngIf="form.controls.intensidad.hasError('required')">
+              Intensidad es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Característica</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="caracteristica"
+            placeholder="Característica"
+            required="true"
+            (change)="CargarConsultaInicial($event,5)"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.caracteristica.hasError('required')">
+            Característica es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        
+      </div>
+  
+      <div class="row">
+        <mat-form-field class="example-full-width">
+            <mat-label>Irradiacion</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="irradiacion"
+              placeholder="Irradiacion"
+              required="true"
+              (change)="CargarConsultaInicial($event,7)"
+              autocomplete="off"
+            />
+            <mat-error *ngIf="form.controls.irradiacion.hasError('required')">
+              Irradiacion es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Atenúa</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="atenua"
+            placeholder="Atenúa"
+            required="true"
+            (change)="CargarConsultaInicial($event,4)"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.atenua.hasError('required')">
+            Atenúa es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        
+      </div>
+  
+      <div class="row">
+        <mat-form-field class="example-full-width">
+            <mat-label>Actividad Física</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="actividadFisica"
+              placeholder="Actividad Física"
+              required="true"
+              (change)="CargarConsultaInicial($event,1)"
+              autocomplete="off"
+            />
+            <mat-error *ngIf="form.controls.actividadFisica.hasError('required')">
+              Actividad Física es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <div class="example-full-width">
+              <mat-checkbox class="mt-20" color="primary" (change)="CargarConsultaInicial($event,10)" formControlName="covid">Covid</mat-checkbox>
+
+          </div>
+
+      </div>
+  
+  
+  
+  
+    </div>
+  </form>
+  

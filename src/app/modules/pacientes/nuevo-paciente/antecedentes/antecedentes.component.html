@@ -1,0 +1,426 @@
+<form [formGroup]="form" class="example-form">
+  <div class="col pad-15">
+
+    <!-- Cirugias -->
+    <div class="row bg-section">
+      <h3>Cirugías</h3>
+      <mat-form-field class="example-full-width">
+        <mat-label>Cirugías</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="cirugias"
+          placeholder="Año, localización"
+          (change)="CargarAntecedentes()"
+          autocomplete="off"
+          [(ngModel)]="antecedentes.cirugias"
+        />
+        <mat-error *ngIf="form.controls.cirugias.hasError('required')">
+          Cirugías es <strong>obligatorio</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Odontologia -->
+    <div class="row">
+      <h3 class="mt-20">Odontología</h3>
+      <div class="row">
+        <h5>Implantes</h5>
+        <div class="row">
+          <mat-form-field class="example-full-width">
+            <mat-label>Implantes Superiores</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="implanteSuperior"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.implanteSuperior"
+            />
+            <mat-error
+              *ngIf="form.controls.implanteSuperior.hasError('required')"
+            >
+              Implantes Superiores es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Implantes Inferiores</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="implanteInferior"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.implanteInferior"
+            />
+            <mat-error
+              *ngIf="form.controls.implanteInferior.hasError('required')"
+            >
+              Implantes Inferiores es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <h5>Ortodoncia</h5>
+        <div class="example-full-width">
+
+            <mat-checkbox [(ngModel)]="antecedentes.ortodoncia" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
+        </div>
+            
+        <mat-form-field class="example-full-width">
+            <mat-label>Edad</mat-label>
+            <input
+              type="number"
+              matInput
+              formControlName="EdadOrtodoncia"
+              placeholder="Edad Ortodoncia"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.EdadOrtodoncia"
+              [disabled]="!antecedentes.ortodoncia"
+            />
+            <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('required')">
+                Edad es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+      </div>
+
+      <div class="row">
+        <h5>Piezas</h5>
+        <mat-form-field class="example-full-width">
+            <mat-label>Piezas Faltantes</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="piezasfaltantes"
+              placeholder="Piezas Faltantes"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.piezasfaltantes"
+            />
+            <mat-error *ngIf="form.controls.piezasfaltantes.hasError('required')">
+                Piezas Faltantes es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="example-full-width">
+
+            <mat-checkbox class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- Menstruacion -->
+    <div class="row bg-section">
+        <h3 class="mt-20">Salud Femeninda</h3>
+        <div class="example-full-width">
+
+            <mat-checkbox [(ngModel)]="antecedentes.menstruacion" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
+        </div>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Frecuencia</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="frecuencia"
+              placeholder="Frecuencia"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.frecuencia"
+              [disabled]="!antecedentes.menstruacion"
+            />
+            <mat-error *ngIf="form.controls.frecuencia.hasError('required')">
+                Frecuencia es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Duración</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="duracion"
+              placeholder="Duración"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.duracion"
+              [disabled]="!antecedentes.menstruacion"
+            />
+            <mat-error *ngIf="form.controls.duracion.hasError('required')">
+                Duración es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Volumen</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="volumen"
+              placeholder="Volumen"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.volumen"
+              [disabled]="!antecedentes.menstruacion"
+            />
+            <mat-error *ngIf="form.controls.volumen.hasError('required')">
+                Volumen es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Pérdidas</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="perdidas"
+              placeholder="Pérdidas"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.perdidas"
+            />
+            <mat-error *ngIf="form.controls.perdidas.hasError('required')">
+                Pérdidas es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Partos</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="partos"
+              placeholder="Partos"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.partos"
+            />
+            <mat-error *ngIf="form.controls.partos.hasError('required')">
+                Partos es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+    </div>
+
+    <!-- Sistemas -->
+    <div class="row">
+        <h3 class="mt-20">Sistemas</h3>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Intestinal</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="intestinal"
+              placeholder="Intestinal"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.intestinal"
+            />
+            <mat-error *ngIf="form.controls.intestinal.hasError('required')">
+                Intestinal es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Digestivo</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="digestivo"
+              placeholder="Digestivo"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.digestivo"
+            />
+            <mat-error *ngIf="form.controls.digestivo.hasError('required')">
+                Digestivo es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Cardíaco</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="cardiaco"
+              placeholder="Cardíaco"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.cardiaco"
+            />
+            <mat-error *ngIf="form.controls.cardiaco.hasError('required')">
+                Cardíaco es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Urogenital</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="urogenital"
+              placeholder="Urogenital"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.urogenital"
+            />
+            <mat-error *ngIf="form.controls.urogenital.hasError('required')">
+                Urogenital es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Respiratorio</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="respiratorio"
+              placeholder="Respiratorio"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.respiratorio"
+            />
+            <mat-error *ngIf="form.controls.respiratorio.hasError('required')">
+                Respiratorio es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+
+    </div>
+
+    <!-- Otros -->
+    <div class="row bg-section">
+        <h3 class="mt-20">Otros</h3>
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Accidentes</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="accidentes"
+              placeholder="Accidentes"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.accidentes"
+            />
+            <mat-error *ngIf="form.controls.accidentes.hasError('required')">
+                Accidentes es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="example-full-width">
+
+            <mat-checkbox [(ngModel)]="antecedentes.diabetes" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
+        </div>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Medicación</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="medicacion"
+              placeholder="Medicación"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.medicacion"
+            />
+            <mat-error *ngIf="form.controls.medicacion.hasError('required')">
+                Medicación es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Fracturas</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="fracturas"
+              placeholder="Fracturas"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.fracturas"
+            />
+            <mat-error *ngIf="form.controls.fracturas.hasError('required')">
+                Fracturas es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Dolores de Cabeza</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="dolorCabeza"
+              placeholder="Dolores de Cabeza"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.dolorCabeza"
+            />
+            <mat-error *ngIf="form.controls.dolorCabeza.hasError('required')">
+                Dolores de Cabeza es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Tiroides</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="tiroides"
+              placeholder="Tiroides"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.tiroides"
+            />
+            <mat-error *ngIf="form.controls.tiroides.hasError('required')">
+                Tiroides es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Otros</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="otros"
+              placeholder="Otros"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.otros"
+            />
+            <mat-error *ngIf="form.controls.otros.hasError('required')">
+                Otros es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Alimentación</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="alimentacion"
+              placeholder="Alimentación"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.alimentacion"
+            />
+            <mat-error *ngIf="form.controls.alimentacion.hasError('required')">
+                Alimentación es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+
+    </div>
+
+
+
+  </div>
+
+
+
+</form>
