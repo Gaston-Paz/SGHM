@@ -1,18 +1,20 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
-import { DatosPersonales } from "src/app/core/interfaces/datos-personales.interface";
+import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { environment } from "src/environments/environment.prod";
 
 @Injectable({
   providedIn: "root",
 })
 export class NuevoPacienteService {
-  datosPersonales: DatosPersonales = {
+  datosPersonales: Paciente = {
     apellido: "",
     celular: "",
     fechaNacimiento: new Date(),
-    mail: "",
-    nacimiento: "",
+    email: "",
+    nacio: "",
     nombre: "",
     ocupacion: "",
     localidad: ""
@@ -64,7 +66,7 @@ export class NuevoPacienteService {
     tiroides:''
   }
 
-  constructor() {}
+  constructor(private _httpClient: HttpClient) {}
 
   CargarDatosPersonales(dato: string, campo: number,valido:boolean) {      
     switch (campo) {
@@ -79,11 +81,11 @@ export class NuevoPacienteService {
         break;
       case 4: this.datosPersonales.celular = dato;
         break;
-      case 5: this.datosPersonales.mail = dato;
+      case 5: this.datosPersonales.email = dato;
         break;
       case 6: this.datosPersonales.ocupacion = dato;
         break;
-      case 7: this.datosPersonales.nacimiento = dato;
+      case 7: this.datosPersonales.nacio = dato;
         break;
         case 8: this.datosPersonales.localidad = dato;
         break;
@@ -128,19 +130,12 @@ export class NuevoPacienteService {
     return this.datosPersonlesCompletos && this.consultaInicialCompleta;
   }
 
+  //Métodos HTTP
   GuardarPaciente(){
-    console.log('Datos personales');
-    console.log(this.datosPersonales);
-    console.log('-----------------');
+    return this._httpClient.post<any>(environment.url + '/paciente',this.datosPersonales);
+  }
 
-    console.log('Consulta Inicial');
-    console.log(this.consultaInicial);
-    console.log('-----------------');
-
-    console.log('Antecedentes');
-    console.log(this.antecedente);
-    console.log('-----------------');
-    
-    
+  ObtenerPacientes(){
+    return this._httpClient.get<Paciente[]>('http://localhost:8080/paciente')
   }
 }

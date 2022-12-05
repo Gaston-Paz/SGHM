@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer } from "@angular/platform-browser";
-import { DatosPersonales } from "src/app/core/interfaces/datos-personales.interface";
+import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { NuevoPacienteService } from "../../nuevo-paciente.service";
 
 @Component({
