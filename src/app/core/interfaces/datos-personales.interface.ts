@@ -1,5 +1,5 @@
 export interface Paciente{
-    id?:number;
+    idPaciente?:number;
     nombre: string,
     apellido: string,
     celular: string,
@@ -8,6 +8,8 @@ export interface Paciente{
     localidad: string,
     nacio: string,
     ocupacion: string,
-    fotoPerfil?: Blob
+    fotoPerfil: string,
+    extensionFoto?: string,
+
     
 }

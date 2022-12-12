@@ -153,8 +153,9 @@
           type="file"
           formControlName="foto"
           placeholder="Foto del paciente"
-          (change)="CargarFoto($event)"
+          (change)="CargarFoto($event)" 
         />
+
 
           <img *ngIf="previsualizacionFoto" [src]="previsualizacionFoto" alt="Foto del paciente">
     </div>

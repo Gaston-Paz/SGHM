@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
@@ -17,7 +17,8 @@ export class NuevoPacienteService {
     nacio: "",
     nombre: "",
     ocupacion: "",
-    localidad: ""
+    localidad: "",
+    fotoPerfil: ""
   };
   datosPersonlesCompletos: boolean = false;
 
@@ -65,6 +66,8 @@ export class NuevoPacienteService {
     volumen:'',
     tiroides:''
   }
+
+  imagen: Blob = new Blob();
 
   constructor(private _httpClient: HttpClient) {}
 
@@ -131,11 +134,19 @@ export class NuevoPacienteService {
   }
 
   //Métodos HTTP
-  GuardarPaciente(){
-    return this._httpClient.post<any>(environment.url + '/paciente',this.datosPersonales);
+  GuardarFoto(formData:FormData, idPaciente:number){
+    return this._httpClient.post<Paciente>(environment.url + '/paciente/' + idPaciente,formData);
   }
 
   ObtenerPacientes(){
     return this._httpClient.get<Paciente[]>('http://localhost:8080/paciente')
+  }
+
+  GuardarPaciente(){
+    return this._httpClient.post<Paciente>(environment.url + '/paciente/', this.datosPersonales);
+  }
+
+  ObtenerFoto(){
+    return this._httpClient.get<any>(environment.url + '/paciente/foto/1');
   }
 }

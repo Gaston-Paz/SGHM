@@ -38,10 +38,9 @@ export class DatosPersonalesComponent implements OnInit {
   CargarFoto(ev: any) {
     const fotoCapturada = ev.target.files[0];
     this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
-      console.log(imagen);
       this.previsualizacionFoto = imagen.base;
+      this.SubirImagen(ev.target.files[0]);
     });
-    // this.fotos.push(fotoCapturada);
   }
 
   ExtraerBase64 = async ($event: any) =>
@@ -70,4 +69,30 @@ export class DatosPersonalesComponent implements OnInit {
   CargarDatosPersonales(dato: any, campo: number) {
     this._servicePacienteNuevo.CargarDatosPersonales(dato.target.value,campo, this.form.valid);
   }
+
+  SubirImagen(archivo:any){
+    this._servicePacienteNuevo.imagen = archivo;
+  }
+
+  // CargarImagen(file:FormData){
+  //   this._servicePacienteNuevo.datosPersonales.fotoPerfil = async (file: Blob) =>{
+  //       return new Promise((resolve,reject) => {
+  //         try {
+  //           let reader = new FileReader();
+  //           let fileByteArray: any = [];
+  //           reader.readAsArrayBuffer(file);
+  //           reader.onloadend = (evt) => {
+  //             if(evt.target!.readyState === FileReader.DONE){
+  //               const arrayBuffer: ArrayBuffer = evt.target!.result;
+  //               const array = new Uint8Array(arrayBuffer);
+  //               array.forEach((item) => fileByteArray.push(item));
+  //             }
+  //             resolve(fileByteArray);
+  //           }
+  //         } catch (e) {
+  //           reject(e);
+  //         }
+  //       });
+  //   }
+  // }
 }
