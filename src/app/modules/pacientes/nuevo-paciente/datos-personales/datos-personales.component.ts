@@ -14,6 +14,7 @@ export class DatosPersonalesComponent implements OnInit {
   fotos: any = [];
   previsualizacionFoto: string = "";
   form!: FormGroup;
+  fecha: Date = new Date();
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -22,6 +23,7 @@ export class DatosPersonalesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.fecha = new Date(Date.now());
     this.form = this._formBuilder.group({
       apellido: ["", Validators.required],
       celular: ["", Validators.required],
@@ -33,6 +35,7 @@ export class DatosPersonalesComponent implements OnInit {
       ocupacion: ["", Validators.required],
       foto: [""],
     });
+   
   }
 
   CargarFoto(ev: any) {
@@ -66,7 +69,7 @@ export class DatosPersonalesComponent implements OnInit {
       }
   });
 
-  CargarDatosPersonales(dato: any, campo: number) {
+  CargarDatosPersonales(dato: any, campo: number) {   
     this._servicePacienteNuevo.CargarDatosPersonales(dato.target.value,campo, this.form.valid);
   }
 
@@ -74,25 +77,14 @@ export class DatosPersonalesComponent implements OnInit {
     this._servicePacienteNuevo.imagen = archivo;
   }
 
-  // CargarImagen(file:FormData){
-  //   this._servicePacienteNuevo.datosPersonales.fotoPerfil = async (file: Blob) =>{
-  //       return new Promise((resolve,reject) => {
-  //         try {
-  //           let reader = new FileReader();
-  //           let fileByteArray: any = [];
-  //           reader.readAsArrayBuffer(file);
-  //           reader.onloadend = (evt) => {
-  //             if(evt.target!.readyState === FileReader.DONE){
-  //               const arrayBuffer: ArrayBuffer = evt.target!.result;
-  //               const array = new Uint8Array(arrayBuffer);
-  //               array.forEach((item) => fileByteArray.push(item));
-  //             }
-  //             resolve(fileByteArray);
-  //           }
-  //         } catch (e) {
-  //           reject(e);
-  //         }
-  //       });
-  //   }
-  // }
+  changeDate(date:any){
+    let fechaaux = new Date(date.value);
+    let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
+    let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
+    this.form.controls.fechaNacimiento.setValue(fechas);   
+    this._servicePacienteNuevo.CargarDatosPersonales(fecha.toDateString(),3, this.form.valid);
+    console.log(this._servicePacienteNuevo.datosPersonales);
+    
+  }
+
 }

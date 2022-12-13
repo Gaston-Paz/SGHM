@@ -37,7 +37,7 @@
     <div class="row">
       <mat-form-field class="example-full-width">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input
+        <!-- <input
           type="date"
           matInput
           formControlName="fechaNacimiento"
@@ -48,7 +48,13 @@
         />
         <mat-error *ngIf="form.controls.fechaNacimiento.hasError('required')">
           Fecha de Nacimiento es <strong>obligatorio</strong>
-        </mat-error>
+        </mat-error> -->
+
+        <input matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput)"
+        onclick="changeDate(dateInput)" [max]="fecha" [matDatepicker]="selector" [value]="form.controls.fechaNacimiento.value">
+        <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
+        <mat-datepicker #selector></mat-datepicker>
+
       </mat-form-field>
 
       <mat-form-field class="example-full-width">
@@ -146,10 +152,11 @@
       </mat-form-field>
     </div>
 
-    <div class="row">
+    <div class="row pad-10">
 
         <mat-label>Foto</mat-label>
         <input
+        class="form-control"
           type="file"
           formControlName="foto"
           placeholder="Foto del paciente"

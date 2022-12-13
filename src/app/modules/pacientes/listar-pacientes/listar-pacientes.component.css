@@ -1,0 +1,31 @@
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .container{
+      display: flex;
+      flex-direction: column;
+  }
+
+  .foto{
+    width: 205px;
+  }
+  
+  .button{
+    background-color: #60C76E;
+    color: #ffffff;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}

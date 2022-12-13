@@ -1,0 +1,29 @@
+.row{
+    display: flex;
+    width: 100%;
+}
+
+.col{
+    flex-direction: column;
+    width: 80%;
+}
+
+.col-2{
+    flex-direction: column;
+    width: 20%;
+}
+
+span{
+    font-size: 14px;
+}
+
+
+success.mat-snack-bar-container{
+    color: white;
+    background-color: #00b55b;
+}
+
+error.mat-snack-bar-container{
+    color: white;
+    background-color: #DA6363;
+}

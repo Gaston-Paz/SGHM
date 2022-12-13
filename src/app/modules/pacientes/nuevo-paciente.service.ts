@@ -71,7 +71,7 @@ export class NuevoPacienteService {
 
   constructor(private _httpClient: HttpClient) {}
 
-  CargarDatosPersonales(dato: string, campo: number,valido:boolean) {      
+  CargarDatosPersonales(dato: string, campo: number,valido:boolean) {        
     switch (campo) {
       case 1: this.datosPersonales.nombre = dato;
         break;
@@ -79,7 +79,7 @@ export class NuevoPacienteService {
         break;
       case 3: 
       let fechaaux = new Date(dato);
-      let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
+      let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()-1));
       this.datosPersonales.fechaNacimiento = fecha
         break;
       case 4: this.datosPersonales.celular = dato;

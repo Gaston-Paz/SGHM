@@ -18,13 +18,17 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDividerModule} from '@angular/material/divider';
+import { ListarPacientesComponent } from './listar-pacientes/listar-pacientes.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
     NuevoPacienteComponent,
     DatosPersonalesComponent,
     ConsultaInicialComponent,
-    AntecedentesComponent
+    AntecedentesComponent,
+    ListarPacientesComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +43,9 @@ import {MatDividerModule} from '@angular/material/divider';
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    MatDividerModule
+    MatDividerModule,
+    MatTableModule,
+    MatSnackBarModule
   ],
   providers: [  
     MatDatepickerModule,  

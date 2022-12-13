@@ -17,6 +17,39 @@ export class AppComponent {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
 
-  fillerNav = ['Nuevo Médico','Médicos','Nuevo Paciente','Pacientes','Nueva Consulta','Consultas','Imágenes','Cerrar sesión']
+  fillerNav: any = [
+    {
+      text:'Nuevo Médico',
+      url: ''
+    },
+    {
+      text:'Médicos',
+      url: ''
+    },
+    {
+      text:'Nuevo Paciente',
+      url: '/pacientes/nuevo-paciente'
+    },
+    {
+      text:'Pacientes',
+      url: '/pacientes/listar-pacientes'
+    },
+    {
+      text:'Nueva Consulta',
+      url: ''
+    },
+    {
+      text:'Consultas',
+      url: ''
+    },
+    {
+      text:'Imágenes',
+      url: ''
+    },
+    {
+      text:'Cerrar sesión',
+      url: ''
+    },
+]
 
 }
