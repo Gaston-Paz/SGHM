@@ -79,7 +79,7 @@
               placeholder="Edad Ortodoncia"
               (change)="CargarAntecedentes()"
               autocomplete="off"
-              [(ngModel)]="antecedentes.EdadOrtodoncia"
+              [(ngModel)]="antecedentes.edadOrtodoncia"
               [disabled]="!antecedentes.ortodoncia"
             />
             <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('required')">
@@ -100,7 +100,7 @@
               placeholder="Piezas Faltantes"
               (change)="CargarAntecedentes()"
               autocomplete="off"
-              [(ngModel)]="antecedentes.piezasfaltantes"
+              [(ngModel)]="antecedentes.piezasFaltantes"
             />
             <mat-error *ngIf="form.controls.piezasfaltantes.hasError('required')">
                 Piezas Faltantes es <strong>obligatorio</strong>
@@ -189,6 +189,24 @@
                 Pérdidas es <strong>obligatorio</strong>
             </mat-error>
           </mat-form-field>
+
+          <div class="example-full-width">
+
+            <mat-checkbox [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Embarazos</mat-checkbox>
+        </div>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Abortos</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="aborto"
+            placeholder="Partos"
+            (change)="CargarAntecedentes()"
+            autocomplete="off"
+            [(ngModel)]="antecedentes.abortos"
+          />
+        </mat-form-field>
 
           <mat-form-field class="example-full-width">
             <mat-label>Partos</mat-label>

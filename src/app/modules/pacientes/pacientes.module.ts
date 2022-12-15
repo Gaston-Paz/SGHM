@@ -21,6 +21,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { ListarPacientesComponent } from './listar-pacientes/listar-pacientes.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estudios-medicos.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     DatosPersonalesComponent,
     ConsultaInicialComponent,
     AntecedentesComponent,
-    ListarPacientesComponent
+    ListarPacientesComponent,
+    EstudiosMedicosComponent
   ],
   imports: [
     CommonModule,

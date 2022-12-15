@@ -1,0 +1,15 @@
+<div class="row pad-10">
+
+    <mat-label>Estudios</mat-label>
+    <input
+    class="form-control"
+      type="file"
+      placeholder="Foto del paciente"
+      (change)="CargarFoto($event)" 
+      multiple
+      accept="image/png, image/gif, image/jpeg"
+    />
+
+
+      <img class="mt-10" *ngFor="let foto of previsualizacionFoto" [src]="foto" alt="Estudio Médico ">
+</div>

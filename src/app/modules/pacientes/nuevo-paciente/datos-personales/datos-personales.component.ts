@@ -82,9 +82,7 @@ export class DatosPersonalesComponent implements OnInit {
     let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
     let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
     this.form.controls.fechaNacimiento.setValue(fechas);   
-    this._servicePacienteNuevo.CargarDatosPersonales(fecha.toDateString(),3, this.form.valid);
-    console.log(this._servicePacienteNuevo.datosPersonales);
-    
+    this._servicePacienteNuevo.CargarDatosPersonales(fecha.toDateString(),3, this.form.valid); 
   }
 
 }

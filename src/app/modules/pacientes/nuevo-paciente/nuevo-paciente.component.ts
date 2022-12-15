@@ -6,21 +6,20 @@ import { mergeMap } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { SnackBarComponent } from "src/app/shared/snack-bar/snack-bar.component";
+import { forkJoin, Observable } from "rxjs";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
   styleUrls: ["./nuevo-paciente.component.css"],
 })
 export class NuevoPacienteComponent implements OnInit {
-
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
     private sanitizer: DomSanitizer,
     private _snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   FormValid() {
     return this._servicePacienteNuevo.FormValid();
@@ -28,55 +27,62 @@ export class NuevoPacienteComponent implements OnInit {
   }
 
   GuardarPaciente() {
+    let obs: Array<Observable<any>> = [];
     let formData = new FormData();
     formData.append("foto", this._servicePacienteNuevo.imagen);
     this._servicePacienteNuevo.GuardarPaciente().subscribe(
       (paciente) => {
-        if(this._servicePacienteNuevo.imagen !== undefined){
+        if (this._servicePacienteNuevo.imagen !== undefined) {
+          obs.push(
+            this._servicePacienteNuevo.GuardarFoto(
+              formData,
+              paciente.idPaciente!,
+              false
+            )
+          );
+        }
 
-          this._servicePacienteNuevo
-          .GuardarFoto(formData, paciente.idPaciente!)
-          .subscribe(
+        if (this._servicePacienteNuevo.estudios.length > 0) {
+          this._servicePacienteNuevo.estudios.forEach((est,index) => {
+            let formDatas = new FormData();
+            formDatas.append("foto", est);
+            obs.push(
+              this._servicePacienteNuevo.GuardarFoto(
+                formDatas,
+                paciente.idPaciente!,
+                true,
+                index+1
+              )
+            );
+
+          });
+
+          forkJoin(obs).subscribe(
             (resp) => {
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                  data: {
-                    mensaje: "El paciente se guardó con éxito"
-                  },
-                  horizontalPosition: "center",
-                  panelClass: "success"
-              });
+              console.log("todo bien");
             },
             (error: HttpErrorResponse) => {
               this._snackBar.openFromComponent(SnackBarComponent, {
                 data: {
-                  mensaje: "El paciente se guardó con éxito"
+                  mensaje: "El paciente se guardó con éxito",
                 },
                 horizontalPosition: "center",
-                panelClass: "error"
-            });
+                panelClass: "error",
+              });
             }
-            );
-          }else{
-            this._snackBar.openFromComponent(SnackBarComponent, {
-              data: {
-                mensaje: "El paciente se guardó con éxito"
-              },
-              horizontalPosition: "center",
-              panelClass: "success"
-          });
-          }
+          );
+        }
       },
       (error: HttpErrorResponse) => {
         this._snackBar.openFromComponent(SnackBarComponent, {
           data: {
-            mensaje: "El paciente se guardó con éxito"
+            mensaje: "El paciente se guardó con éxito",
           },
           horizontalPosition: "center",
-          panelClass: "error"
-      });
+          panelClass: "error",
+        });
       }
     );
+
   }
-
-
 }
