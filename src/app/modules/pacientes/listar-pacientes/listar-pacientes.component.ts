@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ListarPacientesComponent implements OnInit {
 
   pacientes:Paciente[] = [];
 
-  constructor(private _servicePacienteNuevo: NuevoPacienteService) { }
+  constructor(private _servicePacienteNuevo: NuevoPacienteService,
+    private _spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
     this._servicePacienteNuevo.ObtenerPacientes().subscribe(

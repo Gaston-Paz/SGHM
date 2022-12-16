@@ -22,6 +22,7 @@ import { ListarPacientesComponent } from './listar-pacientes/listar-pacientes.co
 import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estudios-medicos.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estu
     MatCheckboxModule,
     MatDividerModule,
     MatTableModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxSpinnerModule
   ],
   providers: [  
     MatDatepickerModule,  

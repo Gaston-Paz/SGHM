@@ -5,8 +5,9 @@ import { NuevoPacienteService } from "../nuevo-paciente.service";
 import { mergeMap } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { SnackBarComponent } from "src/app/shared/snack-bar/snack-bar.component";
+import { SnackBarComponent } from "src/app/shared/Components/snack-bar/snack-bar.component";
 import { forkJoin, Observable } from "rxjs";
+import { SpinnerService } from "src/app/shared/services/spinner.service";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
@@ -16,7 +17,8 @@ export class NuevoPacienteComponent implements OnInit {
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
     private sanitizer: DomSanitizer,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private _spinnerService: SpinnerService
   ) {}
 
   ngOnInit(): void {}
@@ -43,25 +45,22 @@ export class NuevoPacienteComponent implements OnInit {
         }
 
         if (this._servicePacienteNuevo.estudios.length > 0) {
-          this._servicePacienteNuevo.estudios.forEach((est,index) => {
+          this._servicePacienteNuevo.estudios.forEach((est) => {
             let formDatas = new FormData();
             formDatas.append("foto", est);
             obs.push(
               this._servicePacienteNuevo.GuardarFoto(
                 formDatas,
                 paciente.idPaciente!,
-                true,
-                index+1
+                true
               )
             );
 
           });
-
+        }
           forkJoin(obs).subscribe(
             (resp) => {
               console.log("todo bien");
-            },
-            (error: HttpErrorResponse) => {
               this._snackBar.openFromComponent(SnackBarComponent, {
                 data: {
                   mensaje: "El paciente se guardó con éxito",
@@ -69,14 +68,26 @@ export class NuevoPacienteComponent implements OnInit {
                 horizontalPosition: "center",
                 panelClass: "error",
               });
+            },
+            (error: HttpErrorResponse) => {
+              console.log(error);
+              this._snackBar.openFromComponent(SnackBarComponent, {
+                data: {
+                  mensaje: error.error.message,
+                },
+                horizontalPosition: "center",
+                panelClass: "error",
+              });
             }
           );
-        }
+
       },
       (error: HttpErrorResponse) => {
+        console.log(error);
+        
         this._snackBar.openFromComponent(SnackBarComponent, {
           data: {
-            mensaje: "El paciente se guardó con éxito",
+            mensaje: error.error.message,
           },
           horizontalPosition: "center",
           panelClass: "error",
