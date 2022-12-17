@@ -23,6 +23,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estudios-medicos.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatSortModule } from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatDividerModule,
     MatTableModule,
     MatSnackBarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   providers: [  
     MatDatepickerModule,  

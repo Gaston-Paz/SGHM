@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
 import { NuevoPacienteService } from '../../nuevo-paciente.service';
@@ -41,6 +41,8 @@ export class AntecedentesComponent implements OnInit {
     volumen:'',
     tiroides:''
   }
+  @Input("antecedente") antecedente!: Antecedente;
+  @Input("hayAntecedente") hayAntecedente: boolean = false;
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService) { }
@@ -74,7 +76,12 @@ export class AntecedentesComponent implements OnInit {
       otros: [""],
       alimentacion: [""],
       diabetes: [false],
+      embarazos: [false],
     });
+    if(this.hayAntecedente)this.antecedentes = this.antecedente;
+
+    console.log(this.antecedente);
+    
   }
 
   CargarAntecedentes(){  

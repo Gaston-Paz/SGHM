@@ -11,6 +11,7 @@ table {
   .container{
       display: flex;
       flex-direction: column;
+      margin-top: 10px;
   }
 
   .foto{
@@ -28,4 +29,9 @@ th.mat-header-cell {
 
 td {
   text-align: center;
+}
+
+.left{
+  justify-content: start;
+  margin-bottom: 20px;
 }
