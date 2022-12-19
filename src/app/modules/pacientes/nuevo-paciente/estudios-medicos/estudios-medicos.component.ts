@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NuevoPacienteService } from '../../nuevo-paciente.service';
+import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
   selector: 'app-estudios-medicos',

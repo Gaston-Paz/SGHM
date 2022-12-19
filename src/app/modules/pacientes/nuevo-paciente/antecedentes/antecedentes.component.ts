@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
-import { NuevoPacienteService } from '../../nuevo-paciente.service';
+import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
   selector: 'app-antecedentes',

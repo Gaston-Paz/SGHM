@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConsultaInicial } from 'src/app/core/interfaces/consulta-inicial.interface';
-import { NuevoPacienteService } from '../../nuevo-paciente.service';
+import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
   selector: 'app-consulta-inicial',

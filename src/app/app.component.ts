@@ -36,7 +36,7 @@ export class AppComponent {
     },
     {
       text:'Nueva Consulta',
-      url: ''
+      url: '/consultas/nueva-consulta'
     },
     {
       text:'Consultas',

@@ -8,7 +8,7 @@ import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
 import { ConsultaInicial } from 'src/app/core/interfaces/consulta-inicial.interface';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
-import { NuevoPacienteService } from '../nuevo-paciente.service';
+import { NuevoPacienteService } from '../nuevo-paciente/nuevo-paciente.service';
 import { ListadosService } from './listados.service';
 
 @Component({

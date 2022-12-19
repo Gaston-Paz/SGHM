@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
-import { NuevoPacienteService } from "../nuevo-paciente.service";
+import { NuevoPacienteService } from "./nuevo-paciente.service";
 import { mergeMap } from "rxjs/operators";
 import { DomSanitizer } from "@angular/platform-browser";
 import { MatSnackBar } from "@angular/material/snack-bar";
