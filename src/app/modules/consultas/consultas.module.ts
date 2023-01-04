@@ -15,6 +15,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatPaginatorModule,
+    MatTableModule,
+    MatSortModule
   ]
 })
 export class ConsultasModule { }

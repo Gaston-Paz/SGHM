@@ -5,8 +5,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
+import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
+import { ConsultasService } from './consultas.service';
 
 @Component({
   selector: 'app-nueva-consulta',
@@ -17,11 +19,24 @@ export class NuevaConsultaComponent implements OnInit {
   form!: FormGroup;
   fecha: Date = new Date();
   pacientes: Paciente[] = [];
+  tratamiento:Tratamiento = {
+    idPaciente:0,
+    fecha: new Date(),
+    motivo:'',
+    trianguloDeTalla:'',
+    alturaDeIliacos:'',
+    barral:'',
+    esferas:'',
+    especifico:'',
+    sedestacion:'',
+    proximoTurnoIndicado: new Date()
+  }
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
-    private _spinnerService: NgxSpinnerService) { }
+    private _spinnerService: NgxSpinnerService,
+    private _serviceConsulta:ConsultasService) { }
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
@@ -52,16 +67,51 @@ export class NuevaConsultaComponent implements OnInit {
 
   }
 
-  changeDate(date:any){
+  changeDate(date:any,control:number){
     let fechaaux = new Date(date.value);
     let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
     let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-    this.form.controls.fechaNacimiento.setValue(fechas);   
-
+    if(control === 1)this.form.controls.fecha.setValue(fechas);   
+    else if(control === 2)this.form.controls.proximoTurno.setValue(fechas);   
   }
 
   GuardarConsulta(){
+    this.MapTratamiento();
+    console.log(this.tratamiento);
+    
+    this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
+      this._snackBar.openFromComponent(SnackBarComponent, {
+        data: {
+          mensaje: "El tratamiento se guardó con éxito",
+        },
+        horizontalPosition: "center",
+        panelClass: "success",
+      });
+    },(error:HttpErrorResponse) => {
+      console.log(error);
+      this._snackBar.openFromComponent(SnackBarComponent, {
+        data: {
+          mensaje: error.error.message,
+        },
+        horizontalPosition: "center",
+        panelClass: "error",
+      });
+    })
+    
+  }
 
+  MapTratamiento(){
+    this.tratamiento.fecha = this.form.controls.fecha.value;
+    this.tratamiento.paciente = this.form.controls.paciente.value;
+    this.tratamiento.idPaciente = this.tratamiento.paciente!.idPaciente!;
+    this.tratamiento.motivo = this.form.controls.motivo.value;
+    this.tratamiento.trianguloDeTalla = this.form.controls.triangulo.value;
+    this.tratamiento.alturaDeIliacos = this.form.controls.altura.value;
+    this.tratamiento.barral = this.form.controls.barral.value;
+    this.tratamiento.esferas = this.form.controls.esferas.value;
+    this.tratamiento.especifico = this.form.controls.especifico.value;
+    this.tratamiento.sedestacion = this.form.controls.sedestacion.value;
+    this.tratamiento.proximoTurnoIndicado = this.form.controls.proximoTurno.value;
   }
 
 }

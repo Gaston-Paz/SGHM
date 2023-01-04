@@ -25,7 +25,6 @@ export class NuevoPacienteComponent implements OnInit {
 
   FormValid() {
     return this._servicePacienteNuevo.FormValid();
-    //return true;
   }
 
   GuardarPaciente() {
@@ -60,13 +59,12 @@ export class NuevoPacienteComponent implements OnInit {
         }
           forkJoin(obs).subscribe(
             (resp) => {
-              console.log("todo bien");
               this._snackBar.openFromComponent(SnackBarComponent, {
                 data: {
                   mensaje: "El paciente se guardó con éxito",
                 },
                 horizontalPosition: "center",
-                panelClass: "error",
+                panelClass: "success",
               });
             },
             (error: HttpErrorResponse) => {

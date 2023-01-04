@@ -40,7 +40,7 @@ export class AppComponent {
     },
     {
       text:'Consultas',
-      url: ''
+      url: '/consultas/listar-consultas'
     },
     {
       text:'Imágenes',

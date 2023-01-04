@@ -1,1 +1,102 @@
-<p>listar-consultas works!</p>
+<div class="container">
+    <mat-form-field >
+      <mat-label>Pacientes</mat-label>
+      <mat-select (selectionChange)="buscarTratamientos()" [(ngModel)]="paciente">
+        <mat-option
+          *ngFor="let paciente of pacientes"
+          [value]="paciente"
+        >
+          {{ paciente.nombre }} - {{ paciente.apellido }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+      <!-- Position Column -->
+      <ng-container matColumnDef="fecha">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Fecha</th>
+        <td mat-cell *matCellDef="let element">{{ element.fecha | date : "dd/MM/yyyy" }}</td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="motivo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Motivo</th>
+        <td mat-cell *matCellDef="let element">{{ element.motivo }}</td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="trianguloDeTalla">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Triángulo de talla</th>
+        <td mat-cell *matCellDef="let element">{{ element.trianguloDeTalla }}</td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="alturaDeIliacos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Altura de Iliacos</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.alturaDeIliacos}}
+        </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="barral">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Barral</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.barral }}
+        </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="esferas">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Esferas</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.esferas }}
+        </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="especifico">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Específico</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.especifico }}
+        </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="sedestacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Sedestación</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.sedestacion }}
+        </td>
+      </ng-container>
+
+       <!-- Symbol Column -->
+       <ng-container matColumnDef="proximoTurnoIndicado">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Próximo turno indicado</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.proximoTurnoIndicado | date : "dd/MM/yyyy" }}
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="12">
+          No se encontraron consultas realizadas para el paciente:
+        </td>
+      </tr>
+    </table>
+    <mat-paginator [length]="200" [pageSizeOptions]="[50, 100]" aria-label="Select page">
+    </mat-paginator>
+  </div>
+  
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.8)"
+    size="large"
+    color="#60c76e"
+    type="ball-atom"
+    [fullScreen]="true"
+    ><p style="color: white">Cargando...</p></ngx-spinner
+  >
+  

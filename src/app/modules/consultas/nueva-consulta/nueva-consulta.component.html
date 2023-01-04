@@ -13,7 +13,7 @@
               <mat-select formControlName="paciente" required>
                 <mat-option
                   *ngFor="let paciente of pacientes"
-                  [value]="paciente.idPaciente"
+                  [value]="paciente"
                 >
                   {{ paciente.nombre }} - {{ paciente.apellido }}
                 </mat-option>
@@ -30,7 +30,7 @@
                 readonly="true"
                 autocomplete="off"
                 #dateInput
-                (dateChange)="changeDate(dateInput)"
+                (dateChange)="changeDate(dateInput,1)"
                 onclick="changeDate(dateInput)"
                 [max]="fecha"
                 [matDatepicker]="selector"
@@ -166,10 +166,10 @@
                 matInput
                 readonly="true"
                 autocomplete="off"
-                #dateInput
-                (dateChange)="changeDate(dateInput)"
+                #dateInputProximo
+                (dateChange)="changeDate(dateInputProximo,2)"
                 onclick="changeDate(dateInput)"
-                [max]="fecha"
+                [min]="fecha"
                 [matDatepicker]="proximo"
                 [value]="form.controls.proximoTurno.value"
               />
