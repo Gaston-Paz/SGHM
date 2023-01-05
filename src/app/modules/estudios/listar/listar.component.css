@@ -1,0 +1,28 @@
+.width-100{
+    width: 100%;
+}
+
+.mt-20{
+    margin-top: 20px;
+}
+
+.mb-20{
+    margin-bottom: 20px;
+}
+
+
+.end{
+    display: flex;
+    justify-content: end;
+    margin-bottom: 20px;
+  }
+
+  .button{
+    background-color: #60C76E;
+    color: #ffffff;
+}
+
+.button-disabled{
+    background-color: #cfebd2;
+    color: #ffffff;
+}
