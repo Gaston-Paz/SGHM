@@ -1,12 +1,13 @@
 
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
+import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent  {
   title = 'SGHC';
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -43,8 +44,12 @@ export class AppComponent {
       url: '/consultas/listar-consultas'
     },
     {
-      text:'Imágenes',
-      url: ''
+      text:'Nuevos Estudios',
+      url: '/estudios/estudios'
+    },
+    {
+      text:'Estudios',
+      url: '/estudios/listar-estudios'
     },
     {
       text:'Cerrar sesión',
