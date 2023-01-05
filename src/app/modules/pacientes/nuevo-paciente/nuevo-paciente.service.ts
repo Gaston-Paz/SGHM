@@ -225,10 +225,65 @@ export class NuevoPacienteService {
     return false;
   }
 
+  InicializarObjetos(){
+    this.datosPersonales = {
+      apellido: "",
+      celular: "",
+      fechaNacimiento: new Date(),
+      email: "",
+      nacio: "",
+      nombre: "",
+      ocupacion: "",
+      localidad: "",
+      fotoPerfil: "",
+    };
+    this.consultaInicial = {
+      actividadFisica: "",
+      antiguedad: "",
+      atenua: "",
+      caracteristica: "",
+      intensidad: "",
+      irradiacion: "",
+      localizacion: "",
+      motivo: "",
+      covid: false,
+      fecha: new Date(),
+    };
+    this.antecedente = {
+      abortos: "",
+      accidentes: "",
+      alimentacion: "",
+      cardiaco: "",
+      cirugias: "",
+      diabetes: false,
+      digestivo: "",
+      dolorCabeza: "",
+      duracion: "",
+      edadOrtodoncia: 0,
+      embarazos: false,
+      fracturas: "",
+      frecuencia: "",
+      implanteInferior: "",
+      implanteSuperior: "",
+      intestinal: "",
+      medicacion: "",
+      menstruacion: false,
+      ortodoncia: false,
+      otros: "",
+      partos: "",
+      perdidas: "",
+      piezasFaltantes: "",
+      placaDescanso: false,
+      respiratorio: "",
+      urogenital: "",
+      volumen: "",
+      tiroides: "",
+    };
+    this.estudios = [];
+  }
+
   //Métodos HTTP
-  GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean) {
-    console.log(environment.url + "/paciente/" + idPaciente + "/" + esEstudio);
-    
+  GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean) {    
     return this._httpClient.post<Paciente>(
       environment.url + "/paciente/" + idPaciente + "/" + esEstudio,
       formData

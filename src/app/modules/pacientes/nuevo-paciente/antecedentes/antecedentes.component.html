@@ -1,3 +1,4 @@
+<mat-card>
 <form [formGroup]="form" autocomplete="off" class="example-form">
   <div class="col pad-15">
 
@@ -38,6 +39,7 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.implanteSuperior"
               [readonly]="hayAntecedente"
+              placeholder="Implantes Superiores"
             />
             <mat-error
               *ngIf="form.controls.implanteSuperior.hasError('required')"
@@ -56,6 +58,7 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.implanteInferior"
               [readonly]="hayAntecedente"
+              placeholder="Implantes Inferiores"
             />
             <mat-error
               *ngIf="form.controls.implanteInferior.hasError('required')"
@@ -210,7 +213,7 @@
             type="text"
             matInput
             formControlName="aborto"
-            placeholder="Partos"
+            placeholder="Abortos"
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.abortos"
@@ -461,7 +464,5 @@
 
 
   </div>
-
-
-
 </form>
+</mat-card>

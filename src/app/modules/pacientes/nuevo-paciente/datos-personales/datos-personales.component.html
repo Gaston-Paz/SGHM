@@ -37,17 +37,6 @@
     <div class="row">
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <!-- <input
-          type="date"
-          matInput
-          formControlName="fechaNacimiento"
-          placeholder="Fecha de Nacimiento"
-          required="true"
-          (change)="CargarDatosPersonales($event,3)"
-          autocomplete="off"
-        />
-         -->
-
         <input matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput)"
         onclick="changeDate(dateInput)" [max]="fecha" [matDatepicker]="selector" [value]="form.controls.fechaNacimiento.value">
         <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
@@ -142,7 +131,7 @@
           type="text"
           matInput
           formControlName="nacimiento"
-          placeholder="Ex. pat@example.com"
+          placeholder="¿Cómo nació?"
           required="true"
           (change)="CargarDatosPersonales($event,7)"
           autocomplete="off"

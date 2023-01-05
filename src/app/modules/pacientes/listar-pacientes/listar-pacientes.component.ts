@@ -1,27 +1,36 @@
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginatedTabHeader } from '@angular/material/tabs/paginated-tab-header';
-import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
-import { ConsultaInicial } from 'src/app/core/interfaces/consulta-inicial.interface';
-import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
-import { SpinnerService } from 'src/app/shared/services/spinner.service';
-import { NuevoPacienteService } from '../nuevo-paciente/nuevo-paciente.service';
-import { ListadosService } from './listados.service';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatSort } from "@angular/material/sort";
+import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
+import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
+import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
+import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { SpinnerService } from "src/app/shared/services/spinner.service";
+import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
+import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
+import { ListadosService } from "./listados.service";
 
 @Component({
-  selector: 'app-listar-pacientes',
-  templateUrl: './listar-pacientes.component.html',
-  styleUrls: ['./listar-pacientes.component.css']
+  selector: "app-listar-pacientes",
+  templateUrl: "./listar-pacientes.component.html",
+  styleUrls: ["./listar-pacientes.component.css"],
 })
-export class ListarPacientesComponent implements OnInit,AfterViewInit  {
-
-  pacientes:Paciente[] = [];
+export class ListarPacientesComponent implements OnInit, AfterViewInit {
+  pacientes: Paciente[] = [];
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['nombre', 'apellido', 'mail', 'nacimiento','foto','antecedentes','consultaInicial','turnos'];
+  displayedColumns: string[] = [
+    "apellido",
+    "nombre",
+    "mail",
+    "nacimiento",
+    "foto",
+    "antecedentes",
+    "consultaInicial",
+    "turnos",
+  ];
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
   antecedentes: boolean = false;
@@ -72,26 +81,37 @@ export class ListarPacientesComponent implements OnInit,AfterViewInit  {
     fecha: new Date(),
   };
 
-  constructor(private _servicePacienteNuevo: NuevoPacienteService,
+  constructor(
+    private _servicePacienteNuevo: NuevoPacienteService,
     private _spinnerService: SpinnerService,
-    private _serviceListados: ListadosService) { }
+    private _serviceListados: ListadosService,
+    private _serviceConsulta: ConsultasService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this._servicePacienteNuevo.ObtenerPacientes().subscribe(
       (resp) => {
-        resp.forEach(r => {
+        resp.forEach((r) => {
           r.fechaNacimiento = new Date(r.fechaNacimiento);
-          let variables = r.fotoPerfil.toString().split("\\");         
-          r.fotoPerfil = "..//..//..//..//assets//" + variables[8] + "//" + variables[9] + "//" + variables[10] ;
+          let variables = r.fotoPerfil.toString().split("\\");
+          r.fotoPerfil =
+            "..//..//..//..//assets//" +
+            variables[8] +
+            "//" +
+            variables[9] +
+            "//" +
+            variables[10];
           this.pacientes.push(r);
         });
 
-        this.dataSource.data = this.pacientes;
-        
+        this.dataSource.data = this.pacientes.sort((a,b) => {
+          if(a.apellido < b.apellido)return -1;
+          else return 1;
+        });
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-        
       }
     );
   }
@@ -106,53 +126,68 @@ export class ListarPacientesComponent implements OnInit,AfterViewInit  {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  VerAntecedentes(element:Paciente){
+  VerAntecedentes(element: Paciente) {
+    this._serviceListados
+      .ObtenerAntecedentePorId(element.idPaciente!)
+      .subscribe(
+        (resp) => {
+          this.antecedente = resp;
+          this.antecedentes = true;
+          this.pacientesVer = false;
+          this.consultaInicial = false;
+          this.turnos = false;
 
-    this._serviceListados.ObtenerAntecedentePorId(element.idPaciente!).subscribe(resp => {
-      this.antecedente = resp;
-      this.antecedentes = true;
-      this.pacientesVer = false;
-      this.consultaInicial = false;
-      this.turnos = false;
-  
-      this.nombrePaciente = element.nombre;
-      this.apellidoPaciente = element.apellido;
-    },
-    (error: HttpErrorResponse) => {
-      console.log(error);
-      
-    }
-  );
-
-
+          this.nombrePaciente = element.nombre;
+          this.apellidoPaciente = element.apellido;
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+        }
+      );
   }
 
-  VerConsultas(element:Paciente){
+  VerConsultas(element: Paciente) {
+    this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(
+      (resp) => {
+        this.consultas = resp;
+        this.antecedentes = false;
+        this.pacientesVer = false;
+        this.consultaInicial = true;
+        this.turnos = false;
 
-    this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(resp => {
-      this.consultas = resp;
-      this.antecedentes = false;
-      this.pacientesVer = false;
-      this.consultaInicial = true;
-      this.turnos = false;
-  
-      this.nombrePaciente = element.nombre;
-      this.apellidoPaciente = element.apellido;
-    },
-    (error: HttpErrorResponse) => {
-      console.log(error);
-      
-    }
-  );
-
-
+        this.nombrePaciente = element.nombre;
+        this.apellidoPaciente = element.apellido;
+      },
+      (error: HttpErrorResponse) => {
+        console.log(error);
+      }
+    );
   }
 
-  Volver(){
+  Volver() {
     this.antecedentes = false;
     this.pacientesVer = true;
     this.consultaInicial = false;
     this.turnos = false;
+    this._serviceConsulta.paciente = {
+      apellido: "",
+      celular: "",
+      fechaNacimiento: new Date(),
+      email: "",
+      nacio: "",
+      nombre: "",
+      ocupacion: "",
+      localidad: "",
+      fotoPerfil: "",
+    };
   }
 
+  verTurnos(paciente: Paciente) {
+    this._serviceConsulta.paciente = paciente;
+    //this._router.navigate(['./consultas/listar-consultas'])
+    this.antecedentes = false;
+    this.pacientesVer = false;
+    this.consultaInicial = false;
+    this.turnos = true;
+  }
 }
