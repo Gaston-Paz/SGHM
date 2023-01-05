@@ -41,6 +41,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule
-  ]
+  ],
+  exports:[ListarConsultasComponent]
 })
 export class ConsultasModule { }

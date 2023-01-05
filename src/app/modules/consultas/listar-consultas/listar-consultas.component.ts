@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -37,19 +38,28 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     localidad: "",
     fotoPerfil: "",
   };
+  form!:FormGroup;
 
   constructor(private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
-    private _serviceTratamiento:ConsultasService) { }
+    private _serviceTratamiento:ConsultasService,
+    private _formBuilder:FormBuilder) { }
 
   ngOnInit(): void {
+    this.form = this._formBuilder.group({
+      paciente: [this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null ? this._serviceTratamiento.paciente.idPaciente : this.paciente.idPaciente]
+    });
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
     obs.push(this._serviceTratamiento.ObtenerConsultas());
     forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];
       this.tratamientos = resp[1];
+      if(this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null) {
+        this.buscarTratamientos();
+      }
+      
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snackBar.openFromComponent(SnackBarComponent, {
@@ -68,11 +78,15 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
   }
 
   buscarTratamientos(){
+    this.paciente = this.pacientes.find(x => x.idPaciente === this._serviceTratamiento.paciente.idPaciente)!;
     this.tratamientosFiltrados = [];
     this.tratamientos.forEach(t => {
-      if(t.paciente?.idPaciente === this.paciente.idPaciente)this.tratamientosFiltrados.push(t);
+      if(t.paciente?.idPaciente === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
     });
-    this.dataSource.data = this.tratamientosFiltrados;
+    this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
+      if(a.idTratamiento! > b.idTratamiento!)return -1;
+      else return 1;
+    });
   }
 
 }
