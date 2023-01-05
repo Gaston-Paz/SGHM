@@ -77,7 +77,6 @@ export class NuevaConsultaComponent implements OnInit {
 
   GuardarConsulta(){
     this.MapTratamiento();
-    console.log(this.tratamiento);
     
     this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
       this._snackBar.openFromComponent(SnackBarComponent, {
@@ -87,6 +86,7 @@ export class NuevaConsultaComponent implements OnInit {
         horizontalPosition: "center",
         panelClass: "success",
       });
+      this.form.reset();
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snackBar.openFromComponent(SnackBarComponent, {
