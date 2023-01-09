@@ -86,7 +86,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
       if(t.paciente?.idPaciente === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
     });
     this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
-      if(a.idTratamiento! > b.idTratamiento!)return -1;
+      if(a.fecha! > b.fecha!)return -1;
       else return 1;
     });
   }
