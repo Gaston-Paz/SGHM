@@ -136,7 +136,8 @@
             <mat-checkbox [disabled]="hayAntecedente" class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
         </div>
   </div>
-    <!-- Menstruacion -->
+
+    <!-- Salud Femenina -->
     <div class="row bg-section">
         <h3 class="mt-20">Salud Femenina</h3>
         <div class="example-full-width">
@@ -220,16 +221,30 @@
             <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
         </div>
 
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Abortos</mat-label>
+        <mat-form-field appearance="outline" class="example-full-width w-24">
+          <mat-label>Abortos Inducidos</mat-label>
           <input
             type="text"
             matInput
-            formControlName="aborto"
-            placeholder="Abortos"
+            formControlName="abortoInducido"
+            placeholder="Abortos Inducidos"
             (change)="CargarAntecedentes()"
             autocomplete="off"
-            [(ngModel)]="antecedentes.abortos"
+            [(ngModel)]="antecedentes.abortoInducido"
+            [readonly]="hayAntecedente"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width w-24">
+          <mat-label>Abortos Espontáneos</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="abortoEspontaneo"
+            placeholder="Abortos Espontáneos"
+            (change)="CargarAntecedentes()"
+            autocomplete="off"
+            [(ngModel)]="antecedentes.abortoEspontaneo"
             [readonly]="hayAntecedente"
           />
         </mat-form-field>
