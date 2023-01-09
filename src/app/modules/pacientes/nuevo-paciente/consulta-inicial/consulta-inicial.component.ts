@@ -32,11 +32,11 @@ export class ConsultaInicialComponent implements OnInit {
         motivo: [this.consulta.motivo, Validators.required],
         localizacion: [this.consulta.localizacion, Validators.required],
         antiguedad: [this.consulta.antiguedad, Validators.required],
-        intensidad: [this.consulta.intensidad, Validators.required],
-        caracteristica: [this.consulta.caracteristica, [Validators.required]],
-        irradiacion: [this.consulta.irradiacion, Validators.required],
-        atenua: [this.consulta.atenua, Validators.required],
-        actividadFisica: [this.consulta.actividadFisica, Validators.required],
+        intensidad: [this.consulta.intensidad],
+        caracteristica: [this.consulta.caracteristica],
+        irradiacion: [this.consulta.irradiacion],
+        atenua: [this.consulta.atenua],
+        actividadFisica: [this.consulta.actividadFisica],
         covid: [this.consulta.covid],
       });
     }else{
