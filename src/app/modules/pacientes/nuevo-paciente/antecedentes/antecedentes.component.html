@@ -320,6 +320,33 @@
 
           </mat-form-field>
 
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Fuma</mat-label>
+            <mat-select formControlName="fuma" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.fuma">
+              <mat-option
+              *ngFor="let fumas of fumador"
+              [value]="fumas"
+              >
+              {{ fumas }}
+            </mat-option>
+          </mat-select>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Otras drogas</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="otrasDrogas"
+              placeholder="Otras drogas"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.otrasDrogas"
+              [readonly]="hayAntecedente"
+            />
+
+          </mat-form-field>
+
 
     </div>
 

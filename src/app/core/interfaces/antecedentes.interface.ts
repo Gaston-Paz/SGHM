@@ -30,6 +30,8 @@ export interface Antecedente{
     accidentes?:string;
     tiroides?:string;
     oseo?:string;
+    otrasDrogas?:string;
+    fuma?:string;
     protesis?:string;
     diabetes:boolean;
     contencion:boolean;

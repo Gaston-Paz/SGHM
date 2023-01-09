@@ -20,6 +20,7 @@ export class AntecedentesComponent implements OnInit {
     contencion:false
 
   }
+  fumador: string[]=['Tabaco','Marihuana','Ambos'];
   @Input("antecedente") antecedente!: Antecedente;
   @Input("hayAntecedente") hayAntecedente: boolean = false;
 
@@ -57,6 +58,8 @@ export class AntecedentesComponent implements OnInit {
       alimentacion: [],
       protesis: [],
       oseo: [],
+      fuma: [],
+      otrasDrogas: [],
       contencion: [false],
       diabetes: [false],
       embarazos: [false],
