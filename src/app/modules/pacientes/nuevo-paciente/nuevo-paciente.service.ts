@@ -208,6 +208,12 @@ export class NuevoPacienteService {
       case 10:
         this.consultaInicial.covid = !this.consultaInicial.covid;
         break;
+        case 11:
+          this.consultaInicial.fechaCovid = this.consultaInicial.fechaCovid;
+          break;
+          case 12:
+            this.consultaInicial.otros = this.consultaInicial.otros;
+            break;
     }
     this.consultaInicialCompleta = valido;
   }

@@ -47,12 +47,14 @@ export class ConsultaInicialComponent implements OnInit {
         motivo: ["", Validators.required],
         localizacion: [, Validators.required],
         antiguedad: [, Validators.required],
-        intensidad: [, Validators.required],
-        caracteristica: ["", [Validators.required]],
-        irradiacion: ["", Validators.required],
-        atenua: ["", Validators.required],
-        actividadFisica: ["", Validators.required],
+        intensidad: [],
+        caracteristica: [],
+        irradiacion: [],
+        atenua: [],
+        actividadFisica: [],
         covid: [""],
+        fechaCovid: [],
+        otros: [],
       });
     }
   }
@@ -63,7 +65,7 @@ export class ConsultaInicialComponent implements OnInit {
     this._servicePacienteNuevo.CargarConsultaInicial(valor,campo,this.form.valid);
   }
 
-  changeDate(date:any){
+  changeDate(date:any,campo:number){
     // let fechaaux = new Date(date.value);
     // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
     // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
@@ -74,8 +76,13 @@ export class ConsultaInicialComponent implements OnInit {
     let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
     let fechaMostrar = new Date(fechaInput).toLocaleDateString();
-    this.form.controls.fecha.setValue(fecha);   
-    this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,3, this.form.valid);
+    if(campo === 1){
+      this.form.controls.fecha.setValue(fecha);   
+      this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,3, this.form.valid);
+    }else{
+      this.form.controls.fechaCovid.setValue(fecha);   
+      this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,11, this.form.valid);
+    }
   }
 
 }
