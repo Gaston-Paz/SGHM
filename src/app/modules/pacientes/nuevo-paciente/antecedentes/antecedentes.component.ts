@@ -17,6 +17,7 @@ export class AntecedentesComponent implements OnInit {
     menstruacion:false,
     ortodoncia:false,
     placaDescanso:false,
+    contencion:false
 
   }
   @Input("antecedente") antecedente!: Antecedente;
@@ -31,7 +32,7 @@ export class AntecedentesComponent implements OnInit {
       implanteInferior: [],
       implanteSuperior: [],
       ortodoncia: [false],
-      EdadOrtodoncia: [,Validators.min(0)],
+      EdadOrtodoncia: [,[Validators.max(100),Validators.min(0)]],
       piezasfaltantes: [],
       placaDescanso: [false],
       menstruacion: [false],
@@ -53,16 +54,15 @@ export class AntecedentesComponent implements OnInit {
       tiroides: [],
       otros: [],
       alimentacion: [],
+      contencion: [false],
       diabetes: [false],
       embarazos: [false],
     });
-    if(this.hayAntecedente)this.antecedentes = this.antecedente;
-
-    console.log(this.antecedente);
-    
+    if(this.hayAntecedente)this.antecedentes = this.antecedente;    
   }
 
-  CargarAntecedentes(){  
+  CargarAntecedentes(){ 
+    if(!this.antecedente.ortodoncia)this.antecedente.edadOrtodoncia = undefined; 
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
   }
 

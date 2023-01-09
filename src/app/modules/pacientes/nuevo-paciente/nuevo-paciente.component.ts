@@ -41,6 +41,10 @@ export class NuevoPacienteComponent implements OnInit {
     return this._servicePacienteNuevo.FormValid();
   }
 
+  GetAntecedente(){
+    return this._servicePacienteNuevo.antecedente;
+  }
+
   GuardarPaciente() {
     let obs: Array<Observable<any>> = [];
     let formData = new FormData();

@@ -73,11 +73,13 @@
         <h5>Ortodoncia</h5>
         <div class="example-full-width">
 
+            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-10" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
+
             <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.ortodoncia" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
         </div>
             
         <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Edad</mat-label>
+            <mat-label>Edad Ortodoncia</mat-label>
             <input
               type="number"
               matInput
@@ -87,15 +89,19 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.edadOrtodoncia"
               [disabled]="!antecedentes.ortodoncia"
-              [readonly]="hayAntecedente"
+              [readonly]="hayAntecedente || !antecedentes.ortodoncia"
               [min]="0"
-            />
+              [max]="100"
+              />
             <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('required')">
                 Edad es <strong>obligatorio</strong>
             </mat-error>
             <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('min')">
-                La Edad debe ser <strong>mayo a cero</strong>
+                La Edad debe ser <strong>mayor a cero</strong>
             </mat-error>
+            <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('max')">
+              La Edad debe ser <strong>menor a 100</strong>
+          </mat-error>
           </mat-form-field>
 
       </div>

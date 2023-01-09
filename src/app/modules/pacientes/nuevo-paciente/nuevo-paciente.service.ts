@@ -39,7 +39,8 @@ export class NuevoPacienteService {
     embarazos: false,
     menstruacion: false,
     ortodoncia: false,
-    placaDescanso: false
+    placaDescanso: false,
+    contencion: false
   };
 
   imagen: Blob = new Blob();
@@ -70,7 +71,8 @@ export class NuevoPacienteService {
       embarazos: false,
       menstruacion: false,
       ortodoncia: false,
-      placaDescanso: false
+      placaDescanso: false,
+      contencion: false
     },
   };
 
@@ -211,7 +213,8 @@ export class NuevoPacienteService {
       embarazos: false,
       menstruacion: false,
       ortodoncia: false,
-      placaDescanso: false
+      placaDescanso: false,
+      contencion: false
     };
     this.estudios = [];
   }

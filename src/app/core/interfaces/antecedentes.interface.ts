@@ -29,4 +29,5 @@ export interface Antecedente{
     accidentes?:string;
     tiroides?:string;
     diabetes:boolean;
+    contencion:boolean;
 }
