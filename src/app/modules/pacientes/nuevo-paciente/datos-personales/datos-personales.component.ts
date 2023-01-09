@@ -24,14 +24,16 @@ export class DatosPersonalesComponent implements OnInit {
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
     this.form = this._formBuilder.group({
-      apellido: ["", Validators.required],
-      celular: ["", Validators.required],
-      localidad: [, Validators.required],
-      fechaNacimiento: [, Validators.required],
-      mail: ["", [Validators.required, Validators.email]],
-      nacimiento: ["", Validators.required],
       nombre: ["", Validators.required],
+      apellido: ["", Validators.required],
+      fechaNacimiento: [, Validators.required],
+      nacimiento: ["", Validators.required],
+      otros: ["", Validators.required],
       ocupacion: ["", Validators.required],
+      localidad: [, Validators.required],
+      mail: ["", [Validators.required, Validators.email]],
+      celular: ["", Validators.required],
+      deParte: ["", Validators.required],
       foto: [""],
     });
    
