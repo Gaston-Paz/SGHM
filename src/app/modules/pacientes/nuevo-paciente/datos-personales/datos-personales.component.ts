@@ -1,5 +1,7 @@
+import { DatePipe } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DateAdapter } from "@angular/material/core";
 import { DomSanitizer } from "@angular/platform-browser";
 import { NuevoPacienteService } from "../nuevo-paciente.service";
 
@@ -15,12 +17,16 @@ export class DatosPersonalesComponent implements OnInit {
   form!: FormGroup;
   fecha: Date = new Date();
   nacimientos: string[] = ['Vaginal','Cesarea'];
+  pipe = new DatePipe('es-ES');
 
   constructor(
     private _formBuilder: FormBuilder,
     private sanitizer: DomSanitizer,
-    private _servicePacienteNuevo: NuevoPacienteService
-  ) {}
+    private _servicePacienteNuevo: NuevoPacienteService,
+    private _dateAdapter: DateAdapter<Date>
+  ) {
+    this._dateAdapter.setLocale('es-ES');
+  }
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
@@ -80,11 +86,16 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   changeDate(date:any){
-    let fechaaux = new Date(date.value);
-    let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
-    let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-    this.form.controls.fechaNacimiento.setValue(fechas);   
-    this._servicePacienteNuevo.CargarDatosPersonales(fecha.toDateString(),3, this.form.valid); 
+    // let fechaaux = new Date(date.value);
+    // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
+    // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
+
+    let dateParts = date.value.split('/');
+    let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
+    let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
+    let fechaMostrar = new Date(fechaInput).toLocaleDateString();
+    this.form.controls.fechaNacimiento.setValue(fecha);   
+    this._servicePacienteNuevo.CargarDatosPersonales(fechaMostrar,3, this.form.valid); 
   }
 
 }

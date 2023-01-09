@@ -1,6 +1,8 @@
+import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
@@ -19,6 +21,7 @@ export class NuevaConsultaComponent implements OnInit {
   form!: FormGroup;
   fecha: Date = new Date();
   pacientes: Paciente[] = [];
+  pipe = new DatePipe('es-ES');
   tratamiento:Tratamiento = {
     idPaciente:0,
     fecha: new Date(),
@@ -36,7 +39,10 @@ export class NuevaConsultaComponent implements OnInit {
     private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
-    private _serviceConsulta:ConsultasService) { }
+    private _serviceConsulta:ConsultasService,
+    private _dateAdapter: DateAdapter<Date>) {
+      this._dateAdapter.setLocale('es-ES');
+     }
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
@@ -68,11 +74,18 @@ export class NuevaConsultaComponent implements OnInit {
   }
 
   changeDate(date:any,control:number){
-    let fechaaux = new Date(date.value);
-    let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
-    let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-    if(control === 1)this.form.controls.fecha.setValue(fechas);   
-    else if(control === 2)this.form.controls.proximoTurno.setValue(fechas);   
+    // let fechaaux = new Date(date.value);
+    // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
+    // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
+    // if(control === 1)this.form.controls.fecha.setValue(fechas);   
+    // else if(control === 2)this.form.controls.proximoTurno.setValue(fechas);   
+
+    let dateParts = date.value.split('/');
+    let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
+    let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
+    let fechaMostrar = new Date(fechaInput).toLocaleDateString();
+    if(control === 1)this.form.controls.fecha.setValue(fecha);   
+    else if(control === 2)this.form.controls.proximoTurno.setValue(fecha);   
   }
 
   GuardarConsulta(){

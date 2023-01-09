@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DateAdapter } from '@angular/material/core';
 import { ConsultaInicial } from 'src/app/core/interfaces/consulta-inicial.interface';
 import { NuevoPacienteService } from '../nuevo-paciente.service';
 
@@ -14,9 +16,13 @@ export class ConsultaInicialComponent implements OnInit {
   fecha: Date = new Date();
   @Input("consulta") consulta!: ConsultaInicial;
   @Input("hayConsulta") hayConsulta: boolean = false;
+  pipe = new DatePipe('es-ES');
 
   constructor(private _formBuilder: FormBuilder,
-    private _servicePacienteNuevo: NuevoPacienteService) { }
+    private _servicePacienteNuevo: NuevoPacienteService,
+    private _dateAdapter: DateAdapter<Date>) {
+      this._dateAdapter.setLocale('es-ES');
+     }
 
   ngOnInit(): void {   
 
@@ -56,11 +62,18 @@ export class ConsultaInicialComponent implements OnInit {
   }
 
   changeDate(date:any){
-    let fechaaux = new Date(date.value);
-    let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
-    let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-    this.form.controls.fecha.setValue(fechas);   
-    this._servicePacienteNuevo.CargarConsultaInicial(fecha.toDateString(),3, this.form.valid);    
+    // let fechaaux = new Date(date.value);
+    // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
+    // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
+    // this.form.controls.fecha.setValue(fechas);   
+    // this._servicePacienteNuevo.CargarConsultaInicial(fecha.toDateString(),3, this.form.valid);   
+    
+    let dateParts = date.value.split('/');
+    let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
+    let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
+    let fechaMostrar = new Date(fechaInput).toLocaleDateString();
+    this.form.controls.fecha.setValue(fecha);   
+    this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,3, this.form.valid);
   }
 
 }
