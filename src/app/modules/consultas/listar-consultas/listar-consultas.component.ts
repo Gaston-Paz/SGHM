@@ -23,7 +23,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['fecha', 'motivo', 'trianguloDeTalla', 'alturaDeIliacos','barral','esferas','especifico','sedestacion','proximoTurnoIndicado'];
+  displayedColumns: string[] = ['fecha', 'motivo', 'sedestacion','sugerencias','proximoTurnoIndicado'];
   pacientes:Paciente[]=[];
   tratamientos:Tratamiento[]=[];
   tratamientosFiltrados:Tratamiento[]=[];
