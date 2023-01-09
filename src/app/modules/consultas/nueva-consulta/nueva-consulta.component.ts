@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,16 +23,23 @@ export class NuevaConsultaComponent implements OnInit {
   pacientes: Paciente[] = [];
   pipe = new DatePipe('es-ES');
   tratamiento:Tratamiento = {
-    idPaciente:0,
-    fecha: new Date(),
-    motivo:'',
-    trianguloDeTalla:'',
-    alturaDeIliacos:'',
-    barral:'',
-    esferas:'',
     especifico:'',
-    sedestacion:'',
-    proximoTurnoIndicado: new Date()
+    fecha: new Date(),
+    idPaciente: 0,
+    motivo: '',
+    proximoTurnoIndicado: new Date(),
+    sedestacion: '',
+    sugerencias: ''
+  }
+  @Input("alta") alta: boolean = false;
+  consulta: Tratamiento = {
+    especifico:'',
+    fecha: new Date(),
+    idPaciente: 0,
+    motivo: '',
+    proximoTurnoIndicado: new Date(),
+    sedestacion: '',
+    sugerencias: ''
   }
 
   constructor(private _formBuilder: FormBuilder,
@@ -50,11 +57,12 @@ export class NuevaConsultaComponent implements OnInit {
       fecha:[,[Validators.required]],
       paciente:[,[Validators.required]],
       motivo:[,[Validators.required]],
-      triangulo:[,[Validators.required]],
-      altura:[,[Validators.required]],
-      barral:[,[Validators.required]],
-      esferas:[,[Validators.required]],
+      triangulo:[],
+      altura:[],
+      barral:[],
+      esferas:[],
       especifico:[,[Validators.required]],
+      sugerencias:[,[Validators.required]],
       sedestacion:[,[Validators.required]],
       proximoTurno:[,[Validators.required]]
     });
@@ -73,7 +81,7 @@ export class NuevaConsultaComponent implements OnInit {
 
   }
 
-  changeDate(date:any,control:number){
+  changeDate(date:any,control:number,esAlta:boolean=false){
     // let fechaaux = new Date(date.value);
     // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
     // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
@@ -85,7 +93,10 @@ export class NuevaConsultaComponent implements OnInit {
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
     let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     if(control === 1)this.form.controls.fecha.setValue(fecha);   
-    else if(control === 2)this.form.controls.proximoTurno.setValue(fecha);   
+    else if(control === 2)this.form.controls.proximoTurno.setValue(fecha);
+    
+    this.consulta.proximoTurnoIndicado = fecha;
+    if(esAlta)this.SetConsultaAlta();
   }
 
   GuardarConsulta(){
@@ -125,6 +136,11 @@ export class NuevaConsultaComponent implements OnInit {
     this.tratamiento.especifico = this.form.controls.especifico.value;
     this.tratamiento.sedestacion = this.form.controls.sedestacion.value;
     this.tratamiento.proximoTurnoIndicado = this.form.controls.proximoTurno.value;
+    this.tratamiento.sugerencias = this.form.controls.sugerencias.value;
+  }
+
+  SetConsultaAlta(){
+    this._servicePaciente.consulta = this.consulta;
   }
 
 }

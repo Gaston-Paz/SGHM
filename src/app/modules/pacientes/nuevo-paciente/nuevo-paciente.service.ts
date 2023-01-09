@@ -4,6 +4,7 @@ import { AltaPaciente } from "src/app/core/interfaces/alta-paciente.interface";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { Tratamiento } from "src/app/core/interfaces/tratamiento.interface";
 import { environment } from "src/environments/environment.prod";
 
 @Injectable({
@@ -43,6 +44,16 @@ export class NuevoPacienteService {
     contencion: false
   };
 
+  consulta: Tratamiento = {
+    especifico:'',
+    fecha: new Date(),
+    idPaciente: 0,
+    motivo: '',
+    proximoTurnoIndicado: new Date(),
+    sedestacion: '',
+    sugerencias: ''
+  }
+
   imagen: Blob = new Blob();
 
   alta: AltaPaciente = {
@@ -74,6 +85,15 @@ export class NuevoPacienteService {
       placaDescanso: false,
       contencion: false
     },
+    tratamiento: {
+      especifico:'',
+      fecha: new Date(),
+      idPaciente: 0,
+      motivo: '',
+      proximoTurnoIndicado: new Date(),
+      sedestacion: '',
+      sugerencias: ''
+    }
   };
 
   estudios: Blob[] = [];
@@ -217,6 +237,15 @@ export class NuevoPacienteService {
       contencion: false
     };
     this.estudios = [];
+    this.consulta = {
+      especifico:'',
+      fecha: new Date(),
+      idPaciente: 0,
+      motivo: '',
+      proximoTurnoIndicado: new Date(),
+      sedestacion: '',
+      sugerencias: ''
+    }
   }
 
   //Métodos HTTP
@@ -235,6 +264,9 @@ export class NuevoPacienteService {
     this.alta.paciente = this.datosPersonales;
     this.alta.antecedente = this.antecedente;
     this.alta.consultaInicial = this.consultaInicial;
+    this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
+    this.consulta.fecha = this.consultaInicial.fecha;
+    this.alta.tratamiento = this.consulta;
     return this._httpClient.post<Paciente>(
       environment.url + "/paciente/",
       this.alta

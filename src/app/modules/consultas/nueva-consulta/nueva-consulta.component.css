@@ -35,3 +35,16 @@
     background-color: #cfebd2;
     color: #ffffff;
 }
+
+.bg-section{
+    background-color: #EEFCEF;
+    border-radius: 15px;
+  }
+  h3, h5{
+    margin: 0;
+  }
+  
+  h3{
+    font-weight: 500;
+    margin-top: 20px;
+  }  

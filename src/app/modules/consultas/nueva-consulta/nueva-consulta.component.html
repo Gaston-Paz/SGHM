@@ -1,13 +1,15 @@
-<div class="container">
-  <mat-card>
+<div class="container" *ngIf="!alta">
+  <mat-card >
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>Nueva Consulta</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <form [formGroup]="form" autocomplete="off" class="example-form">
-        <div class="col pad-15">
+
+        <div class="col pad-15-bis">
           <div class="row">
+            <h3>Evaluación</h3>
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Pacientes</mat-label>
               <mat-select formControlName="paciente" required>
@@ -30,6 +32,7 @@
                 readonly="true"
                 autocomplete="off"
                 #dateInput
+                required="true"
                 (dateChange)="changeDate(dateInput,1)"
                 onclick="changeDate(dateInput)"
                 [max]="fecha"
@@ -46,9 +49,7 @@
                 Fecha de Consulta es <strong>obligatorio</strong>
               </mat-error>
             </mat-form-field>
-          </div>
 
-          <div class="row">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Motivo</mat-label>
               <input
@@ -71,18 +72,10 @@
                 matInput
                 formControlName="triangulo"
                 placeholder="Triángulo de la talla"
-                required="true"
                 autocomplete="off"
               />
-              <mat-error *ngIf="form.controls.triangulo.hasError('required')">
-                Triángulo de la talla es <strong>obligatorio</strong>
-              </mat-error>
             </mat-form-field>
-          </div>
-        </div>
 
-        <div class="col pad-15-bis">
-          <div class="row">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>Altura de Iliacos</mat-label>
               <input
@@ -90,12 +83,8 @@
                 matInput
                 formControlName="altura"
                 placeholder="Altura de Iliacos"
-                required="true"
                 autocomplete="off"
               />
-              <mat-error *ngIf="form.controls.altura.hasError('required')">
-                Altura de Iliacos es <strong>obligatorio</strong>
-              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
@@ -105,16 +94,10 @@
                 matInput
                 formControlName="barral"
                 placeholder="Barral"
-                required="true"
                 autocomplete="off"
               />
-              <mat-error *ngIf="form.controls.barral.hasError('required')">
-                Barral es <strong>obligatorio</strong>
-              </mat-error>
             </mat-form-field>
-          </div>
 
-          <div class="row">
             <mat-form-field appearance="outline" class="example-full-width">
               <mat-label>3 Esferas DD</mat-label>
               <input
@@ -122,12 +105,8 @@
                 matInput
                 formControlName="esferas"
                 placeholder="3 Esferas DD"
-                required="true"
                 autocomplete="off"
               />
-              <mat-error *ngIf="form.controls.esferas.hasError('required')">
-                3 Esferas DD es <strong>obligatorio</strong>
-              </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
@@ -144,19 +123,39 @@
                 Específico es <strong>obligatorio</strong>
               </mat-error>
             </mat-form-field>
+          </div>
 
+          <div class="row bg-section">
+            <h3>Tratamiento</h3>
             <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
               <mat-label>Sedestación</mat-label>
-              <input
+              <textarea
                 type="text"
                 matInput
                 formControlName="sedestacion"
                 placeholder="Sedestación"
                 required="true"
                 autocomplete="off"
-              />
+                rows="5"
+              ></textarea>
               <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
                 Sedestación es <strong>obligatorio</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
+              <mat-label>Sugerencias</mat-label>
+              <textarea
+                type="text"
+                matInput
+                formControlName="sugerencias"
+                placeholder="Sugerencias"
+                required="true"
+                autocomplete="off"
+                rows="5"
+              ></textarea>
+              <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
+                Sugerencias es <strong>obligatorio</strong>
               </mat-error>
             </mat-form-field>
 
@@ -167,6 +166,7 @@
                 readonly="true"
                 autocomplete="off"
                 #dateInputProximo
+                required="true"
                 (dateChange)="changeDate(dateInputProximo,2)"
                 onclick="changeDate(dateInput)"
                 [min]="fecha"
@@ -193,6 +193,197 @@
         <button [disabled]="!form.valid" (click)="GuardarConsulta()" [ngClass]="form.valid ? 'button' : 'button-disabled' " mat-button>Guardar</button>
     </mat-card-actions>
   </mat-card>
+</div>
+
+<div class="container" *ngIf="alta">
+  <form [formGroup]="form" autocomplete="off" class="example-form">
+    <!-- <div class="col pad-15">
+      <div class="row">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Fecha de Consulta</mat-label>
+          <input
+            matInput
+            readonly="true"
+            autocomplete="off"
+            #dateInput
+            (dateChange)="changeDate(dateInput,1)"
+            onclick="changeDate(dateInput)"
+            [max]="fecha"
+            [matDatepicker]="selector"
+            [value]="form.controls.fecha.value"
+          />
+          <mat-datepicker-toggle
+            mat-datepicket-toggle
+            matSuffix
+            [for]="selector"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #selector></mat-datepicker>
+          <mat-error *ngIf="form.controls.fecha.hasError('required')">
+            Fecha de Consulta es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Motivo</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="motivo"
+            placeholder="Motivo"
+            required="true"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.motivo.hasError('required')">
+            Motivo es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Triángulo de la talla</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="triangulo"
+            placeholder="Triángulo de la talla"
+            required="true"
+            autocomplete="off"
+          />
+          <mat-error *ngIf="form.controls.triangulo.hasError('required')">
+            Triángulo de la talla es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div> -->
+
+    <div class="col pad-15-bis">
+      <div class="row">
+        <h3>Evaluación</h3>
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Altura de Iliacos</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="altura"
+            placeholder="Altura de Iliacos"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.alturaDeIliacos"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Barral</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="barral"
+            placeholder="Barral"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.barral"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>3 Esferas DD</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="esferas"
+            placeholder="3 Esferas DD"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.esferas"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Específico</mat-label>
+          <input
+            type="text"
+            matInput
+            formControlName="especifico"
+            placeholder="Específico"
+            required="true"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.especifico"
+          />
+          <mat-error *ngIf="form.controls.especifico.hasError('required')">
+            Específico es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row bg-section">
+        <h3>Tratamiento</h3>
+
+        <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
+          <mat-label>Sedestación</mat-label>
+          <textarea
+            type="text"
+            matInput
+            formControlName="sedestacion"
+            placeholder="Sedestación"
+            required="true"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.sedestacion"
+            rows="5"
+          ></textarea>
+          <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
+            Sedestación es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
+          <mat-label>Sugerencias</mat-label>
+          <textarea
+            type="text"
+            matInput
+            formControlName="sugerencias"
+            placeholder="Sugerencias"
+            rows="5"
+            required="true"
+            autocomplete="off"
+            (change)="SetConsultaAlta()"
+            [(ngModel)]="consulta.sugerencias"
+          ></textarea>
+          <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
+            Sugerencias es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="example-full-width">
+          <mat-label>Próximo Turno</mat-label>
+          <input
+            matInput
+            readonly="true"
+            autocomplete="off"
+            #dateInputProximo
+            (dateChange)="changeDate(dateInputProximo,2,true)"
+            onclick="changeDate(dateInput)"
+            [min]="fecha"
+            [matDatepicker]="proximo"
+            [value]="form.controls.proximoTurno.value"
+          />
+          <mat-datepicker-toggle
+            mat-datepicket-toggle
+            matSuffix
+            [for]="proximo"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #proximo></mat-datepicker>
+          <mat-error
+            *ngIf="form.controls.proximoTurno.hasError('required')"
+          >
+            Próximo Turno es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
 </div>
 
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#60c76e" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>

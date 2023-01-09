@@ -5,12 +5,13 @@ export interface Tratamiento{
     idPaciente:number;
     fecha:Date;
     motivo:string;
-    trianguloDeTalla:string;
-    alturaDeIliacos:string;
-    barral:string;
-    esferas:string;
+    trianguloDeTalla?:string;
+    alturaDeIliacos?:string;
+    barral?:string;
+    esferas?:string;
     especifico:string;
     sedestacion:string;
+    sugerencias:string;
     proximoTurnoIndicado:Date;
     paciente?: Paciente;
 }

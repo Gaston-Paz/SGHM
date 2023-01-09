@@ -28,7 +28,7 @@
             (change)="CargarConsultaInicial($event,3)"
             autocomplete="off"
           /> -->
-          <input matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput,1)"
+          <input required="true" matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput,1)"
         onclick="changeDate(dateInput)" [max]="fecha" [matDatepicker]="selector" [value]="form.controls.fecha.value">
         <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
         <mat-datepicker #selector></mat-datepicker>
@@ -168,7 +168,7 @@
       <div class="row">
         <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Fecha Covid</mat-label>
-            <input matInput readonly="true" autocomplete="off" #dateInputCovid (dateChange)="changeDate(dateInputCovid,2)"
+            <input matInput readonly="true" autocomplete="off" #dateInputCovid (dateChange)="changeDate(dateInputCovid,2)" 
         onclick="changeDate(dateInputCovid)" [max]="fecha" [matDatepicker]="selectorCovid" [value]="form.controls.fechaCovid.value">
         <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selectorCovid" ></mat-datepicker-toggle>
         <mat-datepicker #selectorCovid></mat-datepicker>
