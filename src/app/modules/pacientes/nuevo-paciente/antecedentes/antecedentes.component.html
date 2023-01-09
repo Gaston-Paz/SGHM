@@ -88,9 +88,13 @@
               [(ngModel)]="antecedentes.edadOrtodoncia"
               [disabled]="!antecedentes.ortodoncia"
               [readonly]="hayAntecedente"
+              [min]="0"
             />
             <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('required')">
                 Edad es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('min')">
+                La Edad debe ser <strong>mayo a cero</strong>
             </mat-error>
           </mat-form-field>
 

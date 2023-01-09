@@ -35,34 +35,11 @@ export class NuevoPacienteService {
   consultaInicialCompleta: boolean = false;
 
   antecedente: Antecedente = {
-    abortos: "",
-    accidentes: "",
-    alimentacion: "",
-    cardiaco: "",
-    cirugias: "",
     diabetes: false,
-    digestivo: "",
-    dolorCabeza: "",
-    duracion: "",
-    edadOrtodoncia: 0,
     embarazos: false,
-    fracturas: "",
-    frecuencia: "",
-    implanteInferior: "",
-    implanteSuperior: "",
-    intestinal: "",
-    medicacion: "",
     menstruacion: false,
     ortodoncia: false,
-    otros: "",
-    partos: "",
-    perdidas: "",
-    piezasFaltantes: "",
-    placaDescanso: false,
-    respiratorio: "",
-    urogenital: "",
-    volumen: "",
-    tiroides: "",
+    placaDescanso: false
   };
 
   imagen: Blob = new Blob();
@@ -89,34 +66,11 @@ export class NuevoPacienteService {
       localizacion: ""
     },
     antecedente: {
-      abortos: "",
-      accidentes: "",
-      alimentacion: "",
-      cardiaco: "",
-      cirugias: "",
       diabetes: false,
-      digestivo: "",
-      dolorCabeza: "",
-      duracion: "",
-      edadOrtodoncia: 0,
       embarazos: false,
-      fracturas: "",
-      frecuencia: "",
-      implanteInferior: "",
-      implanteSuperior: "",
-      intestinal: "",
-      medicacion: "",
       menstruacion: false,
       ortodoncia: false,
-      otros: "",
-      partos: "",
-      perdidas: "",
-      piezasFaltantes: "",
-      placaDescanso: false,
-      respiratorio: "",
-      urogenital: "",
-      volumen: "",
-      tiroides: "",
+      placaDescanso: false
     },
   };
 
@@ -253,34 +207,11 @@ export class NuevoPacienteService {
       localizacion: ""
     };
     this.antecedente = {
-      abortos: "",
-      accidentes: "",
-      alimentacion: "",
-      cardiaco: "",
-      cirugias: "",
       diabetes: false,
-      digestivo: "",
-      dolorCabeza: "",
-      duracion: "",
-      edadOrtodoncia: 0,
       embarazos: false,
-      fracturas: "",
-      frecuencia: "",
-      implanteInferior: "",
-      implanteSuperior: "",
-      intestinal: "",
-      medicacion: "",
       menstruacion: false,
       ortodoncia: false,
-      otros: "",
-      partos: "",
-      perdidas: "",
-      piezasFaltantes: "",
-      placaDescanso: false,
-      respiratorio: "",
-      urogenital: "",
-      volumen: "",
-      tiroides: "",
+      placaDescanso: false
     };
     this.estudios = [];
   }
