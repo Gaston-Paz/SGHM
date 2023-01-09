@@ -17,9 +17,6 @@
           [(ngModel)]="antecedentes.cirugias"
           [readonly]="hayAntecedente"
         />
-        <mat-error *ngIf="form.controls.cirugias.hasError('required')">
-          Cirugías es <strong>obligatorio</strong>
-        </mat-error>
       </mat-form-field>
     </div>
 
@@ -39,11 +36,6 @@
               [readonly]="hayAntecedente"
               placeholder="Implantes Superiores"
             />
-            <mat-error
-              *ngIf="form.controls.implanteSuperior.hasError('required')"
-            >
-              Implantes Superiores es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -58,11 +50,6 @@
               [readonly]="hayAntecedente"
               placeholder="Implantes Inferiores"
             />
-            <mat-error
-              *ngIf="form.controls.implanteInferior.hasError('required')"
-            >
-              Implantes Inferiores es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
         <h5>Ortodoncia</h5>
@@ -87,9 +74,6 @@
                 [min]="0"
                 [max]="100"
                 />
-              <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('required')">
-                  Edad es <strong>obligatorio</strong>
-              </mat-error>
               <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('min')">
                   La Edad debe ser <strong>mayor a cero</strong>
               </mat-error>
@@ -126,13 +110,9 @@
               [(ngModel)]="antecedentes.piezasFaltantes"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.piezasfaltantes.hasError('required')">
-                Piezas Faltantes es <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
+        </mat-form-field>
 
           <div class="example-full-width">
-
             <mat-checkbox [disabled]="hayAntecedente" class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
         </div>
   </div>
@@ -141,7 +121,6 @@
     <div class="row bg-section">
         <h3 class="mt-20">Salud Femenina</h3>
         <div class="example-full-width">
-
             <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.menstruacion" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
         </div>
 
@@ -158,9 +137,7 @@
               [disabled]="!antecedentes.menstruacion"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.frecuencia.hasError('required')">
-                Frecuencia es <strong>obligatorio</strong>
-            </mat-error>
+
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -176,9 +153,6 @@
               [disabled]="!antecedentes.menstruacion"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.duracion.hasError('required')">
-                Duración es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -194,9 +168,6 @@
               [disabled]="!antecedentes.menstruacion"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.volumen.hasError('required')">
-                Volumen es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -211,13 +182,9 @@
               [(ngModel)]="antecedentes.perdidas"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.perdidas.hasError('required')">
-                Pérdidas es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <div class="example-full-width">
-
             <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
         </div>
 
@@ -261,9 +228,6 @@
               [(ngModel)]="antecedentes.partos"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.partos.hasError('required')">
-                Partos es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
     </div>
 
@@ -283,9 +247,6 @@
               [(ngModel)]="antecedentes.intestinal"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.intestinal.hasError('required')">
-                Intestinal es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -300,9 +261,6 @@
               [(ngModel)]="antecedentes.digestivo"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.digestivo.hasError('required')">
-                Digestivo es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -317,9 +275,6 @@
               [(ngModel)]="antecedentes.cardiaco"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.cardiaco.hasError('required')">
-                Cardíaco es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -334,9 +289,6 @@
               [(ngModel)]="antecedentes.urogenital"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.urogenital.hasError('required')">
-                Urogenital es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -351,9 +303,21 @@
               [(ngModel)]="antecedentes.respiratorio"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.respiratorio.hasError('required')">
-                Respiratorio es <strong>obligatorio</strong>
-            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Óseo</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="oseo"
+              placeholder="Óseo"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.oseo"
+              [readonly]="hayAntecedente"
+            />
+
           </mat-form-field>
 
 
@@ -488,8 +452,6 @@
           </mat-form-field>
 
     </div>
-
-
 
   </div>
 </form>

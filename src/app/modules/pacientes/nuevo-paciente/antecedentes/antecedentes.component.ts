@@ -56,6 +56,7 @@ export class AntecedentesComponent implements OnInit {
       otros: [],
       alimentacion: [],
       protesis: [],
+      oseo: [],
       contencion: [false],
       diabetes: [false],
       embarazos: [false],
