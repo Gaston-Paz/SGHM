@@ -19,6 +19,8 @@ export class ConsultasService {
     ocupacion: "",
     localidad: "",
     fotoPerfil: "",
+    otros:"",
+    deParte: ""
   };
   
   constructor(private _httpClient: HttpClient) {}

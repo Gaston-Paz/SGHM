@@ -37,6 +37,8 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     ocupacion: "",
     localidad: "",
     fotoPerfil: "",
+    otros:"",
+    deParte: ""
   };
   form!:FormGroup;
 

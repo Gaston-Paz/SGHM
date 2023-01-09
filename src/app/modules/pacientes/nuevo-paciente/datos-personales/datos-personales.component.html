@@ -71,7 +71,7 @@
           formControlName="otros"
           placeholder="Otros comentarios"
           required="true"
-          
+          (change)="CargarDatosPersonales($event,9)"
           autocomplete="off"
         />
         <mat-error *ngIf="form.controls.otros.hasError('required')">
@@ -119,7 +119,7 @@
           formControlName="deParte"
           placeholder="De parte de quién viene"
           required="true"
-
+          (change)="CargarDatosPersonales($event,10)"
           autocomplete="off"
         />
         <mat-error *ngIf="form.controls.celular.hasError('required')">

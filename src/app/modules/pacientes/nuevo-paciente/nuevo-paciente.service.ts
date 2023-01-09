@@ -20,6 +20,8 @@ export class NuevoPacienteService {
     ocupacion: "",
     localidad: "",
     fotoPerfil: "",
+    otros:"",
+    deParte: ""
   };
   datosPersonlesCompletos: boolean = false;
 
@@ -81,6 +83,8 @@ export class NuevoPacienteService {
       ocupacion: "",
       localidad: "",
       fotoPerfil: "",
+      otros:"",
+      deParte: ""
     },
     consultaInicial: {
       actividadFisica: "",
@@ -164,6 +168,12 @@ export class NuevoPacienteService {
       case 8:
         this.datosPersonales.localidad = dato;
         break;
+        case 9:
+        this.datosPersonales.otros = dato;
+        break;
+        case 10:
+        this.datosPersonales.deParte = dato;
+        break;
     }
     this.datosPersonlesCompletos = valido;
   }
@@ -236,6 +246,8 @@ export class NuevoPacienteService {
       ocupacion: "",
       localidad: "",
       fotoPerfil: "",
+      otros:"",
+      deParte: ""
     };
     this.consultaInicial = {
       actividadFisica: "",

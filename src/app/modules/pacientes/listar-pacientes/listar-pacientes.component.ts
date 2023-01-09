@@ -179,6 +179,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       ocupacion: "",
       localidad: "",
       fotoPerfil: "",
+      otros:"",
+      deParte: ""
     };
   }
 
