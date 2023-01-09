@@ -14,6 +14,7 @@ export class DatosPersonalesComponent implements OnInit {
   previsualizacionFoto: string = "";
   form!: FormGroup;
   fecha: Date = new Date();
+  nacimientos: string[] = ['Vaginal','Cesarea'];
 
   constructor(
     private _formBuilder: FormBuilder,

@@ -27,6 +27,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { ListarConsultasComponent } from '../consultas/listar-consultas/listar-consultas.component';
 import { ConsultasModule } from '../consultas/consultas.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ConsultasModule } from '../consultas/consultas.module';
     NgxSpinnerModule,
     MatSortModule,
     MatPaginatorModule,
-    ConsultasModule
+    ConsultasModule,
+    MatSelectModule
   ],
   providers: [  
     MatDatepickerModule,  

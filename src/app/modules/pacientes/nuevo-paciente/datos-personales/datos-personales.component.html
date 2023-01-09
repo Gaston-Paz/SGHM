@@ -49,15 +49,14 @@
 
       <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>¿Cómo nació?</mat-label>
-        <input
-          type="text"
-          matInput
-          formControlName="nacimiento"
-          placeholder="¿Cómo nació?"
-          required="true"
-          (change)="CargarDatosPersonales($event,7)"
-          autocomplete="off"
-        />
+        <mat-select formControlName="nacimiento" required (selectionChange)="CargarDatosPersonales($event,7)">
+          <mat-option
+            *ngFor="let nac of nacimientos"
+            [value]="nac"
+          >
+            {{ nac }} 
+          </mat-option>
+        </mat-select>
         <mat-error *ngIf="form.controls.nacimiento.hasError('required')">
           ¿Cómo nació? es <strong>obligatorio</strong>
         </mat-error>
