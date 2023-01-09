@@ -54,6 +54,7 @@ export class AntecedentesComponent implements OnInit {
       tiroides: [],
       otros: [],
       alimentacion: [],
+      protesis: [],
       contencion: [false],
       diabetes: [false],
       embarazos: [false],

@@ -28,6 +28,7 @@ export interface Antecedente{
     perdidas?:string;
     accidentes?:string;
     tiroides?:string;
+    protesis?:string;
     diabetes:boolean;
     contencion:boolean;
 }
