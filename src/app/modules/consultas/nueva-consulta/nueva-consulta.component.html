@@ -15,7 +15,7 @@
               <mat-select formControlName="paciente" required>
                 <mat-option
                   *ngFor="let paciente of pacientes"
-                  [value]="paciente"
+                  [value]="paciente.idPaciente"
                 >
                   {{ paciente.nombre }} - {{ paciente.apellido }}
                 </mat-option>

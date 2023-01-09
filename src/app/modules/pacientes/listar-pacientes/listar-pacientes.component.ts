@@ -29,12 +29,14 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "foto",
     "antecedentes",
     "consultaInicial",
-    "turnos",
+    "consultas",
+    "nuevaConsulta"
   ];
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
   antecedentes: boolean = false;
   consultaInicial: boolean = false;
+  consultaNueva: boolean = false;
   turnos: boolean = false;
   nombrePaciente: string = "";
   apellidoPaciente: string = "";
@@ -52,6 +54,19 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     motivo: "",
     covid: false,
     fecha: new Date(),
+  };
+  idPaciente:Paciente = {
+    apellido: "",
+    celular: "",
+    fechaNacimiento: new Date(),
+    email: "",
+    nacio: "",
+    nombre: "",
+    ocupacion: "",
+    localidad: "",
+    fotoPerfil: "",
+    otros:"",
+    deParte: ""
   };
 
   constructor(
@@ -108,6 +123,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.antecedentes = true;
           this.pacientesVer = false;
           this.consultaInicial = false;
+          this.consultaNueva = false;
           this.turnos = false;
 
           this.nombrePaciente = element.nombre;
@@ -126,6 +142,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.antecedentes = false;
         this.pacientesVer = false;
         this.consultaInicial = true;
+        this.consultaNueva = false;
         this.turnos = false;
 
         this.nombrePaciente = element.nombre;
@@ -142,6 +159,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.pacientesVer = true;
     this.consultaInicial = false;
     this.turnos = false;
+    this.consultaNueva = false;
     this._serviceConsulta.paciente = {
       apellido: "",
       celular: "",
@@ -159,10 +177,19 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
 
   verTurnos(paciente: Paciente) {
     this._serviceConsulta.paciente = paciente;
-    //this._router.navigate(['./consultas/listar-consultas'])
     this.antecedentes = false;
     this.pacientesVer = false;
     this.consultaInicial = false;
     this.turnos = true;
+    this.consultaNueva = false;
+  }
+
+  NuevaConsulta(paciente: Paciente){
+    this.idPaciente = paciente!;
+    this.consultaNueva = true;
+    this.antecedentes = false;
+    this.pacientesVer = false;
+    this.consultaInicial = false;
+    this.turnos = false;
   }
 }

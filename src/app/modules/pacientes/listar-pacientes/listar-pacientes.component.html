@@ -67,10 +67,18 @@
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="turnos">
-      <th mat-header-cell *matHeaderCellDef> Historial de turnos </th>
+    <ng-container matColumnDef="consultas">
+      <th mat-header-cell *matHeaderCellDef> Consultas </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="verTurnos(element)" > Ver Turnos </button>
+          <button class="button" mat-button (click)="verTurnos(element)" > Ver Consultas </button>
+    </td>
+    </ng-container>
+
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="nuevaConsulta">
+      <th mat-header-cell *matHeaderCellDef> Nueva Consulta </th>
+      <td mat-cell *matCellDef="let element"> 
+          <button class="button" mat-button (click)="NuevaConsulta(element)" > Nueva Consulta </button>
     </td>
     </ng-container>
 
@@ -111,6 +119,15 @@
 
 <div [hidden]="!turnos" class="container">
   <app-listar-consultas *ngIf="turnos" ></app-listar-consultas>
+
+  <div class="left mt-20">
+    <button class="button" mat-button (click)="Volver()" > Volver </button>
+
+  </div>
+</div>
+
+<div [hidden]="!consultaNueva" class="container">
+  <app-nueva-consulta *ngIf="consultaNueva" [paciente]="idPaciente" ></app-nueva-consulta>
 
   <div class="left mt-20">
     <button class="button" mat-button (click)="Volver()" > Volver </button>

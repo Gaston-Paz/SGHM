@@ -32,6 +32,19 @@ export class NuevaConsultaComponent implements OnInit {
     sugerencias: ''
   }
   @Input("alta") alta: boolean = false;
+  @Input("paciente") idPaciente: Paciente = {
+    apellido: "",
+    celular: "",
+    fechaNacimiento: new Date(),
+    email: "",
+    nacio: "",
+    nombre: "",
+    ocupacion: "",
+    localidad: "",
+    fotoPerfil: "",
+    otros:"",
+    deParte: ""
+  };
   consulta: Tratamiento = {
     especifico:'',
     fecha: new Date(),
@@ -55,7 +68,7 @@ export class NuevaConsultaComponent implements OnInit {
     this.fecha = new Date(Date.now());
     this.form = this._formBuilder.group({
       fecha:[,[Validators.required]],
-      paciente:[,[Validators.required]],
+      paciente:[this.idPaciente.idPaciente,[Validators.required]],
       motivo:[,[Validators.required]],
       triangulo:[],
       altura:[],
@@ -66,6 +79,7 @@ export class NuevaConsultaComponent implements OnInit {
       sedestacion:[,[Validators.required]],
       proximoTurno:[,[Validators.required]]
     });
+    
     this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
       this.pacientes = pacientes;
     },(error:HttpErrorResponse) => {
@@ -126,8 +140,8 @@ export class NuevaConsultaComponent implements OnInit {
 
   MapTratamiento(){
     this.tratamiento.fecha = this.form.controls.fecha.value;
-    this.tratamiento.paciente = this.form.controls.paciente.value;
-    this.tratamiento.idPaciente = this.tratamiento.paciente!.idPaciente!;
+    this.tratamiento.idPaciente = this.form.controls.paciente.value;
+    this.tratamiento.paciente = this.pacientes.find(x => x.idPaciente === this.tratamiento.idPaciente);
     this.tratamiento.motivo = this.form.controls.motivo.value;
     this.tratamiento.trianguloDeTalla = this.form.controls.triangulo.value;
     this.tratamiento.alturaDeIliacos = this.form.controls.altura.value;
