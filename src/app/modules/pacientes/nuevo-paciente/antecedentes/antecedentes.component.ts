@@ -21,6 +21,7 @@ export class AntecedentesComponent implements OnInit {
 
   }
   fumador: string[]=['Tabaco','Marihuana','Ambos'];
+  tiroides: string[]=['Hipotiroidismo','Hipertiroidismo'];
   @Input("antecedente") antecedente!: Antecedente;
   @Input("hayAntecedente") hayAntecedente: boolean = false;
 

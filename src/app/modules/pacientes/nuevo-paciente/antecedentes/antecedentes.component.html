@@ -322,7 +322,7 @@
 
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Fuma</mat-label>
-            <mat-select formControlName="fuma" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.fuma">
+            <mat-select formControlName="fuma" (selectionChange)="CargarAntecedentes()" [disabled]="hayAntecedente" [(ngModel)]="antecedentes.fuma">
               <mat-option
               *ngFor="let fumas of fumador"
               [value]="fumas"
@@ -366,13 +366,9 @@
               [(ngModel)]="antecedentes.accidentes"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.accidentes.hasError('required')">
-                Accidentes es <strong>obligatorio</strong>
-            </mat-error>
-          </mat-form-field>
+        </mat-form-field>
 
           <div class="example-full-width">
-
             <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.diabetes" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
         </div>
 
@@ -388,9 +384,6 @@
               [(ngModel)]="antecedentes.medicacion"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.medicacion.hasError('required')">
-                Medicación es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -405,9 +398,6 @@
               [(ngModel)]="antecedentes.fracturas"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.fracturas.hasError('required')">
-                Fracturas es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -422,26 +412,18 @@
               [(ngModel)]="antecedentes.dolorCabeza"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.dolorCabeza.hasError('required')">
-                Dolores de Cabeza es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Tiroides</mat-label>
-            <input
-              type="text"
-              matInput
-              formControlName="tiroides"
-              placeholder="Tiroides"
-              (change)="CargarAntecedentes()"
-              autocomplete="off"
-              [(ngModel)]="antecedentes.tiroides"
-              [readonly]="hayAntecedente"
-            />
-            <mat-error *ngIf="form.controls.tiroides.hasError('required')">
-                Tiroides es <strong>obligatorio</strong>
-            </mat-error>
+            <mat-select formControlName="tiroides" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.tiroides" [disabled]="hayAntecedente">
+              <mat-option
+              *ngFor="let tiro of tiroides"
+              [value]="tiro"
+              >
+              {{ tiro }}
+            </mat-option>
+          </mat-select>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -456,9 +438,6 @@
               [(ngModel)]="antecedentes.otros"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.otros.hasError('required')">
-                Otros es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -473,9 +452,6 @@
               [(ngModel)]="antecedentes.alimentacion"
               [readonly]="hayAntecedente"
             />
-            <mat-error *ngIf="form.controls.alimentacion.hasError('required')">
-                Alimentación es <strong>obligatorio</strong>
-            </mat-error>
           </mat-form-field>
 
     </div>
