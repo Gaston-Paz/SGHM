@@ -30,7 +30,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "antecedentes",
     "consultaInicial",
     "consultas",
-    "nuevaConsulta"
+    "nuevaConsulta",
   ];
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
@@ -46,7 +46,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     menstruacion: false,
     ortodoncia: false,
     placaDescanso: false,
-    contencion: false
+    contencion: false,
   };
   consultas: ConsultaInicial = {
     antiguedad: "",
@@ -55,7 +55,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     covid: false,
     fecha: new Date(),
   };
-  idPaciente:Paciente = {
+  idPaciente: Paciente = {
     apellido: "",
     celular: "",
     fechaNacimiento: new Date(),
@@ -65,8 +65,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     ocupacion: "",
     localidad: "",
     fotoPerfil: "",
-    otros:"",
-    deParte: ""
+    otros: "",
+    deParte: "",
   };
 
   constructor(
@@ -90,11 +90,18 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
             variables[9] +
             "//" +
             variables[10];
+
+          var fechaInicio = new Date(r.fechaNacimiento).getTime();
+          var fechaFin = new Date().getTime();
+
+          var diff = fechaFin - fechaInicio;
+
+          r.edad = diff / (1000 * 60 * 60 * 24 * 365);
           this.pacientes.push(r);
         });
 
-        this.dataSource.data = this.pacientes.sort((a,b) => {
-          if(a.apellido < b.apellido)return -1;
+        this.dataSource.data = this.pacientes.sort((a, b) => {
+          if (a.apellido < b.apellido) return -1;
           else return 1;
         });
       },
@@ -170,8 +177,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       ocupacion: "",
       localidad: "",
       fotoPerfil: "",
-      otros:"",
-      deParte: ""
+      otros: "",
+      deParte: "",
     };
   }
 
@@ -184,7 +191,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.consultaNueva = false;
   }
 
-  NuevaConsulta(paciente: Paciente){
+  NuevaConsulta(paciente: Paciente) {
     this.idPaciente = paciente!;
     this.consultaNueva = true;
     this.antecedentes = false;

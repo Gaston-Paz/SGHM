@@ -13,5 +13,5 @@ export interface Paciente{
     fotoPerfil: string,
     extensionFoto?: string,
 
-    
+    edad?:number;
 }
