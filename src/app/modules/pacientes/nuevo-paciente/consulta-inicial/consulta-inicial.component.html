@@ -164,6 +164,31 @@
           </div>
 
       </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Fecha Covid</mat-label>
+            <input
+              type="date"
+              matInput
+              formControlName="fechaCovid"
+              [disabled]="!form.controls.covid.value"
+              autocomplete="off"
+            />
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Otros</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="otros"
+              [disabled]="!form.controls.covid.value"
+              autocomplete="off"
+            />
+          </mat-form-field>
+
+      </div>
   
     </div>
 </form>

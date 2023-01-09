@@ -5,11 +5,13 @@ export interface ConsultaInicial{
     motivo: string;
     antiguedad: string;
     localizacion: string;
-    intensidad: string;
-    caracteristica: string;
-    irradiacion: string;
-    atenua: string;
-    actividadFisica: string;
+    intensidad?: string;
+    caracteristica?: string;
+    irradiacion?: string;
+    atenua?: string;
+    actividadFisica?: string;
     covid: boolean;
+    fechaCovid?: Date;
+    otros?: string;
     
 }

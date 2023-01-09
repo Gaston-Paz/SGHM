@@ -38,6 +38,8 @@ export class ConsultaInicialComponent implements OnInit {
         atenua: [this.consulta.atenua],
         actividadFisica: [this.consulta.actividadFisica],
         covid: [this.consulta.covid],
+        fechaCovid: [this.consulta.fechaCovid],
+        otros: [this.consulta.otros],
       });
     }else{
       this.form = this._formBuilder.group({

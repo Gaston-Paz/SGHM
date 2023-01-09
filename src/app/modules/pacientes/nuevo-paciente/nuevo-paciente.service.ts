@@ -26,16 +26,11 @@ export class NuevoPacienteService {
   datosPersonlesCompletos: boolean = false;
 
   consultaInicial: ConsultaInicial = {
-    actividadFisica: "",
     antiguedad: "",
-    atenua: "",
-    caracteristica: "",
-    intensidad: "",
-    irradiacion: "",
-    localizacion: "",
     motivo: "",
     covid: false,
     fecha: new Date(),
+    localizacion: ""
   };
   consultaInicialCompleta: boolean = false;
 
@@ -87,16 +82,11 @@ export class NuevoPacienteService {
       deParte: ""
     },
     consultaInicial: {
-      actividadFisica: "",
       antiguedad: "",
-      atenua: "",
-      caracteristica: "",
-      intensidad: "",
-      irradiacion: "",
-      localizacion: "",
       motivo: "",
       covid: false,
       fecha: new Date(),
+      localizacion: ""
     },
     antecedente: {
       abortos: "",
@@ -250,16 +240,11 @@ export class NuevoPacienteService {
       deParte: ""
     };
     this.consultaInicial = {
-      actividadFisica: "",
       antiguedad: "",
-      atenua: "",
-      caracteristica: "",
-      intensidad: "",
-      irradiacion: "",
-      localizacion: "",
       motivo: "",
       covid: false,
       fecha: new Date(),
+      localizacion: ""
     };
     this.antecedente = {
       abortos: "",
