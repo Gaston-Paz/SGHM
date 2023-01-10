@@ -1,0 +1,18 @@
+.button{
+    background-color: #60C76E;
+    color: #ffffff;
+}
+.button-disabled{
+    background-color: #cfebd2;
+    color: #ffffff;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+button{
+    margin-right: 2px;
+    margin-left: 2px;
+    width: 40%;
+}

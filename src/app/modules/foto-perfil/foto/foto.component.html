@@ -1,0 +1,50 @@
+<div class="container">
+    <mat-card class="mt-20 mb-20">
+        <mat-card-title>Nueva Foto de Perfil</mat-card-title>
+    <form [formGroup]="form">
+
+        <mat-form-field class="width-100">
+          <mat-label>Pacientes</mat-label>
+          <mat-select formControlName="paciente" (selectionChange)="CheckFoto($event)" >
+
+            <input placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
+
+            <mat-option
+            *ngFor="let paciente of pacientesFilter"
+            [value]="paciente.idPaciente"
+            >
+            {{ paciente.nombre }} {{ paciente.apellido }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <div class="row pad-10">
+          
+          <mat-label>Foto de Perfil</mat-label>
+          <input
+          class="form-control"
+          type="file"
+          formControlName="foto"
+          placeholder="Foto del paciente"
+          (change)="CargarFoto($event)" 
+          required="true"
+          accept="image/png, image/gif, image/jpeg"
+          />
+          
+        
+
+          <img class="mt-20" *ngIf="previsualizacionFoto" [src]="previsualizacionFoto" alt="Foto de Perfil">
+        </div>
+        
+    </form>
+
+
+
+
+    <div class="end mt-20">
+        <button [ngClass]="form.valid ? 'button' : 'button-disabled' " [disabled]="!form.valid" class="button" mat-button (click)="GuardarFoto()" > Guardar Foto de Perfil </button>
+      </div>
+</mat-card>
+</div>
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#60c76e" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>

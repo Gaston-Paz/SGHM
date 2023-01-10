@@ -20,7 +20,6 @@ export class NuevoPacienteService {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    fotoPerfil: "",
     otros:"",
     deParte: ""
   };
@@ -217,7 +216,6 @@ export class NuevoPacienteService {
       nombre: "",
       ocupacion: "",
       localidad: "",
-      fotoPerfil: "",
       otros:"",
       deParte: ""
     };
@@ -273,5 +271,11 @@ export class NuevoPacienteService {
     );
   }
 
+  ActualizarDatosPersonales(datos:Paciente) {
+    return this._httpClient.post<Paciente>(
+      environment.url + "/paciente/actualizar",
+      datos
+    );
+  }
 
 }

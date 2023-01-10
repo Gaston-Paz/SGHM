@@ -19,6 +19,11 @@ const routes: Routes = [
     path: 'estudios',
     loadChildren: () => import('./modules/estudios/estudios.module').then(m => m.EstudiosModule)
   }
+  ,
+  {
+    path: 'foto',
+    loadChildren: () => import('./modules/foto-perfil/foto-perfil.module').then(m => m.FotoPerfilModule)
+  }
 ];
 
 @NgModule({

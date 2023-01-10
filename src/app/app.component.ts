@@ -52,6 +52,10 @@ export class AppComponent  {
       url: '/estudios/listar-estudios'
     },
     {
+      text:'Foto de Perfil Paciente',
+      url: '/foto/foto-perfil'
+    },
+    {
       text:'Cerrar sesión',
       url: ''
     },

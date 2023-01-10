@@ -64,7 +64,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    fotoPerfil: "",
     otros: "",
     deParte: "",
   };
@@ -82,14 +81,16 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       (resp) => {
         resp.forEach((r) => {
           r.fechaNacimiento = new Date(r.fechaNacimiento);
-          let variables = r.fotoPerfil.toString().split("\\");
-          r.fotoPerfil =
+          if(r.fotoPerfil !== undefined && r.fotoPerfil !== null){
+            let variables = r.fotoPerfil!.toString().split("\\");
+            r.fotoPerfil =
             "..//..//..//..//assets//" +
             variables[8] +
             "//" +
             variables[9] +
             "//" +
             variables[10];
+          }
 
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
@@ -176,7 +177,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       nombre: "",
       ocupacion: "",
       localidad: "",
-      fotoPerfil: "",
       otros: "",
       deParte: "",
     };

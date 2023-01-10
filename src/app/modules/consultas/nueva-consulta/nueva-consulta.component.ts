@@ -42,7 +42,6 @@ export class NuevaConsultaComponent implements OnInit {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    fotoPerfil: "",
     otros:"",
     deParte: ""
   };

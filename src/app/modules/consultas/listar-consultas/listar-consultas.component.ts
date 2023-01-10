@@ -37,7 +37,6 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    fotoPerfil: "",
     otros:"",
     deParte: ""
   };

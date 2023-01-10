@@ -15,12 +15,15 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackBarComponent } from './shared/Components/snack-bar/snack-bar.component';
 import { InterceptorService } from './shared/services/interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ModalConfirmComponent } from './shared/Components/modal-confirm/modal-confirm.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    SnackBarComponent
+    SnackBarComponent,
+    ModalConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatIconModule,
     MatButtonModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatDialogModule
   ],
   providers: [
     {
