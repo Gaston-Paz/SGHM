@@ -20,6 +20,8 @@ export class EstudiosComponent implements OnInit {
   pacientes:Paciente[]=[];
   form!:FormGroup;
   previsualizacionFoto: string[] = [];
+  filtroPaciente:string = '';
+  pacientesFilter: Paciente[] = [];
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -35,6 +37,7 @@ export class EstudiosComponent implements OnInit {
     obs.push(this._servicePaciente.ObtenerPacientes());
     forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];      
+      this.pacientesFilter = resp[0];      
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snackBar.openFromComponent(SnackBarComponent, {
@@ -126,5 +129,12 @@ export class EstudiosComponent implements OnInit {
 
   GetEstudio(){
     return this._servicePaciente.estudios.length > 0;
+  }
+
+  applyFilterPaciente(espacio:boolean){
+    let filter = this.filtroPaciente + "";
+    if(espacio) filter += "";
+    this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
 }

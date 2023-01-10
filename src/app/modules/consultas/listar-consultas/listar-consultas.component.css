@@ -48,3 +48,15 @@ h3{
 .mt-20{
   margin-top: 20px;
 }
+
+
+.filtro{
+  height: 36px;
+  /* padding-left: 15px; */
+  font-size: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  background-color: #ffffff;
+  border-bottom: 1px solid #ccc;
+}

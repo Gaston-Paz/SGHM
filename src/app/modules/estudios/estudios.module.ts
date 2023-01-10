@@ -12,6 +12,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { ListarComponent } from './listar/listar.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     FormsModule,
     NgxSpinnerModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    MatInputModule
   ]
 })
 export class EstudiosModule { }

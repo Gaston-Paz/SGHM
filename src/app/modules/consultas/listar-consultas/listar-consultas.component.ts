@@ -25,6 +25,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = ['fecha', 'motivo', 'sedestacion','sugerencias','proximoTurnoIndicado'];
   pacientes:Paciente[]=[];
+  pacientesFilter: Paciente[] = [];
   tratamientos:Tratamiento[]=[];
   tratamientosFiltrados:Tratamiento[]=[];
   paciente: Paciente = {
@@ -41,6 +42,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     deParte: ""
   };
   form!:FormGroup;
+  filtroPaciente:string = '';
 
   constructor(private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
@@ -57,6 +59,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     obs.push(this._serviceTratamiento.ObtenerConsultas());
     forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];
+      this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
       if(this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null) {
         this.buscarTratamientos();
@@ -89,6 +92,13 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
       if(a.fecha! > b.fecha!)return -1;
       else return 1;
     });
+  }
+
+  applyFilterPaciente(espacio:boolean){
+    let filter = this.filtroPaciente + "";
+    if(espacio) filter += "";
+    this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
 
 }

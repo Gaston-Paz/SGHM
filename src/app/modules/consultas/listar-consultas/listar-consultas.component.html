@@ -7,8 +7,10 @@
         formControlName="paciente"
         (selectionChange)="buscarTratamientos()"
       >
+      <input placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
+
         <mat-option
-          *ngFor="let paciente of pacientes"
+          *ngFor="let paciente of pacientesFilter"
           [value]="paciente.idPaciente"
         >
           {{ paciente.nombre }} {{ paciente.apellido }}

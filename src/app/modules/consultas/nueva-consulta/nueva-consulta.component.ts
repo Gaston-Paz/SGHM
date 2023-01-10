@@ -21,6 +21,7 @@ export class NuevaConsultaComponent implements OnInit {
   form!: FormGroup;
   fecha: Date = new Date();
   pacientes: Paciente[] = [];
+  pacientesFilter: Paciente[] = [];
   pipe = new DatePipe('es-ES');
   tratamiento:Tratamiento = {
     especifico:'',
@@ -54,6 +55,7 @@ export class NuevaConsultaComponent implements OnInit {
     sedestacion: '',
     sugerencias: ''
   }
+  filtroPaciente:string = '';
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -62,7 +64,7 @@ export class NuevaConsultaComponent implements OnInit {
     private _serviceConsulta:ConsultasService,
     private _dateAdapter: DateAdapter<Date>) {
       this._dateAdapter.setLocale('es-ES');
-     }
+  }
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
@@ -82,6 +84,7 @@ export class NuevaConsultaComponent implements OnInit {
     
     this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
       this.pacientes = pacientes;
+      this.pacientesFilter = pacientes;
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snackBar.openFromComponent(SnackBarComponent, {
@@ -155,6 +158,13 @@ export class NuevaConsultaComponent implements OnInit {
 
   SetConsultaAlta(){
     this._servicePaciente.consulta = this.consulta;
+  }
+
+  applyFilterPaciente(espacio:boolean){
+    let filter = this.filtroPaciente + "";
+    if(espacio) filter += "";
+    this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
 
 }

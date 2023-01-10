@@ -20,8 +20,10 @@ export class ListarComponent implements OnInit {
 
   form!:FormGroup;
   pacientes:Paciente[]=[];
+  pacientesFilter: Paciente[] = [];
   estudios: Estudios[]=[];
   estudiosFiltrados: Estudios[]=[];
+  filtroPaciente:string = '';
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -39,6 +41,7 @@ export class ListarComponent implements OnInit {
     obs.push(this._serviceEstudio.ObtenerEstudios());
     forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
+      this.pacientesFilter = resp[0]; 
       resp[1].forEach((r: Estudios) => {
         let variables = r.ruta.toString().split("\\");
         r.ruta =
@@ -71,5 +74,12 @@ export class ListarComponent implements OnInit {
       if(a.idEstudio > b.idEstudio)return -1;
       else return 1;
     })
+  }
+
+  applyFilterPaciente(espacio:boolean){
+    let filter = this.filtroPaciente + "";
+    if(espacio) filter += "";
+    this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
 }
