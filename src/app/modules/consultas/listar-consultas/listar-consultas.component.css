@@ -39,3 +39,12 @@ td {
 .width-100{
   width: 100%;
 }
+
+h3{
+      font-size: 20px;
+    font-weight: 500;
+}
+
+.mt-20{
+  margin-top: 20px;
+}

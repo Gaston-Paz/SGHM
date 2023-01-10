@@ -36,11 +36,11 @@ export class AppComponent  {
       url: '/pacientes/listar-pacientes'
     },
     {
-      text:'Nueva Consulta',
+      text:'Nueva Consulta TTO',
       url: '/consultas/nueva-consulta'
     },
     {
-      text:'Consultas',
+      text:'Consultas TTO',
       url: '/consultas/listar-consultas'
     },
     {
