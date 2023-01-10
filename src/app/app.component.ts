@@ -32,6 +32,10 @@ export class AppComponent  {
       url: '/pacientes/nuevo-paciente'
     },
     {
+      text:'Foto de Perfil Paciente',
+      url: '/foto/foto-perfil'
+    },
+    {
       text:'Pacientes',
       url: '/pacientes/listar-pacientes'
     },
@@ -50,10 +54,6 @@ export class AppComponent  {
     {
       text:'Estudios',
       url: '/estudios/listar-estudios'
-    },
-    {
-      text:'Foto de Perfil Paciente',
-      url: '/foto/foto-perfil'
     },
     {
       text:'Cerrar sesión',
