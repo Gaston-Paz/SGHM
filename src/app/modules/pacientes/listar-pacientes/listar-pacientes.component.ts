@@ -126,7 +126,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this._serviceListados
       .ObtenerAntecedentePorId(element.idPaciente!)
       .subscribe(
-        (resp) => {
+        (resp) => {         
           this.antecedente = resp;
           this.antecedentes = true;
           this.pacientesVer = false;
@@ -145,7 +145,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
 
   VerConsultas(element: Paciente) {
     this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(
-      (resp) => {
+      (resp) => {        
         this.consultas = resp;
         this.antecedentes = false;
         this.pacientesVer = false;

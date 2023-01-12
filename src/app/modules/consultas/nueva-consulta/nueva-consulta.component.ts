@@ -5,7 +5,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
@@ -75,7 +74,7 @@ export class NuevaConsultaComponent implements OnInit {
       altura:[],
       barral:[],
       esferas:[],
-      especifico:[,[Validators.required]],
+      especifico:[],
       sugerencias:[],
       sedestacion:[,[Validators.required]],
       proximoTurno:[,[Validators.required]]
@@ -97,17 +96,11 @@ export class NuevaConsultaComponent implements OnInit {
 
   }
 
-  changeDate(date:any,control:number,esAlta:boolean=false){
-    // let fechaaux = new Date(date.value);
-    // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
-    // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-    // if(control === 1)this.form.controls.fecha.setValue(fechas);   
-    // else if(control === 2)this.form.controls.proximoTurno.setValue(fechas);   
+  changeDate(date:any,control:number,esAlta:boolean=false){  
 
     let dateParts = date.value.split('/');
     let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
-    let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     if(control === 1)this.form.controls.fecha.setValue(fecha);   
     else if(control === 2)this.form.controls.proximoTurno.setValue(fecha);
     

@@ -25,7 +25,6 @@ import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estu
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ListarConsultasComponent } from '../consultas/listar-consultas/listar-consultas.component';
 import { ConsultasModule } from '../consultas/consultas.module';
 import { MatSelectModule } from '@angular/material/select';
 

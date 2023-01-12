@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { Tratamiento } from "src/app/core/interfaces/tratamiento.interface";

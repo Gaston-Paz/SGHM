@@ -93,7 +93,6 @@ export class DatosPersonalesComponent implements OnInit {
     let dateParts = date.value.split('/');
     let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
-    let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     this.form.controls.fechaNacimiento.setValue(fecha);   
     this._servicePacienteNuevo.CargarDatosPersonales(fecha,3, this.form.valid); 
 

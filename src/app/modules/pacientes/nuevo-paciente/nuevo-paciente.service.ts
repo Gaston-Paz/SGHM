@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { AltaPaciente } from "src/app/core/interfaces/alta-paciente.interface";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
@@ -285,21 +285,6 @@ export class NuevoPacienteService {
       this.alta
     );
   }
-
-  // GuardarPaciente(){
-  //   this.alta.paciente = this.datosPersonales;
-  //   this.alta.antecedente = this.antecedente;
-  //   this.alta.consultaInicial = this.consultaInicial;
-  //   this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
-  //   this.consulta.fecha = this.consultaInicial.fecha;
-  //   this.alta.tratamiento = this.consulta;
-  //   console.log('antecedente',this.antecedente);
-  //   console.log('inicio', this.consultaInicial);
-  //   console.log('tratamineto',this.consulta);
-    
-    
-    
-  // }
 
   ActualizarDatosPersonales(datos:Paciente) {
     return this._httpClient.post<Paciente>(

@@ -120,7 +120,6 @@
                 matInput
                 formControlName="especifico"
                 placeholder="Específico"
-                required="true"
                 autocomplete="off"
               />
               <mat-error *ngIf="form.controls.barral.hasError('required')">
@@ -261,7 +260,6 @@
             matInput
             formControlName="especifico"
             placeholder="Específico"
-            required="true"
             autocomplete="off"
             (change)="SetConsultaAlta()"
             [(ngModel)]="consulta.especifico"
