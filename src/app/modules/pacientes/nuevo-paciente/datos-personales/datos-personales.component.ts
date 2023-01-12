@@ -36,12 +36,12 @@ export class DatosPersonalesComponent implements OnInit {
       apellido: ["", Validators.required],
       fechaNacimiento: [, Validators.required],
       nacimiento: ["", Validators.required],
-      otros: ["", Validators.required],
+      otros: [""],
       ocupacion: ["", Validators.required],
       localidad: [, Validators.required],
-      mail: ["", [Validators.required, Validators.email]],
-      celular: ["", Validators.required],
-      deParte: ["", Validators.required],
+      mail: ["", [Validators.email]],
+      celular: [""],
+      deParte: [""],
       foto: [""],
     });
    
@@ -79,7 +79,10 @@ export class DatosPersonalesComponent implements OnInit {
   });
 
   CargarDatosPersonales(dato: any, campo: number) {   
-    this._servicePacienteNuevo.CargarDatosPersonales(dato.target.value,campo, this.form.valid);
+    let valor = "";
+    if(campo === 7) valor = dato.value;
+    else valor = dato.target.value; 
+    this._servicePacienteNuevo.CargarDatosPersonales(valor,campo, this.form.valid);
   }
 
   SubirImagen(archivo:any){

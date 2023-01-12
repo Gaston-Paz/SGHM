@@ -76,7 +76,7 @@ export class NuevaConsultaComponent implements OnInit {
       barral:[],
       esferas:[],
       especifico:[,[Validators.required]],
-      sugerencias:[,[Validators.required]],
+      sugerencias:[],
       sedestacion:[,[Validators.required]],
       proximoTurno:[,[Validators.required]]
     });

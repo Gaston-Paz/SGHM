@@ -20,8 +20,8 @@ export interface Antecedente{
     alimentacion?:string;
     embarazos:boolean;
     partos?:string;
-    abortoInducido?:string;
-    abortoEspontaneo?:string;
+    abortosInducido?:string;
+    abortosEspontaneo?:string;
     menstruacion:boolean;
     frecuencia?:string;
     duracion?:string;

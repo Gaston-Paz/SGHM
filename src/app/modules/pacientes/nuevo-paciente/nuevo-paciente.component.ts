@@ -18,7 +18,6 @@ import { EstudiosMedicosComponent } from "./estudios-medicos/estudios-medicos.co
   styleUrls: ["./nuevo-paciente.component.css"],
 })
 export class NuevoPacienteComponent implements OnInit {
-
   @ViewChild(DatosPersonalesComponent)
   private datosPersonales!: DatosPersonalesComponent;
 
@@ -41,7 +40,7 @@ export class NuevoPacienteComponent implements OnInit {
     return this._servicePacienteNuevo.FormValid();
   }
 
-  GetAntecedente(){
+  GetAntecedente() {
     return this._servicePacienteNuevo.antecedente;
   }
 
@@ -49,6 +48,7 @@ export class NuevoPacienteComponent implements OnInit {
     let obs: Array<Observable<any>> = [];
     let formData = new FormData();
     formData.append("foto", this._servicePacienteNuevo.imagen);
+
     this._servicePacienteNuevo.GuardarPaciente().subscribe(
       (paciente) => {
         // if (this._servicePacienteNuevo.imagen !== undefined) {
@@ -75,36 +75,36 @@ export class NuevoPacienteComponent implements OnInit {
 
         //   });
         // }
-          forkJoin(obs).subscribe(
-            (resp) => {
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: "El paciente se guardó con éxito",
-                },
-                horizontalPosition: "center",
-                panelClass: "success",
-              });
-            },
-            (error: HttpErrorResponse) => {
-              console.log(error);
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: error.error.message,
-                },
-                horizontalPosition: "center",
-                panelClass: "error",
-              });
-            }
-          );
 
-        this._servicePacienteNuevo.InicializarObjetos();
-        this.datosPersonales.form.reset();
-        this.consultaInicial.form.reset();
-        this.antecedentes.form.reset();
+        forkJoin(obs).subscribe(
+          (resp) => {
+            this._servicePacienteNuevo.InicializarObjetos();
+            this.datosPersonales.form.reset();
+            this.consultaInicial.form.reset();
+            this.antecedentes.form.reset();
+            this._snackBar.openFromComponent(SnackBarComponent, {
+              data: {
+                mensaje: "El paciente se guardó con éxito",
+              },
+              horizontalPosition: "center",
+              panelClass: "success",
+            });
+          },
+          (error: HttpErrorResponse) => {
+            console.log(error);
+            this._snackBar.openFromComponent(SnackBarComponent, {
+              data: {
+                mensaje: error.error.message,
+              },
+              horizontalPosition: "center",
+              panelClass: "error",
+            });
+          }
+        );
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-        
+
         this._snackBar.openFromComponent(SnackBarComponent, {
           data: {
             mensaje: error.error.message,
@@ -114,6 +114,5 @@ export class NuevoPacienteComponent implements OnInit {
         });
       }
     );
-
   }
 }

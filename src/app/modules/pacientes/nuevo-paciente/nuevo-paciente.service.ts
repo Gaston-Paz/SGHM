@@ -188,10 +188,18 @@ export class NuevoPacienteService {
         this.consultaInicial.covid = !this.consultaInicial.covid;
         break;
         case 11:
-          this.consultaInicial.fechaCovid = this.consultaInicial.fechaCovid;
-          break;
+          let fechaAux = new Date(dato);
+        let fechas = new Date(
+          fechaAux.getFullYear() +
+            "/" +
+            (fechaAux.getMonth() + 1) +
+            "/" +
+            (fechaAux.getDate())
+        );
+          this.consultaInicial.fechaCovid = fechas;
+        break;
           case 12:
-            this.consultaInicial.otros = this.consultaInicial.otros;
+            this.consultaInicial.otros = dato;
             break;
     }
     this.consultaInicialCompleta = valido;
@@ -270,11 +278,28 @@ export class NuevoPacienteService {
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
     this.consulta.fecha = this.consultaInicial.fecha;
     this.alta.tratamiento = this.consulta;
+    console.log(this.alta);
+    
     return this._httpClient.post<Paciente>(
       environment.url + "/paciente/",
       this.alta
     );
   }
+
+  // GuardarPaciente(){
+  //   this.alta.paciente = this.datosPersonales;
+  //   this.alta.antecedente = this.antecedente;
+  //   this.alta.consultaInicial = this.consultaInicial;
+  //   this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
+  //   this.consulta.fecha = this.consultaInicial.fecha;
+  //   this.alta.tratamiento = this.consulta;
+  //   console.log('antecedente',this.antecedente);
+  //   console.log('inicio', this.consultaInicial);
+  //   console.log('tratamineto',this.consulta);
+    
+    
+    
+  // }
 
   ActualizarDatosPersonales(datos:Paciente) {
     return this._httpClient.post<Paciente>(

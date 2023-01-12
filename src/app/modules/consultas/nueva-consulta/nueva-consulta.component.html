@@ -154,7 +154,6 @@
                 matInput
                 formControlName="sugerencias"
                 placeholder="Sugerencias"
-                required="true"
                 autocomplete="off"
                 rows="5"
               ></textarea>
@@ -201,49 +200,10 @@
 
 <div class="container" *ngIf="alta">
   <form [formGroup]="form" autocomplete="off" class="example-form">
-    <!-- <div class="col pad-15">
-      <div class="row">
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Fecha de Consulta</mat-label>
-          <input
-            matInput
-            readonly="true"
-            autocomplete="off"
-            #dateInput
-            (dateChange)="changeDate(dateInput,1)"
-            onclick="changeDate(dateInput)"
-            [max]="fecha"
-            [matDatepicker]="selector"
-            [value]="form.controls.fecha.value"
-          />
-          <mat-datepicker-toggle
-            mat-datepicket-toggle
-            matSuffix
-            [for]="selector"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #selector></mat-datepicker>
-          <mat-error *ngIf="form.controls.fecha.hasError('required')">
-            Fecha de Consulta es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-      </div>
 
+    <div class="col pad-15-bis">
       <div class="row">
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Motivo</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="motivo"
-            placeholder="Motivo"
-            required="true"
-            autocomplete="off"
-          />
-          <mat-error *ngIf="form.controls.motivo.hasError('required')">
-            Motivo es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
+        <h3>Evaluación</h3>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Triángulo de la talla</mat-label>
           <input
@@ -251,19 +211,10 @@
             matInput
             formControlName="triangulo"
             placeholder="Triángulo de la talla"
-            required="true"
             autocomplete="off"
           />
-          <mat-error *ngIf="form.controls.triangulo.hasError('required')">
-            Triángulo de la talla es <strong>obligatorio</strong>
-          </mat-error>
         </mat-form-field>
-      </div>
-    </div> -->
 
-    <div class="col pad-15-bis">
-      <div class="row">
-        <h3>Evaluación</h3>
         <mat-form-field appearance="outline" class="example-full-width">
           <mat-label>Altura de Iliacos</mat-label>
           <input
@@ -350,7 +301,6 @@
             formControlName="sugerencias"
             placeholder="Sugerencias"
             rows="5"
-            required="true"
             autocomplete="off"
             (change)="SetConsultaAlta()"
             [(ngModel)]="consulta.sugerencias"
