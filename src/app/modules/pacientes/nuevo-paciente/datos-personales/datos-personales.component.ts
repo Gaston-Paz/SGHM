@@ -18,6 +18,7 @@ export class DatosPersonalesComponent implements OnInit {
   fecha: Date = new Date();
   nacimientos: string[] = ['Vaginal','Cesarea'];
   pipe = new DatePipe('es-ES');
+  edad:string="";
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -86,16 +87,18 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   changeDate(date:any){
-    // let fechaaux = new Date(date.value);
-    // let fechas = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()));
-    // let fecha = new Date(fechaaux.getFullYear() +"/"+ (fechaaux.getMonth()+1)+"/"+ (fechaaux.getDate()+1));
-
     let dateParts = date.value.split('/');
     let fechaInput = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]).getTime();
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
     let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     this.form.controls.fechaNacimiento.setValue(fecha);   
     this._servicePacienteNuevo.CargarDatosPersonales(fechaMostrar,3, this.form.valid); 
+
+    //Calcular edad
+    var fechaInicio = new Date(fecha).getTime();
+    var fechaFin = new Date().getTime();
+    var diff = fechaFin - fechaInicio;
+    this.edad = (diff / (1000 * 60 * 60 * 24 * 365)).toString().split(".")[0];
   }
 
 }
