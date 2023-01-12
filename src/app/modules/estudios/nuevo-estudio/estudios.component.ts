@@ -8,7 +8,8 @@ import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
-
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-estudios',
@@ -22,6 +23,12 @@ export class EstudiosComponent implements OnInit {
   previsualizacionFoto: string[] = [];
   filtroPaciente:string = '';
   pacientesFilter: Paciente[] = [];
+
+  //Chips
+  addOnBlur:boolean = true;
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  nombresNuevos:string[] = [];
+  cantiArchivos:number = 0;
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -51,16 +58,26 @@ export class EstudiosComponent implements OnInit {
   }
 
   GuardarEstudios(){
+    if(this._servicePaciente.estudios.length !== this.nombresNuevos.length){
+      this._snackBar.openFromComponent(SnackBarComponent, {
+        data: {
+          mensaje: "La cantidad de archivos debe coincidir con la cantidad de nombres ingresados",
+        },
+        horizontalPosition: "center",
+        panelClass: "error",
+      });
+    }else{
     let obs: Array<Observable<any>> = [];
     if (this._servicePaciente.estudios.length > 0) {
-      this._servicePaciente.estudios.forEach((est) => {
+      this._servicePaciente.estudios.forEach((est,index) => {
         let formDatas = new FormData();
         formDatas.append("foto", est);
         obs.push(
           this._servicePaciente.GuardarFoto(
             formDatas,
             this.form.controls.paciente.value,
-            true
+            true,
+            this.nombresNuevos[index]
           )
         );
 
@@ -83,48 +100,8 @@ export class EstudiosComponent implements OnInit {
                 panelClass: "error",
               });
       })
-  }
-}
-
-  CargarEstudios(ev: any) {
-    let cantFotos = ev.target.files.length;
-    for (let index = 0; index < cantFotos; index++) {
-      const fotoCapturada = ev.target.files[index];      
-      this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
-        this.previsualizacionFoto.push(imagen.base);
-        this.SubirEstudio(fotoCapturada);
-      });
-      
     }
-    
-      
   }
-
-  ExtraerBase64 = async ($event: any) =>
-    new Promise((resolve, reject) => {
-      try {
-        const unsafeImg = window.URL.createObjectURL($event);
-        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
-        const reader = new FileReader();
-        reader.readAsDataURL($event);
-        reader.onload = () => {
-          resolve({
-            base: reader.result,
-          });
-        };
-        reader.onerror = (error) => {
-          resolve({
-            base: null,
-          });
-        };
-        return null;
-      } catch (e) {
-        return null;
-      }
-  });
-
-  SubirEstudio(archivo:any){
-    this._servicePaciente.estudios.push(archivo);
   }
 
   GetEstudio(){
@@ -136,5 +113,18 @@ export class EstudiosComponent implements OnInit {
     if(espacio) filter += "";
     this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
     if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
+  }
+
+  //Chips
+  remove(nombre:string){
+    const index = this.nombresNuevos.indexOf(nombre);
+    if(index >= 0)this.nombresNuevos.splice(index,1);
+  }
+
+  add(ev:MatChipInputEvent){
+    const value = (ev.value || '').trim();
+    if(value)this.nombresNuevos.push(ev.value);
+    ev.chipInput!.clear();
+    
   }
 }

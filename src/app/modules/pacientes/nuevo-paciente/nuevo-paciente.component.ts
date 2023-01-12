@@ -51,30 +51,30 @@ export class NuevoPacienteComponent implements OnInit {
     formData.append("foto", this._servicePacienteNuevo.imagen);
     this._servicePacienteNuevo.GuardarPaciente().subscribe(
       (paciente) => {
-        if (this._servicePacienteNuevo.imagen !== undefined) {
-          obs.push(
-            this._servicePacienteNuevo.GuardarFoto(
-              formData,
-              paciente.idPaciente!,
-              false
-            )
-          );
-        }
+        // if (this._servicePacienteNuevo.imagen !== undefined) {
+        //   obs.push(
+        //     this._servicePacienteNuevo.GuardarFoto(
+        //       formData,
+        //       paciente.idPaciente!,
+        //       false
+        //     )
+        //   );
+        // }
 
-        if (this._servicePacienteNuevo.estudios.length > 0) {
-          this._servicePacienteNuevo.estudios.forEach((est) => {
-            let formDatas = new FormData();
-            formDatas.append("foto", est);
-            obs.push(
-              this._servicePacienteNuevo.GuardarFoto(
-                formDatas,
-                paciente.idPaciente!,
-                true
-              )
-            );
+        // if (this._servicePacienteNuevo.estudios.length > 0) {
+        //   this._servicePacienteNuevo.estudios.forEach((est) => {
+        //     let formDatas = new FormData();
+        //     formDatas.append("foto", est);
+        //     obs.push(
+        //       this._servicePacienteNuevo.GuardarFoto(
+        //         formDatas,
+        //         paciente.idPaciente!,
+        //         true
+        //       )
+        //     );
 
-          });
-        }
+        //   });
+        // }
           forkJoin(obs).subscribe(
             (resp) => {
               this._snackBar.openFromComponent(SnackBarComponent, {

@@ -4,4 +4,5 @@ export interface Estudios{
     idEstudio:number;
     paciente:Paciente;
     ruta:string;
+    nombreArchivo:string;
 }

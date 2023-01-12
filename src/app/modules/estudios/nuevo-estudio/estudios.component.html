@@ -16,8 +16,22 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+
+      <app-estudios-medicos></app-estudios-medicos>
+
+      <mat-form-field appearance="outline" class="width-100 example-full-width">
+        <mat-label>Nombre del Archivo</mat-label>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let nombre of nombresNuevos" (removed)="remove(nombre)" class="assigned-chip">
+          {{nombre}}
+          <button class="no-border" matChipRemove>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+        <input required="true" placeholder="Nombres de los archivos..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+      </mat-chip-list>
+    </mat-form-field>
     </form>
-    <app-estudios-medicos></app-estudios-medicos>
     <div class="end mt-20">
         <button [ngClass]="form.valid && GetEstudio() ? 'button' : 'button-disabled' " [disabled]="!form.valid" class="button" mat-button (click)="GuardarEstudios()" > Guardar Estudios </button>
       </div>

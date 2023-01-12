@@ -88,7 +88,7 @@ export class FotoComponent implements OnInit {
   }
 
   CargarFoto(ev: any) {
-    const fotoCapturada = ev.target.files[0];
+    const fotoCapturada = ev.target.files[0];    
     this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
       this.previsualizacionFoto = imagen.base;
       this.SubirImagen(ev.target.files[0]);
@@ -120,6 +120,7 @@ export class FotoComponent implements OnInit {
 
   SubirImagen(archivo: any) {
     this._servicePaciente.imagen = archivo;
+    this._servicePaciente.datosPersonales.extensionFoto = archivo.name.split(".")[1];
   }
 
   GetFoto() {
@@ -145,7 +146,7 @@ export class FotoComponent implements OnInit {
             let formData = new FormData();
             formData.append("foto", this._servicePaciente.imagen);
             let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false));
+            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, this._servicePaciente.datosPersonales.extensionFoto!));
             obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
             forkJoin(obs).subscribe(resp => {
               this._snackBar.openFromComponent(SnackBarComponent, {
@@ -175,7 +176,7 @@ export class FotoComponent implements OnInit {
             let formData = new FormData();
             formData.append("foto", this._servicePaciente.imagen);
             let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false));
+            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, this._servicePaciente.datosPersonales.extensionFoto!));
             obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
             forkJoin(obs).subscribe(resp => {
               this._snackBar.openFromComponent(SnackBarComponent, {
