@@ -37,3 +37,21 @@
     background-color: #ffffff;
     border-bottom: 1px solid #ccc;
   }
+
+  .mat-grid-tile-content{
+    display: flex;
+    flex-direction: column;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  table .foto{
+    width: 350px;
+  }
+
+
+td {
+  text-align: center;
+}

@@ -55,6 +55,8 @@ export class EstudiosMedicosComponent implements OnInit {
 
   SubirEstudio(archivo:any){
     this._servicePacienteNuevo.estudios.push(archivo);
+    this._servicePacienteNuevo.extensiones.push(archivo.name.split(".")[1]);
+
   }
 
 }

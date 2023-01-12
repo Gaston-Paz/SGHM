@@ -111,7 +111,8 @@ export class NuevaConsultaComponent implements OnInit {
     if(control === 1)this.form.controls.fecha.setValue(fecha);   
     else if(control === 2)this.form.controls.proximoTurno.setValue(fecha);
     
-    this.consulta.proximoTurnoIndicado = fecha;
+    this.consulta.proximoTurnoIndicado = new Date(fecha);
+    
     if(esAlta)this.SetConsultaAlta();
   }
 
@@ -157,6 +158,8 @@ export class NuevaConsultaComponent implements OnInit {
 
   SetConsultaAlta(){
     this._servicePaciente.consulta = this.consulta;
+    if(this.consulta.sedestacion !== '' && this.consulta.especifico !== '' &&
+    this.consulta.sugerencias !== '')this._servicePaciente.tratamientoCompleto = true;
   }
 
   applyFilterPaciente(espacio:boolean){

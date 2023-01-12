@@ -52,6 +52,7 @@ export class NuevoPacienteService {
     sedestacion: '',
     sugerencias: ''
   }
+  tratamientoCompleto:boolean = false;
 
   imagen: Blob = new Blob();
 
@@ -96,10 +97,11 @@ export class NuevoPacienteService {
   };
 
   estudios: Blob[] = [];
+  extensiones:string[]=[];
 
   constructor(private _httpClient: HttpClient) {}
 
-  CargarDatosPersonales(dato: string, campo: number, valido: boolean) {
+  CargarDatosPersonales(dato: any, campo: number, valido: boolean) {
     switch (campo) {
       case 1:
         this.datosPersonales.nombre = dato;
@@ -114,8 +116,9 @@ export class NuevoPacienteService {
             "/" +
             (fechaaux.getMonth() + 1) +
             "/" +
-            (fechaaux.getDate() - 1)
+            (fechaaux.getDate())
         );
+        
         this.datosPersonales.fechaNacimiento = fecha;
         break;
       case 4:
@@ -141,9 +144,10 @@ export class NuevoPacienteService {
         break;
     }
     this.datosPersonlesCompletos = valido;
+    
   }
 
-  CargarConsultaInicial(dato: string, campo: number, valido: boolean) {
+  CargarConsultaInicial(dato: any, campo: number, valido: boolean) {
     switch (campo) {
       case 1:
         this.consultaInicial.actividadFisica = dato;
@@ -158,7 +162,7 @@ export class NuevoPacienteService {
             "/" +
             (fechaaux.getMonth() + 1) +
             "/" +
-            (fechaaux.getDate() - 1)
+            (fechaaux.getDate())
         );
         this.consultaInicial.fecha = fecha;
         break;
@@ -191,6 +195,7 @@ export class NuevoPacienteService {
             break;
     }
     this.consultaInicialCompleta = valido;
+    
   }
 
   CargarAntecedentes(antecedentes: Antecedente) {
@@ -198,7 +203,7 @@ export class NuevoPacienteService {
   }
 
   FormValid() {
-    if (this.datosPersonlesCompletos && this.consultaInicialCompleta) {
+    if (this.datosPersonlesCompletos && this.consultaInicialCompleta && this.tratamientoCompleto) {
       this.alta.paciente = this.datosPersonales;
       this.alta.consultaInicial = this.consultaInicial;
       return true;
@@ -247,9 +252,9 @@ export class NuevoPacienteService {
   }
 
   //Métodos HTTP
-  GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean, nombreArchivo:string) {    
+  GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean, nombreArchivo:string, extension:string) {    
     return this._httpClient.post<Paciente>(
-      environment.url + "/paciente/" + idPaciente + "/" + esEstudio + "/" + nombreArchivo,
+      environment.url + "/paciente/" + idPaciente + "/" + esEstudio + "/" + nombreArchivo + "/" + extension,
       formData
     );
   }

@@ -78,10 +78,10 @@ export class ConsultaInicialComponent implements OnInit {
     let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     if(campo === 1){
       this.form.controls.fecha.setValue(fecha);   
-      this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,3, this.form.valid);
+      this._servicePacienteNuevo.CargarConsultaInicial(fecha,3, this.form.valid);
     }else{
       this.form.controls.fechaCovid.setValue(fecha);   
-      this._servicePacienteNuevo.CargarConsultaInicial(fechaMostrar,11, this.form.valid);
+      this._servicePacienteNuevo.CargarConsultaInicial(fecha,11, this.form.valid);
     }
   }
 

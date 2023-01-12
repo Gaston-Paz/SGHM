@@ -5,4 +5,5 @@ export interface Estudios{
     paciente:Paciente;
     ruta:string;
     nombreArchivo:string;
+    fecha:Date;
 }

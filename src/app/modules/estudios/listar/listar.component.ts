@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
@@ -24,6 +25,13 @@ export class ListarComponent implements OnInit {
   estudios: Estudios[]=[];
   estudiosFiltrados: Estudios[]=[];
   filtroPaciente:string = '';
+  dataSource = new MatTableDataSource();
+  displayedColumns: string[] = [
+    "fecha",
+    "nombre",
+    "foto",
+    "ver"
+  ];
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -68,12 +76,14 @@ export class ListarComponent implements OnInit {
   BuscarEstudios(){
     this.estudiosFiltrados = [];
     this.estudios.forEach(e => {
+      e.fecha = new Date(e.fecha);    
       if(e.paciente.idPaciente === this.form.controls.paciente.value) this.estudiosFiltrados.push(e);
     });
     this.estudiosFiltrados = this.estudiosFiltrados.sort((a,b)=>{
       if(a.idEstudio > b.idEstudio)return -1;
       else return 1;
-    })
+    });
+    this.dataSource.data = this.estudiosFiltrados;
   }
 
   applyFilterPaciente(espacio:boolean){

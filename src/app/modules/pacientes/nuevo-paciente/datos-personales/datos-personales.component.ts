@@ -92,7 +92,7 @@ export class DatosPersonalesComponent implements OnInit {
     let fecha = new Date(+dateParts[2],dateParts[1]-1,+dateParts[0]);
     let fechaMostrar = new Date(fechaInput).toLocaleDateString();
     this.form.controls.fechaNacimiento.setValue(fecha);   
-    this._servicePacienteNuevo.CargarDatosPersonales(fechaMostrar,3, this.form.valid); 
+    this._servicePacienteNuevo.CargarDatosPersonales(fecha,3, this.form.valid); 
 
     //Calcular edad
     var fechaInicio = new Date(fecha).getTime();

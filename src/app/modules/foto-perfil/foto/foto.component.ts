@@ -146,7 +146,7 @@ export class FotoComponent implements OnInit {
             let formData = new FormData();
             formData.append("foto", this._servicePaciente.imagen);
             let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, this._servicePaciente.datosPersonales.extensionFoto!));
+            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, "nada",this._servicePaciente.datosPersonales.extensionFoto!));
             obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
             forkJoin(obs).subscribe(resp => {
               this._snackBar.openFromComponent(SnackBarComponent, {
@@ -172,11 +172,11 @@ export class FotoComponent implements OnInit {
           
       });
     }else{
-      this.form.reset();
+            this.form.reset();
             let formData = new FormData();
             formData.append("foto", this._servicePaciente.imagen);
             let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, this._servicePaciente.datosPersonales.extensionFoto!));
+            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, "nada",this._servicePaciente.datosPersonales.extensionFoto!));
             obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
             forkJoin(obs).subscribe(resp => {
               this._snackBar.openFromComponent(SnackBarComponent, {

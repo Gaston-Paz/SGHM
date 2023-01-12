@@ -28,7 +28,7 @@ export class AntecedentesComponent implements OnInit {
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.form = this._formBuilder.group({
       cirugias: [],
       implanteInferior: [],

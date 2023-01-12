@@ -12,6 +12,7 @@
             required="true"
             (change)="CargarConsultaInicial($event,9)"
             autocomplete="off"
+            [readonly]="hayConsulta"
           />
           <mat-error *ngIf="form.controls.motivo.hasError('required')">
             Motivo es <strong>obligatorio</strong>
@@ -30,7 +31,7 @@
           /> -->
           <input required="true" matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput,1)"
         onclick="changeDate(dateInput)" [max]="fecha" [matDatepicker]="selector" [value]="form.controls.fecha.value">
-        <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="hayConsulta" mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
         <mat-datepicker #selector></mat-datepicker>
 
           <mat-error *ngIf="form.controls.fecha.hasError('required')">
@@ -50,6 +51,7 @@
               required="true"
               (change)="CargarConsultaInicial($event,2)"
               autocomplete="off"
+              [readonly]="hayConsulta"
             />
             <mat-error *ngIf="form.controls.antiguedad.hasError('required')">
                 Antigüedad es <strong>obligatorio</strong>
@@ -66,6 +68,7 @@
             required="true"
             (change)="CargarConsultaInicial($event,8)"
             autocomplete="off"
+            [readonly]="hayConsulta"
           />
           <mat-error *ngIf="form.controls.localizacion.hasError('required')">
             Localización es <strong>obligatorio</strong>
@@ -87,6 +90,7 @@
               placeholder="Intensidad"
               (change)="CargarConsultaInicial($event,6)"
               autocomplete="off"
+              [readonly]="hayConsulta"
             />
             <mat-error *ngIf="form.controls.intensidad.hasError('required')">
               Intensidad es <strong>obligatorio</strong>
@@ -102,6 +106,7 @@
             placeholder="Característica"
             (change)="CargarConsultaInicial($event,5)"
             autocomplete="off"
+            [readonly]="hayConsulta"
           />
           <mat-error *ngIf="form.controls.caracteristica.hasError('required')">
             Característica es <strong>obligatorio</strong>
@@ -120,6 +125,7 @@
               placeholder="Irradiacion"
               (change)="CargarConsultaInicial($event,7)"
               autocomplete="off"
+              [readonly]="hayConsulta"
             />
             <mat-error *ngIf="form.controls.irradiacion.hasError('required')">
               Irradiacion es <strong>obligatorio</strong>
@@ -135,6 +141,7 @@
             placeholder="Atenúa"
             (change)="CargarConsultaInicial($event,4)"
             autocomplete="off"
+            [readonly]="hayConsulta"
           />
           <mat-error *ngIf="form.controls.atenua.hasError('required')">
             Atenúa es <strong>obligatorio</strong>
@@ -152,6 +159,7 @@
               placeholder="Actividad Física"
               (change)="CargarConsultaInicial($event,1)"
               autocomplete="off"
+              [readonly]="hayConsulta"
             />
             <mat-error *ngIf="form.controls.actividadFisica.hasError('required')">
               Actividad Física es <strong>obligatorio</strong>
@@ -159,7 +167,7 @@
           </mat-form-field>
   
           <div class="example-full-width">
-              <mat-checkbox class="mt-20" color="primary" (change)="CargarConsultaInicial($event,10)" formControlName="covid">Covid</mat-checkbox>
+              <mat-checkbox [disabled]="hayConsulta" class="mt-20" color="primary" (change)="CargarConsultaInicial($event,10)" formControlName="covid">Covid</mat-checkbox>
 
           </div>
 
@@ -170,7 +178,7 @@
             <mat-label>Fecha Covid</mat-label>
             <input matInput readonly="true" autocomplete="off" #dateInputCovid (dateChange)="changeDate(dateInputCovid,2)" 
         onclick="changeDate(dateInputCovid)" [max]="fecha" [matDatepicker]="selectorCovid" [value]="form.controls.fechaCovid.value">
-        <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selectorCovid" ></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="hayConsulta" mat-datepicket-toggle matSuffix [for]="selectorCovid" ></mat-datepicker-toggle>
         <mat-datepicker #selectorCovid></mat-datepicker>
           </mat-form-field>
   
@@ -183,6 +191,7 @@
               [disabled]="!form.controls.covid.value"
               autocomplete="off"
               (change)="CargarConsultaInicial($event,12)"
+              [readonly]="hayConsulta"
             />
           </mat-form-field>
 

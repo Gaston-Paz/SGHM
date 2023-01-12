@@ -68,7 +68,7 @@
                 placeholder="Edad Ortodoncia"
                 (change)="CargarAntecedentes()"
                 autocomplete="off"
-                [(ngModel)]="antecedentes.edadOrtodoncia"
+                [(ngModel)]="antecedentes.edadOrtodoncia === 0? '': antecedentes.edadOrtodoncia"
                 [disabled]="!antecedentes.ortodoncia"
                 [readonly]="hayAntecedente || !antecedentes.ortodoncia"
                 [min]="0"

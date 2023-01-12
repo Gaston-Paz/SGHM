@@ -37,6 +37,7 @@ export class EstudiosComponent implements OnInit {
     private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+    this._servicePaciente.extensiones = [];
     this.form = this._formBuilder.group({
       paciente: [,[Validators.required]]
     });
@@ -77,7 +78,8 @@ export class EstudiosComponent implements OnInit {
             formDatas,
             this.form.controls.paciente.value,
             true,
-            this.nombresNuevos[index]
+            this.nombresNuevos[index],
+            this._servicePaciente.extensiones[index]
           )
         );
 
@@ -118,7 +120,7 @@ export class EstudiosComponent implements OnInit {
   //Chips
   remove(nombre:string){
     const index = this.nombresNuevos.indexOf(nombre);
-    if(index >= 0)this.nombresNuevos.splice(index,1);
+    if(index >= 0)this.nombresNuevos.splice(index,1); 
   }
 
   add(ev:MatChipInputEvent){
