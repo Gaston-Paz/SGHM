@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: AppComponent
-  // },
+  {
+    path: 'login',
+    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+  },
   {
     path: 'pacientes',
     loadChildren: () => import('./modules/pacientes/pacientes.module').then(m => m.PacientesModule)
