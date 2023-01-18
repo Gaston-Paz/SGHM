@@ -24,6 +24,7 @@ export class AntecedentesComponent implements OnInit {
   tiroides: string[]=['Hipotiroidismo','Hipertiroidismo'];
   @Input("antecedente") antecedente!: Antecedente;
   @Input("hayAntecedente") hayAntecedente: boolean = false;
+  @Input("edicion") edicion: boolean = false;
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService) { }

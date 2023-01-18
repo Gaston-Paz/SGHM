@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSelectChange } from "@angular/material/select";
@@ -9,7 +9,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { forkJoin, Observable } from "rxjs";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
-import { SnackBarComponent } from "src/app/shared/Components/snack-bar/snack-bar.component";
+import { SnackService } from "src/app/shared/services/snack.service";
 import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-paciente.service";
 
 @Component({
@@ -17,13 +17,13 @@ import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-pacie
   templateUrl: "./foto.component.html",
   styleUrls: ["./foto.component.css"],
 })
-export class FotoComponent implements OnInit {
+export class FotoComponent implements OnInit, OnDestroy {
   pacientes: Paciente[] = [];
   form!: FormGroup;
   previsualizacionFoto: string = "";
   filtroPaciente: string = "";
   pacientesFilter: Paciente[] = [];
-  yaTieneFoto:boolean = false;
+  yaTieneFoto: boolean = false;
   paciente: Paciente = {
     apellido: "",
     celular: "",
@@ -33,9 +33,10 @@ export class FotoComponent implements OnInit {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    otros:"",
-    deParte: ""
+    otros: "",
+    deParte: "",
   };
+  subscribes: any[] = [];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -43,8 +44,13 @@ export class FotoComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private sanitizer: DomSanitizer,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _snack: SnackService
   ) {}
+
+  ngOnDestroy(): void {
+    this.subscribes.forEach((s) => s.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -53,21 +59,17 @@ export class FotoComponent implements OnInit {
     });
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
-    forkJoin(obs).subscribe(
-      (resp) => {
-        this.pacientes = resp[0];
-        this.pacientesFilter = resp[0];
-      },
-      (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snackBar.openFromComponent(SnackBarComponent, {
-          data: {
-            mensaje: error.error.message,
-          },
-          horizontalPosition: "center",
-          panelClass: "error",
-        });
-      }
+    this.subscribes.push(
+      forkJoin(obs).subscribe(
+        (resp) => {
+          this.pacientes = resp[0];
+          this.pacientesFilter = resp[0];
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this._snack.Mensaje(error.error.message, "error");
+        }
+      )
     );
   }
 
@@ -88,7 +90,7 @@ export class FotoComponent implements OnInit {
   }
 
   CargarFoto(ev: any) {
-    const fotoCapturada = ev.target.files[0];    
+    const fotoCapturada = ev.target.files[0];
     this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
       this.previsualizacionFoto = imagen.base;
       this.SubirImagen(ev.target.files[0]);
@@ -116,11 +118,12 @@ export class FotoComponent implements OnInit {
       } catch (e) {
         return null;
       }
-  });
+    });
 
   SubirImagen(archivo: any) {
     this._servicePaciente.imagen = archivo;
-    this._servicePaciente.datosPersonales.extensionFoto = archivo.name.split(".")[1];
+    this._servicePaciente.datosPersonales.extensionFoto =
+      archivo.name.split(".")[1];
   }
 
   GetFoto() {
@@ -128,82 +131,89 @@ export class FotoComponent implements OnInit {
   }
 
   GuardarFoto() {
-    if(this.yaTieneFoto){
+    if (this.yaTieneFoto) {
       const dialogRef = this.dialog.open(ModalConfirmComponent, {
         data: {
-          message: 'El paciente ya cuenta con una foto de perfil cargada, ¿Desea sobreescribirla?',
+          message:
+            "El paciente ya cuenta con una foto de perfil cargada, ¿Desea sobreescribirla?",
           buttonText: {
-            ok: 'Sobreescribir',
-            cancel: 'Cancelar'
+            ok: "Sobreescribir",
+            cancel: "Cancelar",
           },
-          action: 'Confirmar'
-        }
+          action: "Confirmar",
+        },
       });
 
-      dialogRef.afterClosed().subscribe((confirm:boolean) => {
-          if(confirm){
-            this.form.reset();
-            let formData = new FormData();
-            formData.append("foto", this._servicePaciente.imagen);
-            let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, "nada",this._servicePaciente.datosPersonales.extensionFoto!));
-            obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
-            forkJoin(obs).subscribe(resp => {
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: 'La foto de perfil se guardó con éxito',
-                },
-                horizontalPosition: "center",
-                panelClass: "success",
-              });
-            },
-            (error: HttpErrorResponse) => {
-              console.log(error);
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: error.error.message,
-                },
-                horizontalPosition: "center",
-                panelClass: "error",
-              });
-            }
+      dialogRef.afterClosed().subscribe((confirm: boolean) => {
+        if (confirm) {
+          this.form.reset();
+          let formData = new FormData();
+          formData.append("foto", this._servicePaciente.imagen);
+          let obs: Array<Observable<any>> = [];
+          obs.push(
+            this._servicePaciente.GuardarFoto(
+              formData,
+              this.paciente.idPaciente!,
+              false,
+              "nada",
+              this._servicePaciente.datosPersonales.extensionFoto!
+            )
           );
-          }
-          
+          obs.push(
+            this._servicePaciente.ActualizarDatosPersonales(this.paciente)
+          );
+          this.subscribes.push(
+            forkJoin(obs).subscribe(
+              (resp) => {
+                this._snack.Mensaje(
+                  "La foto de perfil se guardó con éxito",
+                  "success"
+                );
+              },
+              (error: HttpErrorResponse) => {
+                console.log(error);
+                this._snack.Mensaje(error.error.message, "error");
+              }
+            )
+          );
+        }
       });
-    }else{
-            this.form.reset();
-            let formData = new FormData();
-            formData.append("foto", this._servicePaciente.imagen);
-            let obs: Array<Observable<any>> = [];
-            obs.push(this._servicePaciente.GuardarFoto(formData,this.paciente.idPaciente!,false, "nada",this._servicePaciente.datosPersonales.extensionFoto!));
-            obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
-            forkJoin(obs).subscribe(resp => {
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: 'La foto de perfil se guardó con éxito',
-                },
-                horizontalPosition: "center",
-                panelClass: "success",
-              });
-            },
-            (error: HttpErrorResponse) => {
-              console.log(error);
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: error.error.message,
-                },
-                horizontalPosition: "center",
-                panelClass: "error",
-              });
-            }
+    } else {
+      this.form.reset();
+      let formData = new FormData();
+      formData.append("foto", this._servicePaciente.imagen);
+      let obs: Array<Observable<any>> = [];
+      obs.push(
+        this._servicePaciente.GuardarFoto(
+          formData,
+          this.paciente.idPaciente!,
+          false,
+          "nada",
+          this._servicePaciente.datosPersonales.extensionFoto!
+        )
+      );
+      obs.push(this._servicePaciente.ActualizarDatosPersonales(this.paciente));
+      this.subscribes.push(forkJoin(obs).subscribe(
+        (resp) => {
+          this._snack.Mensaje(
+            "La foto de perfil se guardó con éxito",
+            "success"
           );
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this._snack.Mensaje(error.error.message, "error");
+        }
+      ));
     }
   }
 
-  CheckFoto(ev:MatSelectChange){
-    this.paciente = this.pacientes.find(x => x.idPaciente === ev.value)!;
-    if(this.paciente?.fotoPerfil !== undefined && this.paciente.fotoPerfil !== null)this.yaTieneFoto = true;
-    
+  CheckFoto(ev: MatSelectChange) {
+    this.paciente = this.pacientes.find((x) => x.idPaciente === ev.value)!;
+    if (
+      this.paciente?.fotoPerfil !== undefined &&
+      this.paciente.fotoPerfil !== null
+    )
+      this.yaTieneFoto = true;
   }
 }

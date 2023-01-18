@@ -293,4 +293,18 @@ export class NuevoPacienteService {
     );
   }
 
+  ActualizarAntecedentes(antecedente:Antecedente){
+    return this._httpClient.post<Antecedente>(
+      environment.url + "/antecedentes/actualizar",
+      antecedente
+    );
+  }
+
+  ActualizarConsultaInicial(consulta:ConsultaInicial){
+    return this._httpClient.post<Antecedente>(
+      environment.url + "/consulta-inicial/actualizar",
+      consulta
+    );
+  }
+
 }

@@ -16,6 +16,7 @@ export class ConsultaInicialComponent implements OnInit {
   fecha: Date = new Date();
   @Input("consulta") consulta!: ConsultaInicial;
   @Input("hayConsulta") hayConsulta: boolean = false;
+  @Input("edicion") edicion: boolean = false;
   pipe = new DatePipe('es-ES');
 
   constructor(private _formBuilder: FormBuilder,
@@ -27,6 +28,7 @@ export class ConsultaInicialComponent implements OnInit {
   ngOnInit(): void {   
 
     if(this.hayConsulta){
+      this._servicePacienteNuevo.consultaInicial = this.consulta;
       this.form = this._formBuilder.group({
         fecha: [new Date(this.consulta.fecha), Validators.required],
         motivo: [this.consulta.motivo, Validators.required],

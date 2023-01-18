@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,7 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Estudios } from 'src/app/core/interfaces/estudio.interface';
-import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
+import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { EstudiosService } from '../estudios.service';
 
@@ -17,7 +17,7 @@ import { EstudiosService } from '../estudios.service';
   templateUrl: './listar.component.html',
   styleUrls: ['./listar.component.css']
 })
-export class ListarComponent implements OnInit {
+export class ListarComponent implements OnInit, OnDestroy {
 
   form!:FormGroup;
   pacientes:Paciente[]=[];
@@ -32,13 +32,15 @@ export class ListarComponent implements OnInit {
     "foto",
     "ver"
   ];
+  subscribes:any[]=[];
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private sanitizer: DomSanitizer,
-    private _serviceEstudio:EstudiosService) { }
+    private _serviceEstudio:EstudiosService,
+    private _snack:SnackService) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -47,7 +49,7 @@ export class ListarComponent implements OnInit {
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
     obs.push(this._serviceEstudio.ObtenerEstudios());
-    forkJoin(obs).subscribe(resp => {    
+    this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
       this.pacientesFilter = resp[0]; 
       resp[1].forEach((r: Estudios) => {
@@ -63,14 +65,12 @@ export class ListarComponent implements OnInit {
       });          
     },(error:HttpErrorResponse) => {
       console.log(error);
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: error.error.message,
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
-    });
+      this._snack.Mensaje(error.error.message,'error');
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscribes.forEach(s => s.unsubscribe());
   }
 
   BuscarEstudios(){

@@ -15,7 +15,7 @@
           (change)="CargarAntecedentes()"
           autocomplete="off"
           [(ngModel)]="antecedentes.cirugias"
-          [readonly]="hayAntecedente"
+          [readonly]="edicion"
         />
       </mat-form-field>
     </div>
@@ -33,7 +33,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.implanteSuperior"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
               placeholder="Implantes Superiores"
             />
           </mat-form-field>
@@ -47,7 +47,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.implanteInferior"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
               placeholder="Implantes Inferiores"
             />
           </mat-form-field>
@@ -55,9 +55,9 @@
         <h5>Ortodoncia</h5>
         <div class="example-full-width">
 
-            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
 
-            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.ortodoncia" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.ortodoncia" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
 
             <mat-form-field appearance="outline" class="example-full-width w-30">
               <mat-label>Edad Ortodoncia</mat-label>
@@ -70,7 +70,7 @@
                 autocomplete="off"
                 [(ngModel)]="antecedentes.edadOrtodoncia === 0? '': antecedentes.edadOrtodoncia"
                 [disabled]="!antecedentes.ortodoncia"
-                [readonly]="hayAntecedente || !antecedentes.ortodoncia"
+                [readonly]="edicion || !antecedentes.ortodoncia"
                 [min]="0"
                 [max]="100"
                 />
@@ -93,7 +93,7 @@
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.protesis"
-            [readonly]="hayAntecedente"
+            [readonly]="edicion"
           />
         </mat-form-field>
 
@@ -108,12 +108,12 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.piezasFaltantes"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
         </mat-form-field>
 
           <div class="example-full-width">
-            <mat-checkbox [disabled]="hayAntecedente" class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
         </div>
   </div>
 
@@ -121,7 +121,7 @@
     <div class="row bg-section">
         <h3 class="mt-20">Salud Femenina</h3>
         <div class="example-full-width">
-            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.menstruacion" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.menstruacion" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
         </div>
 
         <mat-form-field appearance="outline" class="example-full-width">
@@ -135,7 +135,7 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.frecuencia"
               [disabled]="!antecedentes.menstruacion"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
 
           </mat-form-field>
@@ -151,7 +151,7 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.duracion"
               [disabled]="!antecedentes.menstruacion"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -166,7 +166,7 @@
               autocomplete="off"
               [(ngModel)]="antecedentes.volumen"
               [disabled]="!antecedentes.menstruacion"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -180,12 +180,12 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.perdidas"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
           <div class="example-full-width">
-            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
         </div>
 
         <mat-form-field appearance="outline" class="example-full-width w-24">
@@ -198,7 +198,7 @@
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.abortosInducido"
-            [readonly]="hayAntecedente"
+            [readonly]="edicion"
           />
         </mat-form-field>
 
@@ -212,7 +212,7 @@
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.abortosEspontaneo"
-            [readonly]="hayAntecedente"
+            [readonly]="edicion"
           />
         </mat-form-field>
 
@@ -226,7 +226,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.partos"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
     </div>
@@ -245,7 +245,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.intestinal"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -259,7 +259,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.digestivo"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -273,7 +273,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.cardiaco"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -287,7 +287,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.urogenital"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -301,7 +301,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.respiratorio"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -315,14 +315,14 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.oseo"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
 
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Fuma</mat-label>
-            <mat-select formControlName="fuma" (selectionChange)="CargarAntecedentes()" [disabled]="hayAntecedente" [(ngModel)]="antecedentes.fuma">
+            <mat-select formControlName="fuma" (selectionChange)="CargarAntecedentes()" [disabled]="edicion" [(ngModel)]="antecedentes.fuma">
               <mat-option
               *ngFor="let fumas of fumador"
               [value]="fumas"
@@ -342,7 +342,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.otrasDrogas"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
 
           </mat-form-field>
@@ -364,12 +364,12 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.accidentes"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
         </mat-form-field>
 
           <div class="example-full-width">
-            <mat-checkbox [disabled]="hayAntecedente" [(ngModel)]="antecedentes.diabetes" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.diabetes" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
         </div>
 
           <mat-form-field appearance="outline" class="example-full-width">
@@ -382,7 +382,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.medicacion"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -396,7 +396,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.fracturas"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -410,13 +410,13 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.dolorCabeza"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
             <mat-label>Tiroides</mat-label>
-            <mat-select formControlName="tiroides" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.tiroides" [disabled]="hayAntecedente">
+            <mat-select formControlName="tiroides" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.tiroides" [disabled]="edicion">
               <mat-option
               *ngFor="let tiro of tiroides"
               [value]="tiro"
@@ -436,7 +436,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.otros"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 
@@ -450,7 +450,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.alimentacion"
-              [readonly]="hayAntecedente"
+              [readonly]="edicion"
             />
           </mat-form-field>
 

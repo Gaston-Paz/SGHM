@@ -1,13 +1,13 @@
 import { DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
-import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
+import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { ConsultasService } from './consultas.service';
 
@@ -16,7 +16,7 @@ import { ConsultasService } from './consultas.service';
   templateUrl: './nueva-consulta.component.html',
   styleUrls: ['./nueva-consulta.component.css']
 })
-export class NuevaConsultaComponent implements OnInit {
+export class NuevaConsultaComponent implements OnInit, OnDestroy {
   form!: FormGroup;
   fecha: Date = new Date();
   pacientes: Paciente[] = [];
@@ -54,13 +54,15 @@ export class NuevaConsultaComponent implements OnInit {
     sugerencias: ''
   }
   filtroPaciente:string = '';
+  subscribes:any[]=[];
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private _serviceConsulta:ConsultasService,
-    private _dateAdapter: DateAdapter<Date>) {
+    private _dateAdapter: DateAdapter<Date>,
+    private _snack:SnackService) {
       this._dateAdapter.setLocale('es-ES');
   }
 
@@ -80,20 +82,18 @@ export class NuevaConsultaComponent implements OnInit {
       proximoTurno:[,[Validators.required]]
     });
     
-    this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
+    this.subscribes.push(this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
       this.pacientes = pacientes;
       this.pacientesFilter = pacientes;
     },(error:HttpErrorResponse) => {
       console.log(error);
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: error.error.message,
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
-    });
+      this._snack.Mensaje(error.error.message,'error');
+    }));
 
+  }
+
+  ngOnDestroy(): void {
+    this.subscribes.forEach(s => s.unsubscribe());
   }
 
   changeDate(date:any,control:number,esAlta:boolean=false){  
@@ -112,25 +112,13 @@ export class NuevaConsultaComponent implements OnInit {
   GuardarConsulta(){
     this.MapTratamiento();
     
-    this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: "El tratamiento se guardó con éxito",
-        },
-        horizontalPosition: "center",
-        panelClass: "success",
-      });
+    this.subscribes.push(this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
+      this._snack.Mensaje("El tratamiento se guardó con éxito",'success');
       this.form.reset();
     },(error:HttpErrorResponse) => {
       console.log(error);
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: error.error.message,
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
-    })
+      this._snack.Mensaje(error.error.message,'error');
+    }));
     
   }
 

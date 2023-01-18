@@ -1,29 +1,29 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
-import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { SnackService } from 'src/app/shared/services/snack.service';
 
 @Component({
   selector: 'app-estudios',
   templateUrl: './estudios.component.html',
   styleUrls: ['./estudios.component.css']
 })
-export class EstudiosComponent implements OnInit {
+export class EstudiosComponent implements OnInit, OnDestroy {
 
   pacientes:Paciente[]=[];
   form!:FormGroup;
   previsualizacionFoto: string[] = [];
   filtroPaciente:string = '';
   pacientesFilter: Paciente[] = [];
-
+  subscribes:any[]=[];
   //Chips
   addOnBlur:boolean = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -34,7 +34,12 @@ export class EstudiosComponent implements OnInit {
     private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private _snack:SnackService) { }
+
+    ngOnDestroy(): void {
+      this.subscribes.forEach(s => s.unsubscribe());
+    }
 
   ngOnInit(): void {
     this._servicePaciente.extensiones = [];
@@ -43,30 +48,18 @@ export class EstudiosComponent implements OnInit {
     });
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
-    forkJoin(obs).subscribe(resp => {    
+    this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];      
       this.pacientesFilter = resp[0];      
     },(error:HttpErrorResponse) => {
       console.log(error);
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: error.error.message,
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
-    });
+      this._snack.Mensaje(error.error.message,'error');
+    }));
   }
 
   GuardarEstudios(){
     if(this._servicePaciente.estudios.length !== this.nombresNuevos.length){
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: "La cantidad de archivos debe coincidir con la cantidad de nombres ingresados",
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
+      this._snack.Mensaje("La cantidad de archivos debe coincidir con la cantidad de nombres ingresados",'error');
     }else{
     let obs: Array<Observable<any>> = [];
     if (this._servicePaciente.estudios.length > 0) {
@@ -84,24 +77,12 @@ export class EstudiosComponent implements OnInit {
         );
 
       });
-      forkJoin(obs).subscribe(resp => {
-        this._snackBar.openFromComponent(SnackBarComponent, {
-          data: {
-            mensaje: "El estudio se guardó con éxito",
-          },
-          horizontalPosition: "center",
-          panelClass: "success",
-        });
+      this.subscribes.push(forkJoin(obs).subscribe(resp => {
+        this._snack.Mensaje("El estudio se guardó con éxito",'success');
       },(error:HttpErrorResponse) => {
         console.log(error);
-              this._snackBar.openFromComponent(SnackBarComponent, {
-                data: {
-                  mensaje: error.error.message,
-                },
-                horizontalPosition: "center",
-                panelClass: "error",
-              });
-      })
+        this._snack.Mensaje(error.error.message,'error');
+      }));
     }
   }
   }

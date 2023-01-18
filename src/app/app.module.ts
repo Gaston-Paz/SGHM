@@ -17,6 +17,7 @@ import { InterceptorService } from './shared/services/interceptor.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalConfirmComponent } from './shared/Components/modal-confirm/modal-confirm.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     HttpClientModule,
     NgxSpinnerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     {

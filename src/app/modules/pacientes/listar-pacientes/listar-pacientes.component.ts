@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
@@ -67,13 +68,15 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     otros: "",
     deParte: "",
   };
+  edicion:boolean=false;
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
     private _spinnerService: SpinnerService,
     private _serviceListados: ListadosService,
     private _serviceConsulta: ConsultasService,
-    private _router: Router
+    private _router: Router,
+    private _snack: SnackService
   ) {}
 
   ngOnInit(): void {
@@ -108,6 +111,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error);
+        this._snack.Mensaje(error.message,'error');
       }
     );
   }
@@ -123,10 +127,11 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   VerAntecedentes(element: Paciente) {
+    
     this._serviceListados
-      .ObtenerAntecedentePorId(element.idPaciente!)
-      .subscribe(
-        (resp) => {         
+    .ObtenerAntecedentePorId(element.idPaciente!)
+    .subscribe(
+      (resp) => {         
           this.antecedente = resp;
           this.antecedentes = true;
           this.pacientesVer = false;
@@ -139,6 +144,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         },
         (error: HttpErrorResponse) => {
           console.log(error);
+          this._snack.Mensaje(error.message,'error');
         }
       );
   }
@@ -158,6 +164,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error);
+        this._snack.Mensaje(error.message,'error');
       }
     );
   }
@@ -199,4 +206,30 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.consultaInicial = false;
     this.turnos = false;
   }
+
+  HabilitarEdicion(){
+    this.edicion = !this.edicion;
+  }
+
+  ActualizarAntecedente(){
+    this._servicePacienteNuevo.ActualizarAntecedentes(this.antecedente).subscribe(antecedente => {
+      this.edicion = false;
+      this._snack.Mensaje("El antecedente del paciente se actualizó con éxito",'success');
+    },(error:HttpErrorResponse) => {
+      console.log(error);
+      this._snack.Mensaje(error.error.message,'error');
+    })
+  }
+
+  ActualizarConsulta(){
+    this._servicePacienteNuevo.ActualizarConsultaInicial(this._servicePacienteNuevo.consultaInicial).subscribe(consulta => {
+      this.edicion = false;
+      
+    },(error:HttpErrorResponse) => {
+      console.log(error);
+      this._snack.Mensaje(error.error.message,'error');
+  });
+    
+  
+}
 }

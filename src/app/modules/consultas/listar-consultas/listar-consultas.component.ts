@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
-import { SnackBarComponent } from 'src/app/shared/Components/snack-bar/snack-bar.component';
+import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { ConsultasService } from '../nueva-consulta/consultas.service';
 
@@ -18,7 +18,7 @@ import { ConsultasService } from '../nueva-consulta/consultas.service';
   templateUrl: './listar-consultas.component.html',
   styleUrls: ['./listar-consultas.component.css']
 })
-export class ListarConsultasComponent implements OnInit, AfterViewInit {
+export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,12 +42,18 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
   };
   form!:FormGroup;
   filtroPaciente:string = '';
+  subscribes:any[]=[];
 
   constructor(private _servicePaciente:NuevoPacienteService,
     private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private _serviceTratamiento:ConsultasService,
-    private _formBuilder:FormBuilder) { }
+    private _formBuilder:FormBuilder,
+    private _snack:SnackService) { }
+
+  ngOnDestroy(): void {
+    this.subscribes.forEach(s => s.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -56,7 +62,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
     obs.push(this._serviceTratamiento.ObtenerConsultas());
-    forkJoin(obs).subscribe(resp => {    
+    this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
@@ -66,14 +72,8 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
       
     },(error:HttpErrorResponse) => {
       console.log(error);
-      this._snackBar.openFromComponent(SnackBarComponent, {
-        data: {
-          mensaje: error.error.message,
-        },
-        horizontalPosition: "center",
-        panelClass: "error",
-      });
-    });
+      this._snack.Mensaje(error.error.message,'error');
+    }));
   }
 
   ngAfterViewInit() {
@@ -99,5 +99,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit {
     this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
     if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
+
+
 
 }

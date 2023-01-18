@@ -34,8 +34,20 @@ td {
 .left{
   justify-content: start;
   margin-bottom: 20px;
+  display: flex;
+}
+
+.right{
+  justify-content: end;
+  margin-bottom: 20px;
+  display: flex;
 }
 
 .mt-20{
   margin-top: 20px;
+}
+
+.button-disabled{
+  background-color: #cfebd2;
+  color: #ffffff;
 }
