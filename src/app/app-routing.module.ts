@@ -1,28 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+import { ModulesComponent } from './modules/modules.component';
+import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   {
     path: 'login',
-    loadChildren: () => import('./modules/login/login.module').then(m => m.LoginModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule),
   },
   {
-    path: 'pacientes',
-    loadChildren: () => import('./modules/pacientes/pacientes.module').then(m => m.PacientesModule)
-  },
-  {
-    path: 'consultas',
-    loadChildren: () => import('./modules/consultas/consultas.module').then(m => m.ConsultasModule)
-  },
-  {
-    path: 'estudios',
-    loadChildren: () => import('./modules/estudios/estudios.module').then(m => m.EstudiosModule)
-  }
-  ,
-  {
-    path: 'foto',
-    loadChildren: () => import('./modules/foto-perfil/foto-perfil.module').then(m => m.FotoPerfilModule)
+    path: 'home',
+    component:ModulesComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

@@ -13,6 +13,7 @@ export class InterceptorService {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
     this._spinnerService.ShowSpinner();
+
     return next.handle(req).pipe(
       finalize(() => this._spinnerService.HideSpinner())
     );

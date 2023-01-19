@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { FotoPerfilRoutingModule } from './foto-perfil-routing.module';
 import { FotoComponent } from './foto/foto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -19,7 +17,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
   ],
   imports: [
     CommonModule,
-    FotoPerfilRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
@@ -30,6 +27,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatSnackBarModule,
     MatDialogModule,
     NgxSpinnerModule
-  ]
+  ],
+  exports:[FotoComponent]
 })
 export class FotoPerfilModule { }

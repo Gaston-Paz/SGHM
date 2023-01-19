@@ -1,0 +1,52 @@
+<div class="container d-flex align-items-center h-75">
+    <mat-card class="d-flex justify-content-center w-100">
+        <div class="row justify-content-center">
+            <div class="d-flex row justify-content-center">
+
+                <h1>Inicio de Sesión</h1>
+            </div>
+                <mat-card-content>
+                <form [formGroup]="form">
+                    <div class="row">
+
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Email</mat-label>
+                            <input
+                            type="text"
+                            matInput
+                            formControlName="mail"
+                            placeholder="Email"
+                            required="true"
+                            autocomplete="off"
+                            />
+                            <mat-error *ngIf="form.controls.mail.hasError('required')">
+                                El Email es <strong>obligatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="row">
+
+                        <mat-form-field appearance="outline" class="example-full-width">
+                            <mat-label>Contraseña</mat-label>
+                            <input
+                            type="password"
+                            matInput
+                            formControlName="pass"
+                            required="true"
+                            autocomplete="off"
+                            />
+                            <mat-error *ngIf="form.controls.pass.hasError('required')">
+                                La contraseña es <strong>obligatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    </form>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary">Primary</button>
+            </mat-card-actions>
+        </div>
+    </mat-card> 
+
+
+</div>

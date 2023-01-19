@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ConsultasRoutingModule } from './consultas-routing.module';
 import { NuevaConsultaComponent } from './nueva-consulta/nueva-consulta.component';
 import { ListarConsultasComponent } from './listar-consultas/listar-consultas.component';
 
@@ -26,7 +24,6 @@ import { MatSortModule } from '@angular/material/sort';
   ],
   imports: [
     CommonModule,
-    ConsultasRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatFormFieldModule,

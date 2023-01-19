@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PacientesRoutingModule } from './pacientes-routing.module';
 import { DatosPersonalesComponent } from './nuevo-paciente/datos-personales/datos-personales.component';
 import { NuevoPacienteComponent } from './nuevo-paciente/nuevo-paciente.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -41,7 +39,6 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   ],
   imports: [
     CommonModule,
-    PacientesRoutingModule,
     MatCardModule,
     MatButtonModule,
     MatTabsModule,
@@ -66,6 +63,10 @@ import {MatTooltipModule} from '@angular/material/tooltip';
   providers: [  
     MatDatepickerModule,  
   ],
-  exports:[EstudiosMedicosComponent]
+  exports:[
+    NuevoPacienteComponent,
+    ListarPacientesComponent,
+    EstudiosMedicosComponent
+  ]
 })
 export class PacientesModule { }

@@ -1,0 +1,37 @@
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+    <mat-toolbar class="example-toolbar">
+      <!-- <button mat-icon-button (click)="snav.toggle()">
+        <mat-icon color="basic">menu</mat-icon>
+      </button> -->
+  
+      <div class="row">
+        <h1 class="example-app-name">Sistema de Gestión de Historias Clínicas</h1>
+  
+        <h2 class="mail">mail@mail.com - Cerrar sesión</h2>
+      </div>
+  
+  
+    </mat-toolbar>
+  
+    <mat-sidenav-container  class="example-sidenav-container"
+                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+      <mat-sidenav class="example-toolbar" #snav [mode]="'side'" opened
+                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+        <mat-nav-list >
+          <a class="color-white" mat-list-item (click)="navegar(nav)"  *ngFor="let nav of fillerNav">{{nav.text}}</a>
+        </mat-nav-list>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <!-- [routerLink]="nav.url" -->
+        <app-nuevo-paciente *ngIf="nuevoPaciente"></app-nuevo-paciente>
+        <app-listar-pacientes *ngIf="listarPaciente"></app-listar-pacientes>
+        <app-foto *ngIf="fotoPerfil"></app-foto>
+        <app-nueva-consulta *ngIf="nuevaConsulta"></app-nueva-consulta>
+        <app-listar-consultas *ngIf="listarConsultas"></app-listar-consultas>
+        <app-estudios *ngIf="nuevoEstudio"></app-estudios>
+        <app-listar *ngIf="listarEstudios"></app-listar>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div>

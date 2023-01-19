@@ -1,7 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { EstudiosRoutingModule } from './estudios-routing.module';
 import { EstudiosComponent } from './nuevo-estudio/estudios.component';
 import { PacientesModule } from '../pacientes/pacientes.module';
 import { MatCardModule } from '@angular/material/card';
@@ -26,7 +24,6 @@ import { MatSortModule } from '@angular/material/sort';
   ],
   imports: [
     CommonModule,
-    EstudiosRoutingModule,
     PacientesModule,
     MatCardModule,
     MatSelectModule,
@@ -41,7 +38,12 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    PacientesModule
+  ],
+  exports: [
+    EstudiosComponent,
+    ListarComponent
   ]
 })
 export class EstudiosModule { }

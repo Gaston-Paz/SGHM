@@ -5,19 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-//Material
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
+import { InterceptorTokenInterceptor } from './shared/services/interceptor-token.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SnackBarComponent } from './shared/Components/snack-bar/snack-bar.component';
-import { InterceptorService } from './shared/services/interceptor.service';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalConfirmComponent } from './shared/Components/modal-confirm/modal-confirm.component';
+import { InterceptorService } from './shared/services/interceptor.service';
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ModulesModule } from './modules/modules.module';
+
 
 
 @NgModule({
@@ -30,20 +26,20 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatListModule,
     MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    NgxSpinnerModule,
     MatDialogModule,
-    MatSnackBarModule
+    HttpClientModule,
+    ModulesModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: InterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorTokenInterceptor,
       multi: true
     }
   ],
