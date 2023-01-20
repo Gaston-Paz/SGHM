@@ -13,11 +13,12 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
-import { ModulesComponent } from './modules.component';
+import {ModulesComponent} from './modules.component';
 import { PacientesModule } from "./pacientes/pacientes.module";
 import { ConsultasModule } from './consultas/consultas.module';
 import { FotoPerfilModule } from './foto-perfil/foto-perfil.module';
 import { EstudiosModule } from './estudios/estudios.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @NgModule({
     declarations: [
@@ -38,7 +39,8 @@ import { EstudiosModule } from './estudios/estudios.module';
         PacientesModule,
         ConsultasModule,
         FotoPerfilModule, 
-        EstudiosModule
+        EstudiosModule,
+        UsuarioModule
     ]
 })
 export class ModulesModule { }

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import ModulesComponent from './modules.component';
+import { NoAutorizadoComponent } from './no-autorizado.component';
 
-describe('ModulesComponent', () => {
-  let component: ModulesComponent;
-  let fixture: ComponentFixture<ModulesComponent>;
+describe('NoAutorizadoComponent', () => {
+  let component: NoAutorizadoComponent;
+  let fixture: ComponentFixture<NoAutorizadoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ModulesComponent ]
+      declarations: [ NoAutorizadoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModulesComponent);
+    fixture = TestBed.createComponent(NoAutorizadoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

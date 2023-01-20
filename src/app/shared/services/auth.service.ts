@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Credencial } from 'src/app/core/interfaces/credenciales.interface';
+import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 import { environment } from "src/environments/environment.prod";
 
 @Injectable({
@@ -11,34 +12,40 @@ export class AuthService {
 
   constructor(private _httpClient: HttpClient) { }
 
-  user:Credencial = {
-    email: "gaspaz12@gmail.com",
-    password: "gP1158174335"
-  }
+  private userMail:string = "";
 
-  Login(){
+  Login(user:Credencial){
     
     return this._httpClient.post<any>(
-      environment.url + "/login",this.user, {
+      environment.url + "/login",user, {
         observe:'response'
-      }).pipe(map((response:HttpResponse<any>) => {
-        console.log(response);
-        
+      }).pipe(map((response:HttpResponse<any>) => {       
           const body = response.body;
           const header = response.headers;
           const bearerToken = header.get('Authorization');
-          
           const token = bearerToken?.replace('Bearer ','');
-          console.log(token);
-          localStorage.setItem('token',token!);
-          console.log(this.GetToken());
-          console.log(localStorage);
-          
+          localStorage.setItem('SGHC-token',token!);        
           return body;
       }));
   }
 
   GetToken(){
-    return localStorage.getItem('token');
+    return localStorage.getItem('SGHC-token');
+  }
+
+  SetEmail(mail:string){
+    this.userMail = mail;
+  }
+
+  GetEmail(){
+    return this.userMail;
+  }
+
+  GetUsuario(mail:string){
+    return this._httpClient.get<Usuario>("http://localhost:8080/usuario/" + mail);
+  }
+
+  GuardarUsuario(usuario:Usuario){
+    return this._httpClient.post<Usuario>("http://localhost:8080/usuario", usuario);
   }
 }

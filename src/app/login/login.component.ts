@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Credencial } from '../core/interfaces/credenciales.interface';
 import { SnackService } from '../shared/services/snack.service';
 
 @Component({
@@ -27,8 +28,14 @@ export class LoginComponent implements OnInit {
   }
 
   Login(){
-    this._authService.Login().subscribe(token => {
-      this._router.navigate(['home']);      
+    const credencial:Credencial = {
+      email: this.form.controls.mail.value,
+      password: this.form.controls.pass.value
+    };
+    this._authService.Login(credencial).subscribe(token => {
+      this._authService.SetEmail(this.form.controls.mail.value);
+      localStorage.setItem('SGHC-mail',this._authService.GetEmail());      
+      this._router.navigate(['home']);
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snack.Mensaje(error.message,'error');

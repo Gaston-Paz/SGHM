@@ -29,7 +29,8 @@ import { ModulesModule } from './modules/modules.module';
     MatIconModule,
     MatDialogModule,
     HttpClientModule,
-    ModulesModule
+    ModulesModule,
+    MatIconModule
   ],
   providers: [
     {
