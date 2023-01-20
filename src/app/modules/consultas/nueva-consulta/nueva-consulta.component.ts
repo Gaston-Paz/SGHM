@@ -139,8 +139,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   SetConsultaAlta(){
     this._servicePaciente.consulta = this.consulta;
-    if(this.consulta.sedestacion !== '' && this.consulta.especifico !== '' &&
-    this.consulta.sugerencias !== '')this._servicePaciente.tratamientoCompleto = true;
+    if(this.consulta.sedestacion !== '')this._servicePaciente.tratamientoCompleto = true;
   }
 
   applyFilterPaciente(espacio:boolean){

@@ -41,11 +41,4 @@ export class AuthService {
     return this.userMail;
   }
 
-  GetUsuario(mail:string){
-    return this._httpClient.get<Usuario>("http://localhost:8080/usuario/" + mail);
-  }
-
-  GuardarUsuario(usuario:Usuario){
-    return this._httpClient.post<Usuario>("http://localhost:8080/usuario", usuario);
-  }
 }

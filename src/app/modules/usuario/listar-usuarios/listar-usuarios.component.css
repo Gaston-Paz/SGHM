@@ -1,0 +1,53 @@
+/* Structure */
+table {
+    width: 100%;
+  }
+  
+  .mat-mdc-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+
+  .container{
+      display: flex;
+      flex-direction: column;
+      margin-top: 10px;
+  }
+
+  .foto{
+    width: 205px;
+  }
+  
+  .button{
+    background-color: #60C76E;
+    color: #ffffff;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}
+
+.left{
+  justify-content: start;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.right{
+  justify-content: end;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.mt-20{
+  margin-top: 20px;
+}
+
+.button-disabled{
+  background-color: #cfebd2;
+  color: #ffffff;
+}

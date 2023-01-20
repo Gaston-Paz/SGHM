@@ -262,13 +262,13 @@ export class NuevoPacienteService {
   //Métodos HTTP
   GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean, nombreArchivo:string, extension:string) {    
     return this._httpClient.post<Paciente>(
-      environment.url + "/paciente/" + idPaciente + "/" + esEstudio + "/" + nombreArchivo + "/" + extension,
+      environment.url + "/api/paciente/" + idPaciente + "/" + esEstudio + "/" + nombreArchivo + "/" + extension,
       formData
     );
   }
 
   ObtenerPacientes() {
-    return this._httpClient.get<Paciente[]>("http://localhost:8080/paciente");
+    return this._httpClient.get<Paciente[]>(environment.url + "/api/paciente");
   }
 
   GuardarPaciente() {
@@ -281,28 +281,28 @@ export class NuevoPacienteService {
     console.log(this.alta);
     
     return this._httpClient.post<Paciente>(
-      environment.url + "/paciente/",
+      environment.url + "/api/paciente",
       this.alta
     );
   }
 
   ActualizarDatosPersonales(datos:Paciente) {
     return this._httpClient.post<Paciente>(
-      environment.url + "/paciente/actualizar",
+      environment.url + "/api/paciente/actualizar",
       datos
     );
   }
 
   ActualizarAntecedentes(antecedente:Antecedente){
     return this._httpClient.post<Antecedente>(
-      environment.url + "/antecedentes/actualizar",
+      environment.url + "/api/antecedentes/actualizar",
       antecedente
     );
   }
 
   ActualizarConsultaInicial(consulta:ConsultaInicial){
     return this._httpClient.post<Antecedente>(
-      environment.url + "/consulta-inicial/actualizar",
+      environment.url + "/api/consulta-inicial/actualizar",
       consulta
     );
   }

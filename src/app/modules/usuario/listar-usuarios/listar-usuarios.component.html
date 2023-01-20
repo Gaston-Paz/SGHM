@@ -1,0 +1,63 @@
+<div  class="container">
+    <mat-form-field >
+      <mat-label>Buscar</mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        (keyup)="applyFilter($event)"
+        placeholder="Buscar"
+        #input
+      />
+    </mat-form-field>
+  <mat-card>
+    <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+      <!-- Name Column -->
+      <ng-container matColumnDef="apellido">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+        <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
+      </ng-container>
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+        <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      </ng-container>
+  
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="mail">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="rol">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Rol</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.rol}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Eliminar</th>
+        <td mat-cell *matCellDef="let element">
+            <button (click)="EliminarUsuario(element)" mat-button class="button" >
+                <mat-icon>delete</mat-icon>
+              </button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="12">
+          No se encontraron pacientes
+        </td>
+      </tr>
+    </table>
+    <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
+    </mat-paginator>
+  </mat-card>
+</div>
+

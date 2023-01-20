@@ -13,6 +13,7 @@ import { InterceptorService } from './shared/services/interceptor.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModulesModule } from './modules/modules.module';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -30,7 +31,8 @@ import { ModulesModule } from './modules/modules.module';
     MatDialogModule,
     HttpClientModule,
     ModulesModule,
-    MatIconModule
+    MatIconModule,
+    MatButtonModule
   ],
   providers: [
     {

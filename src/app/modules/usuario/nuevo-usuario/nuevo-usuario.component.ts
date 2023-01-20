@@ -1,11 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-nuevo-usuario',
@@ -31,24 +32,33 @@ export class NuevoUsuarioComponent implements OnInit {
     rol:''
   }
   diferentes:boolean=false;
+  @Input('usuario')usuarioEditar:Usuario ={
+    apellido:'',
+    email: '',
+    nombre:'',
+    password:'',
+    rol:''
+  }
 
   constructor(private _formBuilder: FormBuilder, 
     private router:Router,
     private _authService:AuthService,
     private _snack:SnackService,
-    private _spinnerService: SpinnerService) { }
+    private _spinnerService: SpinnerService,
+    private _usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
-      nombre: [, Validators.required],
-      apellido: [, Validators.required],
-      mail: [, [Validators.email, Validators.required]],
-      password: [, Validators.required],
-      confirmar: [, Validators.required],
-      rol: [, Validators.required]
+      nombre: [this.usuarioEditar.nombre !== '' ? this.usuarioEditar.nombre : '', Validators.required],
+      apellido: [this.usuarioEditar.apellido !== '' ? this.usuarioEditar.apellido : '', Validators.required],
+      mail: [this.usuarioEditar.email !== '' ? this.usuarioEditar.email : '', [Validators.email, Validators.required]],
+      password: [this.usuarioEditar.password !== '' ? this.usuarioEditar.password : '', Validators.required],
+      confirmar: [this.usuarioEditar.password !== '' ? this.usuarioEditar.password : '', Validators.required],
+      rol: [this.usuarioEditar.rol !== '' ? this.usuarioEditar.rol : '', Validators.required],
+      id: [this.usuarioEditar.id !== undefined ? this.usuarioEditar.id : undefined]
     });
 
-    this._authService.GetUsuario(localStorage.getItem('SGHC-mail')!).subscribe(user => {
+    this._usuarioService.GetUsuario(localStorage.getItem('SGHC-mail')!).subscribe(user => {
       this.UsuarioLogueado = user;
       if(this.UsuarioLogueado.rol !== 'Admin'){
         this.router.navigate(['errores/403']);
@@ -65,10 +75,11 @@ export class NuevoUsuarioComponent implements OnInit {
       email: this.form.controls.mail.value,
       nombre: this.form.controls.nombre.value,
       password: this.form.controls.password.value,
-      rol: this.form.controls.rol.value
+      rol: this.form.controls.rol.value,
+      id: this.form.controls.id.value
     }
 
-    this._authService.GuardarUsuario(this.Usuario).subscribe(usuario => {
+    this._usuarioService.GuardarUsuario(this.Usuario).subscribe(usuario => {
       this._snack.Mensaje('El usuario se guardó con éxito','success');
       this.form.reset();
     },(error:HttpErrorResponse) => {
@@ -83,6 +94,5 @@ export class NuevoUsuarioComponent implements OnInit {
     else if(this.form.controls.password.value === null)this.diferentes =  false;
     else if(this.form.controls.password.value !== this.form.controls.confirmar.value)this.diferentes = true;
     else this.diferentes =  false;
-    
   }
 }

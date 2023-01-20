@@ -27,11 +27,11 @@ export class ConsultasService {
 
   //Métodos HTTP
   ObtenerConsultas() {
-    return this._httpClient.get<Tratamiento[]>(environment.url + "/tratamiento");
+    return this._httpClient.get<Tratamiento[]>(environment.url + "/api/tratamiento");
   }
 
   GuardarConsultas(tratamiento:Tratamiento) {
-    return this._httpClient.post<Tratamiento>(environment.url + "/tratamiento/",tratamiento);
+    return this._httpClient.post<Tratamiento>(environment.url + "/api/tratamiento",tratamiento);
   }
 
 
