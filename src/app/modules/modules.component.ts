@@ -135,6 +135,9 @@ export class ModulesComponent  {
         this.nuevaConsulta = false;
         this.listarEstudios = true;
         this.nuevoEstudio = false;
+      }else if(ev.id === 10){
+        localStorage.removeItem('token');
+        this.router.navigate(['login']);
       }
   }
 

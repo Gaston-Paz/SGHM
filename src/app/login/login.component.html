@@ -2,8 +2,10 @@
     <mat-card class="d-flex justify-content-center w-100">
         <div class="row justify-content-center">
             <div class="d-flex row justify-content-center">
-
-                <h1>Inicio de Sesión</h1>
+                <h1>Sistema de Gestión de Historias Clínicas</h1>
+            </div>
+            <div class="d-flex row justify-content-center">
+                <h3>Inicio de Sesión</h3>
             </div>
                 <mat-card-content>
                 <form [formGroup]="form">
@@ -12,7 +14,7 @@
                         <mat-form-field appearance="outline" class="example-full-width">
                             <mat-label>Email</mat-label>
                             <input
-                            type="text"
+                            type="email"
                             matInput
                             formControlName="mail"
                             placeholder="Email"
@@ -21,6 +23,9 @@
                             />
                             <mat-error *ngIf="form.controls.mail.hasError('required')">
                                 El Email es <strong>obligatorio</strong>
+                            </mat-error>
+                            <mat-error *ngIf="form.controls.mail.hasError('email')">
+                                El formato del Email es <strong>incorrecto</strong>
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -43,7 +48,12 @@
                     </form>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button color="primary">Primary</button>
+                <div class="d-flex row justify-content-end">
+                    <div class="w-25">
+
+                        <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid ? 'button' : 'button-disabled' " (click)="Login()">Iniciar Sesión</button>
+                    </div>
+                </div>
             </mat-card-actions>
         </div>
     </mat-card> 
