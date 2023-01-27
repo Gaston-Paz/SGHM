@@ -11,6 +11,7 @@ import { forkJoin, Observable } from "rxjs";
 import { Usuario } from "src/app/core/interfaces/usuario.interface";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { UsuarioService } from "../usuario.service";
@@ -40,7 +41,8 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
     private _snack: SnackService,
     private _spinnerService: SpinnerService,
     private _usuarioService: UsuarioService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private _serviceError:ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -59,8 +61,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
         this.dataSource.data = this.usuarios;
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snack.Mensaje(error.message, "error");
+        this._serviceError.Error(error);
       }
     );
   }
@@ -103,14 +104,12 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
                 this.usuarios = users;
               },
               (error: HttpErrorResponse) => {
-                console.log(error);
-                this._snack.Mensaje(error.message, "error");
+                this._serviceError.Error(error);
               }
             );
           },
           (error: HttpErrorResponse) => {
-            console.log(error);
-            this._snack.Mensaje(error.message, "error");
+            this._serviceError.Error(error);
           }
         );
       }

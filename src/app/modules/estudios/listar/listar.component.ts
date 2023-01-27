@@ -8,6 +8,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Estudios } from 'src/app/core/interfaces/estudio.interface';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { EstudiosService } from '../estudios.service';
@@ -40,7 +41,8 @@ export class ListarComponent implements OnInit, OnDestroy {
     private _spinnerService: NgxSpinnerService,
     private sanitizer: DomSanitizer,
     private _serviceEstudio:EstudiosService,
-    private _snack:SnackService) { }
+    private _snack:SnackService,
+    private _serviceError:ErrorService) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -55,8 +57,7 @@ export class ListarComponent implements OnInit, OnDestroy {
       this.estudios = resp[1];
         
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
+      this._serviceError.Error(error);
     }));
   }
 

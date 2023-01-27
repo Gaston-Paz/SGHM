@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { ConsultasService } from './consultas.service';
@@ -62,7 +63,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     private _spinnerService: NgxSpinnerService,
     private _serviceConsulta:ConsultasService,
     private _dateAdapter: DateAdapter<Date>,
-    private _snack:SnackService) {
+    private _snack:SnackService,
+    private _serviceError:ErrorService) {
       this._dateAdapter.setLocale('es-ES');
   }
 
@@ -86,8 +88,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
       this.pacientes = pacientes;
       this.pacientesFilter = pacientes;
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
+      this._serviceError.Error(error);
     }));
 
   }
@@ -116,8 +117,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
       this._snack.Mensaje("El tratamiento se guardó con éxito",'success');
       this.form.reset();
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
+      this._serviceError.Error(error);
     }));
     
   }

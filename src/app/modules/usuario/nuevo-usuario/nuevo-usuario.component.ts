@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
 import { UsuarioService } from '../usuario.service';
@@ -45,7 +46,8 @@ export class NuevoUsuarioComponent implements OnInit {
     private _authService:AuthService,
     private _snack:SnackService,
     private _spinnerService: SpinnerService,
-    private _usuarioService: UsuarioService) { }
+    private _usuarioService: UsuarioService,
+    private _serviceError:ErrorService) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -64,8 +66,7 @@ export class NuevoUsuarioComponent implements OnInit {
         this.router.navigate(['errores/403']);
       }
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.message,'error');
+      this._serviceError.Error(error);
     });
   }
 
@@ -83,8 +84,7 @@ export class NuevoUsuarioComponent implements OnInit {
       this._snack.Mensaje('El usuario se guardó con éxito','success');
       this.form.reset();
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.message,'error');
+      this._serviceError.Error(error);
     });
 
   }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Credencial } from '../core/interfaces/credenciales.interface';
+import { ErrorService } from '../shared/services/error.service';
 import { SnackService } from '../shared/services/snack.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private _authService: AuthService,
     private _formBuilder: FormBuilder,
     private _snack:SnackService,
-    private _router: Router) {}
+    private _router: Router,
+    private _serviceError:ErrorService) {}
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -37,8 +39,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('SGHC-mail',this._authService.GetEmail());      
       this._router.navigate(['home']);
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.message,'error');
+      this._serviceError.Error(error);
     });
   }
 

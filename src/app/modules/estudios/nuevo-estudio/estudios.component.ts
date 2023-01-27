@@ -12,6 +12,7 @@ import { SnackService } from "src/app/shared/services/snack.service";
 import { EstudiosService } from "../estudios.service";
 import { createViewChild } from "@angular/compiler/src/core";
 import { EstudiosMedicosComponent } from "../../pacientes/nuevo-paciente/estudios-medicos/estudios-medicos.component";
+import { ErrorService } from "src/app/shared/services/error.service";
 
 @Component({
   selector: "app-estudios",
@@ -39,7 +40,8 @@ export class EstudiosComponent implements OnInit, OnDestroy {
     private _spinnerService: NgxSpinnerService,
     private sanitizer: DomSanitizer,
     private _snack: SnackService,
-    private _serviceEstudio:EstudiosService
+    private _serviceEstudio:EstudiosService,
+    private _serviceError:ErrorService
   ) {}
 
   ngOnDestroy(): void {
@@ -60,8 +62,7 @@ export class EstudiosComponent implements OnInit, OnDestroy {
           this.pacientesFilter = resp[0];
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          this._snack.Mensaje(error.error.message, "error");
+          this._serviceError.Error(error);
         }
       )
     );
@@ -95,8 +96,7 @@ export class EstudiosComponent implements OnInit, OnDestroy {
               this.nombresNuevos = [];
             },
             (error: HttpErrorResponse) => {
-              console.log(error);
-              this._snack.Mensaje(error.error.message, "error");
+              this._serviceError.Error(error);
             }
           )
         );

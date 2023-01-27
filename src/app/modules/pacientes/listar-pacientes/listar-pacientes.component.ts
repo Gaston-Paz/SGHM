@@ -7,6 +7,7 @@ import { Router } from "@angular/router";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
@@ -77,7 +78,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _serviceListados: ListadosService,
     private _serviceConsulta: ConsultasService,
     private _router: Router,
-    private _snack: SnackService
+    private _snack: SnackService,
+    private _serviceError:ErrorService
   ) {}
 
   ngOnInit(): void {
@@ -87,23 +89,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           r.fechaNacimiento = new Date(r.fechaNacimiento);
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
-
           var diff = fechaFin - fechaInicio;
-
-          // if(r.idPaciente === 1){
-
-          //   let blob: Blob = new Blob([JSON.stringify(r.fotoPerfil)], {type : 'image/jpg'});
-          //   let objectURL = URL.createObjectURL(blob);  
-          //   const reader = new FileReader();
-          //   reader.readAsDataURL(blob); 
-          //   reader.onload = (_event) => {
-          //     let url = reader.result; 
-          //     this.url = url;
-          //   };
-          //   this.url = objectURL;
-            
-          // }
-
           r.edad = diff / (1000 * 60 * 60 * 24 * 365);
           this.pacientes.push(r);
         });
@@ -114,8 +100,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         });
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snack.Mensaje(error.message, "error");
+        this._serviceError.Error(error)
       }
     );
   }
@@ -146,8 +131,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.apellidoPaciente = element.apellido;
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          this._snack.Mensaje(error.message, "error");
+          this._serviceError.Error(error)
         }
       );
   }
@@ -166,8 +150,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.apellidoPaciente = element.apellido;
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snack.Mensaje(error.message, "error");
+        this._serviceError.Error(error)
       }
     );
   }
@@ -226,8 +209,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           );
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          this._snack.Mensaje(error.error.message, "error");
+          this._serviceError.Error(error)
         }
       );
   }
@@ -240,8 +222,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.edicion = false;
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          this._snack.Mensaje(error.error.message, "error");
+          this._serviceError.Error(error)
         }
       );
   }

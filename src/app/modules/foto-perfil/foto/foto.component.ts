@@ -8,6 +8,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { forkJoin, Observable } from "rxjs";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
+import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-paciente.service";
 
@@ -44,7 +45,8 @@ export class FotoComponent implements OnInit, OnDestroy {
     private _spinnerService: NgxSpinnerService,
     private sanitizer: DomSanitizer,
     private dialog: MatDialog,
-    private _snack: SnackService
+    private _snack: SnackService,
+    private _serviceError:ErrorService
   ) {}
 
   ngOnDestroy(): void {
@@ -65,8 +67,7 @@ export class FotoComponent implements OnInit, OnDestroy {
           this.pacientesFilter = resp[0];
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          this._snack.Mensaje(error.error.message, "error");
+          this._serviceError.Error(error)
         }
       )
     );
@@ -155,9 +156,8 @@ export class FotoComponent implements OnInit, OnDestroy {
               "La foto de perfil se guardó con éxito",
               "success"
             );
-          },error => {
-            console.log(error);
-            this._snack.Mensaje(error.error.message, "error");
+          },(error: HttpErrorResponse) => {
+            this._serviceError.Error(error)
           });
         }
       });
@@ -169,9 +169,8 @@ export class FotoComponent implements OnInit, OnDestroy {
           "La foto de perfil se guardó con éxito",
           "success"
         );
-      },error => {
-        console.log(error);
-        this._snack.Mensaje(error.error.message, "error");
+      },(error: HttpErrorResponse) => {
+        this._serviceError.Error(error)
       });
       this.form.reset();
     }

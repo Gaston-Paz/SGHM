@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
+import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { ConsultasService } from '../nueva-consulta/consultas.service';
@@ -49,7 +50,8 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     private _spinnerService: NgxSpinnerService,
     private _serviceTratamiento:ConsultasService,
     private _formBuilder:FormBuilder,
-    private _snack:SnackService) { }
+    private _snack:SnackService,
+    private _serviceError:ErrorService) { }
 
   ngOnDestroy(): void {
     this.subscribes.forEach(s => s.unsubscribe());
@@ -71,8 +73,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       }
       
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
+      this._serviceError.Error(error);
     }));
   }
 

@@ -7,6 +7,7 @@ import { ConsultaInicialComponent } from "./consulta-inicial/consulta-inicial.co
 import { DatosPersonalesComponent } from "./datos-personales/datos-personales.component";
 import { AntecedentesComponent } from "./antecedentes/antecedentes.component";
 import { SnackService } from "src/app/shared/services/snack.service";
+import { ErrorService } from "src/app/shared/services/error.service";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
@@ -28,7 +29,8 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
     private _servicePacienteNuevo: NuevoPacienteService,
     private sanitizer: DomSanitizer,
     private _snack: SnackService,
-    private _spinnerService: SpinnerService
+    private _spinnerService: SpinnerService,
+    private _serviceError:ErrorService
   ) {}
 
   ngOnDestroy(): void {
@@ -59,8 +61,7 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
         this._snack.Mensaje("El paciente se guardó con éxito",'success');
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
-        this._snack.Mensaje(error.error.message,'error');
+        this._serviceError.Error(error);
       }
     ));
   }
