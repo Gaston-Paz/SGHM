@@ -8,6 +8,8 @@ import { SnackService } from './snack.service';
 })
 export class ErrorService {
 
+  public errorFatal:string='';
+
   constructor(private _router:Router,
     private _snack: SnackService) { }
 
@@ -15,8 +17,11 @@ export class ErrorService {
     console.log(error);
     if(error.status === 403){
       this._router.navigate(['login']);
+    }else if(error.status === 404){
+      this._router.navigate(['errores/404']);
     }else{
-      this._snack.Mensaje(error.error.message,'error');
+      this.errorFatal = error.error.message;
+      this._router.navigate(['errores/500']);
     }
   }
 }
