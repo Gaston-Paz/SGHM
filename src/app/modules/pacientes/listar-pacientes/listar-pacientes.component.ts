@@ -68,7 +68,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     otros: "",
     deParte: "",
   };
-  edicion:boolean=false;
+  edicion: boolean = false;
+  url:any;
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
@@ -84,21 +85,24 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       (resp) => {
         resp.forEach((r) => {
           r.fechaNacimiento = new Date(r.fechaNacimiento);
-          if(r.fotoPerfil !== undefined && r.fotoPerfil !== null){
-            let variables = r.fotoPerfil!.toString().split("\\");
-            r.fotoPerfil =
-            "..//..//..//..//assets//" +
-            variables[8] +
-            "//" +
-            variables[9] +
-            "//" +
-            variables[10];
-          }
-
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
 
           var diff = fechaFin - fechaInicio;
+
+          // if(r.idPaciente === 1){
+
+          //   let blob: Blob = new Blob([JSON.stringify(r.fotoPerfil)], {type : 'image/jpg'});
+          //   let objectURL = URL.createObjectURL(blob);  
+          //   const reader = new FileReader();
+          //   reader.readAsDataURL(blob); 
+          //   reader.onload = (_event) => {
+          //     let url = reader.result; 
+          //     this.url = url;
+          //   };
+          //   this.url = objectURL;
+            
+          // }
 
           r.edad = diff / (1000 * 60 * 60 * 24 * 365);
           this.pacientes.push(r);
@@ -111,7 +115,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-        this._snack.Mensaje(error.message,'error');
+        this._snack.Mensaje(error.message, "error");
       }
     );
   }
@@ -127,11 +131,10 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   VerAntecedentes(element: Paciente) {
-    
     this._serviceListados
-    .ObtenerAntecedentePorId(element.idPaciente!)
-    .subscribe(
-      (resp) => {         
+      .ObtenerAntecedentePorId(element.idPaciente!)
+      .subscribe(
+        (resp) => {
           this.antecedente = resp;
           this.antecedentes = true;
           this.pacientesVer = false;
@@ -144,14 +147,14 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         },
         (error: HttpErrorResponse) => {
           console.log(error);
-          this._snack.Mensaje(error.message,'error');
+          this._snack.Mensaje(error.message, "error");
         }
       );
   }
 
   VerConsultas(element: Paciente) {
     this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(
-      (resp) => {        
+      (resp) => {
         this.consultas = resp;
         this.antecedentes = false;
         this.pacientesVer = false;
@@ -164,7 +167,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       },
       (error: HttpErrorResponse) => {
         console.log(error);
-        this._snack.Mensaje(error.message,'error');
+        this._snack.Mensaje(error.message, "error");
       }
     );
   }
@@ -207,29 +210,39 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.turnos = false;
   }
 
-  HabilitarEdicion(){
+  HabilitarEdicion() {
     this.edicion = !this.edicion;
   }
 
-  ActualizarAntecedente(){
-    this._servicePacienteNuevo.ActualizarAntecedentes(this.antecedente).subscribe(antecedente => {
-      this.edicion = false;
-      this._snack.Mensaje("El antecedente del paciente se actualizó con éxito",'success');
-    },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
-    })
+  ActualizarAntecedente() {
+    this._servicePacienteNuevo
+      .ActualizarAntecedentes(this.antecedente)
+      .subscribe(
+        (antecedente) => {
+          this.edicion = false;
+          this._snack.Mensaje(
+            "El antecedente del paciente se actualizó con éxito",
+            "success"
+          );
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this._snack.Mensaje(error.error.message, "error");
+        }
+      );
   }
 
-  ActualizarConsulta(){
-    this._servicePacienteNuevo.ActualizarConsultaInicial(this._servicePacienteNuevo.consultaInicial).subscribe(consulta => {
-      this.edicion = false;
-      
-    },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.error.message,'error');
-  });
-    
-  
-}
+  ActualizarConsulta() {
+    this._servicePacienteNuevo
+      .ActualizarConsultaInicial(this._servicePacienteNuevo.consultaInicial)
+      .subscribe(
+        (consulta) => {
+          this.edicion = false;
+        },
+        (error: HttpErrorResponse) => {
+          console.log(error);
+          this._snack.Mensaje(error.error.message, "error");
+        }
+      );
+  }
 }

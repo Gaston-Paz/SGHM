@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Estudios } from 'src/app/core/interfaces/estudio.interface';
 import { environment } from 'src/environments/environment.prod';
 
@@ -12,5 +13,12 @@ export class EstudiosService {
 
   ObtenerEstudios() {
     return this._httpClient.get<Estudios[]>(environment.url+"/api/estudios");
+  }
+
+  GuardarEstudio(estudio: FormData, idPaciente: number) {       
+    return this._httpClient.post<Estudios>(
+      environment.url + "/api/estudios/" + idPaciente,
+      estudio
+    );
   }
 }

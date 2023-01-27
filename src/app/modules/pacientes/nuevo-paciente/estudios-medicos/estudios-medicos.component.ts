@@ -9,6 +9,7 @@ import { NuevoPacienteService } from '../nuevo-paciente.service';
 })
 export class EstudiosMedicosComponent implements OnInit {
   previsualizacionFoto: string[] = [];
+  archivos: any [] = [];
 
   constructor(private sanitizer: DomSanitizer,
     private _servicePacienteNuevo: NuevoPacienteService) { }
@@ -55,8 +56,11 @@ export class EstudiosMedicosComponent implements OnInit {
 
   SubirEstudio(archivo:any){
     this._servicePacienteNuevo.estudios.push(archivo);
-    this._servicePacienteNuevo.extensiones.push(archivo.name.split(".")[1]);
+  }
 
+  VaciarFotos(){
+    this.previsualizacionFoto = [];
+    this.archivos = [];
   }
 
 }

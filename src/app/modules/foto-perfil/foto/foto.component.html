@@ -31,15 +31,10 @@
           accept="image/png, image/gif, image/jpeg"
           />
           
-        
-
           <img class="mt-20" *ngIf="previsualizacionFoto" [src]="previsualizacionFoto" alt="Foto de Perfil">
         </div>
         
     </form>
-
-
-
 
     <div class="end mt-20">
         <button [ngClass]="form.valid ? 'button' : 'button-disabled' " [disabled]="!form.valid" class="button" mat-button (click)="GuardarFoto()" > Guardar Foto de Perfil </button>

@@ -43,7 +43,7 @@
       <td mat-cell *matCellDef="let element">
         <img
           class="foto"
-          [src]="element.fotoPerfil"
+          src="data:image/png;base64,{{element.fotoPerfil}}"
           alt="Sin Foto"
         />
       </td>

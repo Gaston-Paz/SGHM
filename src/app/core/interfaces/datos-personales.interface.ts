@@ -10,8 +10,6 @@ export interface Paciente{
     email: string,
     celular: string,
     deParte: string,
-    fotoPerfil?: string,
-    extensionFoto?: string,
-
+    fotoPerfil?: FormData,
     edad?:number;
 }

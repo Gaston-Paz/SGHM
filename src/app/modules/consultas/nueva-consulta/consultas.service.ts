@@ -18,7 +18,6 @@ export class ConsultasService {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    fotoPerfil: "",
     otros:"",
     deParte: ""
   };

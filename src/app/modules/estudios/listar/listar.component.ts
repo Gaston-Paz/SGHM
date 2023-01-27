@@ -52,17 +52,8 @@ export class ListarComponent implements OnInit, OnDestroy {
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
       this.pacientesFilter = resp[0]; 
-      resp[1].forEach((r: Estudios) => {
-        let variables = r.ruta.toString().split("\\");
-        r.ruta =
-          "..//..//..//..//assets//" +
-          variables[8] +
-          "//" +
-          variables[9] +
-          "//" +
-          variables[10];
-          this.estudios.push(r);
-      });          
+      this.estudios = resp[1];
+        
     },(error:HttpErrorResponse) => {
       console.log(error);
       this._snack.Mensaje(error.error.message,'error');

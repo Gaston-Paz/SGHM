@@ -66,7 +66,6 @@ export class NuevoPacienteService {
       nombre: "",
       ocupacion: "",
       localidad: "",
-      fotoPerfil: "",
       otros:"",
       deParte: ""
     },
@@ -260,10 +259,10 @@ export class NuevoPacienteService {
   }
 
   //Métodos HTTP
-  GuardarFoto(formData: FormData, idPaciente: number, esEstudio: boolean, nombreArchivo:string, extension:string) {    
+  GuardarleFoto(foto: FormData, idPaciente: number) {       
     return this._httpClient.post<Paciente>(
-      environment.url + "/api/paciente/" + idPaciente + "/" + esEstudio + "/" + nombreArchivo + "/" + extension,
-      formData
+      environment.url + "/api/paciente/" + idPaciente,
+      foto
     );
   }
 
