@@ -8,5 +8,19 @@
 
 .icon-display {
     color: red;
-    transform: scale(3);
- }
+    transform: scale(6);
+}
+
+h1{
+    font-weight: 600;
+    font-size: 40px;
+}
+
+p{
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.w-max{
+    width: max-content;
+}

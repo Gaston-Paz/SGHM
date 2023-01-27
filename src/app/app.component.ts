@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     rol:''
   }
   userMail:string = "";
-  muestroMenu: boolean = true;
+  muestroMenu: boolean = false;
   Nav:any[]=[];
   fillerNav: any = [
     {
@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     },
     {
       text:'Pacientes',
-      url: '/pacientes/listar'
+      url: '/pacientes/listar-pacientes'
     },
     {
       text:'Nueva Consulta TTO',
@@ -87,13 +87,20 @@ export class AppComponent implements OnInit {
         this.Nav = this.fillerNav;
       }
     },(error:HttpErrorResponse) => {
-      this._serviceError.Error(error);
+
     });
   }
 
   MuestroMenu(){
-    return !(this.router.url.includes('errores') || this.router.url.includes('login') || this.router.url.includes(' '));
+    this.muestroMenu = !(this.router.url.includes('errores') || this.router.url.includes('login') || this.router.url === '/');
+    if(this.muestroMenu){
+      if(this.Usuario.rol === "Usuario"){
+        this.Nav = this.fillerNav.filter((n: { usuario: any; }) => n.usuario);
+      }else{
+        this.Nav = this.fillerNav;
+      }
+    }
+    return this.muestroMenu;
   }
-
 
 }

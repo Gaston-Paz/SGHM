@@ -5,10 +5,10 @@
                 <h1>Sistema de Gestión de Historias Clínicas</h1>
             </div>
             <div class="d-flex row justify-content-center">
-                <h3>Inicio de Sesión</h3>
+                <h3>Recuperación de contraseña</h3>
             </div>
                 <mat-card-content>
-                <form [formGroup]="form" (ngSubmit)="Login()">
+                <form [formGroup]="form" (ngSubmit)="Recuperar()">
                     <div class="row">
 
                         <mat-form-field appearance="outline" class="example-full-width">
@@ -29,29 +29,11 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="row">
-
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Contraseña</mat-label>
-                            <input
-                            type="password"
-                            matInput
-                            formControlName="pass"
-                            required="true"
-                            autocomplete="off"
-                            />
-                            <mat-error *ngIf="form.controls.pass.hasError('required')">
-                                La contraseña es <strong>obligatorio</strong>
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="row">
-                        <a href="/login/recuperacion">¿Olvidaste tu contraseña?</a>
-                    </div>
+                    
                     <div class="d-flex row justify-content-center">
                         <div class="w-25">
                             
-                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid ? 'button' : 'button-disabled' " (click)="Login()">Iniciar Sesión</button>
+                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid ? 'button' : 'button-disabled' " (click)="Recuperar()">Enviar código</button>
                         </div>
                     </div>
                 </form>
@@ -61,3 +43,4 @@
 
 
 </div>
+

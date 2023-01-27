@@ -6,7 +6,7 @@ import { NuevoPacienteComponent } from './nuevo-paciente/nuevo-paciente.componen
 
 const routes: Routes = [
   {
-    path: 'listar',
+    path: 'listar-pacientes',
     component:ListarPacientesComponent,
     canActivate: [AuthGuard]
   },

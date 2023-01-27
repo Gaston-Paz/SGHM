@@ -156,6 +156,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   Volver() {
+    this.edicion = false;
     this.antecedentes = false;
     this.pacientesVer = true;
     this.consultaInicial = false;

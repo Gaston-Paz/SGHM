@@ -14,12 +14,12 @@
   
     </mat-toolbar>
   
-    <mat-sidenav-container  class="example-sidenav-container"
+    <mat-sidenav-container class="example-sidenav-container"
                            [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
       <mat-sidenav class="example-toolbar" #snav [mode]="'side'" opened
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list >
-          <a class="color-white" mat-list-item [routerLink]="nav.url"  *ngFor="let nav of Nav">{{nav.text}}</a>
+          <a class="color-white" mat-list-item [routerLink]="nav.url" *ngFor="let nav of Nav">{{nav.text}}</a>
         </mat-nav-list>
       </mat-sidenav>
   
@@ -30,6 +30,6 @@
     </mat-sidenav-container>
 </div>
 
-<div *ngIf="!MuestroMenu()">
+<div *ngIf="!MuestroMenu()" class="d-flex h-100 align-items-center justify-content-center">
   <router-outlet></router-outlet>
 </div>

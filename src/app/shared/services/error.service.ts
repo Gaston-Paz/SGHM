@@ -16,7 +16,7 @@ export class ErrorService {
   Error(error:HttpErrorResponse){
     console.log(error);
     if(error.status === 403){
-      this._router.navigate(['login']);
+      this._router.navigate(['errores/403']);
     }else if(error.status === 404){
       this._router.navigate(['errores/404']);
     }else{

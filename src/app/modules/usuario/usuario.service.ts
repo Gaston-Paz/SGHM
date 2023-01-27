@@ -25,4 +25,8 @@ export class UsuarioService {
   EliminarUsuario(id:number){
     return this._httpClient.delete<Usuario>(environment.url + "/api/usuario/" + id);
   }
+
+  RecuperarContraseña(mail:string){
+    return this._httpClient.post<any>(environment.url + "/api/recuperacion/" + mail, undefined);
+  }
 }

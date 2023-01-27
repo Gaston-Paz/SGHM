@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-no-encontrado',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoEncontradoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router:Router) { }
 
   ngOnInit(): void {
+  }
+
+  Volver(){
+    this._router.navigate(['home']);
   }
 
 }
