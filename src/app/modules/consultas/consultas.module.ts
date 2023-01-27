@@ -16,6 +16,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { ConsultasRoutingModule } from './consultas-routing.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatSortModule } from '@angular/material/sort';
     NgxSpinnerModule,
     MatPaginatorModule,
     MatTableModule,
-    MatSortModule
+    MatSortModule,
+    ConsultasRoutingModule
   ],
   exports:[ListarConsultasComponent, NuevaConsultaComponent]
 })

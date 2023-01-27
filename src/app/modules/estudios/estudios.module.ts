@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { EstudiosRoutingModule } from './estudios-routing.module';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { MatSortModule } from '@angular/material/sort';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    PacientesModule
+    PacientesModule,
+    EstudiosRoutingModule
   ],
   exports: [
     EstudiosComponent,

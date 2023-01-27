@@ -27,6 +27,7 @@ import { ConsultasModule } from '../consultas/consultas.module';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { PacientesRoutingModule } from './pacientes-routing.module';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     ConsultasModule,
     MatSelectModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    PacientesRoutingModule
   ],
   providers: [  
     MatDatepickerModule,  

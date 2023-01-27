@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { FotosRoutingModule } from './fotos-routing.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatCardModule,
     MatSnackBarModule,
     MatDialogModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    FotosRoutingModule
   ],
   exports:[FotoComponent]
 })

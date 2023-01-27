@@ -14,6 +14,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModulesModule } from './modules/modules.module';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
 
 
 
@@ -32,7 +35,10 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     ModulesModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSidenavModule,
+        MatToolbarModule,
+        MatListModule
   ],
   providers: [
     {

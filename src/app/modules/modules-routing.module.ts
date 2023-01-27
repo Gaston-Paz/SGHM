@@ -23,6 +23,11 @@ const routes: Routes = [
     path: 'foto',
     loadChildren: () => import('./foto-perfil/foto-perfil.module').then(m => m.FotoPerfilModule),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'usuarios',
+    loadChildren: () => import('./usuario/usuario.module').then(m => m.UsuarioModule),
+    canActivate: [AuthGuard]
   }
 ];
 

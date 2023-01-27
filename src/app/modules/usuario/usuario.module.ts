@@ -13,6 +13,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
+import { UsuariosRoutingModule } from './usuarios-routing.module';
 
 
 
@@ -33,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
     NgxSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule
+    MatIconModule,
+    UsuariosRoutingModule
   ],
   exports:[NuevoUsuarioComponent,ListarUsuariosComponent]
 })
