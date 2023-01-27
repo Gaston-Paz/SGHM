@@ -1,6 +1,7 @@
+import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ModulesComponent } from './modules/modules.component';
+import { NoEncontradoComponent } from './errores/no-encontrado/no-encontrado.component';
 import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
@@ -15,7 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'errores',
-    loadChildren: () => import('./errores/errores.module').then(m => m.ErroresModule),
+    loadChildren: () => import('./errores/errores.module').then(m => m.ErroresModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login'
   }
 ];
 

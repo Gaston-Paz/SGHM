@@ -1,6 +1,5 @@
 
-
-<div class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+<div *ngIf="MuestroMenu()" class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
     <mat-toolbar class="example-toolbar">
       <!-- <button mat-icon-button (click)="snav.toggle()">
         <mat-icon color="basic">menu</mat-icon>
@@ -20,7 +19,7 @@
       <mat-sidenav class="example-toolbar" #snav [mode]="'side'" opened
                    [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
         <mat-nav-list >
-          <a class="color-white" mat-list-item [routerLink]="nav.url"  *ngFor="let nav of fillerNav">{{nav.text}}</a>
+          <a class="color-white" mat-list-item [routerLink]="nav.url"  *ngFor="let nav of Nav">{{nav.text}}</a>
         </mat-nav-list>
       </mat-sidenav>
   
@@ -29,4 +28,8 @@
         <router-outlet></router-outlet>
       </mat-sidenav-content>
     </mat-sidenav-container>
-  </div>
+</div>
+
+<div *ngIf="!MuestroMenu()">
+  <router-outlet></router-outlet>
+</div>

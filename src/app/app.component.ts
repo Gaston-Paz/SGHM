@@ -1,5 +1,5 @@
 
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { Usuario } from './core/interfaces/usuario.interface';
@@ -11,7 +11,7 @@ import { SnackService } from './shared/services/snack.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent  {
+export class AppComponent implements OnInit {
   title = 'SGHC';
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
@@ -24,30 +24,8 @@ export class AppComponent  {
     rol:''
   }
   userMail:string = "";
-
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router,
-    private _usuarioService:UsuarioService,
-    private _snack:SnackService) {
-    this.mobileQuery = media.matchMedia('(max-width: 600px)');
-    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-    this.mobileQuery.addListener(this._mobileQueryListener);
-  }
-
-  ngOnInit(): void {   
-    this.userMail = localStorage.getItem('SGHC-mail')!;
-    this._usuarioService.GetUsuario(this.userMail).subscribe(user => {
-      this.Usuario = user;
-      // if(this.Usuario.rol === "Usuario"){
-      //   this.fillerNav = this.Nav.filter((n: { usuario: any; }) => n.usuario);
-      // }else{
-      //   this.fillerNav = this.Nav;
-      // }
-    },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.message,'error');
-    });
-  }
-
+  muestroMenu: boolean = true;
+  Nav:any[]=[];
   fillerNav: any = [
     {
       text:'Nuevo Usuario',
@@ -87,12 +65,35 @@ export class AppComponent  {
     },
     {
       text:'Cerrar sesión',
-      url: ''
+      url: '/login'
     },
   ]
 
-  navegar(ev:any){
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router,
+    private _usuarioService:UsuarioService,
+    private _snack:SnackService) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
 
+  ngOnInit(): void {   
+    this.userMail = localStorage.getItem('SGHC-mail')!;
+    this._usuarioService.GetUsuario(this.userMail).subscribe(user => {
+      this.Usuario = user;
+      if(this.Usuario.rol === "Usuario"){
+        this.Nav = this.fillerNav.filter((n: { usuario: any; }) => n.usuario);
+      }else{
+        this.Nav = this.fillerNav;
+      }
+    },(error:HttpErrorResponse) => {
+      console.log(error);
+      this._snack.Mensaje(error.message,'error');
+    });
+  }
+
+  MuestroMenu(){
+    return !(this.router.url.includes('errores') || this.router.url.includes('login') || this.router.url.includes(' '));
   }
 
 
