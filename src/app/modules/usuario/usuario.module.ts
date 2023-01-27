@@ -36,7 +36,6 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
     MatPaginatorModule,
     MatIconModule,
     UsuariosRoutingModule
-  ],
-  exports:[NuevoUsuarioComponent,ListarUsuariosComponent]
+  ]
 })
 export class UsuarioModule { }

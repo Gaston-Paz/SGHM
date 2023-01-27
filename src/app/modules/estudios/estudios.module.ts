@@ -42,10 +42,6 @@ import { EstudiosRoutingModule } from './estudios-routing.module';
     MatSortModule,
     PacientesModule,
     EstudiosRoutingModule
-  ],
-  exports: [
-    EstudiosComponent,
-    ListarComponent
   ]
 })
 export class EstudiosModule { }

@@ -29,7 +29,6 @@ import { FotosRoutingModule } from './fotos-routing.module';
     MatDialogModule,
     NgxSpinnerModule,
     FotosRoutingModule
-  ],
-  exports:[FotoComponent]
+  ]
 })
 export class FotoPerfilModule { }

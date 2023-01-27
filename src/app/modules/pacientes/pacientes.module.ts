@@ -66,8 +66,6 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
     MatDatepickerModule,  
   ],
   exports:[
-    NuevoPacienteComponent,
-    ListarPacientesComponent,
     EstudiosMedicosComponent
   ]
 })
