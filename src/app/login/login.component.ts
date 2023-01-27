@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
     private _serviceError:ErrorService) {}
 
   ngOnInit(): void {
+    this.CleanLocalStorage();
     this.form = this._formBuilder.group({
       mail: [, [Validators.required, Validators.email]],
       pass: [, Validators.required]
@@ -41,6 +42,11 @@ export class LoginComponent implements OnInit {
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     });
+  }
+
+  CleanLocalStorage(){
+    localStorage.removeItem('SGHC-token');
+    localStorage.removeItem('SGHC-mail');
   }
 
 

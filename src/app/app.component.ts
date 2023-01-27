@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Usuario } from './core/interfaces/usuario.interface';
 import { UsuarioService } from './modules/usuario/usuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { SnackService } from './shared/services/snack.service';
+import { ErrorService } from './shared/services/error.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   fillerNav: any = [
     {
       text:'Nuevo Usuario',
-      url: '/usuarios/nuevo-usuario'
+      url: 'usuarios/nuevo-usuario'
     },
     {
       text:'Usuarios',
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private router:Router,
     private _usuarioService:UsuarioService,
-    private _snack:SnackService) {
+    private _serviceError:ErrorService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -87,8 +87,7 @@ export class AppComponent implements OnInit {
         this.Nav = this.fillerNav;
       }
     },(error:HttpErrorResponse) => {
-      console.log(error);
-      this._snack.Mensaje(error.message,'error');
+      this._serviceError.Error(error);
     });
   }
 
