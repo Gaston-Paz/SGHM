@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Recuperacion } from 'src/app/core/interfaces/recuperacion.interface';
 import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 import { environment } from 'src/environments/environment.prod';
 
@@ -26,7 +27,11 @@ export class UsuarioService {
     return this._httpClient.delete<Usuario>(environment.url + "/api/usuario/" + id);
   }
 
-  RecuperarContraseña(mail:string){
+  EnviarCodigo(mail:string){
     return this._httpClient.post<any>(environment.url + "/api/recuperacion/" + mail, undefined);
+  }
+
+  RecuperarContraseña(recupero: Recuperacion){
+    return this._httpClient.post<any>(environment.url + "/api/recuperacion", recupero);
   }
 }

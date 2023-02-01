@@ -28,17 +28,64 @@
                                 El formato del Email es <strong>incorrecto</strong>
                             </mat-error>
                         </mat-form-field>
+
+                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
+                            <mat-label>Código de Recuperación</mat-label>
+                            <input
+                            type="text"
+                            matInput
+                            formControlName="token"
+                            placeholder="Código de Recuperación"
+                            required="true"
+                            autocomplete="off"
+                            />
+                            <mat-error *ngIf="recuparar && form.controls.token.value === undefined">
+                                El código de recuperación es <strong>obligatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
+                            <mat-label>Contraseña Nueva</mat-label>
+                            <input
+                            type="password"
+                            matInput
+                            formControlName="pass"
+                            placeholder="Contraseña Nueva"
+                            required="true"
+                            autocomplete="off"
+                            />
+                            <mat-error *ngIf="recuparar && form.controls.pass.value === undefined">
+                                El código de recuperación es <strong>obligatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
+                            <mat-label>Confirmar Contraseña</mat-label>
+                            <input
+                            type="password"
+                            matInput
+                            formControlName="confirmar"
+                            placeholder="Código de Recuperación"
+                            required="true"
+                            autocomplete="off"
+                            />
+                            <mat-error *ngIf="recuparar && form.controls.confirmar.value === undefined">
+                                El código de recuperación es <strong>obligatorio</strong>
+                            </mat-error>
+                        </mat-form-field>
                     </div>
 
-                    <mat-error *ngIf="!tokenEnviado">
-                        <strong> Recibirá un email con el código de recuperación.</strong>
-                    </mat-error>
+                    <mat-error *ngIf="diferentes && !tokenEnviado">
+                        Las contraseñas <strong>no coinciden</strong>
+                      </mat-error>
                     
                     <div class="d-flex row justify-content-center">
                         <div class="w-50 d-flex justify-content-center">
                             
-                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid && !recuparar? 'button' : 'button-disabled' " (click)="Recuperar()">Enviar código</button>
-                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="recuparar ? 'button' : 'button-disabled' " >Recuperar Contraseña</button>
+                            <button mat-raised-button *ngIf="tokenEnviado" [disabled]="form.controls.mail.value === null" [ngClass]="form.controls.mail.value !== null ? 'button' : 'button-disabled' " (click)="EnviarCodigo()">Enviar código</button>
+
+                            <button mat-raised-button *ngIf="!tokenEnviado" [disabled]="!form.valid" [ngClass]="recuparar ? 'button' : 'button-disabled' " (click)="Recuperar()">Recuperar Contraseña</button>
+
                             <button mat-raised-button color="light" [disabled]="tokenEnviado" (click)="Volver()">Volver</button>
                         </div>
                     </div>
