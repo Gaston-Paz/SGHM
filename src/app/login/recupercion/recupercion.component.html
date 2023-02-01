@@ -8,7 +8,7 @@
                 <h3>Recuperación de contraseña</h3>
             </div>
                 <mat-card-content>
-                <form [formGroup]="form" (ngSubmit)="Recuperar()">
+                <form [formGroup]="form">
                     <div class="row">
 
                         <mat-form-field appearance="outline" class="example-full-width">
@@ -29,11 +29,17 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
+
+                    <mat-error *ngIf="!tokenEnviado">
+                        <strong> Recibirá un email con el código de recuperación.</strong>
+                    </mat-error>
                     
                     <div class="d-flex row justify-content-center">
-                        <div class="w-25">
+                        <div class="w-50 d-flex justify-content-center">
                             
-                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid ? 'button' : 'button-disabled' " (click)="Recuperar()">Enviar código</button>
+                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid && !recuparar? 'button' : 'button-disabled' " (click)="Recuperar()">Enviar código</button>
+                            <button mat-raised-button [disabled]="!form.valid" [ngClass]="recuparar ? 'button' : 'button-disabled' " >Recuperar Contraseña</button>
+                            <button mat-raised-button color="light" [disabled]="tokenEnviado" (click)="Volver()">Volver</button>
                         </div>
                     </div>
                 </form>
@@ -43,4 +49,7 @@
 
 
 </div>
+
+
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#60c76e" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
 

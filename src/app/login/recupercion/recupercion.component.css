@@ -12,3 +12,7 @@ h1,h3{
     color: #ffffff;
 }
 
+button{
+    margin-left: 5px;
+    margin-right: 5px;
+}

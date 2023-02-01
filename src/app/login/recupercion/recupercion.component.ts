@@ -1,8 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { UsuarioService } from 'src/app/modules/usuario/usuario.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
+import { SnackService } from 'src/app/shared/services/snack.service';
+import { SpinnerService } from 'src/app/shared/services/spinner.service';
 
 @Component({
   selector: 'app-recupercion',
@@ -12,10 +15,16 @@ import { ErrorService } from 'src/app/shared/services/error.service';
 export class RecupercionComponent implements OnInit {
 
   form!:FormGroup;
+  tokenEnviado:boolean = true;
+  recuparar:boolean = false;
+  cont = 0;
 
   constructor(private _formBuilder: FormBuilder,
     private _serviceUsuario:UsuarioService,
-    private _serviceError:ErrorService) { }
+    private _serviceError:ErrorService,
+    private _spinnerService: SpinnerService,
+    private _router:Router,
+    private _snackService:SnackService) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -25,10 +34,16 @@ export class RecupercionComponent implements OnInit {
 
   Recuperar(){
     this._serviceUsuario.RecuperarContraseña(this.form.controls.mail.value).subscribe(resp => {
-
+      this.tokenEnviado = !this.tokenEnviado;
+      this.recuparar = !this.recuparar;
+      this._snackService.Mensaje('Se le ha enviado un código por email para que pueda recuperar su contraseña.','success');
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     })
+  }
+
+  Volver(){
+    this._router.navigate(['login']);
   }
 
 }
