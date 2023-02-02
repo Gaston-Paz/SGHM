@@ -11,7 +11,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'listar',
+    path: 'listar-estudios',
     component:ListarComponent,
     canActivate: [AuthGuard]
   }

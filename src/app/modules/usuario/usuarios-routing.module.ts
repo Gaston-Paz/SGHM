@@ -6,7 +6,7 @@ import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
 
 const routes: Routes = [
   {
-    path: 'listar',
+    path: 'listar-usuarios',
     component:ListarUsuariosComponent,
     canActivate: [AuthGuard]
   },

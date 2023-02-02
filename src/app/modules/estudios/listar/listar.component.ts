@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Estudios } from 'src/app/core/interfaces/estudio.interface';
+import { ModalImagenComponent } from 'src/app/shared/Components/modal-imagen/modal-imagen.component';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
@@ -42,7 +44,8 @@ export class ListarComponent implements OnInit, OnDestroy {
     private sanitizer: DomSanitizer,
     private _serviceEstudio:EstudiosService,
     private _snack:SnackService,
-    private _serviceError:ErrorService) { }
+    private _serviceError:ErrorService,
+    private _dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({
@@ -83,5 +86,14 @@ export class ListarComponent implements OnInit, OnDestroy {
     if(espacio) filter += "";
     this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
     if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
+  }
+
+  VerEstudio(element:Estudios){
+    const dialogRef = this._dialog.open(ModalImagenComponent, {
+      data: {
+        element: element
+      },
+      maxHeight: "800px"
+    });
   }
 }

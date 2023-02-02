@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { ModalImagenComponent } from './shared/Components/modal-imagen/modal-imagen.component';
 
 
 
@@ -24,7 +25,8 @@ import { MatListModule } from '@angular/material/list';
   declarations: [
     AppComponent,
     SnackBarComponent,
-    ModalConfirmComponent
+    ModalConfirmComponent,
+    ModalImagenComponent
   ],
   imports: [
     BrowserModule,

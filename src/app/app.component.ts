@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
     },
     {
       text: "Usuarios",
-      url: "/usuarios/listar",
+      url: "/usuarios/listar-usuarios",
     },
     {
       text: "Nuevo Paciente",
@@ -52,7 +52,7 @@ export class AppComponent implements OnInit {
     },
     {
       text: "Consultas TTO",
-      url: "/consultas/listar",
+      url: "/consultas/listar-consultas",
     },
     {
       text: "Nuevos Estudios",
@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
     },
     {
       text: "Estudios",
-      url: "/estudios/listar",
+      url: "/estudios/listar-estudios",
     },
     {
       text: "Cerrar sesión",
