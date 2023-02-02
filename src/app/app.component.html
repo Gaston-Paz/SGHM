@@ -1,40 +1,58 @@
+<div
+[ngClass]="_router.url.includes('login') ? 'container mt-20' : 'container'"
+>
+<div [ngClass]="_router.url.includes('login') ? 'none' :'row w-100 barra-bg h6 barra'">
+  <div class="row">
+    <h1 class="example-app-name">Sistema de Gestión de Historias Clínicas</h1>
 
-<div [ngClass]="_router.url.includes('login') ? 'container mt-20' :'container'">
+    <h2 class="mail">{{ Usuario.apellido }} , {{ Usuario.nombre }}</h2>
+  </div>
+</div>
 
-
-<div [hidden]="!_serviceError.muestroMenu" class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
-    <mat-toolbar class="example-toolbar">
+    <div
+      [hidden]="!_serviceError.muestroMenu"
+      class="example-container"
+      [class.example-is-mobile]="mobileQuery.matches"
+    >
+      <!-- <mat-toolbar class="example-toolbar"> -->
       <!-- <button mat-icon-button (click)="snav.toggle()">
         <mat-icon color="basic">menu</mat-icon>
       </button> -->
-  
-      <div class="row">
+
+      <!-- <div class="row">
         <h1 class="example-app-name">Sistema de Gestión de Historias Clínicas</h1>
   
         <h2 class="mail"> {{Usuario.apellido}} , {{Usuario.nombre}} </h2>
-      </div>
-  
-  
-    </mat-toolbar>
-  
-    <mat-sidenav-container class="example-sidenav-container"
-                           [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-      <mat-sidenav class="example-toolbar" #snav [mode]="'side'" opened
-                   [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
-        <mat-nav-list >
-          <a class="color-white" mat-list-item [routerLinkActive]="'active-link'" [routerLink]="nav.url" *ngFor="let nav of Nav">{{nav.text}}</a>
-        </mat-nav-list>
-      </mat-sidenav>
-  
-      <!-- <mat-sidenav-content>
+      </div> -->
 
-      </mat-sidenav-content> -->
-    </mat-sidenav-container>
-  </div>
-  <div [ngClass]="_router.url.includes('login') ? '' :'router'">
-    <router-outlet ></router-outlet>
-  </div>
+      <!-- </mat-toolbar> -->
+
+      <mat-sidenav-container
+        class="example-sidenav-container"
+        [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+      >
+        <mat-sidenav
+          class="example-toolbar"
+          #snav
+          [mode]="'side'"
+          opened
+          [fixedInViewport]="mobileQuery.matches"
+          fixedTopGap="56"
+        >
+          <mat-nav-list>
+            <a
+              class="color-white"
+              mat-list-item
+              [routerLinkActive]="'active-link'"
+              [routerLink]="nav.url"
+              *ngFor="let nav of Nav"
+              >{{ nav.text }}</a
+            >
+          </mat-nav-list>
+        </mat-sidenav>
+      </mat-sidenav-container>
+    </div>
+    <div [ngClass]="_router.url.includes('login') ? '' : 'router'">
+      <router-outlet></router-outlet>
+    </div>
 </div>
-<!-- <div [hidden]="_serviceError.muestroMenu" class="d-flex h-100 align-items-center justify-content-center">
-  <router-outlet></router-outlet>
-</div> -->

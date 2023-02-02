@@ -1,7 +1,7 @@
 .example-container {
     display: flex;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -40,6 +40,8 @@
   .example-toolbar{
     background-color: #60C76E;
     color: #ffffff;
+    position: fixed;
+    z-index: 100;
   }
 
   .row {
@@ -77,9 +79,38 @@
   margin-top: 15%;
 }
 
+.mat-drawer{
+  top:50px
+}
+
+.barra{
+  z-index: 110;
+  position: fixed;  
+  left: 0;
+  padding: 10px;
+}
+
+.barra-bg{
+  background-color: #60C76E;
+  color: #ffffff;
+}
+
+.h6{
+  height: 6%!important;
+}
+
+.w101{
+  width: 101%;
+}
+
+.none{
+  display: none;
+}
+
+
 @media only screen and (min-width: 1110px) and (max-width: 1377px){
   .router{
-    z-index: 100;
+    /* z-index: 100; */
       position: absolute;
       top: 10%;
       left: 18%;
@@ -89,7 +120,7 @@
 
 @media only screen and (min-width: 920px) and (max-width: 1110px){
   .router{
-    z-index: 100;
+    /* z-index: 100; */
       position: absolute;
       top: 10%;
       left: 21%;
@@ -99,7 +130,7 @@
 
 @media only screen and (min-width: 0) and (max-width: 920px){
   .router{
-    z-index: 100;
+    /* z-index: 100; */
       position: absolute;
       top: 10%;
       left: 24%;

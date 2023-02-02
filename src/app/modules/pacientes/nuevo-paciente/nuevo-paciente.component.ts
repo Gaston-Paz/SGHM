@@ -7,6 +7,8 @@ import { DatosPersonalesComponent } from "./datos-personales/datos-personales.co
 import { AntecedentesComponent } from "./antecedentes/antecedentes.component";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { ErrorService } from "src/app/shared/services/error.service";
+import { timer } from "rxjs";
+import { Router } from "@angular/router";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
@@ -28,7 +30,8 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
     private _servicePacienteNuevo: NuevoPacienteService,
     private _snack: SnackService,
     private _spinnerService: SpinnerService,
-    private _serviceError:ErrorService
+    private _serviceError:ErrorService,
+    private _router:Router
   ) {}
 
   ngOnDestroy(): void {
@@ -51,12 +54,15 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
 
     this.subscribes.push(this._servicePacienteNuevo.GuardarPaciente().subscribe(
       (paciente) => {
-
         this._servicePacienteNuevo.InicializarObjetos();
         this.datosPersonales.form.reset();
         this.consultaInicial.form.reset();
         this.antecedentes.form.reset();
         this._snack.Mensaje("El paciente se guardó con éxito",'success');
+        const espera = timer(1500);
+        espera.subscribe(() => {
+        this._router.navigate(['home/pacientes/listar-pacientes']);
+      });
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error);

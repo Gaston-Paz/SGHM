@@ -66,7 +66,7 @@ export class RecupercionComponent implements OnInit {
     };
 
     this._serviceUsuario.RecuperarContraseña(recupera).subscribe(resp=> {
-      const espera = timer(3000);
+      const espera = timer(2000);
       this.form.reset();
       this._snackService.Mensaje('La contraseña se modificó con éxito.','success');
       espera.subscribe(() => {

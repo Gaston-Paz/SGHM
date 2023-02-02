@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Credencial } from '../core/interfaces/credenciales.interface';
 import { ErrorService } from '../shared/services/error.service';
+import { SnackService } from '../shared/services/snack.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(private _authService: AuthService,
     private _formBuilder: FormBuilder,
     private _router: Router,
-    private _serviceError:ErrorService) {
+    private _serviceError:ErrorService,
+    private _snackService:SnackService) {
       this._serviceError.muestroMenu = false;
     }
 
@@ -42,7 +44,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('SGHC-mail',this._authService.GetEmail());      
       this._router.navigate(['home']);
     },(error:HttpErrorResponse) => {
-      this._serviceError.Error(error);
+      this._snackService.Mensaje('Email o contraseña incorrecta','error');
     });
   }
 

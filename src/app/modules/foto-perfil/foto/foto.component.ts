@@ -4,8 +4,9 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSelectChange } from "@angular/material/select";
 import { DomSanitizer } from "@angular/platform-browser";
+import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin, Observable, timer } from "rxjs";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
 import { ErrorService } from "src/app/shared/services/error.service";
@@ -37,7 +38,7 @@ export class FotoComponent implements OnInit, OnDestroy {
     deParte: "",
   };
   subscribes: any[] = [];
-  formData!:FormData;
+  formData!: FormData;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -46,7 +47,8 @@ export class FotoComponent implements OnInit, OnDestroy {
     private _sanitizer: DomSanitizer,
     private _dialog: MatDialog,
     private _snack: SnackService,
-    private _serviceError:ErrorService
+    private _serviceError: ErrorService,
+    private _router:Router
   ) {}
 
   ngOnDestroy(): void {
@@ -67,7 +69,7 @@ export class FotoComponent implements OnInit, OnDestroy {
           this.pacientesFilter = resp[0];
         },
         (error: HttpErrorResponse) => {
-          this._serviceError.Error(error)
+          this._serviceError.Error(error);
         }
       )
     );
@@ -92,7 +94,7 @@ export class FotoComponent implements OnInit, OnDestroy {
   CargarFoto(ev: any) {
     const fotoCapturada = ev.target.files[0];
     this.formData = new FormData();
-    this.formData.append('fotoPerfil', fotoCapturada);
+    this.formData.append("fotoPerfil", fotoCapturada);
 
     this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
       this.previsualizacionFoto = imagen.base;
@@ -120,22 +122,20 @@ export class FotoComponent implements OnInit, OnDestroy {
       } catch (e) {
         return null;
       }
-  });
+    });
 
   CheckFoto(ev: MatSelectChange) {
     this.paciente = this.pacientes.find((x) => x.idPaciente === ev.value)!;
     if (
       this.paciente?.fotoPerfil !== undefined &&
       this.paciente.fotoPerfil !== null
-    ){
+    ) {
       this.yaTieneFoto = true;
-
     }
   }
 
-  GuardarFoto(){
-    
-      if (this.yaTieneFoto) {
+  GuardarFoto() {
+    if (this.yaTieneFoto) {
       const dialogRef = this._dialog.open(ModalConfirmComponent, {
         data: {
           message:
@@ -148,34 +148,47 @@ export class FotoComponent implements OnInit, OnDestroy {
         },
       });
 
-    dialogRef.afterClosed().subscribe((confirm: boolean) => {
+      dialogRef.afterClosed().subscribe((confirm: boolean) => {
         if (confirm) {
-          
-          this._servicePaciente.GuardarleFoto(this.formData,this.form.controls.paciente.value).subscribe(resp => {
-            this._snack.Mensaje(
-              "La foto de perfil se guardó con éxito",
-              "success"
+          this._servicePaciente
+            .GuardarleFoto(this.formData, this.form.controls.paciente.value)
+            .subscribe(
+              (resp) => {
+                this._snack.Mensaje(
+                  "La foto de perfil se guardó con éxito",
+                  "success"
+                );
+                const espera = timer(1500);
+                espera.subscribe(() => {
+                  this._router.navigate(["home/pacientes/listar-pacientes"]);
+                });
+              },
+              (error: HttpErrorResponse) => {
+                this._serviceError.Error(error);
+              }
             );
-          },(error: HttpErrorResponse) => {
-            this._serviceError.Error(error)
-          });
         }
       });
       this.form.reset();
     } else {
-
-      this._servicePaciente.GuardarleFoto(this.formData,this.form.controls.paciente.value).subscribe(resp => {
-        this._snack.Mensaje(
-          "La foto de perfil se guardó con éxito",
-          "success"
+      this._servicePaciente
+        .GuardarleFoto(this.formData, this.form.controls.paciente.value)
+        .subscribe(
+          (resp) => {
+            this._snack.Mensaje(
+              "La foto de perfil se guardó con éxito",
+              "success"
+            );
+            const espera = timer(1500);
+            espera.subscribe(() => {
+              this._router.navigate(["home/pacientes/listar-pacientes"]);
+            });
+          },
+          (error: HttpErrorResponse) => {
+            this._serviceError.Error(error);
+          }
         );
-      },(error: HttpErrorResponse) => {
-        this._serviceError.Error(error)
-      });
       this.form.reset();
     }
-
-
-
   }
 }

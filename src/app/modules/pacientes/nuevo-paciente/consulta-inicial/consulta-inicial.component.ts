@@ -54,7 +54,7 @@ export class ConsultaInicialComponent implements OnInit {
         irradiacion: [],
         atenua: [],
         actividadFisica: [],
-        covid: [""],
+        covid: [false],
         fechaCovid: [],
         otros: [],
       });

@@ -219,6 +219,10 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       .subscribe(
         (consulta) => {
           this.edicion = false;
+          this._snack.Mensaje(
+            "La consulta inicial del paciente se actualizó con éxito",
+            "success"
+          );
         },
         (error: HttpErrorResponse) => {
           this._serviceError.Error(error)

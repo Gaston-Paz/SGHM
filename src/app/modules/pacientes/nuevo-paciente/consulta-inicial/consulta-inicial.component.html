@@ -170,7 +170,7 @@
             <mat-label>Fecha Covid</mat-label>
             <input matInput readonly="true" autocomplete="off" #dateInputCovid (dateChange)="changeDate(dateInputCovid,2)" 
         onclick="changeDate(dateInputCovid)" [max]="fecha" [matDatepicker]="selectorCovid" [value]="form.controls.fechaCovid.value">
-        <mat-datepicker-toggle [disabled]="edicion" mat-datepicket-toggle matSuffix [for]="selectorCovid" ></mat-datepicker-toggle>
+        <mat-datepicker-toggle [disabled]="edicion || !form.controls.covid.value" mat-datepicket-toggle matSuffix [for]="selectorCovid" ></mat-datepicker-toggle>
         <mat-datepicker #selectorCovid></mat-datepicker>
           </mat-form-field>
   
@@ -180,10 +180,9 @@
               type="text"
               matInput
               formControlName="otros"
-              [disabled]="!form.controls.covid.value"
               autocomplete="off"
               (change)="CargarConsultaInicial($event,12)"
-              [readonly]="edicion"
+              [readonly]="edicion || !form.controls.covid.value"
             />
           </mat-form-field>
 
