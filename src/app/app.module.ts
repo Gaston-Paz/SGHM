@@ -39,8 +39,8 @@ import { ModalImagenComponent } from './shared/Components/modal-imagen/modal-ima
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-        MatToolbarModule,
-        MatListModule
+    MatToolbarModule,
+    MatListModule
   ],
   providers: [
     {

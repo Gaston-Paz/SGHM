@@ -8,12 +8,14 @@ const routes: Routes = [
   {
     path: 'nueva-consulta',
     component:NuevaConsultaComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'listar-consultas',
     component:ListarConsultasComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   }
 ];
 

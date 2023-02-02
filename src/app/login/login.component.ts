@@ -20,7 +20,9 @@ export class LoginComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _snack:SnackService,
     private _router: Router,
-    private _serviceError:ErrorService) {}
+    private _serviceError:ErrorService) {
+      this._serviceError.muestroMenu = false;
+    }
 
   ngOnInit(): void {
     this.CleanLocalStorage();
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   Login(){
+
     const credencial:Credencial = {
       email: this.form.controls.mail.value,
       password: this.form.controls.pass.value

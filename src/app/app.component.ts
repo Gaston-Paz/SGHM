@@ -5,6 +5,7 @@ import { Usuario } from "./core/interfaces/usuario.interface";
 import { UsuarioService } from "./modules/usuario/usuario.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorService } from "./shared/services/error.service";
+import { AuthService } from "./shared/services/auth.service";
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -28,39 +29,39 @@ export class AppComponent implements OnInit {
   fillerNav: any = [
     {
       text: "Nuevo Usuario",
-      url: "usuarios/nuevo-usuario",
+      url: "home/usuarios/nuevo-usuario",
     },
     {
       text: "Usuarios",
-      url: "/usuarios/listar-usuarios",
+      url: "home/usuarios/listar-usuarios",
     },
     {
       text: "Nuevo Paciente",
-      url: "/pacientes/nuevo-paciente",
+      url: "home/pacientes/nuevo-paciente",
     },
     {
       text: "Foto de Perfil Paciente",
-      url: "/foto/nueva",
+      url: "home/foto/nueva",
     },
     {
       text: "Pacientes",
-      url: "/pacientes/listar-pacientes",
+      url: "home/pacientes/listar-pacientes",
     },
     {
       text: "Nueva Consulta TTO",
-      url: "/consultas/nueva-consulta",
+      url: "home/consultas/nueva-consulta",
     },
     {
       text: "Consultas TTO",
-      url: "/consultas/listar-consultas",
+      url: "home/consultas/listar-consultas",
     },
     {
       text: "Nuevos Estudios",
-      url: "/estudios/nuevo-estudio",
+      url: "home/estudios/nuevo-estudio",
     },
     {
       text: "Estudios",
-      url: "/estudios/listar-estudios",
+      url: "home/estudios/listar-estudios",
     },
     {
       text: "Cerrar sesión",
@@ -73,11 +74,12 @@ export class AppComponent implements OnInit {
     media: MediaMatcher,
     private router: Router,
     private _usuarioService: UsuarioService,
-    private _serviceError: ErrorService
+    public _serviceError: ErrorService
   ) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    this._serviceError.muestroMenu = this.MuestroMenu();
   }
 
   ngOnInit(): void {
@@ -100,7 +102,7 @@ export class AppComponent implements OnInit {
   }
 
   MuestroMenu() {
-    this.muestroMenu = !(
+    this.muestroMenu = (
       this.router.url.includes("errores") ||
       this.router.url.includes("login") ||
       this.router.url === "/"
@@ -114,4 +116,6 @@ export class AppComponent implements OnInit {
     }
     return this.muestroMenu;
   }
+
+
 }

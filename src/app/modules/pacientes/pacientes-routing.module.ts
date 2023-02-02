@@ -8,12 +8,14 @@ const routes: Routes = [
   {
     path: 'listar-pacientes',
     component:ListarPacientesComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'nuevo-paciente',
     component:NuevoPacienteComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   }
 ];
 

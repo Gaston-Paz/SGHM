@@ -9,6 +9,7 @@ import { SnackService } from './snack.service';
 export class ErrorService {
 
   public errorFatal:string='';
+  public muestroMenu:boolean = true;
 
   constructor(private _router:Router,
     private _snack: SnackService) { }

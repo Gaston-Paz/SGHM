@@ -9,7 +9,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ListarUsuariosComponent } from './listar-usuarios/listar-usuarios.component';
-import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';

@@ -8,12 +8,14 @@ const routes: Routes = [
   {
     path: 'nuevo-estudio',
     component:EstudiosComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'listar-estudios',
     component:ListarComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   }
 ];
 

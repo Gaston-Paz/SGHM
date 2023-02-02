@@ -12,7 +12,8 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./modules/modules.module').then(m => m.ModulesModule),
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'errores',
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'errores/404'
   }
 ];
 

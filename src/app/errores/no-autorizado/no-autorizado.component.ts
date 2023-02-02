@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ErrorService } from 'src/app/shared/services/error.service';
 
 @Component({
   selector: 'app-no-autorizado',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
 })
 export class NoAutorizadoComponent implements OnInit {
 
-  constructor(private _router:Router) { }
+  constructor(private _router:Router,
+    public _serviceError:ErrorService) { 
+      this._serviceError.muestroMenu = false;
+    }
 
   ngOnInit(): void {
+    
   }
 
   Volver(){

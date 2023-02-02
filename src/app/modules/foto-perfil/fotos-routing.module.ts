@@ -7,7 +7,8 @@ const routes: Routes = [
   {
     path: 'nueva',
     component:FotoComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    runGuardsAndResolvers: 'always'
   }
 ];
 

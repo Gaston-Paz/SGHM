@@ -12,7 +12,9 @@ export class FatalComponent implements OnInit {
   fatal:string='';
 
   constructor(private _router:Router,
-    private _serviceError:ErrorService) { }
+    private _serviceError:ErrorService) { 
+      this._serviceError.muestroMenu = false;
+    }
 
   ngOnInit(): void {
     this.fatal = this._serviceError.errorFatal;
