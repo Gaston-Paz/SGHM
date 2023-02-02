@@ -2,6 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { timer } from 'rxjs';
 import { Recuperacion } from 'src/app/core/interfaces/recuperacion.interface';
 import { UsuarioService } from 'src/app/modules/usuario/usuario.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
@@ -65,8 +66,12 @@ export class RecupercionComponent implements OnInit {
     };
 
     this._serviceUsuario.RecuperarContraseña(recupera).subscribe(resp=> {
-
-    this._snackService.Mensaje('todo bien','success');
+      const espera = timer(3000);
+      this.form.reset();
+      this._snackService.Mensaje('La contraseña se modificó con éxito.','success');
+      espera.subscribe(() => {
+        this.Volver();
+      });
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     })
