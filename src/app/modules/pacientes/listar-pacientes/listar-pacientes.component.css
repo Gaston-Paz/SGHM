@@ -51,3 +51,12 @@ td {
   background-color: #cfebd2;
   color: #ffffff;
 }
+
+h3{
+  font-size: 20px;
+font-weight: 500;
+}
+
+.mt-20{
+margin-top: 20px;
+}

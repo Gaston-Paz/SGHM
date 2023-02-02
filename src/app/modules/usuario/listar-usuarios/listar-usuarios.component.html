@@ -1,5 +1,7 @@
 <div  class="container">
-    <mat-form-field >
+  <mat-card>
+    <h3 class="mt-20">Usuarios</h3>
+    <mat-form-field class="w-100">
       <mat-label>Buscar</mat-label>
       <input
         autocomplete="off"
@@ -9,7 +11,6 @@
         #input
       />
     </mat-form-field>
-  <mat-card>
     <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
       <!-- Name Column -->
       <ng-container matColumnDef="apellido">

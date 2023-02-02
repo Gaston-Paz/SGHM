@@ -57,3 +57,52 @@
   border: solid 1px #fff;
   border-radius: 5px;
 }
+
+/* .router{
+  z-index: 100;
+  position: relative;
+  top: 76px;
+  left: 103px;
+} */
+
+.router{
+  z-index: 100;
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 75%;
+}
+
+.mt-20{
+  margin-top: 15%;
+}
+
+@media only screen and (min-width: 1110px) and (max-width: 1377px){
+  .router{
+    z-index: 100;
+      position: absolute;
+      top: 10%;
+      left: 18%;
+      width: 75%;
+  }
+}
+
+@media only screen and (min-width: 920px) and (max-width: 1110px){
+  .router{
+    z-index: 100;
+      position: absolute;
+      top: 10%;
+      left: 21%;
+      width: 75%;
+  }
+}
+
+@media only screen and (min-width: 0) and (max-width: 920px){
+  .router{
+    z-index: 100;
+      position: absolute;
+      top: 10%;
+      left: 24%;
+      width: 75%;
+  }
+}

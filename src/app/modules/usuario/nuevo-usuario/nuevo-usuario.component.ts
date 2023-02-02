@@ -45,9 +45,12 @@ export class NuevoUsuarioComponent implements OnInit {
     private _snack:SnackService,
     private _spinnerService: SpinnerService,
     private _usuarioService: UsuarioService,
-    private _serviceError:ErrorService) { }
+    private _serviceError:ErrorService) {
+      this._serviceError.muestroMenu = true;
+     }
 
   ngOnInit(): void {
+    this._serviceError.muestroMenu = true;
     this.form = this._formBuilder.group({
       nombre: [this.usuarioEditar.nombre !== '' ? this.usuarioEditar.nombre : '', Validators.required],
       apellido: [this.usuarioEditar.apellido !== '' ? this.usuarioEditar.apellido : '', Validators.required],

@@ -1,5 +1,8 @@
 
-<div *ngIf="_serviceError.muestroMenu" class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
+<div [ngClass]="_router.url.includes('login') ? 'container mt-20' :'container'">
+
+
+<div [hidden]="!_serviceError.muestroMenu" class="example-container" [class.example-is-mobile]="mobileQuery.matches" >
     <mat-toolbar class="example-toolbar">
       <!-- <button mat-icon-button (click)="snav.toggle()">
         <mat-icon color="basic">menu</mat-icon>
@@ -23,13 +26,15 @@
         </mat-nav-list>
       </mat-sidenav>
   
-      <mat-sidenav-content>
+      <!-- <mat-sidenav-content>
 
-        <router-outlet></router-outlet>
-      </mat-sidenav-content>
+      </mat-sidenav-content> -->
     </mat-sidenav-container>
+  </div>
+  <div [ngClass]="_router.url.includes('login') ? '' :'router'">
+    <router-outlet ></router-outlet>
+  </div>
 </div>
-
-<div *ngIf="!_serviceError.muestroMenu" class="d-flex h-100 align-items-center justify-content-center">
+<!-- <div [hidden]="_serviceError.muestroMenu" class="d-flex h-100 align-items-center justify-content-center">
   <router-outlet></router-outlet>
-</div>
+</div> -->

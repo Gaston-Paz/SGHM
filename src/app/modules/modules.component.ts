@@ -12,7 +12,8 @@ export class ModulesComponent implements OnInit {
     this._errorService.muestroMenu = true;
   }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {  
+    this._errorService.muestroMenu = true;
   }
 
 }

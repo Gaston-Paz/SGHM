@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       password: this.form.controls.pass.value
     };
     this._authService.Login(credencial).subscribe(token => {
+      this._serviceError.muestroMenu = true; 
       this._authService.SetEmail(this.form.controls.mail.value);
       localStorage.setItem('SGHC-mail',this._authService.GetEmail());      
       this._router.navigate(['home']);

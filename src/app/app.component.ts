@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private _router: Router,
+    public _router: Router,
     private _usuarioService: UsuarioService,
     public _serviceError: ErrorService
   ) {
@@ -87,6 +87,7 @@ export class AppComponent implements OnInit {
     if (this.userMail !== null) {
       this._usuarioService.GetUsuario(this.userMail).subscribe(
         (user) => {
+          
           this.Usuario = user;
           if (this.Usuario.rol === "Usuario") {
             this.Nav = this.fillerNav.filter(
