@@ -43,8 +43,8 @@ export class FotoComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private _servicePaciente: NuevoPacienteService,
     private _spinnerService: NgxSpinnerService,
-    private sanitizer: DomSanitizer,
-    private dialog: MatDialog,
+    private _sanitizer: DomSanitizer,
+    private _dialog: MatDialog,
     private _snack: SnackService,
     private _serviceError:ErrorService
   ) {}
@@ -103,7 +103,7 @@ export class FotoComponent implements OnInit, OnDestroy {
     new Promise((resolve, reject) => {
       try {
         const unsafeImg = window.URL.createObjectURL($event);
-        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);
         const reader = new FileReader();
         reader.readAsDataURL($event);
         reader.onload = () => {
@@ -136,7 +136,7 @@ export class FotoComponent implements OnInit, OnDestroy {
   GuardarFoto(){
     
       if (this.yaTieneFoto) {
-      const dialogRef = this.dialog.open(ModalConfirmComponent, {
+      const dialogRef = this._dialog.open(ModalConfirmComponent, {
         data: {
           message:
             "El paciente ya cuenta con una foto de perfil cargada, ¿Desea sobreescribirla?",

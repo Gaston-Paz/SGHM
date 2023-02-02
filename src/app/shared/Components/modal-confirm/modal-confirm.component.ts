@@ -13,7 +13,7 @@ export class ModalConfirmComponent implements OnInit {
   cancel:string = "";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
-  private dialogRef: MatDialogRef<ModalConfirmComponent>) { }
+  private _dialogRef: MatDialogRef<ModalConfirmComponent>) { }
 
   ngOnInit(): void {
     this.message = this.data.message;

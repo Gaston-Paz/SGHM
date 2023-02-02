@@ -28,7 +28,7 @@ export class ModalImagenComponent implements OnInit {
   }
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
-  private dialogRef: MatDialogRef<ModalImagenComponent>) { }
+  private _dialogRef: MatDialogRef<ModalImagenComponent>) { }
 
   ngOnInit(): void {
     this.element = this.data.element;

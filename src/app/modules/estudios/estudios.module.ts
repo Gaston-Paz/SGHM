@@ -9,7 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatButtonModule } from '@angular/material/button';
 import { ListarComponent } from './listar/listar.component';
-import {MatGridListModule} from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,7 +32,6 @@ import { EstudiosRoutingModule } from './estudios-routing.module';
     FormsModule,
     NgxSpinnerModule,
     MatButtonModule,
-    MatGridListModule,
     MatInputModule,
     MatChipsModule,
     MatIconModule,

@@ -11,7 +11,7 @@ export class EstudiosMedicosComponent implements OnInit {
   previsualizacionFoto: string[] = [];
   archivos: any [] = [];
 
-  constructor(private sanitizer: DomSanitizer,
+  constructor(private _sanitizer: DomSanitizer,
     private _servicePacienteNuevo: NuevoPacienteService) { }
 
   ngOnInit(): void {
@@ -35,7 +35,7 @@ export class EstudiosMedicosComponent implements OnInit {
     new Promise((resolve, reject) => {
       try {
         const unsafeImg = window.URL.createObjectURL($event);
-        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);
         const reader = new FileReader();
         reader.readAsDataURL($event);
         reader.onload = () => {

@@ -22,7 +22,7 @@ export class DatosPersonalesComponent implements OnInit {
 
   constructor(
     private _formBuilder: FormBuilder,
-    private sanitizer: DomSanitizer,
+    private _sanitizer: DomSanitizer,
     private _servicePacienteNuevo: NuevoPacienteService,
     private _dateAdapter: DateAdapter<Date>
   ) {
@@ -59,7 +59,7 @@ export class DatosPersonalesComponent implements OnInit {
     new Promise((resolve, reject) => {
       try {
         const unsafeImg = window.URL.createObjectURL($event);
-        const image = this.sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);
         const reader = new FileReader();
         reader.readAsDataURL($event);
         reader.onload = () => {

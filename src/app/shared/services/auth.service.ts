@@ -2,7 +2,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Credencial } from 'src/app/core/interfaces/credenciales.interface';
-import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 import { environment } from "src/environments/environment.prod";
 
 @Injectable({

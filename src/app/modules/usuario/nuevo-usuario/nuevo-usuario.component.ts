@@ -3,7 +3,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Usuario } from 'src/app/core/interfaces/usuario.interface';
-import { AuthService } from 'src/app/shared/services/auth.service';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { SpinnerService } from 'src/app/shared/services/spinner.service';
@@ -42,8 +41,7 @@ export class NuevoUsuarioComponent implements OnInit {
   }
 
   constructor(private _formBuilder: FormBuilder, 
-    private router:Router,
-    private _authService:AuthService,
+    private _router:Router,
     private _snack:SnackService,
     private _spinnerService: SpinnerService,
     private _usuarioService: UsuarioService,
@@ -63,7 +61,7 @@ export class NuevoUsuarioComponent implements OnInit {
     this._usuarioService.GetUsuario(localStorage.getItem('SGHC-mail')!).subscribe(user => {
       this.UsuarioLogueado = user;
       if(this.UsuarioLogueado.rol !== 'Admin'){
-        this.router.navigate(['errores/403']);
+        this._router.navigate(['errores/403']);
       }
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);

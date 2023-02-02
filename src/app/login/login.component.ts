@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Credencial } from '../core/interfaces/credenciales.interface';
 import { ErrorService } from '../shared/services/error.service';
-import { SnackService } from '../shared/services/snack.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +17,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private _authService: AuthService,
     private _formBuilder: FormBuilder,
-    private _snack:SnackService,
     private _router: Router,
     private _serviceError:ErrorService) {
       this._serviceError.muestroMenu = false;

@@ -1,7 +1,5 @@
-import { FullscreenOverlayContainer } from '@angular/cdk/overlay';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { NoEncontradoComponent } from './errores/no-encontrado/no-encontrado.component';
 import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [

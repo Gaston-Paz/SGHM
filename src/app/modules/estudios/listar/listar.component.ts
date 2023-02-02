@@ -2,16 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Estudios } from 'src/app/core/interfaces/estudio.interface';
 import { ModalImagenComponent } from 'src/app/shared/Components/modal-imagen/modal-imagen.component';
 import { ErrorService } from 'src/app/shared/services/error.service';
-import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { EstudiosService } from '../estudios.service';
 
@@ -39,11 +36,8 @@ export class ListarComponent implements OnInit, OnDestroy {
 
   constructor(private _formBuilder:FormBuilder,
     private _servicePaciente:NuevoPacienteService,
-    private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
-    private sanitizer: DomSanitizer,
     private _serviceEstudio:EstudiosService,
-    private _snack:SnackService,
     private _serviceError:ErrorService,
     private _dialog: MatDialog) { }
 

@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private _authService:AuthService,
-    private router:Router){
+    private _router:Router){
 
   }
 
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     if(this._authService.GetToken()){
       return true;
     }
-    this.router.navigate(['/login']);
+    this._router.navigate(['/login']);
     return false;
   }
   

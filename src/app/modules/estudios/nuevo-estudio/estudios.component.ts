@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { DomSanitizer } from "@angular/platform-browser";
 import { NgxSpinnerService } from "ngx-spinner";
 import { forkJoin, Observable } from "rxjs";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
@@ -10,7 +9,6 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { EstudiosService } from "../estudios.service";
-import { createViewChild } from "@angular/compiler/src/core";
 import { EstudiosMedicosComponent } from "../../pacientes/nuevo-paciente/estudios-medicos/estudios-medicos.component";
 import { ErrorService } from "src/app/shared/services/error.service";
 
@@ -38,7 +36,6 @@ export class EstudiosComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private _servicePaciente: NuevoPacienteService,
     private _spinnerService: NgxSpinnerService,
-    private sanitizer: DomSanitizer,
     private _snack: SnackService,
     private _serviceEstudio:EstudiosService,
     private _serviceError:ErrorService

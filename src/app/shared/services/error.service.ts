@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { SnackService } from './snack.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +10,7 @@ export class ErrorService {
   public errorFatal:string='';
   public muestroMenu:boolean = true;
 
-  constructor(private _router:Router,
-    private _snack: SnackService) { }
+  constructor(private _router:Router) { }
 
   Error(error:HttpErrorResponse){
     console.log(error);

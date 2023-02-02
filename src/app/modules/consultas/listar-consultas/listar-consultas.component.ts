@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,7 +9,6 @@ import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { ErrorService } from 'src/app/shared/services/error.service';
-import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { ConsultasService } from '../nueva-consulta/consultas.service';
 
@@ -46,11 +44,9 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   subscribes:any[]=[];
 
   constructor(private _servicePaciente:NuevoPacienteService,
-    private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private _serviceTratamiento:ConsultasService,
     private _formBuilder:FormBuilder,
-    private _snack:SnackService,
     private _serviceError:ErrorService) { }
 
   ngOnDestroy(): void {

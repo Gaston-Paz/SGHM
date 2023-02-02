@@ -1,16 +1,13 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { toBase64String } from "@angular/compiler/src/output/source_map";
 import { AfterViewInit, Component, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { throwToolbarMixedModesError } from "@angular/material/toolbar";
 import { Router } from "@angular/router";
 import { forkJoin, Observable } from "rxjs";
 import { Usuario } from "src/app/core/interfaces/usuario.interface";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
-import { AuthService } from "src/app/shared/services/auth.service";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
@@ -36,12 +33,11 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ["apellido", "nombre", "mail", "rol", "delete"];
 
   constructor(
-    private router: Router,
-    private _authService: AuthService,
+    private _router: Router,
     private _snack: SnackService,
     private _spinnerService: SpinnerService,
     private _usuarioService: UsuarioService,
-    private dialog: MatDialog,
+    private _dialog: MatDialog,
     private _serviceError:ErrorService
   ) {}
 
@@ -55,7 +51,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
       (resp) => {
         this.UsuarioLogueado = resp[0];
         if (this.UsuarioLogueado.rol !== "Admin") {
-          this.router.navigate(["errores/403"]);
+          this._router.navigate(["errores/403"]);
         }
         this.usuarios = resp[1];
         this.dataSource.data = this.usuarios;
@@ -77,7 +73,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
   }
 
   EliminarUsuario(usuario: Usuario) {
-    const dialogRef = this.dialog.open(ModalConfirmComponent, {
+    const dialogRef = this._dialog.open(ModalConfirmComponent, {
       data: {
         message:
           "¿Desea eliminar al usuario " +

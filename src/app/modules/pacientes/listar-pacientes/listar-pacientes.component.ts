@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { Router } from "@angular/router";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
@@ -77,7 +76,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _spinnerService: SpinnerService,
     private _serviceListados: ListadosService,
     private _serviceConsulta: ConsultasService,
-    private _router: Router,
     private _snack: SnackService,
     private _serviceError:ErrorService
   ) {}

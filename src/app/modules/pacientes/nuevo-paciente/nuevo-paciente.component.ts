@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { NuevoPacienteService } from "./nuevo-paciente.service";
-import { DomSanitizer } from "@angular/platform-browser";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultaInicialComponent } from "./consulta-inicial/consulta-inicial.component";
 import { DatosPersonalesComponent } from "./datos-personales/datos-personales.component";
@@ -27,7 +26,6 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
-    private sanitizer: DomSanitizer,
     private _snack: SnackService,
     private _spinnerService: SpinnerService,
     private _serviceError:ErrorService

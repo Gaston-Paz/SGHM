@@ -5,7 +5,7 @@ import { Usuario } from "./core/interfaces/usuario.interface";
 import { UsuarioService } from "./modules/usuario/usuario.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorService } from "./shared/services/error.service";
-import { AuthService } from "./shared/services/auth.service";
+
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
@@ -72,7 +72,7 @@ export class AppComponent implements OnInit {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private router: Router,
+    private _router: Router,
     private _usuarioService: UsuarioService,
     public _serviceError: ErrorService
   ) {
@@ -103,9 +103,9 @@ export class AppComponent implements OnInit {
 
   MuestroMenu() {
     this.muestroMenu = (
-      this.router.url.includes("errores") ||
-      this.router.url.includes("login") ||
-      this.router.url === "/"
+      this._router.url.includes("errores") ||
+      this._router.url.includes("login") ||
+      this._router.url === "/"
     );
     if (this.muestroMenu) {
       if (this.Usuario.rol === "Usuario") {

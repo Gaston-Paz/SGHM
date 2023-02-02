@@ -3,7 +3,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
@@ -59,7 +58,6 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePaciente:NuevoPacienteService,
-    private _snackBar: MatSnackBar,
     private _spinnerService: NgxSpinnerService,
     private _serviceConsulta:ConsultasService,
     private _dateAdapter: DateAdapter<Date>,
