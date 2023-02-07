@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { ErrorService } from '../shared/services/error.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ErrorService } from '../shared/services/error.service';
 })
 export class ModulesComponent implements OnInit {
 
-  constructor(public _errorService:ErrorService) {
+  constructor(public _errorService:ErrorService,private _router:Router) {
     this._errorService.muestroMenu = true;
   }
 

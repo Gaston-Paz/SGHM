@@ -80,7 +80,8 @@ export class EstudiosComponent implements OnInit, OnDestroy {
           obs.push(
             this._serviceEstudio.GuardarEstudio(
               formData,
-              this.form.controls.paciente.value
+              this.form.controls.paciente.value,
+              this.nombresNuevos[index]
             )
           );
         });

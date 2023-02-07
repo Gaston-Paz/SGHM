@@ -18,6 +18,7 @@ export class ErrorService {
     password:'',
     rol:''
   }
+  recargo:boolean = true;
 
   constructor(private _router:Router) { }
 

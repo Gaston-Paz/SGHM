@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
 
   FiltrarMenu(){
     if (this.Usuario.rol === "Usuario") {
-      this.Nav = this.fillerNav.filter((n: { usuario: any }) => n.usuario);
+      this.Nav = this.fillerNav.filter((n: any) => !n.text.includes('Usuario'));
     } else {
       this.Nav = this.fillerNav;
     }
