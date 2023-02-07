@@ -6,7 +6,8 @@ export interface Antecedente{
     implanteInferior?:string;
     ortodoncia:boolean;
     edadOrtodoncia?:string;
-    piezasFaltantes?:string;
+    piezasFaltantesSup?:string;
+    piezasFaltantesInf?:string;
     placaDescanso:boolean;
     intestinal?:string;
     digestivo?:string;

@@ -8,7 +8,6 @@ import { environment } from "src/environments/environment.prod";
   providedIn: "root",
 })
 export class ConsultasService {
-
   paciente: Paciente = {
     apellido: "",
     celular: "",
@@ -18,20 +17,42 @@ export class ConsultasService {
     nombre: "",
     ocupacion: "",
     localidad: "",
-    otros:"",
-    deParte: ""
+    otros: "",
+    deParte: "",
   };
-  
+
+  editartto: Tratamiento = {
+    fecha: new Date(),
+    idPaciente: 0,
+    motivo: "",
+    sedestacion: "",
+    paciente:{
+      apellido:'',
+      celular:'',
+      deParte:'',
+      email:'',
+      fechaNacimiento: new Date(),
+      localidad:'',
+      nacio:'',
+      nombre:'',
+      ocupacion:'',
+      otros:''
+    }
+  };
+
   constructor(private _httpClient: HttpClient) {}
 
   //Métodos HTTP
   ObtenerConsultas() {
-    return this._httpClient.get<Tratamiento[]>(environment.url + "/api/tratamiento");
+    return this._httpClient.get<Tratamiento[]>(
+      environment.url + "/api/tratamiento"
+    );
   }
 
-  GuardarConsultas(tratamiento:Tratamiento) {
-    return this._httpClient.post<Tratamiento>(environment.url + "/api/tratamiento",tratamiento);
+  GuardarConsultas(tratamiento: Tratamiento) {
+    return this._httpClient.post<Tratamiento>(
+      environment.url + "/api/tratamiento",
+      tratamiento
+    );
   }
-
-
 }

@@ -3,7 +3,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
+import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { timer } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { ErrorService } from 'src/app/shared/services/error.service';
@@ -62,29 +64,37 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     private _serviceConsulta:ConsultasService,
     private _dateAdapter: DateAdapter<Date>,
     private _snack:SnackService,
-    private _serviceError:ErrorService) {
+    private _serviceError:ErrorService,
+    private _router:Router) {
       this._dateAdapter.setLocale('es-ES');
   }
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
-    this.form = this._formBuilder.group({
-      fecha:[,[Validators.required]],
-      paciente:[this.idPaciente.idPaciente,[Validators.required]],
-      motivo:[,[Validators.required]],
-      triangulo:[],
-      altura:[],
-      barral:[],
-      esferas:[],
-      especifico:[],
-      sugerencias:[],
-      sedestacion:[,[Validators.required]],
-      proximoTurno:[]
-    });
+      this.form = this._formBuilder.group({
+        fecha:[this._serviceConsulta.editartto.fecha,[Validators.required]],
+        paciente:[,[Validators.required]],
+        motivo:[this._serviceConsulta.editartto.motivo,[Validators.required]],
+        triangulo:[this._serviceConsulta.editartto.trianguloDeTalla],
+        altura:[this._serviceConsulta.editartto.alturaDeIliacos],
+        barral:[this._serviceConsulta.editartto.barral],
+        esferas:[this._serviceConsulta.editartto.esferas],
+        especifico:[this._serviceConsulta.editartto.especifico],
+        sugerencias:[this._serviceConsulta.editartto.sugerencias],
+        sedestacion:[this._serviceConsulta.editartto.sedestacion,[Validators.required]],
+        proximoTurno:[this._serviceConsulta.editartto.proximoTurnoIndicado]
+      });
     
     this.subscribes.push(this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
       this.pacientes = pacientes;
       this.pacientesFilter = pacientes;
+      if(this._serviceConsulta.editartto.idPaciente !== 0){
+        this.form.controls.paciente.setValue(this._serviceConsulta.editartto.paciente!.idPaciente);
+        this.tratamiento.idTratamiento = this._serviceConsulta.editartto.idTratamiento;
+      }else{
+        this.form.controls.paciente.setValue(this.idPaciente.idPaciente);
+      }
+      
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     }));
@@ -114,6 +124,10 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     this.subscribes.push(this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
       this._snack.Mensaje("El tratamiento se guardó con éxito",'success');
       this.form.reset();
+      const espera = timer(1500);
+      espera.subscribe(() => {
+        this._router.navigate(['home/consultas/listar-consultas'])
+      });
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     }));

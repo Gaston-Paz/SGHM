@@ -197,6 +197,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   ActualizarAntecedente() {
+    console.log(this.antecedente);
+    
     this._servicePacienteNuevo
       .ActualizarAntecedentes(this.antecedente)
       .subscribe(

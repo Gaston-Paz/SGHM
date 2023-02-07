@@ -9,9 +9,9 @@ export interface Tratamiento{
     alturaDeIliacos?:string;
     barral?:string;
     esferas?:string;
-    especifico:string;
+    especifico?:string;
     sedestacion:string;
-    sugerencias:string;
-    proximoTurnoIndicado:Date;
+    sugerencias?:string;
+    proximoTurnoIndicado?:Date;
     paciente?: Paciente;
 }

@@ -23,8 +23,8 @@
     <!-- Odontologia -->
     <div class="row">
       <h3 class="mt-20">Odontología</h3>
-        <h5>Implantes</h5>
-          <mat-form-field appearance="outline" class="example-full-width">
+        <h5>Implantes y piezas</h5>
+          <mat-form-field appearance="outline" class="example-full-width w-24">
             <mat-label>Implantes Superiores</mat-label>
             <input
               type="text"
@@ -38,7 +38,7 @@
             />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="example-full-width">
+          <mat-form-field appearance="outline" class="example-full-width w-24">
             <mat-label>Implantes Inferiores</mat-label>
             <input
               type="text"
@@ -52,69 +52,80 @@
             />
           </mat-form-field>
 
-        <h5>Ortodoncia</h5>
-        <div class="example-full-width">
-
-            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
-
-            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.ortodoncia" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
-
-            <mat-form-field appearance="outline" class="example-full-width w-30">
-              <mat-label>Edad Ortodoncia</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="EdadOrtodoncia"
-                placeholder="Edad Ortodoncia"
-                (change)="CargarAntecedentes()"
-                autocomplete="off"
-                [(ngModel)]="antecedentes.edadOrtodoncia === undefined || antecedentes.edadOrtodoncia === null? '': antecedentes.edadOrtodoncia"
-                [disabled]="!antecedentes.ortodoncia"
-                [readonly]="edicion || !antecedentes.ortodoncia"
-                [min]="0"
-                [max]="100"
-                />
-              <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('min')">
-                  La Edad debe ser <strong>mayor a cero</strong>
-              </mat-error>
-              <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('max')">
-                La Edad debe ser <strong>menor a 100</strong>
-            </mat-error>
-            </mat-form-field>
-        </div>
-            
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Prótesis</mat-label>
+        <mat-form-field appearance="outline" class="example-full-width w-24">
+          <mat-label>Piezas Faltantes Superiores</mat-label>
           <input
             type="text"
             matInput
-            formControlName="protesis"
-            placeholder="Prótesis"
+            formControlName="piezasfaltantesSup"
+            placeholder="Piezas Faltantes"
             (change)="CargarAntecedentes()"
             autocomplete="off"
-            [(ngModel)]="antecedentes.protesis"
+            [(ngModel)]="antecedentes.piezasFaltantesSup"
             [readonly]="edicion"
           />
-        </mat-form-field>
+      </mat-form-field>
 
-        <h5>Piezas</h5>
-        <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Piezas Faltantes</mat-label>
+      <mat-form-field appearance="outline" class="example-full-width w-24">
+        <mat-label>Piezas Faltantes Inferiores</mat-label>
+        <input
+          type="text"
+          matInput
+          formControlName="piezasfaltantesInf"
+          placeholder="Piezas Faltantes"
+          (change)="CargarAntecedentes()"
+          autocomplete="off"
+          [(ngModel)]="antecedentes.piezasFaltantesInf"
+          [readonly]="edicion"
+        />
+    </mat-form-field>
+
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Prótesis</mat-label>
             <input
               type="text"
               matInput
-              formControlName="piezasfaltantes"
-              placeholder="Piezas Faltantes"
+              formControlName="protesis"
+              placeholder="Prótesis"
               (change)="CargarAntecedentes()"
               autocomplete="off"
-              [(ngModel)]="antecedentes.piezasFaltantes"
+              [(ngModel)]="antecedentes.protesis"
               [readonly]="edicion"
             />
-        </mat-form-field>
+          </mat-form-field>
 
-          <div class="example-full-width">
-            <mat-checkbox [disabled]="edicion" class="mt-20" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
-        </div>
+        <div class="example-full-width mb-3 w-24">
+
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
+
+            <mat-checkbox [disabled]="edicion" class="mt-20 mr-60" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
+
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.ortodoncia" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
+
+          </div>
+          <mat-form-field appearance="outline" class="example-full-width w-24">
+            <mat-label>Edad Ortodoncia</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="EdadOrtodoncia"
+              placeholder="Edad Ortodoncia"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.edadOrtodoncia"
+              [disabled]="!antecedentes.ortodoncia"
+              [readonly]="edicion || !antecedentes.ortodoncia"
+              [min]="0"
+              [max]="100"
+              />
+            <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('min')">
+                La Edad debe ser <strong>mayor a cero</strong>
+            </mat-error>
+            <mat-error *ngIf="form.controls.EdadOrtodoncia.hasError('max')">
+              La Edad debe ser <strong>menor a 100</strong>
+          </mat-error>
+          </mat-form-field>
+
   </div>
 
     <!-- Salud Femenina -->

@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { ConsultasRoutingModule } from './consultas-routing.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ConsultasRoutingModule } from './consultas-routing.module';
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    ConsultasRoutingModule
+    ConsultasRoutingModule,
+    MatIconModule
   ],
   exports:[ListarConsultasComponent, NuevaConsultaComponent]
 })
