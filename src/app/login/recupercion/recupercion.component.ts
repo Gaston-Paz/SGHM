@@ -26,7 +26,9 @@ export class RecupercionComponent implements OnInit {
     private _serviceError:ErrorService,
     private _spinnerService: SpinnerService,
     private _router:Router,
-    private _snackService:SnackService) { }
+    private _snackService:SnackService) { 
+      this._serviceError.muestroMenu = false;
+    }
 
   ngOnInit(): void {
     this.form = this._formBuilder.group({

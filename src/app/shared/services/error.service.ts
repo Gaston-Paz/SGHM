@@ -19,6 +19,8 @@ export class ErrorService {
     }else if(error.status === 404){
       this._router.navigate(['errores/404']);
     }else{
+      console.log(error);
+      
       this.errorFatal = error.error.message;
       this._router.navigate(['errores/500']);
     }
