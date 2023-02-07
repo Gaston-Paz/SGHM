@@ -62,13 +62,13 @@
             <mat-form-field appearance="outline" class="example-full-width w-30">
               <mat-label>Edad Ortodoncia</mat-label>
               <input
-                type="number"
+                type="text"
                 matInput
                 formControlName="EdadOrtodoncia"
                 placeholder="Edad Ortodoncia"
                 (change)="CargarAntecedentes()"
                 autocomplete="off"
-                [(ngModel)]="antecedentes.edadOrtodoncia === 0? '': antecedentes.edadOrtodoncia"
+                [(ngModel)]="antecedentes.edadOrtodoncia === undefined || antecedentes.edadOrtodoncia === null? '': antecedentes.edadOrtodoncia"
                 [disabled]="!antecedentes.ortodoncia"
                 [readonly]="edicion || !antecedentes.ortodoncia"
                 [min]="0"

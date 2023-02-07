@@ -79,7 +79,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
       especifico:[],
       sugerencias:[],
       sedestacion:[,[Validators.required]],
-      proximoTurno:[,[Validators.required]]
+      proximoTurno:[]
     });
     
     this.subscribes.push(this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {

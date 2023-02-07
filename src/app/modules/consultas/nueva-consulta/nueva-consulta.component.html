@@ -131,18 +131,16 @@
           <div class="row bg-section">
             <h3>Tratamiento</h3>
             <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-              <mat-label>Sedestación</mat-label>
               <textarea
                 type="text"
                 matInput
                 formControlName="sedestacion"
-                placeholder="Sedestación"
                 required="true"
                 autocomplete="off"
                 rows="5"
               ></textarea>
               <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
-                Sedestación es <strong>obligatorio</strong>
+                Campo <strong>obligatorio</strong>
               </mat-error>
             </mat-form-field>
 
@@ -274,12 +272,10 @@
         <h3>Tratamiento</h3>
 
         <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-          <mat-label>Sedestación</mat-label>
           <textarea
             type="text"
             matInput
             formControlName="sedestacion"
-            placeholder="Sedestación"
             required="true"
             autocomplete="off"
             (change)="SetConsultaAlta()"
@@ -287,7 +283,7 @@
             rows="5"
           ></textarea>
           <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
-            Sedestación es <strong>obligatorio</strong>
+            Campo <strong>obligatorio</strong>
           </mat-error>
         </mat-form-field>
 
@@ -327,11 +323,6 @@
             [for]="proximo"
           ></mat-datepicker-toggle>
           <mat-datepicker #proximo></mat-datepicker>
-          <mat-error
-            *ngIf="form.controls.proximoTurno.hasError('required')"
-          >
-            Próximo Turno es <strong>obligatorio</strong>
-          </mat-error>
         </mat-form-field>
       </div>
     </div>

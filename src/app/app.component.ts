@@ -83,23 +83,17 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.userMail = localStorage.getItem("SGHC-mail")!;
-    // if (this.userMail !== null) {
-    //   this._usuarioService.GetUsuario(this.userMail).subscribe(
-    //     (user) => {
+    this.userMail = localStorage.getItem("SGHC-mail")!;
+    if (this.userMail !== null) {
+      this._usuarioService.GetUsuario(this.userMail).subscribe(
+        (user) => {
           
-    //       this.Usuario = user;
-    //       if (this.Usuario.rol === "Usuario") {
-    //         this.Nav = this.fillerNav.filter(
-    //           (n: { usuario: any }) => n.usuario
-    //         );
-    //       } else {
-    //         this.Nav = this.fillerNav;
-    //       }
-    //     },
-    //     (error: HttpErrorResponse) => {}
-    //   );
-    // }
+          this.Usuario = user;
+          this.FiltrarMenu();
+        },
+        (error: HttpErrorResponse) => {}
+      );
+    }
   }
 
   MuestroMenu() {
@@ -109,13 +103,17 @@ export class AppComponent implements OnInit {
       this._router.url === "/"
     );
     if (this.muestroMenu) {
-      if (this.Usuario.rol === "Usuario") {
-        this.Nav = this.fillerNav.filter((n: { usuario: any }) => n.usuario);
-      } else {
-        this.Nav = this.fillerNav;
-      }
+      this.FiltrarMenu();
     }
     return this.muestroMenu;
+  }
+
+  FiltrarMenu(){
+    if (this.Usuario.rol === "Usuario") {
+      this.Nav = this.fillerNav.filter((n: { usuario: any }) => n.usuario);
+    } else {
+      this.Nav = this.fillerNav;
+    }
   }
 
 

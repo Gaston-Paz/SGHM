@@ -94,13 +94,10 @@
           matInput
           formControlName="ocupacion"
           placeholder="Ocupación del paciente"
-          required="true"
           (change)="CargarDatosPersonales($event,6)"
           autocomplete="off"
         />
-        <mat-error *ngIf="form.controls.ocupacion.hasError('required')">
-          Ocupación es <strong>obligatorio</strong>
-        </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="example-full-width">
@@ -110,13 +107,10 @@
           matInput
           formControlName="localidad"
           placeholder="Localidad del paciente"
-          required="true"
           (change)="CargarDatosPersonales($event,8)"
           autocomplete="off"
         />
-        <mat-error *ngIf="form.controls.localidad.hasError('required')">
-          Localidad es <strong>obligatorio</strong>
-        </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="example-full-width">

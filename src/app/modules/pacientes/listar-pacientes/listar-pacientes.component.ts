@@ -25,7 +25,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     "apellido",
     "nombre",
-    "mail",
+    "celular",
     "nacimiento",
     "foto",
     "antecedentes",

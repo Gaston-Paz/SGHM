@@ -17,48 +17,6 @@ import { SnackService } from '../shared/services/snack.service';
 export class LoginComponent implements OnInit {
 
   form!: FormGroup;
-  public fillerNav: any = [
-    {
-      text: "Nuevo Usuario",
-      url: "home/usuarios/nuevo-usuario",
-    },
-    {
-      text: "Usuarios",
-      url: "home/usuarios/listar-usuarios",
-    },
-    {
-      text: "Nuevo Paciente",
-      url: "home/pacientes/nuevo-paciente",
-    },
-    {
-      text: "Foto de Perfil Paciente",
-      url: "home/foto/nueva",
-    },
-    {
-      text: "Pacientes",
-      url: "home/pacientes/listar-pacientes",
-    },
-    {
-      text: "Nueva Consulta TTO",
-      url: "home/consultas/nueva-consulta",
-    },
-    {
-      text: "Consultas TTO",
-      url: "home/consultas/listar-consultas",
-    },
-    {
-      text: "Nuevos Estudios",
-      url: "home/estudios/nuevo-estudio",
-    },
-    {
-      text: "Estudios",
-      url: "home/estudios/listar-estudios",
-    },
-    {
-      text: "Cerrar sesión",
-      url: "/login",
-    },
-  ];
 
   constructor(private _authService: AuthService,
     private _formBuilder: FormBuilder,
@@ -91,19 +49,13 @@ export class LoginComponent implements OnInit {
         (user) => {
           
           this._serviceError.Usuario = user;
-          if (user.rol === "Usuario") {
-            this._serviceError.Nav = this.fillerNav.filter(
-                      (n:any) => !n.text.includes('Usuario')
-                    );
-                  } else {
-                    this._serviceError.Nav = this.fillerNav;
-                  }
+          this._router.navigate(['home']);
         },
         (error: HttpErrorResponse) => {
           this._serviceError.Error(error);
         }
       );
-      this._router.navigate(['home']);
+
       
     },(error:HttpErrorResponse) => {
       this._snackService.Mensaje('Email o contraseña incorrecta','error');

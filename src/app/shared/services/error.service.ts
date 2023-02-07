@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 
 @Injectable({
@@ -17,7 +18,6 @@ export class ErrorService {
     password:'',
     rol:''
   }
-  public Nav: any[] = [];
 
   constructor(private _router:Router) { }
 
@@ -34,4 +34,5 @@ export class ErrorService {
       this._router.navigate(['errores/500']);
     }
   }
+
 }

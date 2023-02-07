@@ -26,9 +26,9 @@
 
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="mail">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>E-mail</th>
-      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    <ng-container matColumnDef="celular">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
+      <td mat-cell *matCellDef="let element">{{ element.celular }}</td>
     </ng-container>
 
     <ng-container matColumnDef="nacimiento">
@@ -60,17 +60,17 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="consultaInicial">
-      <th mat-header-cell *matHeaderCellDef> Consulta Inicial </th>
+      <th mat-header-cell *matHeaderCellDef> Primera Consulta </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="VerConsultas(element)"> Ver Consulta Inicial </button>
+          <button class="button" mat-button (click)="VerConsultas(element)"> Ver Primera Consulta </button>
     </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="consultas">
-      <th mat-header-cell *matHeaderCellDef> Ver Consultas </th>
+      <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="verTurnos(element)" > Ver Consultas </button>
+          <button class="button" mat-button (click)="verTurnos(element)" > Ver TTO </button>
     </td>
     </ng-container>
 
