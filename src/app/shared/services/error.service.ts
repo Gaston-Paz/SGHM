@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Usuario } from 'src/app/core/interfaces/usuario.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,14 @@ export class ErrorService {
 
   public errorFatal:string='';
   public muestroMenu:boolean = true;
+  public Usuario: Usuario = {
+    apellido:'',
+    email:'',
+    nombre:'',
+    password:'',
+    rol:''
+  }
+  public Nav: any[] = [];
 
   constructor(private _router:Router) { }
 
