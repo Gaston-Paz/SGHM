@@ -19,7 +19,7 @@ table {
   }
   
   .button{
-    background-color: #60C76E;
+    background-color:rgb(119, 114, 72);
     color: #ffffff;
 }
 
@@ -48,7 +48,7 @@ td {
 }
 
 .button-disabled{
-  background-color: #cfebd2;
+    background-color: rgb(225,223,206);
   color: #ffffff;
 }
 

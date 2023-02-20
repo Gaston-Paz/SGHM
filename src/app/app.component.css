@@ -38,7 +38,7 @@
   }
 
   .example-toolbar{
-    background-color: #60C76E;
+    background-color: rgb(119, 114, 72);
     color: #ffffff;
     position: fixed;
     z-index: 100;
@@ -55,7 +55,7 @@
 }
 
 .active-link{
-  background-color: #009a15;
+  background-color: rgb(180,174,131);
   border: solid 1px #fff;
   border-radius: 5px;
 }
@@ -91,7 +91,7 @@
 }
 
 .barra-bg{
-  background-color: #60C76E;
+  background-color: rgb(119, 114, 72);
   color: #ffffff;
 }
 

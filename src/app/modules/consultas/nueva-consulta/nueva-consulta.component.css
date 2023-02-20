@@ -27,17 +27,17 @@
 
   
 .button{
-    background-color: #60C76E;
+    background-color:rgb(119, 114, 72);
     color: #ffffff;
 }
 
 .button-disabled{
-    background-color: #cfebd2;
+    background-color: rgb(225,223,206);
     color: #ffffff;
 }
 
 .bg-section{
-    background-color: #EEFCEF;
+  background-color: rgb(247, 245, 229);
     border-radius: 15px;
   }
   h3, h5{
