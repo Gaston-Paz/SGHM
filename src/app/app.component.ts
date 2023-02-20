@@ -91,7 +91,9 @@ export class AppComponent implements OnInit {
           this.Usuario = user;
           this.FiltrarMenu();
         },
-        (error: HttpErrorResponse) => {}
+        (error: HttpErrorResponse) => {
+          this._serviceError.Error(error);
+        }
       );
     }
   }

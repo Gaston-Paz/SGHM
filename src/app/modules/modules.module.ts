@@ -19,6 +19,7 @@ import { ConsultasModule } from './consultas/consultas.module';
 import { FotoPerfilModule } from './foto-perfil/foto-perfil.module';
 import { EstudiosModule } from './estudios/estudios.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     declarations: [
@@ -40,7 +41,8 @@ import { UsuarioModule } from './usuario/usuario.module';
         ConsultasModule,
         FotoPerfilModule, 
         EstudiosModule,
-        UsuarioModule
+        UsuarioModule,
+        MatCardModule
     ]
 })
 export class ModulesModule { }

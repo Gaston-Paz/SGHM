@@ -3,6 +3,14 @@
         <div class="row justify-content-center">
             <div class="d-flex row justify-content-center">
                 <h1>Sistema de Gestión de Historias Clínicas</h1>
+                <div class="div-img">
+
+                    <img
+                    class="w10"
+                    src="../../assets/logo.jpeg"
+                    alt="Sin Foto"
+                    />
+                </div>
             </div>
             <div class="d-flex row justify-content-center">
                 <h3>Inicio de Sesión</h3>
@@ -49,7 +57,7 @@
                         <a href="/login/recuperacion">¿Olvidaste tu contraseña?</a>
                     </div>
                     <div class="d-flex row justify-content-center">
-                        <div class="w-25">
+                        <div class="w-25 d-flex justify-content-center">
                             
                             <button mat-raised-button [disabled]="!form.valid" [ngClass]="form.valid ? 'button' : 'button-disabled' " (click)="Login()">Iniciar Sesión</button>
                         </div>

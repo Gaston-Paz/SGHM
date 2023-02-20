@@ -3,9 +3,9 @@
 >
 <div [ngClass]="_router.url.includes('login') ? 'none' :'row w-100 barra-bg h6 barra'">
   <div class="row">
-    <h1 class="example-app-name">Sistema de Gestión de Historias Clínicas</h1>
+    <h1 class="example-app-name"> <a [routerLink]="'/home'"> Sistema de Gestión de Historias Clínicas</a></h1>
 
-    <h2 class="mail">{{ _serviceError.Usuario.apellido }} , {{ _serviceError.Usuario.nombre }}</h2>
+    <h2 class="mail">{{ Usuario.apellido }} , {{ Usuario.nombre }}</h2>
   </div>
 </div>
 

@@ -1,0 +1,72 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header class="d-flex justify-content-center mb-5">
+      <mat-card-title>Sistema de Gestión de Historias Clínicas</mat-card-title>
+      <mat-card-subtitle>¡Hola {{usuario.nombre}} {{usuario.apellido}}, Que tengas un buen día!</mat-card-subtitle>
+      <img class="foto" src="../../assets/logo.jpeg" alt="Sin Foto" />
+    </mat-card-header>
+
+    <h2>¿Qué podrás hacer aquí?</h2>
+
+    <div class="row d-flex w-100">
+        <span >1- <strong>Dar de alta Pacientes</strong></span>
+        <p>
+            Todos los pacientes que se acerquen a su primera consulta deberán ser
+            ingresados en el sistema por única vez en la sección
+            <a [routerLink]="'pacientes/nuevo-paciente'">"Nuevo Paciente"</a>.
+            Allí se cargarán los datos personales, antecedentes y el motivo de la
+            consulta.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >2- <strong>Agregar foto de perfil a los pacientes</strong></span>
+        <p>
+            En caso de tener la aceptación de paciente para tomarle una foto, podrás subirla a su perfil en la sección
+            <a [routerLink]="'foto/nueva'">"Foto de Perfil Paciente"</a>.
+            Esto ayudará a una identificación más rápida.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >3- <strong>Buscar pacientes</strong></span>
+        <p>
+            Cuando necesite buscar un paciente en particular para ver o editar sus antecedentes, consulta inicial o agregar una nueva consulta deberá dirigirse a la sección
+            <a [routerLink]="'pacientes/listar-pacientes'">"Pacientes"</a>.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >4- <strong>Nueva consulta tratamiento</strong></span>
+        <p>
+            En caso de no haber accedido a la historia completa del paciente en la sección "Pacientes" y quiera cargar un nuevo tratamiento deberá dirigirse a 
+            <a [routerLink]="'consultas/nueva-consulta'">"Nueva Consulta TTO"</a>.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >5- <strong>Consultas tratamiento</strong></span>
+        <p>
+            Si solamente quiere ver los tratamientos de los pacientes deberá acceder a la sección 
+            <a [routerLink]="'consultas/listar-consultas'">"Consultas TTO"</a>.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >6- <strong>Cargar estudios a un paciente</strong></span>
+        <p>
+            Para realizar la carga individual de estudios o masiva deberá dirigirse a la sección
+            <a [routerLink]="'estudios/nuevo-estudio'">"Nuevos Estudios"</a>.
+        </p>
+    </div>
+
+    <div class="row d-flex w-100 mt-3">
+        <span >7- <strong>Ver estudios</strong></span>
+        <p>
+            Para visualizar los estudios cargados deberá dirigirse a la sección
+            <a [routerLink]="'estudios/listar-estudios'">"Estudios"</a>.
+        </p>
+    </div>
+
+  </mat-card>
+</div>
