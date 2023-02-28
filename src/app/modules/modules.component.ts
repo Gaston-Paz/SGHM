@@ -24,16 +24,17 @@ export class ModulesComponent implements OnInit {
   constructor(public _errorService:ErrorService,
     private _router:Router,
     private _usuarioService:UsuarioService) {
-    this._errorService.muestroMenu = true;
   }
 
   ngOnInit(): void {  
-    this._errorService.muestroMenu = true;
     this.mail = localStorage.getItem("SGHC-mail")!;
     if (this.mail !== null) {
       this._usuarioService.GetUsuario(this.mail).subscribe(
         (user) => {
-          this.usuario = user;
+          this._errorService.Usuario = user;
+          if(this._errorService.Usuario.rol === "Admin")this._errorService.Nav = this._errorService.fillerNav;
+          else this._errorService.Nav = this._errorService.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._errorService.muestroMenu = true;
         },
         (error: HttpErrorResponse) => {
           this._errorService.Error(error);

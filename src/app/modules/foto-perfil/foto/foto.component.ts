@@ -12,6 +12,7 @@ import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/m
 import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-paciente.service";
+import { UsuarioService } from "../../usuario/usuario.service";
 
 @Component({
   selector: "app-foto",
@@ -39,6 +40,7 @@ export class FotoComponent implements OnInit, OnDestroy {
   };
   subscribes: any[] = [];
   formData!: FormData;
+  mail:string='';
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -48,7 +50,8 @@ export class FotoComponent implements OnInit, OnDestroy {
     private _dialog: MatDialog,
     private _snack: SnackService,
     private _serviceError: ErrorService,
-    private _router:Router
+    private _router:Router,
+    private _usuarioService:UsuarioService
   ) {}
 
   ngOnDestroy(): void {
@@ -61,12 +64,21 @@ export class FotoComponent implements OnInit, OnDestroy {
       foto: [, [Validators.required]],
     });
     let obs: Array<Observable<any>> = [];
+    if (this.mail !== null)this.mail = localStorage.getItem("SGHC-mail")!;
     obs.push(this._servicePaciente.ObtenerPacientes());
+    obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(
       forkJoin(obs).subscribe(
         (resp) => {
           this.pacientes = resp[0];
           this.pacientesFilter = resp[0];
+
+          if (this.mail !== null){
+            this._serviceError.Usuario = resp[1];
+            if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+            else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+            this._serviceError.muestroMenu = true;
+          }
         },
         (error: HttpErrorResponse) => {
           this._serviceError.Error(error);

@@ -23,6 +23,7 @@ export class NuevoUsuarioComponent implements OnInit {
     password:'',
     rol:''
   }
+
   roles:string[]=['Usuario','Admin'];
   UsuarioLogueado:Usuario = {
     apellido:'',
@@ -66,6 +67,10 @@ export class NuevoUsuarioComponent implements OnInit {
       if(this.UsuarioLogueado.rol !== 'Admin'){
         this._router.navigate(['errores/403']);
       }
+      this._serviceError.Usuario = user;
+      if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     });

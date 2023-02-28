@@ -53,6 +53,10 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
         if (this.UsuarioLogueado.rol !== "Admin") {
           this._router.navigate(["errores/403"]);
         }
+        this._serviceError.Usuario = resp[0];
+        if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
         this.usuarios = resp[1];
         this.dataSource.data = this.usuarios;
       },

@@ -11,6 +11,7 @@ import { SnackService } from "src/app/shared/services/snack.service";
 import { EstudiosService } from "../estudios.service";
 import { EstudiosMedicosComponent } from "../../pacientes/nuevo-paciente/estudios-medicos/estudios-medicos.component";
 import { ErrorService } from "src/app/shared/services/error.service";
+import { UsuarioService } from "../../usuario/usuario.service";
 
 @Component({
   selector: "app-estudios",
@@ -32,13 +33,16 @@ export class EstudiosComponent implements OnInit, OnDestroy {
 
   @ViewChild(EstudiosMedicosComponent) estudioComponent!: EstudiosMedicosComponent;
 
+  mail:string='';
+
   constructor(
     private _formBuilder: FormBuilder,
     private _servicePaciente: NuevoPacienteService,
     private _spinnerService: NgxSpinnerService,
     private _snack: SnackService,
     private _serviceEstudio:EstudiosService,
-    private _serviceError:ErrorService
+    private _serviceError:ErrorService,
+    private _usuarioService: UsuarioService
   ) {}
 
   ngOnDestroy(): void {
@@ -51,12 +55,20 @@ export class EstudiosComponent implements OnInit, OnDestroy {
       paciente: [, [Validators.required]],
     });
     let obs: Array<Observable<any>> = [];
+    this.mail = localStorage.getItem("SGHC-mail")!;
     obs.push(this._servicePaciente.ObtenerPacientes());
+    if (this.mail !== null)obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(
       forkJoin(obs).subscribe(
         (resp) => {
           this.pacientes = resp[0];
           this.pacientesFilter = resp[0];
+          if (this.mail !== null){
+            this._serviceError.Usuario = resp[1];
+          if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
+          }
         },
         (error: HttpErrorResponse) => {
           this._serviceError.Error(error);

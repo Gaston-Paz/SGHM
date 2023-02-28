@@ -37,7 +37,7 @@
     <div class="row">
       <mat-form-field appearance="outline" class="w-20 example-full-width">
         <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput)"
+        <input matInput required="true" readonly="true" autocomplete="off" #dateInput (dateChange)="changeDate(dateInput)"
         onclick="changeDate(dateInput)" [max]="fecha" [matDatepicker]="selector" [value]="form.controls.fechaNacimiento.value">
         <mat-datepicker-toggle mat-datepicket-toggle matSuffix [for]="selector" ></mat-datepicker-toggle>
         <mat-datepicker #selector></mat-datepicker>

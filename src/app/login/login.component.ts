@@ -1,9 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { AppComponent } from '../app.component';
 import { Credencial } from '../core/interfaces/credenciales.interface';
 import { UsuarioService } from '../modules/usuario/usuario.service';
 import { ErrorService } from '../shared/services/error.service';
@@ -47,7 +46,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('SGHC-mail',this._authService.GetEmail()); 
         this._usuarioService.GetUsuario(this.form.controls.mail.value).subscribe(
         (user) => {
-          
           this._serviceError.Usuario = user;
           this._router.navigate(['home']);
         },

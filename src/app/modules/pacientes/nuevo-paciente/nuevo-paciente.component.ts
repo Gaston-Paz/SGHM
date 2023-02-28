@@ -9,6 +9,8 @@ import { SnackService } from "src/app/shared/services/snack.service";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { timer } from "rxjs";
 import { Router } from "@angular/router";
+import { UsuarioService } from "../../usuario/usuario.service";
+import { Usuario } from "src/app/core/interfaces/usuario.interface";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
@@ -26,19 +28,38 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
 
   subscribes:any[]=[];
 
+  mail:string='';
+
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
     private _snack: SnackService,
     private _spinnerService: SpinnerService,
     private _serviceError:ErrorService,
-    private _router:Router
+    private _router:Router,
+    private _usuarioService: UsuarioService
   ) {}
 
   ngOnDestroy(): void {
     this.subscribes.forEach(s => s.unsubscribe());
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mail = localStorage.getItem("SGHC-mail")!;
+    if (this.mail !== null) {
+      this._usuarioService.GetUsuario(this.mail).subscribe(
+        (user) => {
+          this._serviceError.Usuario = user;
+          if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
+        },
+        (error: HttpErrorResponse) => {
+          this._serviceError.Error(error);
+        }
+      );
+    }
+  }
+  
 
   FormValid() {
     return this._servicePacienteNuevo.FormValid();

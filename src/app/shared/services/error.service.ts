@@ -19,6 +19,49 @@ export class ErrorService {
     rol:''
   }
   recargo:boolean = true;
+  public Nav: any[] = [];
+  public fillerNav: any = [
+    {
+      text: "Nuevo Usuario",
+      url: "home/usuarios/nuevo-usuario",
+    },
+    {
+      text: "Usuarios",
+      url: "home/usuarios/listar-usuarios",
+    },
+    {
+      text: "Nuevo Paciente",
+      url: "home/pacientes/nuevo-paciente",
+    },
+    {
+      text: "Foto de Perfil Paciente",
+      url: "home/foto/nueva",
+    },
+    {
+      text: "Pacientes",
+      url: "home/pacientes/listar-pacientes",
+    },
+    {
+      text: "Nueva Consulta TTO",
+      url: "home/consultas/nueva-consulta",
+    },
+    {
+      text: "Consultas TTO",
+      url: "home/consultas/listar-consultas",
+    },
+    {
+      text: "Nuevos Estudios",
+      url: "home/estudios/nuevo-estudio",
+    },
+    {
+      text: "Estudios",
+      url: "home/estudios/listar-estudios",
+    },
+    {
+      text: "Cerrar sesión",
+      url: "/login",
+    },
+  ];
 
   constructor(private _router:Router) { }
 

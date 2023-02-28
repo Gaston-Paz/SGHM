@@ -5,12 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { timer } from 'rxjs';
+import { forkJoin, Observable, timer } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { SnackService } from 'src/app/shared/services/snack.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
+import { UsuarioService } from '../../usuario/usuario.service';
 import { ConsultasService } from './consultas.service';
 
 @Component({
@@ -57,6 +58,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   }
   filtroPaciente:string = '';
   subscribes:any[]=[];
+  mail:string='';
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePaciente:NuevoPacienteService,
@@ -65,7 +67,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     private _dateAdapter: DateAdapter<Date>,
     private _snack:SnackService,
     private _serviceError:ErrorService,
-    private _router:Router) {
+    private _router:Router,
+    private _usuarioService: UsuarioService) {
       this._dateAdapter.setLocale('es-ES');
   }
 
@@ -84,10 +87,15 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         sedestacion:[this._serviceConsulta.editartto.sedestacion,[Validators.required]],
         proximoTurno:[this._serviceConsulta.editartto.proximoTurnoIndicado]
       });
-    
-    this.subscribes.push(this._servicePaciente.ObtenerPacientes().subscribe(pacientes => {
-      this.pacientes = pacientes;
-      this.pacientesFilter = pacientes;
+
+      let obs: Array<Observable<any>> = [];
+      this.mail = localStorage.getItem("SGHC-mail")!;
+      obs.push(this._servicePaciente.ObtenerPacientes());
+      if (this.mail !== null)obs.push(this._usuarioService.GetUsuario(this.mail));
+
+      this.subscribes.push(forkJoin(obs).subscribe(resp => {
+      this.pacientes = resp[0];
+      this.pacientesFilter = resp[0];
       if(this._serviceConsulta.editartto.idPaciente !== 0){
         this.form.controls.paciente.setValue(this._serviceConsulta.editartto.paciente!.idPaciente);
         this.tratamiento.idTratamiento = this._serviceConsulta.editartto.idTratamiento;
@@ -95,6 +103,13 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         this.form.controls.paciente.setValue(this.idPaciente.idPaciente);
       }
       
+      if (this.mail !== null){
+        this._serviceError.Usuario = resp[1];
+        if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+        else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+        this._serviceError.muestroMenu = true;
+      }
+        
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);
     }));

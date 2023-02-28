@@ -5,7 +5,7 @@
   <div class="row">
     <h1 class="example-app-name"> <a [routerLink]="'/home'"> Sistema de Gestión de Historias Clínicas</a></h1>
 
-    <h2 class="mail">{{ Usuario.apellido }} , {{ Usuario.nombre }}</h2>
+    <h2 class="mail">{{ _serviceError.Usuario.apellido }} , {{ _serviceError.Usuario.nombre }}</h2>
   </div>
 </div>
 
@@ -45,7 +45,7 @@
               mat-list-item
               [routerLinkActive]="'active-link'"
               [routerLink]="nav.url"
-              *ngFor="let nav of Nav"
+              *ngFor="let nav of _serviceError.Nav"
               >{{ nav.text }}</a
             >
           </mat-nav-list>

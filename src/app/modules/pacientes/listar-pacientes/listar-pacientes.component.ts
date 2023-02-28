@@ -3,13 +3,16 @@ import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { forkJoin, Observable } from "rxjs";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
+import { Usuario } from "src/app/core/interfaces/usuario.interface";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
+import { UsuarioService } from "../../usuario/usuario.service";
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
 import { ListadosService } from "./listados.service";
 
@@ -71,19 +74,28 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   edicion: boolean = false;
   url:any;
 
+  mail:string='';
+
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
     private _spinnerService: SpinnerService,
     private _serviceListados: ListadosService,
     private _serviceConsulta: ConsultasService,
     private _snack: SnackService,
-    private _serviceError:ErrorService
+    private _serviceError:ErrorService,
+    private _usuarioService:UsuarioService
   ) {}
 
   ngOnInit(): void {
-    this._servicePacienteNuevo.ObtenerPacientes().subscribe(
+    this.mail = localStorage.getItem("SGHC-mail")!;
+    let obs: Array<Observable<any>> = [];
+    obs.push(this._servicePacienteNuevo.ObtenerPacientes());
+    if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
+  
+
+    forkJoin(obs).subscribe(
       (resp) => {
-        resp.forEach((r) => {
+        resp[0].forEach((r: Paciente) => {
           r.fechaNacimiento = new Date(r.fechaNacimiento);
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
@@ -96,6 +108,13 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           if (a.apellido < b.apellido) return -1;
           else return 1;
         });
+
+        if (this.mail !== null){
+          this._serviceError.Usuario = resp[1];
+          if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
+        }
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error)

@@ -11,6 +11,7 @@ import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
 import { Tratamiento } from 'src/app/core/interfaces/tratamiento.interface';
 import { ErrorService } from 'src/app/shared/services/error.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
+import { UsuarioService } from '../../usuario/usuario.service';
 import { ConsultasService } from '../nueva-consulta/consultas.service';
 
 @Component({
@@ -43,13 +44,15 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   form!:FormGroup;
   filtroPaciente:string = '';
   subscribes:any[]=[];
+  mail:string='';
 
   constructor(private _servicePaciente:NuevoPacienteService,
     private _spinnerService: NgxSpinnerService,
     private _serviceTratamiento:ConsultasService,
     private _formBuilder:FormBuilder,
     private _serviceError:ErrorService,
-    private _router:Router) { }
+    private _router:Router,
+    private _usuarioService: UsuarioService) { }
 
   ngOnDestroy(): void {
     this.subscribes.forEach(s => s.unsubscribe());
@@ -59,9 +62,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.form = this._formBuilder.group({
       paciente: [this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null ? this._serviceTratamiento.paciente.idPaciente : this.paciente.idPaciente]
     });
+    this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
     obs.push(this._serviceTratamiento.ObtenerConsultas());
+    if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
@@ -88,6 +93,13 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
             otros:''
           }
         };
+      }
+
+      if (this.mail !== null){
+        this._serviceError.Usuario = resp[2];
+          if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
+          else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
+          this._serviceError.muestroMenu = true;
       }
       
     },(error:HttpErrorResponse) => {
