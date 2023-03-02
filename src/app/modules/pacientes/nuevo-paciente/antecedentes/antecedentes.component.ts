@@ -72,6 +72,11 @@ export class AntecedentesComponent implements OnInit {
 
   CargarAntecedentes(){ 
     if(!this.antecedente.ortodoncia)this.antecedente.edadOrtodoncia = undefined; 
+    if(!this.antecedente.embarazos){
+      this.antecedente.abortosEspontaneo = undefined; 
+      this.antecedente.abortosInducido = undefined; 
+      this.antecedente.partos = undefined; 
+    }
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
   }
 

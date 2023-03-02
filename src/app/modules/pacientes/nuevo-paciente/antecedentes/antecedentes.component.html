@@ -181,20 +181,6 @@
             />
           </mat-form-field>
 
-          <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Pérdidas</mat-label>
-            <input
-              type="text"
-              matInput
-              formControlName="perdidas"
-              placeholder="Pérdidas"
-              (change)="CargarAntecedentes()"
-              autocomplete="off"
-              [(ngModel)]="antecedentes.perdidas"
-              [readonly]="edicion"
-            />
-          </mat-form-field>
-
           <div class="example-full-width">
             <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
         </div>
@@ -209,7 +195,7 @@
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.abortosInducido"
-            [readonly]="edicion"
+            [readonly]="edicion || !antecedentes.embarazos"
           />
         </mat-form-field>
 
@@ -223,12 +209,12 @@
             (change)="CargarAntecedentes()"
             autocomplete="off"
             [(ngModel)]="antecedentes.abortosEspontaneo"
-            [readonly]="edicion"
+            [readonly]="edicion || !antecedentes.embarazos"
           />
         </mat-form-field>
 
           <mat-form-field appearance="outline" class="example-full-width">
-            <mat-label>Partos</mat-label>
+            <mat-label>Partos/Cesareas</mat-label>
             <input
               type="text"
               matInput
@@ -237,7 +223,7 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.partos"
-              [readonly]="edicion"
+              [readonly]="edicion || !antecedentes.embarazos"
             />
           </mat-form-field>
     </div>
@@ -461,6 +447,20 @@
               (change)="CargarAntecedentes()"
               autocomplete="off"
               [(ngModel)]="antecedentes.alimentacion"
+              [readonly]="edicion"
+            />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="example-full-width">
+            <mat-label>Pérdidas</mat-label>
+            <input
+              type="text"
+              matInput
+              formControlName="perdidas"
+              placeholder="Pérdidas"
+              (change)="CargarAntecedentes()"
+              autocomplete="off"
+              [(ngModel)]="antecedentes.perdidas"
               [readonly]="edicion"
             />
           </mat-form-field>

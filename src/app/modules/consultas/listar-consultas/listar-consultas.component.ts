@@ -71,9 +71,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
-      if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.editartto.paciente!.idPaciente !== 0)) {
-        this._serviceTratamiento.paciente = this._serviceTratamiento.editartto.paciente!;
-        this.form.controls.paciente.setValue(this._serviceTratamiento.editartto.paciente?.idPaciente!);
+      
+      if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.paciente.idPaciente! !== 0)) {
+        // this._serviceTratamiento.paciente = this._serviceTratamiento.editartto.paciente!;
+        // this.form.controls.paciente.setValue(this._serviceTratamiento.editartto.paciente?.idPaciente!);
+        this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
         this._serviceTratamiento.editartto = {
           fecha: new Date(),
@@ -132,6 +134,18 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   EditarTto(element:Tratamiento){   
+    this._serviceTratamiento.paciente = {
+        apellido:'',
+        celular:'',
+        deParte:'',
+        email:'',
+        fechaNacimiento: new Date(),
+        localidad:'',
+        nacio:'',
+        nombre:'',
+        ocupacion:'',
+        otros:''
+    };
     this._serviceTratamiento.editartto = element;
     this._router.navigate(['home/consultas/nueva-consulta']);
   }
