@@ -18,10 +18,7 @@ table {
     width: 205px;
   }
   
-  .button{
-    background-color:rgb(119, 114, 72);
-    color: #ffffff;
-}
+
 
 th.mat-header-cell {
   text-align: center;
@@ -47,10 +44,7 @@ td {
   margin-top: 20px;
 }
 
-.button-disabled{
-    background-color: rgb(225,223,206);
-  color: #ffffff;
-}
+
 
 h3{
   font-size: 20px;

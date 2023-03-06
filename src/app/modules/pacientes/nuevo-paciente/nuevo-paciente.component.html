@@ -31,7 +31,9 @@
               </mat-card-content>
 
               <mat-card-actions align="end">
-                <button [disabled]="!FormValid()" (click)="GuardarPaciente()" [ngClass]="FormValid() ? 'button' : 'button-disabled' " mat-button>Guardar</button>
+                
+                <app-button [habilita]="!FormValid()" [valido]="FormValid()" [texto]="'Guardar'" (clickButton)="GuardarPaciente()"></app-button>
+
               </mat-card-actions>
         </mat-card>
     </div>

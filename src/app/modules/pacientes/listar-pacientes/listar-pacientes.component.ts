@@ -7,7 +7,6 @@ import { forkJoin, Observable } from "rxjs";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
-import { Usuario } from "src/app/core/interfaces/usuario.interface";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
@@ -143,8 +142,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.consultaInicial = false;
           this.consultaNueva = false;
           this.turnos = false;
-  console.log(resp);
-  console.log(element.idPaciente);
   
           this.nombrePaciente = element.nombre;
           this.apellidoPaciente = element.apellido;
@@ -217,9 +214,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.edicion = !this.edicion;
   }
 
-  ActualizarAntecedente() {
-    console.log(this.antecedente);
-    
+  ActualizarAntecedente() {   
     this._servicePacienteNuevo
       .ActualizarAntecedentes(this.antecedente)
       .subscribe(

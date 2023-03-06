@@ -8,7 +8,6 @@ import { ConsultaInicialComponent } from './nuevo-paciente/consulta-inicial/cons
 
 //Material
 import {MatCardModule} from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -28,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { PacientesRoutingModule } from './pacientes-routing.module';
+import { ComponentsModule } from 'src/app/shared/Components/components.module';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule,
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
@@ -58,9 +57,10 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
     MatPaginatorModule,
     ConsultasModule,
     MatSelectModule,
-    MatIconModule,
     MatTooltipModule,
-    PacientesRoutingModule
+    PacientesRoutingModule,
+    ComponentsModule,
+    MatIconModule
   ],
   providers: [  
     MatDatepickerModule,  

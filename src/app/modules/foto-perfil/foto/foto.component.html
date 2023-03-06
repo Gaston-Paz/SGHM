@@ -37,7 +37,7 @@
     </form>
 
     <div class="end mt-20">
-        <button [ngClass]="form.valid ? 'button' : 'button-disabled' " [disabled]="!form.valid" class="button" mat-button (click)="GuardarFoto()" > Guardar Foto de Perfil </button>
+        <app-button [habilita]="!form.valid" [valido]="form.valid" [texto]="'Guardar Foto de Perfil'" (clickButton)="GuardarFoto()"></app-button>
       </div>
 </mat-card>
 </div>

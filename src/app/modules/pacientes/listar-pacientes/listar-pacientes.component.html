@@ -54,7 +54,7 @@
     <ng-container matColumnDef="antecedentes">
       <th mat-header-cell *matHeaderCellDef>Antecedentes</th>
       <td mat-cell *matCellDef="let element">
-        <button class="button" mat-button (click)="VerAntecedentes(element)">Ver Antecedentes</button>
+        <app-button [texto]="'Ver Antecedentes'" (clickButton)="VerAntecedentes(element)"></app-button>
       </td>
     </ng-container>
 
@@ -62,7 +62,7 @@
     <ng-container matColumnDef="consultaInicial">
       <th mat-header-cell *matHeaderCellDef> Primera Consulta </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="VerConsultas(element)"> Ver Primera Consulta </button>
+        <app-button [texto]="'Ver Primera Consulta'" (clickButton)="VerConsultas(element)"></app-button>
     </td>
     </ng-container>
 
@@ -70,7 +70,7 @@
     <ng-container matColumnDef="consultas">
       <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="verTurnos(element)" > Ver TTO </button>
+        <app-button [texto]="'Ver TTO'" (clickButton)="verTurnos(element)"></app-button>
     </td>
     </ng-container>
 
@@ -78,7 +78,7 @@
      <ng-container matColumnDef="nuevaConsulta">
       <th mat-header-cell *matHeaderCellDef> Nueva Consulta </th>
       <td mat-cell *matCellDef="let element"> 
-          <button class="button" mat-button (click)="NuevaConsulta(element)" > Nueva Consulta </button>
+          <app-button [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(element)"></app-button>
     </td>
     </ng-container>
 
@@ -98,33 +98,43 @@
 </div>
 
 <div [hidden]="!antecedentes" class="container">
-  <h2>Antecedentes de {{nombrePaciente}} {{apellidoPaciente}} <button matTooltip="Presione para editar el formulario"
-    [matTooltipPosition]="'right'" class="button" mat-mini-fab (click)="HabilitarEdicion()" ><mat-icon>edit</mat-icon></button> </h2>
+  <h2>Antecedentes de {{nombrePaciente}} {{apellidoPaciente}} 
+    <app-mini-fab 
+    [textoTooltip]="'Presione para editar el formulario'" 
+    [posicionTooltip]="'right'" 
+    [clase]="'button'"
+    [icon]="'edit'"
+    (click)="HabilitarEdicion()"></app-mini-fab> 
+  </h2>
   <app-antecedentes *ngIf="antecedentes" [edicion]="!edicion" [antecedente]="antecedente" [hayAntecedente]="true"></app-antecedentes>
 
   <div class="row">
 
     <div class="left w-50 mt-20">
-      <button class="button" mat-button (click)="Volver()" > Volver </button>
+      <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
     </div>
     <div class="right w-50 mt-20">
-      <button [ngClass]="edicion ? 'button' : 'button-disabled' " mat-button [disabled]="!edicion" (click)="ActualizarAntecedente()" > Guardar </button>
+      <app-button [habilita]="!edicion" [valido]="edicion" [texto]="'Guardar'" (clickButton)="ActualizarAntecedente()" ></app-button>
     </div>
   </div>
 </div>
 
 <div [hidden]="!consultaInicial" class="container">
-  <h2>Consulta Inicial de {{nombrePaciente}} {{apellidoPaciente}} <button matTooltip="Presione para editar el formulario"
-    [matTooltipPosition]="'right'" class="button" mat-mini-fab (click)="HabilitarEdicion()" ><mat-icon>edit</mat-icon></button></h2>
+  <h2>Consulta Inicial de {{nombrePaciente}} {{apellidoPaciente}}     <app-mini-fab 
+    [textoTooltip]="'Presione para editar el formulario'" 
+    [posicionTooltip]="'right'" 
+    [clase]="'button'"
+    [icon]="'edit'"
+    (click)="HabilitarEdicion()"></app-mini-fab> </h2>
   <app-consulta-inicial *ngIf="consultaInicial" [edicion]="!edicion" [consulta]="consultas" [hayConsulta]="true"></app-consulta-inicial>
 
   <div class="row">
 
     <div class="left w-50 mt-20">
-      <button class="button" mat-button (click)="Volver()" > Volver </button>
+      <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
     </div>
     <div class="right w-50 mt-20">
-      <button [ngClass]="edicion ? 'button' : 'button-disabled' " mat-button [disabled]="!edicion" (click)="ActualizarConsulta()" > Guardar </button>
+      <app-button [habilita]="!edicion" [valido]="edicion" [texto]="'Guardar'" (clickButton)="ActualizarConsulta()" ></app-button>
     </div>
   </div>
 </div>
@@ -133,8 +143,7 @@
   <app-listar-consultas *ngIf="turnos" ></app-listar-consultas>
 
   <div class="left mt-20">
-    <button class="button" mat-button (click)="Volver()" > Volver </button>
-
+    <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
   </div>
 </div>
 
@@ -142,7 +151,7 @@
   <app-nueva-consulta *ngIf="consultaNueva" [paciente]="idPaciente" ></app-nueva-consulta>
 
   <div class="left mt-20">
-    <button class="button" mat-button (click)="Volver()" > Volver </button>
+    <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
 
   </div>
 </div>

@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RecupercionComponent } from './recupercion/recupercion.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppModule } from '../app.module';
+import { ComponentsModule } from '../shared/Components/components.module';
 
 
 
@@ -30,7 +31,8 @@ import { AppModule } from '../app.module';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ComponentsModule
   ]
 })
 export class LoginModule { }
