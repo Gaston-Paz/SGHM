@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { ConsultasRoutingModule } from './consultas-routing.module';
 import { MatIconModule } from '@angular/material/icon';
+import { ComponentsModule } from 'src/app/shared/Components/components.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,6 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -41,7 +41,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatSortModule,
     ConsultasRoutingModule,
-    MatIconModule
+    ComponentsModule
   ],
   exports:[ListarConsultasComponent, NuevaConsultaComponent]
 })

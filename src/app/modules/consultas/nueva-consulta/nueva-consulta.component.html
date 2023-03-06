@@ -190,7 +190,9 @@
       </form>
     </mat-card-content>
     <mat-card-actions align="end">
-        <button [disabled]="!form.valid" (click)="GuardarConsulta()" [ngClass]="form.valid ? 'button' : 'button-disabled' " mat-button>Guardar</button>
+
+        <app-button [habilita]="!form.valid" [valido]="form.valid" [texto]="'Guardar'" (clickButton)="GuardarConsulta()"></app-button>
+
     </mat-card-actions>
   </mat-card>
 </div>
