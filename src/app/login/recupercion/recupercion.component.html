@@ -11,68 +11,14 @@
                 <form [formGroup]="form">
                     <div class="row">
 
-                        <mat-form-field appearance="outline" class="example-full-width">
-                            <mat-label>Email</mat-label>
-                            <input
-                            type="email"
-                            matInput
-                            formControlName="mail"
-                            placeholder="Email"
-                            required="true"
-                            autocomplete="off"
-                            />
-                            <mat-error *ngIf="form.controls.mail.hasError('required')">
-                                El Email es <strong>obligatorio</strong>
-                            </mat-error>
-                            <mat-error *ngIf="form.controls.mail.hasError('email')">
-                                El formato del Email es <strong>incorrecto</strong>
-                            </mat-error>
-                        </mat-form-field>
+                        <app-inputs [label]="'Email'" [placeHolder]="'Email'" [requerido]="true" [type]="'email'" [valor]="form.controls.mail.value" (cambio)="asignarValor(form.controls.mail, $event)" ></app-inputs>
 
-                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
-                            <mat-label>Código de Recuperación</mat-label>
-                            <input
-                            type="text"
-                            matInput
-                            formControlName="token"
-                            placeholder="Código de Recuperación"
-                            required="true"
-                            autocomplete="off"
-                            />
-                            <mat-error *ngIf="recuparar && form.controls.token.value === undefined">
-                                El código de recuperación es <strong>obligatorio</strong>
-                            </mat-error>
-                        </mat-form-field>
+                        <app-inputs *ngIf="!tokenEnviado" [label]="'Código de Recuperación'" [placeHolder]="'Código de Recuperación'" [requerido]="true" [type]="'text'" [valor]="form.controls.token.value" (cambio)="asignarValor(form.controls.token, $event)" ></app-inputs>
 
-                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
-                            <mat-label>Contraseña Nueva</mat-label>
-                            <input
-                            type="password"
-                            matInput
-                            formControlName="pass"
-                            placeholder="Contraseña Nueva"
-                            required="true"
-                            autocomplete="off"
-                            />
-                            <mat-error *ngIf="recuparar && form.controls.pass.value === undefined">
-                                El código de recuperación es <strong>obligatorio</strong>
-                            </mat-error>
-                        </mat-form-field>
+                        <app-inputs *ngIf="!tokenEnviado" [label]="'Contraseña Nueva'" [placeHolder]="'Contraseña Nueva'" [requerido]="true" [type]="'password'" [valor]="form.controls.pass.value" (cambio)="asignarValor(form.controls.pass, $event)" ></app-inputs>
 
-                        <mat-form-field *ngIf="!tokenEnviado" appearance="outline" class="example-full-width">
-                            <mat-label>Confirmar Contraseña</mat-label>
-                            <input
-                            type="password"
-                            matInput
-                            formControlName="confirmar"
-                            placeholder="Código de Recuperación"
-                            required="true"
-                            autocomplete="off"
-                            />
-                            <mat-error *ngIf="recuparar && form.controls.confirmar.value === undefined">
-                                El código de recuperación es <strong>obligatorio</strong>
-                            </mat-error>
-                        </mat-form-field>
+                        <app-inputs *ngIf="!tokenEnviado" [label]="'Confirmar Contraseña'" [placeHolder]="'Confirmar Contraseña'" [requerido]="true" [type]="'password'" [valor]="form.controls.confirmar.value" (cambio)="asignarValor(form.controls.confirmar, $event)" ></app-inputs>
+
                     </div>
 
                     <mat-error *ngIf="diferentes && !tokenEnviado">
@@ -81,12 +27,13 @@
                     
                     <div class="d-flex row justify-content-center">
                         <div class="w-50 d-flex justify-content-center">
-                            
-                            <button mat-raised-button *ngIf="tokenEnviado" [disabled]="form.controls.mail.value === null" [ngClass]="form.controls.mail.value !== null ? 'button' : 'button-disabled' " (click)="EnviarCodigo()">Enviar código</button>
 
-                            <button mat-raised-button *ngIf="!tokenEnviado" [disabled]="!form.valid" [ngClass]="recuparar ? 'button' : 'button-disabled' " (click)="Recuperar()">Recuperar Contraseña</button>
+                            <app-button *ngIf="tokenEnviado" [habilita]="form.controls.mail.value === null" [valido]="form.controls.mail.value !== null" [texto]="'Enviar código'" (clickButton)="EnviarCodigo()"></app-button>
 
-                            <button mat-raised-button color="light" [disabled]="tokenEnviado" (click)="Volver()">Volver</button>
+                            <app-button *ngIf="!tokenEnviado" [habilita]="!form.valid" [valido]="recuparar" [texto]="'Recuperar Contraseña'" (clickButton)="Recuperar()"></app-button>
+
+                            <app-stroked [habilita]="!tokenEnviado" [texto]="'Volver'" (clickButton)="Volver()"></app-stroked>
+
                         </div>
                     </div>
                 </form>

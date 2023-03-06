@@ -25,9 +25,9 @@
                         <app-inputs [label]="'Contraseña'" [type]="'password'" [requerido]="true" [valor]="form.controls.pass.value" (cambio)="asignarValor(form.controls.pass, $event)" ></app-inputs>
 
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <a href="/login/recuperacion">¿Olvidaste tu contraseña?</a>
-                    </div>
+                    </div> -->
                     <div class="d-flex row justify-content-center">
                         <div class="w-25 d-flex justify-content-center">
                             <app-button [habilita]="!form.valid" [valido]="form.valid" [texto]="'Iniciar Sesión'" (clickButton)="Login()"></app-button>

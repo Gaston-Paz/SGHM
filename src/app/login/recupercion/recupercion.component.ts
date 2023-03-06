@@ -80,4 +80,11 @@ export class RecupercionComponent implements OnInit {
 
   }
 
+  asignarValor(control:any,valor:string,checkConstraseña:boolean = false){   
+    if(valor !== "" ){
+      control.setValue(valor);
+      if(checkConstraseña)this.CheckConfirmPassword();      
+    }
+  }
+
 }
