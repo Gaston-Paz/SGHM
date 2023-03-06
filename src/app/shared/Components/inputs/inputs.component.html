@@ -1,0 +1,20 @@
+<mat-form-field appearance="outline" class="example-full-width">
+  <mat-label> {{ label }} </mat-label>
+  <input
+    [tabIndex]="tabindex"
+    type="text"
+    matInput
+    [placeholder]="placeHolder"
+    [required]="requerido"
+    autocomplete="off"
+    (change)="cambios($event)"
+    (blur)="valido($event)"
+    [type]="type"
+    [value]="valor"
+  />
+</mat-form-field>
+
+<mat-error [ngClass]=" valida ? '' : 'color-white' " >
+  {{ label }} es <strong>obligatorio</strong>
+</mat-error>
+

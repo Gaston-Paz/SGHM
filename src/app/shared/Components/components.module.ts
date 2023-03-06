@@ -10,6 +10,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MiniFabComponent } from './buttons/mini-fab/mini-fab.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StrokedComponent } from './buttons/stroked/stroked.component';
+import { InputsComponent } from './inputs/inputs.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 
@@ -20,14 +23,17 @@ import { StrokedComponent } from './buttons/stroked/stroked.component';
     ModalConfirmComponent,
     ModalImagenComponent,
     MiniFabComponent,
-    StrokedComponent
+    StrokedComponent,
+    InputsComponent
   ],
   imports: [
     CommonModule,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   exports:[
     ButtonComponent,
@@ -35,7 +41,8 @@ import { StrokedComponent } from './buttons/stroked/stroked.component';
     ModalConfirmComponent,
     ModalImagenComponent,
     MiniFabComponent,
-    StrokedComponent
+    StrokedComponent,
+    InputsComponent
   ]
 })
 export class ComponentsModule { }

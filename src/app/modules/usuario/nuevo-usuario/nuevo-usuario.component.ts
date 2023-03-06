@@ -41,6 +41,8 @@ export class NuevoUsuarioComponent implements OnInit {
     rol:''
   }
 
+  valida:boolean = false;
+
   constructor(private _formBuilder: FormBuilder, 
     private _router:Router,
     private _snack:SnackService,
@@ -95,10 +97,22 @@ export class NuevoUsuarioComponent implements OnInit {
 
   }
 
-  CheckConfirmPassword(){
+  CheckConfirmPassword(){        
     if(this.form.controls.confirmar.value === null)this.diferentes = false;
     else if(this.form.controls.password.value === null)this.diferentes =  false;
     else if(this.form.controls.password.value !== this.form.controls.confirmar.value)this.diferentes = true;
     else this.diferentes =  false;
+  }
+
+  asignarValor(control:any,valor:string,checkConstraseña:boolean = false){   
+    if(valor !== "" ){
+      control.setValue(valor);
+      if(checkConstraseña)this.CheckConfirmPassword();      
+    }
+  }
+
+  Valido(){
+    this.valida = this.form.controls.rol.value === "";
+    
   }
 }
