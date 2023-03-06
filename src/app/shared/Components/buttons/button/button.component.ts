@@ -9,7 +9,9 @@ export class ButtonComponent implements OnInit {
 
   @Input('habilita')habilita:boolean = false;
   @Input('valido')valido:boolean = true;
+  @Input('icono')icono:boolean = true;
   @Input('texto')texto:string = '';
+  @Input('textoIcono')textoIcono:string = '';
   @Output() clickButton = new EventEmitter<MouseEvent>();
 
   constructor() { }

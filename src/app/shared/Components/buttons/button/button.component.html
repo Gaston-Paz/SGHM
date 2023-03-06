@@ -1,1 +1,1 @@
-<button mat-raised-button [disabled]="habilita" [ngClass]="valido ? 'button' : 'button-disabled' " (click)="clicks($event)"> {{texto}} </button>
+<button mat-raised-button [disabled]="habilita" [ngClass]="valido ? 'button' : 'button-disabled' " (click)="clicks($event)"> {{texto}} <mat-icon [hidden]="icono"> {{textoIcono}} </mat-icon> </button>

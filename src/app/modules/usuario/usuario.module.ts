@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
+import { ComponentsModule } from 'src/app/shared/Components/components.module';
 
 
 
@@ -27,14 +28,13 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatSelectModule,
     MatCardModule,
     NgxSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    MatIconModule,
-    UsuariosRoutingModule
+    UsuariosRoutingModule,
+    ComponentsModule
   ]
 })
 export class UsuarioModule { }

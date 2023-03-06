@@ -107,7 +107,9 @@
               </mat-card-content>
 
               <mat-card-actions align="end">
-                <button [disabled]="!form.valid || diferentes" (click)="GuardarUsuario()" [ngClass]="form.valid ? 'button' : 'button-disabled' " mat-button>Guardar</button>
+
+                <app-button [habilita]="!form.valid || diferentes" [valido]="form.valid" [texto]="'Guardar'" (clickButton)="GuardarUsuario()" ></app-button>
+
               </mat-card-actions>
         </mat-card>
     </div>
