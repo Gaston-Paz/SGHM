@@ -33,7 +33,9 @@
     </mat-form-field>
     </form>
     <div class="end mt-20">
-        <button [ngClass]="form.valid && GetEstudio() ? 'button' : 'button-disabled' " [disabled]="!form.valid" class="button" mat-button (click)="GuardarEstudios()" > Guardar Estudios </button>
+
+      <app-button [valido]="form.valid && GetEstudio()" [habilita]="!form.valid" [texto]="'Guardar Estudios'" (clickButton)="GuardarEstudios()" ></app-button>
+
       </div>
 </mat-card>
 </div>

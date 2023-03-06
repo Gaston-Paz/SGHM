@@ -11,11 +11,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { ListarComponent } from './listar/listar.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatChipsModule } from '@angular/material/chips';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { EstudiosRoutingModule } from './estudios-routing.module';
+import { ComponentsModule } from 'src/app/shared/Components/components.module';
 
 @NgModule({
   declarations: [
@@ -31,15 +32,15 @@ import { EstudiosRoutingModule } from './estudios-routing.module';
     ReactiveFormsModule,
     FormsModule,
     NgxSpinnerModule,
-    MatButtonModule,
     MatInputModule,
     MatChipsModule,
-    MatIconModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     PacientesModule,
-    EstudiosRoutingModule
+    EstudiosRoutingModule,
+    ComponentsModule,
+    MatIconModule
   ]
 })
 export class EstudiosModule { }
