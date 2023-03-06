@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
@@ -56,12 +57,17 @@ export class ListarComponent implements OnInit, OnDestroy {
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
       this.pacientesFilter = resp[0]; 
-      this.estudios = resp[1];
+      this.estudios = resp[1];    
       if (this.mail !== null){
         this._serviceError.Usuario = resp[2];
         if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
         else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
         this._serviceError.muestroMenu = true;
+      }
+      
+      if(this._serviceEstudio.paciente.idPaciente !== 0){
+        this.form.controls.paciente.setValue(this._serviceEstudio.paciente.idPaciente);
+        this.BuscarEstudios();
       }
         
     },(error:HttpErrorResponse) => {
@@ -72,7 +78,7 @@ export class ListarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscribes.forEach(s => s.unsubscribe());
   }
-
+  urls: any[] = [];
   BuscarEstudios(){
     this.estudiosFiltrados = [];
     this.estudios.forEach(e => {

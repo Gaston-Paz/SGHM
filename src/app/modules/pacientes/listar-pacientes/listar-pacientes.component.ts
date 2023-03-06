@@ -143,7 +143,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.consultaInicial = false;
           this.consultaNueva = false;
           this.turnos = false;
-
+  console.log(resp);
+  console.log(element.idPaciente);
+  
           this.nombrePaciente = element.nombre;
           this.apellidoPaciente = element.apellido;
         },

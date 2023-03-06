@@ -46,6 +46,7 @@
               [routerLinkActive]="'active-link'"
               [routerLink]="nav.url"
               *ngFor="let nav of _serviceError.Nav"
+              (click)="resetar()"
               >{{ nav.text }}</a
             >
           </mat-nav-list>

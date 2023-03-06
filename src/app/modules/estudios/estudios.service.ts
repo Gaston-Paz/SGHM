@@ -9,6 +9,19 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class EstudiosService {
 
+  paciente: Paciente = {
+    apellido: "",
+    celular: "",
+    fechaNacimiento: new Date(),
+    email: "",
+    nacio: "",
+    nombre: "",
+    ocupacion: "",
+    localidad: "",
+    otros: "",
+    deParte: "",
+  };
+
   constructor(private _httpClient: HttpClient) { }
 
   ObtenerEstudios() {

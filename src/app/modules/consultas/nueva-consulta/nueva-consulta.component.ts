@@ -135,13 +135,13 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   GuardarConsulta(){
     this.MapTratamiento();
-    
     this.subscribes.push(this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(resp => {
       this._snack.Mensaje("El tratamiento se guardó con éxito",'success');
       this.form.reset();
       const espera = timer(1500);
       espera.subscribe(() => {
-        this._router.navigate(['home/consultas/listar-consultas'])
+        this._serviceConsulta.paciente = this.tratamiento.paciente!;
+        this._router.navigate(['home/consultas/listar-consultas']);
       });
     },(error:HttpErrorResponse) => {
       this._serviceError.Error(error);

@@ -5,6 +5,7 @@ import { Usuario } from "./core/interfaces/usuario.interface";
 import { UsuarioService } from "./modules/usuario/usuario.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorService } from "./shared/services/error.service";
+import { ConsultasService } from "./modules/consultas/nueva-consulta/consultas.service";
 
 @Component({
   selector: "app-root",
@@ -74,7 +75,8 @@ export class AppComponent implements OnInit {
     media: MediaMatcher,
     public _router: Router,
     private _usuarioService: UsuarioService,
-    public _serviceError: ErrorService
+    public _serviceError: ErrorService,
+    private _serviceConsulta: ConsultasService
   ) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -95,6 +97,22 @@ export class AppComponent implements OnInit {
         }
       );
     }
+  }
+
+  resetar(){
+    this._serviceConsulta.paciente = {
+      apellido: "",
+      celular: "",
+      fechaNacimiento: new Date(),
+      email: "",
+      nacio: "",
+      nombre: "",
+      ocupacion: "",
+      localidad: "",
+      otros: "",
+      deParte: "",
+    };
+    
   }
 
   // MuestroMenu() {

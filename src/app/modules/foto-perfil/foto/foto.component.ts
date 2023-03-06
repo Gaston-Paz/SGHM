@@ -172,6 +172,7 @@ export class FotoComponent implements OnInit, OnDestroy {
                 );
                 const espera = timer(1500);
                 espera.subscribe(() => {
+                  this.form.reset();
                   this._router.navigate(["home/pacientes/listar-pacientes"]);
                 });
               },
@@ -181,7 +182,7 @@ export class FotoComponent implements OnInit, OnDestroy {
             );
         }
       });
-      this.form.reset();
+
     } else {
       this._servicePaciente
         .GuardarleFoto(this.formData, this.form.controls.paciente.value)
@@ -193,6 +194,7 @@ export class FotoComponent implements OnInit, OnDestroy {
             );
             const espera = timer(1500);
             espera.subscribe(() => {
+              this.form.reset();
               this._router.navigate(["home/pacientes/listar-pacientes"]);
             });
           },
@@ -200,7 +202,7 @@ export class FotoComponent implements OnInit, OnDestroy {
             this._serviceError.Error(error);
           }
         );
-      this.form.reset();
+
     }
   }
 }

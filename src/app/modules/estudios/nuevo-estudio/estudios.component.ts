@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
-import { forkJoin, Observable } from "rxjs";
+import { forkJoin, Observable, timer } from "rxjs";
 import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-paciente.service";
 import { COMMA, ENTER } from "@angular/cdk/keycodes";
@@ -12,6 +12,7 @@ import { EstudiosService } from "../estudios.service";
 import { EstudiosMedicosComponent } from "../../pacientes/nuevo-paciente/estudios-medicos/estudios-medicos.component";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { UsuarioService } from "../../usuario/usuario.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-estudios",
@@ -42,7 +43,8 @@ export class EstudiosComponent implements OnInit, OnDestroy {
     private _snack: SnackService,
     private _serviceEstudio:EstudiosService,
     private _serviceError:ErrorService,
-    private _usuarioService: UsuarioService
+    private _usuarioService: UsuarioService,
+    private _router: Router
   ) {}
 
   ngOnDestroy(): void {
@@ -101,9 +103,14 @@ export class EstudiosComponent implements OnInit, OnDestroy {
           forkJoin(obs).subscribe(
             (resp) => {
               this._snack.Mensaje("El estudio se guardó con éxito", "success");
-              this.form.reset();
-              this.estudioComponent.VaciarFotos();
               this.nombresNuevos = [];
+              const espera = timer(1500);
+              espera.subscribe(() => {
+                this.estudioComponent.VaciarFotos();                
+                this._serviceEstudio.paciente = this.pacientes.find(x => x.idPaciente === this.form.controls.paciente.value)!;
+                this.form.reset();
+                this._router.navigate(['home/estudios/listar-estudios']);
+              });
             },
             (error: HttpErrorResponse) => {
               this._serviceError.Error(error);
