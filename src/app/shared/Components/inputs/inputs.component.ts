@@ -15,6 +15,7 @@ export class InputsComponent implements OnInit {
   @Input('placeHolder')placeHolder:string = '';
   @Input('type')type:string = '';
   @Input('requerido')requerido:boolean = false;
+  @Input('readOnly')readOnly:boolean = false;
   validaRequerido:boolean = false;
   validaMail:boolean = false;
   @Output() cambio = new EventEmitter<any>();
