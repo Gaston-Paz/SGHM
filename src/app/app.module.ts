@@ -18,7 +18,7 @@ import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

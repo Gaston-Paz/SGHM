@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MiniFabComponent } from './buttons/mini-fab/mini-fab.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StrokedComponent } from './buttons/stroked/stroked.component';
 
 
 
@@ -18,7 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SnackBarComponent,
     ModalConfirmComponent,
     ModalImagenComponent,
-    MiniFabComponent
+    MiniFabComponent,
+    StrokedComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +34,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SnackBarComponent,
     ModalConfirmComponent,
     ModalImagenComponent,
-    MiniFabComponent
+    MiniFabComponent,
+    StrokedComponent
   ]
 })
 export class ComponentsModule { }
