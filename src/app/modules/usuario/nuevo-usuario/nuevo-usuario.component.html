@@ -1,70 +1,116 @@
 <div class="container mt-2">
-    <div class="card">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>Nuevo Usuario</mat-card-title>
-              </mat-card-header>
+  <div class="card">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Nuevo Usuario</mat-card-title>
+      </mat-card-header>
 
-              <mat-card-content>
-                <form [formGroup]="form">
-                    <div class="row w-100">
-                            <div class="col-6">
+      <mat-card-content>
+        <form [formGroup]="form">
+          <div class="row w-100">
+            <div class="col-6">
+              <div class="w-100">
+                <app-inputs
+                  [tabindex]="1"
+                  [label]="'Nombre'"
+                  [type]="'text'"
+                  [requerido]="true"
+                  [placeHolder]="'Nombre del usuario'"
+                  (cambio)="asignarValor(form.controls.nombre, $event)"
+                  [valor]="form.controls.nombre.value"
+                ></app-inputs>
+              </div>
 
-                              <div class="w-100">
-                                <app-inputs [tabindex]="1" [label]="'Nombre'" [type]="'text'" [requerido]="true" [placeHolder]="'Nombre del usuario'" (cambio)="asignarValor(form.controls.nombre, $event)" [valor]="form.controls.nombre.value"></app-inputs>
-                              </div>
+              <div class="w-100">
+                <app-inputs
+                  [tabindex]="3"
+                  [label]="'Email'"
+                  [type]="'email'"
+                  [requerido]="true"
+                  [placeHolder]="'E-mail del usuario'"
+                  (cambio)="asignarValor(form.controls.mail, $event)"
+                  [valor]="form.controls.mail.value"
+                ></app-inputs>
+              </div>
 
-                              <div class="w-100">
-                                <app-inputs [tabindex]="3" [label]="'Email'" [type]="'email'" [requerido]="true" [placeHolder]="'E-mail del usuario'" (cambio)="asignarValor(form.controls.mail, $event)" [valor]="form.controls.mail.value" ></app-inputs>
-                              </div>
+              <div class="w-100">
+                <app-inputs
+                  [tabindex]="5"
+                  [label]="'Contraseña'"
+                  [type]="'password'"
+                  [requerido]="true"
+                  [valor]="form.controls.password.value"
+                  (cambio)="asignarValor(form.controls.password, $event, true)"
+                ></app-inputs>
+              </div>
+            </div>
 
-                              <div class="w-100">
-                                <app-inputs [tabindex]="5" [label]="'Contraseña'" [type]="'password'" [requerido]="true" [valor]="form.controls.password.value" (cambio)="asignarValor(form.controls.password, $event,true)" ></app-inputs>
-                              </div>
+            <div class="col-6">
+              <div class="w-100">
+                <app-inputs
+                  [tabindex]="2"
+                  [label]="'Apellido'"
+                  [type]="'text'"
+                  [requerido]="true"
+                  [placeHolder]="'Apellido del usuario'"
+                  (cambio)="asignarValor(form.controls.apellido, $event)"
+                  [valor]="form.controls.apellido.value"
+                ></app-inputs>
+              </div>
+              <div class="w-100">
+                <mat-form-field appearance="outline" class="example-full-width">
+                  <mat-label>Rol</mat-label>
+                  <mat-select
+                    tabindex="4"
+                    formControlName="rol"
+                    required
+                    (closed)="Valido()"
+                  >
+                    <mat-option *ngFor="let rol of roles" [value]="rol">
+                      {{ rol }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-error [ngClass]="valida ? '' : 'color-white'">
+                  El Rol es <strong>obligatorio</strong>
+                </mat-error>
+              </div>
+              <div class="w-100">
+                <app-inputs
+                  [tabindex]="6"
+                  [label]="'Confirmar Contraseña'"
+                  [type]="'password'"
+                  [requerido]="true"
+                  [placeHolder]="'E-mail del usuario'"
+                  (cambio)="asignarValor(form.controls.confirmar, $event, true)"
+                  [valor]="form.controls.confirmar.value"
+                ></app-inputs>
+              </div>
+            </div>
+          </div>
+          <mat-error *ngIf="diferentes">
+            Las contraseñas <strong>no coinciden</strong>
+          </mat-error>
+        </form>
+      </mat-card-content>
 
-                            </div>
-
-
-                            <div class="col-6">
-                              <div class="w-100">
-                                <app-inputs [tabindex]="2" [label]="'Apellido'" [type]="'text'" [requerido]="true" [placeHolder]="'Apellido del usuario'" (cambio)="asignarValor(form.controls.apellido, $event)" [valor]="form.controls.apellido.value"></app-inputs>
-                              </div>
-                              <div class="w-100">
-                                <mat-form-field appearance="outline" class="example-full-width">
-                                  <mat-label>Rol</mat-label>
-                                  <mat-select tabindex="4" formControlName="rol" required (closed)="Valido()">
-                                    <mat-option
-                                      *ngFor="let rol of roles"
-                                      [value]="rol"
-                                    >
-                                      {{ rol }} 
-                                    </mat-option>
-                                  </mat-select>
-                                </mat-form-field>
-                                <mat-error [ngClass]="valida ? '' : 'color-white'">
-                                  El Rol es <strong>obligatorio</strong>
-                                </mat-error>
-                              </div>
-                              <div class="w-100">
-                                
-                          <app-inputs [tabindex]="6" [label]="'Confirmar Contraseña'" [type]="'password'" [requerido]="true" [placeHolder]="'E-mail del usuario'" (cambio)="asignarValor(form.controls.confirmar, $event,true)" [valor]="form.controls.confirmar.value"></app-inputs>
-                              </div>
-                            </div>
-
-                    </div>
-                    <mat-error *ngIf="diferentes">
-                      Las contraseñas <strong>no coinciden</strong>
-                    </mat-error>
-                </form>
-              </mat-card-content>
-
-              <mat-card-actions align="end">
-
-                <app-button [habilita]="!form.valid || diferentes" [valido]="form.valid" [texto]="'Guardar'" (clickButton)="GuardarUsuario()" ></app-button>
-
-              </mat-card-actions>
-        </mat-card>
-    </div>
+      <mat-card-actions align="end">
+        <app-button
+          [habilita]="!form.valid || diferentes"
+          [valido]="form.valid"
+          [texto]="'Guardar'"
+          (clickButton)="GuardarUsuario()"
+        ></app-button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "large" color = "#60c76e" type = "ball-atom" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="large"
+  color="#60c76e"
+  type="ball-atom"
+  [fullScreen]="true"
+  ><p style="color: white">Cargando...</p></ngx-spinner
+>

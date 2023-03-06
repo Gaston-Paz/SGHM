@@ -6,7 +6,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { FotosRoutingModule } from './fotos-routing.module';
@@ -24,7 +23,6 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     MatSelectModule,
     MatInputModule,
     MatCardModule,
-    MatSnackBarModule,
     MatDialogModule,
     NgxSpinnerModule,
     FotosRoutingModule,

@@ -65,5 +65,11 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem('SGHC-mail');
   }
 
+  asignarValor(control:any,valor:string){   
+    if(valor !== "" ){
+      control.setValue(valor);    
+    }
+  }
+
 
 }

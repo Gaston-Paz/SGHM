@@ -15,8 +15,10 @@ export class InputsComponent implements OnInit {
   @Input('placeHolder')placeHolder:string = '';
   @Input('type')type:string = '';
   @Input('requerido')requerido:boolean = false;
-  valida:boolean = false;
+  validaRequerido:boolean = false;
+  validaMail:boolean = false;
   @Output() cambio = new EventEmitter<any>();
+  msj:string = '';
 
   constructor() { }
 
@@ -28,7 +30,24 @@ export class InputsComponent implements OnInit {
   }
 
   valido(ev:any){
-    this.valida = ev.target.value === "";    
+    if(this.type === 'email') {
+      
+      if(ev.target.value.length < 3){
+        if(ev.target.value.length > 0)this.validaMail = true;
+        else this.validaMail = false;
+      }
+      else if(!ev.target.value.includes('@')) this.validaMail = true;
+      else if(ev.target.value.includes('@')){
+        let formato =  ev.target.value.split('@');
+        if(formato[0] === "" || formato[1] === "")this.validaMail = true;
+        else this.validaMail = false;
+      }else this.validaMail = false;
+      
+    }
+    this.validaRequerido = ev.target.value === "";    
+
+    if(this.validaMail) this.msj = `El formato del e-mail es `;
+    else if(this.validaRequerido) this.msj = `${this.label} es `
   }
 
 }

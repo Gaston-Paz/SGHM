@@ -14,7 +14,8 @@
   />
 </mat-form-field>
 
-<mat-error [ngClass]=" valida ? '' : 'color-white' " >
-  {{ label }} es <strong>obligatorio</strong>
+<mat-error [ngClass]=" validaRequerido || validaMail ? '' : 'color-white' " >
+ {{msj }} <strong>incorrecto</strong>
 </mat-error>
+
 

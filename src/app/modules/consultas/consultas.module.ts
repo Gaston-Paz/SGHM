@@ -8,7 +8,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -30,7 +29,6 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSnackBarModule,
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
