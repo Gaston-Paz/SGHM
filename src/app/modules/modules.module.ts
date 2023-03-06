@@ -7,8 +7,6 @@ import { ModulesRoutingModule } from './modules-routing.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatListModule} from '@angular/material/list';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -31,8 +29,6 @@ import { MatCardModule } from '@angular/material/card';
         MatSidenavModule,
         MatToolbarModule,
         MatListModule,
-        MatIconModule,
-        MatButtonModule,
         HttpClientModule,
         NgxSpinnerModule,
         MatDialogModule,

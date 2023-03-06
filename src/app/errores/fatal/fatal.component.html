@@ -5,15 +5,15 @@
         </div>
 
         <div class="mb-5 w-max">
-            <h1>Error Fatal en el servidor</h1>
+            <h1>Error en el servidor</h1>
         </div>
 
         <div class="mb-5 ">
-            <p> {{fatal}} </p>
+            <p> Comuníquese con su administrador y envíele este mensaje: {{fatal}} </p>
         </div>
 
         <div class="mb-5">
-            <button mat-raised-button color="primary" (click)="Volver()">Volver</button>
+            <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
         </div>
     </div>
 </div>
