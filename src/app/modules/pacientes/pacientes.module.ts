@@ -14,8 +14,6 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
 //Material
 import {MatCardModule} from '@angular/material/card';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -38,8 +36,6 @@ import { MatSelectModule } from '@angular/material/select';
     CommonModule,
     MatCardModule,
     MatTabsModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,

@@ -3,27 +3,8 @@
     margin-top: 10px;
 }
 
-.title{
-    margin: auto;
-    margin-top: 10px;
-}
-
-.title h1{
-    font-weight: 600;
-}
-
 .card{
     display: flex;
     margin-bottom: 10px;
-}
-
-.button{
-    background-color:rgb(119, 114, 72);
-    color: #ffffff;
-}
-
-.button-disabled{
-    background-color: rgb(225,223,206);
-    color: #ffffff;
 }
 

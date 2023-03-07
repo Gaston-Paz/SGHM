@@ -9,20 +9,8 @@
     width: 48%;
   }
 
-.date-picker-toogle{
-  margin-left: 525px;
-}
-
-img{
-  width: 45%;
-}
-
 .pad-15{
   padding: 15px 15px 0 15px;
-}
-
-.pad-15-bis{
-  padding: 0 15px 0 15px;
 }
 
 .mt-20{
@@ -46,27 +34,13 @@ h3{
   margin-right: 60px;;
 }
 
-.w-30{
-  width: 30%;
-}
-
 .w-24{
   width: 24%;
-}
-
-.ml-25{
-  margin-left: 2.5%;
-}
-
-.w75{
-  width: 75%;
 }
 
 .mat-checkbox{
   display: inherit;
 }
-
-
 
 .mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
   padding: 0;

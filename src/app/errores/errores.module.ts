@@ -6,7 +6,6 @@ import { NoAutorizadoComponent } from './no-autorizado/no-autorizado.component';
 import { NoEncontradoComponent } from './no-encontrado/no-encontrado.component';
 import { FatalComponent } from './fatal/fatal.component';
 import { ComponentsModule } from '../shared/Components/components.module';
-import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -18,8 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     ErroresRoutingModule,
-    ComponentsModule,
-    MatIconModule
+    ComponentsModule
   ]
 })
 export class ErroresModule { }

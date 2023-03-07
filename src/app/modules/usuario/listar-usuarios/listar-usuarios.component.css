@@ -1,26 +1,16 @@
-/* Structure */
 table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  .container{
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  .foto{
-    width: 205px;
-  }
-  
-  .button{
-    background-color:rgb(119, 114, 72);
-    color: #ffffff;
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
 }
 
 th.mat-header-cell {
@@ -31,32 +21,12 @@ td {
   text-align: center;
 }
 
-.left{
-  justify-content: start;
-  margin-bottom: 20px;
-  display: flex;
-}
-
-.right{
-  justify-content: end;
-  margin-bottom: 20px;
-  display: flex;
-}
-
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
 
-.button-disabled{
-  background-color: rgb(225,223,206);
-  color: #ffffff;
-}
 
-h3{
+h3 {
   font-size: 20px;
-font-weight: 500;
-}
-
-.mt-20{
-margin-top: 20px;
+  font-weight: 500;
 }

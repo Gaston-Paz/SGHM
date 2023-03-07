@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NuevoUsuarioComponent } from './nuevo-usuario/nuevo-usuario.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -23,7 +22,6 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
     MatSelectModule,
     MatCardModule,
     NgxSpinnerModule,

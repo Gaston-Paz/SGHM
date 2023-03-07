@@ -43,7 +43,9 @@ import { MatInputModule } from '@angular/material/input';
     MiniFabComponent,
     StrokedComponent,
     InputsComponent,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ]
 })
 export class ComponentsModule { }

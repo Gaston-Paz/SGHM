@@ -1,7 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from '../core/interfaces/usuario.interface';
 import { ErrorService } from '../shared/services/error.service';
 import { UsuarioService } from './usuario/usuario.service';
 
@@ -12,13 +11,6 @@ import { UsuarioService } from './usuario/usuario.service';
 })
 export class ModulesComponent implements OnInit {
 
-  usuario:Usuario={
-    apellido:'',
-    email:'',
-    nombre:'',
-    password:'',
-    rol:''
-  };
   mail:string="";
 
   constructor(public _errorService:ErrorService,

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
 import { NuevoPacienteService } from '../nuevo-paciente.service';
 

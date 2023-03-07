@@ -10,7 +10,6 @@ import { ErrorService } from "src/app/shared/services/error.service";
 import { timer } from "rxjs";
 import { Router } from "@angular/router";
 import { UsuarioService } from "../../usuario/usuario.service";
-import { Usuario } from "src/app/core/interfaces/usuario.interface";
 @Component({
   selector: "app-nuevo-paciente",
   templateUrl: "./nuevo-paciente.component.html",
