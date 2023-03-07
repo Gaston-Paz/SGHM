@@ -15,7 +15,7 @@
   />
 </mat-form-field>
 
-<mat-label  [ngClass]=" validaRequerido || validaMail ? 'mat-error' : 'none' " >
+<mat-label  [ngClass]=" requerido && validaRequerido ? 'mat-error' : type === 'email' && validaMail ? 'mat-error' : 'none' " >
  {{msj}}
 </mat-label>
 

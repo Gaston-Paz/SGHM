@@ -31,13 +31,13 @@
               </mat-form-field>
 
               <div class="w-100">
-                <app-inputs [tabindex]="3" [label]="'Motivo'" [type]="'text'" [placeHolder]="'Motivo'" [requerido]="true" (cambio)="form.controls.motivo.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="3" [label]="'Motivo'" [type]="'text'" [placeHolder]="'Motivo'" [requerido]="true" (cambio)="form.controls.motivo.setValue($event)" [valor]="form.controls.motivo.value" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="5" [label]="'Altura de Iliacos'" [type]="'text'" [placeHolder]="'Altura de Iliacos'" [requerido]="false" (cambio)="form.controls.altura.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="5" [label]="'Altura de Iliacos'" [type]="'text'" [placeHolder]="'Altura de Iliacos'" [requerido]="false" (cambio)="form.controls.altura.setValue($event)" [valor]="form.controls.altura.value" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="7" [label]="'3 Esferas DD'" [type]="'text'" [placeHolder]="'3 Esferas DD'" [requerido]="false" (cambio)="form.controls.esferas.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="7" [label]="'3 Esferas DD'" [type]="'text'" [placeHolder]="'3 Esferas DD'" [requerido]="false" (cambio)="form.controls.esferas.setValue($event)" [valor]="form.controls.esferas.value" ></app-inputs>
               </div>
 
             </div>
@@ -69,13 +69,13 @@
               </mat-form-field>
 
               <div class="w-100">
-                <app-inputs [tabindex]="4" [label]="'Triángulo de la talla'" [type]="'text'" [placeHolder]="'Triángulo de la talla'" [requerido]="false" (cambio)="form.controls.triangulo.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="4" [label]="'Triángulo de la talla'" [type]="'text'" [placeHolder]="'Triángulo de la talla'" [requerido]="false" (cambio)="form.controls.triangulo.setValue($event)" [valor]="form.controls.triangulo.value" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="6" [label]="'Barral'" [type]="'text'" [placeHolder]="'Barral'" [requerido]="false" (cambio)="form.controls.barral.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="6" [label]="'Barral'" [type]="'text'" [placeHolder]="'Barral'" [requerido]="false" (cambio)="form.controls.barral.setValue($event)" [valor]="form.controls.barral.value" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="8" [label]="'Específico'" [type]="'text'" [placeHolder]="'Específico'" [requerido]="false" (cambio)="form.controls.especifico.setValue($event)" ></app-inputs>
+                <app-inputs [tabindex]="8" [label]="'Específico'" [type]="'text'" [placeHolder]="'Específico'" [requerido]="false" (cambio)="form.controls.especifico.setValue($event)" [valor]="form.controls.especifico.value" ></app-inputs>
               </div>
             </div>
 
@@ -144,11 +144,6 @@
                 </mat-error>
               </mat-form-field>
             </div>
-
-
-
-
-
           </div>
         </div>
       </form>
@@ -209,6 +204,7 @@
               (change)="SetConsultaAlta()"
               [(ngModel)]="consulta.sedestacion"
               rows="5"
+              tabindex="6"
             ></textarea>
             <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
               Campo <strong>obligatorio</strong>
@@ -226,6 +222,7 @@
               [min]="fecha"
               [matDatepicker]="proximo"
               [value]="form.controls.proximoTurno.value"
+              tabindex="8"
             />
             <mat-datepicker-toggle
               mat-datepicket-toggle
@@ -247,6 +244,7 @@
               autocomplete="off"
               (change)="SetConsultaAlta()"
               [(ngModel)]="consulta.sugerencias"
+              tabindex="7"
             ></textarea>
             <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
               Sugerencias es <strong>obligatorio</strong>

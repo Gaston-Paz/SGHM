@@ -47,7 +47,7 @@ export class InputsComponent implements OnInit {
     }
     this.validaRequerido = ev.target.value === "";    
 
-    if(this.validaMail) this.msj = `El formato del e-mail es incorrect`;
+    if(this.validaMail) this.msj = `El formato del e-mail es incorrecto`;
     else if(this.validaRequerido) this.msj = `${this.label} es obligatorio`
   }
 

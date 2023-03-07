@@ -23,50 +23,57 @@ export class AntecedentesComponent implements OnInit {
   }
   fumador: string[]=['Tabaco','Marihuana','Ambos'];
   tiroides: string[]=['Hipotiroidismo','Hipertiroidismo'];
-  @Input("antecedente") antecedente!: Antecedente;
+  @Input("antecedente") antecedente: Antecedente = {
+    contencion: false,
+    diabetes: false,
+    embarazos: false,
+    menstruacion: false,
+    ortodoncia: false,
+    placaDescanso: false
+  };
   @Input("hayAntecedente") hayAntecedente: boolean = false;
   @Input("edicion") edicion: boolean = false;
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {      
     this.form = this._formBuilder.group({
-      cirugias: [],
-      implanteInferior: [],
-      implanteSuperior: [],
-      ortodoncia: [false],
-      EdadOrtodoncia: [],
-      piezasfaltantesSup: [],
-      piezasfaltantesInf: [],
-      placaDescanso: [false],
-      menstruacion: [false],
-      perdidas: [],
-      frecuencia: [],
-      partos: [],
-      abortoInducido: [],
-      abortoEspontaneo: [],
-      duracion: [],
-      volumen: [],
-      intestinal: [],
-      digestivo: [],
-      cardiaco: [],
-      urogenital: [],
-      respiratorio: [],
-      accidentes: [],
-      medicacion: [],
-      fracturas: [],
-      dolorCabeza: [],
-      tiroides: [],
-      otros: [],
-      alimentacion: [],
-      protesis: [],
-      oseo: [],
-      fuma: [],
-      otrasDrogas: [],
-      contencion: [false],
-      diabetes: [false],
-      embarazos: [false],
+      cirugias: [this.antecedente.cirugias === undefined ? '' : this.antecedente.cirugias],
+      implanteInferior: [this.antecedente.implanteInferior === undefined ? '' : this.antecedente.implanteInferior],
+      implanteSuperior: [this.antecedente.implanteSuperior === undefined ? '' : this.antecedente.implanteSuperior],
+      ortodoncia: [this.antecedente.ortodoncia],
+      EdadOrtodoncia: [this.antecedente.edadOrtodoncia === undefined ? '' : this.antecedente.edadOrtodoncia],
+      piezasfaltantesSup: [this.antecedente.piezasFaltantesSup === undefined ? '' : this.antecedente.piezasFaltantesSup],
+      piezasfaltantesInf: [this.antecedente.piezasFaltantesInf === undefined ? '' : this.antecedente.piezasFaltantesInf],
+      placaDescanso: [this.antecedente.placaDescanso],
+      menstruacion: [this.antecedente.menstruacion],
+      perdidas: [this.antecedente.perdidas === undefined ? '' : this.antecedente.perdidas],
+      frecuencia: [this.antecedente.frecuencia === undefined ? '' : this.antecedente.frecuencia],
+      partos: [this.antecedente.partos === undefined ? '' : this.antecedente.partos],
+      abortoInducido: [this.antecedente.abortosInducido === undefined ? '' : this.antecedente.abortosInducido],
+      abortoEspontaneo: [this.antecedente.abortosEspontaneo === undefined ? '' : this.antecedente.abortosEspontaneo],
+      duracion: [this.antecedente.duracion === undefined ? '' : this.antecedente.duracion],
+      volumen: [this.antecedente.volumen === undefined ? '' : this.antecedente.volumen],
+      intestinal: [this.antecedente.intestinal === undefined ? '' : this.antecedente.intestinal],
+      digestivo: [this.antecedente.digestivo === undefined ? '' : this.antecedente.digestivo],
+      cardiaco: [this.antecedente.cardiaco === undefined ? '' : this.antecedente.cardiaco],
+      urogenital: [this.antecedente.urogenital === undefined ? '' : this.antecedente.urogenital],
+      respiratorio: [this.antecedente.respiratorio === undefined ? '' : this.antecedente.respiratorio],
+      accidentes: [this.antecedente.accidentes === undefined ? '' : this.antecedente.accidentes],
+      medicacion: [this.antecedente.medicacion === undefined ? '' : this.antecedente.medicacion],
+      fracturas: [this.antecedente.fracturas === undefined ? '' : this.antecedente.fracturas],
+      dolorCabeza: [this.antecedente.dolorCabeza === undefined ? '' : this.antecedente.dolorCabeza],
+      tiroides: [this.antecedente.tiroides === undefined ? '' : this.antecedente.tiroides],
+      otros: [this.antecedente.otros === undefined ? '' : this.antecedente.otros],
+      alimentacion: [this.antecedente.alimentacion === undefined ? '' : this.antecedente.alimentacion],
+      protesis: [this.antecedente.protesis === undefined ? '' : this.antecedente.protesis],
+      oseo: [this.antecedente.oseo === undefined ? '' : this.antecedente.oseo],
+      fuma: [this.antecedente.fuma === undefined ? '' : this.antecedente.fuma],
+      otrasDrogas: [this.antecedente.otrasDrogas === undefined ? '' : this.antecedente.otrasDrogas],
+      contencion: [this.antecedente.contencion],
+      diabetes: [this.antecedente.diabetes],
+      embarazos: [this.antecedente.embarazos],
     });
     if(this.hayAntecedente)this.antecedentes = this.antecedente;    
   }

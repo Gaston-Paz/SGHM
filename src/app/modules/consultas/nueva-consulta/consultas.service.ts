@@ -28,15 +28,9 @@ export class ConsultasService {
     sedestacion: "",
     paciente:{
       apellido:'',
-      celular:'',
-      deParte:'',
-      email:'',
       fechaNacimiento: new Date(),
-      localidad:'',
       nacio:'',
-      nombre:'',
-      ocupacion:'',
-      otros:''
+      nombre:''
     }
   };
 

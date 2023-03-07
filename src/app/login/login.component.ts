@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
       email: this.form.controls.mail.value,
       password: this.form.controls.pass.value
     };
+    
     this._authService.Login(credencial).subscribe(token => {
       this._serviceError.muestroMenu = true; 
       this._authService.SetEmail(this.form.controls.mail.value);
@@ -56,6 +57,7 @@ export class LoginComponent implements OnInit {
 
       
     },(error:HttpErrorResponse) => {
+      console.log(error);
       this._snackService.Mensaje('Email o contraseña incorrecta','error');
     });
   }

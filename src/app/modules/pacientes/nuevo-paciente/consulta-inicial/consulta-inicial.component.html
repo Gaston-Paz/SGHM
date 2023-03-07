@@ -12,6 +12,7 @@
               [requerido]="true"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 9,form.controls.motivo)"
+              [valor]="form.controls.motivo.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -23,6 +24,7 @@
               [requerido]="true"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 2,form.controls.antiguedad)"
+              [valor]="form.controls.antiguedad.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -34,6 +36,7 @@
               [requerido]="false"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 6,form.controls.intensidad)"
+              [valor]="form.controls.intensidad.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -45,6 +48,7 @@
               [requerido]="false"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 7,form.controls.irradiacion)"
+              [valor]="form.controls.irradiacion.value"
             ></app-inputs>
           </div>
           <div class="w-100 ">
@@ -56,6 +60,7 @@
               [requerido]="false"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
+              [valor]="form.controls.actividadFisica.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -121,6 +126,7 @@
               [requerido]="true"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 8,form.controls.localizacion)"
+              [valor]="form.controls.localizacion.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -132,6 +138,7 @@
               [requerido]="false"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 5,form.controls.caracteristica)"
+              [valor]="form.controls.caracteristica.value"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -143,11 +150,12 @@
               [requerido]="false"
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 4,form.controls.atenua)"
+              [valor]="form.controls.atenua.value"
             ></app-inputs>
           </div>
           <div class="w-100 mb-38">
             <mat-checkbox
-              [tabindex]="10"
+              tabindex="10"
               [disabled]="edicion"
               color="primary"
               (change)="CargarConsultaInicial($event, 10,form.controls.covid)"
@@ -164,6 +172,7 @@
               [requerido]="false"
               [readOnly]="edicion || !form.controls.covid.value"
               (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
+              [valor]="form.controls.otros.value"
             ></app-inputs>
           </div>
         </div>
