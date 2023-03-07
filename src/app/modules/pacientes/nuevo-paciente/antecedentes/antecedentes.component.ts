@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Antecedente } from 'src/app/core/interfaces/antecedentes.interface';
 import { NuevoPacienteService } from '../nuevo-paciente.service';
@@ -6,7 +6,8 @@ import { NuevoPacienteService } from '../nuevo-paciente.service';
 @Component({
   selector: 'app-antecedentes',
   templateUrl: './antecedentes.component.html',
-  styleUrls: ['./antecedentes.component.css']
+  styleUrls: ['./antecedentes.component.css'],
+  encapsulation : ViewEncapsulation.None
 })
 export class AntecedentesComponent implements OnInit {
 

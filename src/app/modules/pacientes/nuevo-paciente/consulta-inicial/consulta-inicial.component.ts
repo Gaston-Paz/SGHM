@@ -61,9 +61,11 @@ export class ConsultaInicialComponent implements OnInit {
     }
   }
 
-  CargarConsultaInicial(ev:any,campo:number){
+  CargarConsultaInicial(ev:any,campo:number, control:any){
     let valor = "";
-    if(campo !== 10) valor = (ev.target.value);    
+    if(campo !== 10) valor = ev; 
+    else valor = ev.checked;   
+    control.setValue(valor);
     this._servicePacienteNuevo.CargarConsultaInicial(valor,campo,this.form.valid);
   }
 

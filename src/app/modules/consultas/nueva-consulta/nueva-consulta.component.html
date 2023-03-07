@@ -10,181 +10,145 @@
         <div class="col pad-15-bis">
           <div class="row">
             <h3>Evaluación</h3>
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Pacientes</mat-label>
-              <mat-select formControlName="paciente" required>
-
-                <input placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
-
-
-                <mat-option
-                  *ngFor="let paciente of pacientesFilter"
-                  [value]="paciente.idPaciente"
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="w-100 mb-20">
+                <mat-label>Pacientes</mat-label>
+                <mat-select formControlName="paciente" required>
+  
+                  <input tabindex="1" placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
+  
+  
+                  <mat-option
+                    *ngFor="let paciente of pacientesFilter"
+                    [value]="paciente.idPaciente"
+                  >
+                    {{ paciente.nombre }} - {{ paciente.apellido }}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.controls.paciente.hasError('required')"
+                  >Paciente es <strong>obligatorio</strong></mat-error
                 >
-                  {{ paciente.nombre }} - {{ paciente.apellido }}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="form.controls.paciente.hasError('required')"
-                >Paciente es <strong>obligatorio</strong></mat-error
-              >
-            </mat-form-field>
+              </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Fecha de Consulta</mat-label>
-              <input
-                matInput
-                readonly="true"
-                autocomplete="off"
-                #dateInput
-                required="true"
-                (dateChange)="changeDate(dateInput,1)"
-                onclick="changeDate(dateInput)"
-                [max]="fecha"
-                [matDatepicker]="selector"
-                [value]="form.controls.fecha.value"
-              />
-              <mat-datepicker-toggle
-                mat-datepicket-toggle
-                matSuffix
-                [for]="selector"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #selector></mat-datepicker>
-              <mat-error *ngIf="form.controls.fecha.hasError('required')">
-                Fecha de Consulta es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
+              <div class="w-100">
+                <app-inputs [tabindex]="3" [label]="'Motivo'" [type]="'text'" [placeHolder]="'Motivo'" [requerido]="true" (cambio)="form.controls.motivo.setValue($event)" ></app-inputs>
+              </div>
+              <div class="w-100">
+                <app-inputs [tabindex]="5" [label]="'Altura de Iliacos'" [type]="'text'" [placeHolder]="'Altura de Iliacos'" [requerido]="false" (cambio)="form.controls.altura.setValue($event)" ></app-inputs>
+              </div>
+              <div class="w-100">
+                <app-inputs [tabindex]="7" [label]="'3 Esferas DD'" [type]="'text'" [placeHolder]="'3 Esferas DD'" [requerido]="false" (cambio)="form.controls.esferas.setValue($event)" ></app-inputs>
+              </div>
 
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Motivo</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="motivo"
-                placeholder="Motivo"
-                required="true"
-                autocomplete="off"
-              />
-              <mat-error *ngIf="form.controls.motivo.hasError('required')">
-                Motivo es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" class="w-100 mb-20">
+                <mat-label>Fecha de Consulta</mat-label>
+                <input
+                  matInput
+                  readonly="true"
+                  autocomplete="off"
+                  #dateInput
+                  required="true"
+                  (dateChange)="changeDate(dateInput,1)"
+                  onclick="changeDate(dateInput)"
+                  [max]="fecha"
+                  [matDatepicker]="selector"
+                  [value]="form.controls.fecha.value"
+                  tabindex="2"
+                />
+                <mat-datepicker-toggle
+                  mat-datepicket-toggle
+                  matSuffix
+                  [for]="selector"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #selector></mat-datepicker>
+                <mat-error *ngIf="form.controls.fecha.hasError('required')">
+                  Fecha de Consulta es <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Triángulo de la talla</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="triangulo"
-                placeholder="Triángulo de la talla"
-                autocomplete="off"
-              />
-            </mat-form-field>
+              <div class="w-100">
+                <app-inputs [tabindex]="4" [label]="'Triángulo de la talla'" [type]="'text'" [placeHolder]="'Triángulo de la talla'" [requerido]="false" (cambio)="form.controls.triangulo.setValue($event)" ></app-inputs>
+              </div>
+              <div class="w-100">
+                <app-inputs [tabindex]="6" [label]="'Barral'" [type]="'text'" [placeHolder]="'Barral'" [requerido]="false" (cambio)="form.controls.barral.setValue($event)" ></app-inputs>
+              </div>
+              <div class="w-100">
+                <app-inputs [tabindex]="8" [label]="'Específico'" [type]="'text'" [placeHolder]="'Específico'" [requerido]="false" (cambio)="form.controls.especifico.setValue($event)" ></app-inputs>
+              </div>
+            </div>
 
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Altura de Iliacos</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="altura"
-                placeholder="Altura de Iliacos"
-                autocomplete="off"
-              />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Barral</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="barral"
-                placeholder="Barral"
-                autocomplete="off"
-              />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>3 Esferas DD</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="esferas"
-                placeholder="3 Esferas DD"
-                autocomplete="off"
-              />
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Específico</mat-label>
-              <input
-                type="text"
-                matInput
-                formControlName="especifico"
-                placeholder="Específico"
-                autocomplete="off"
-              />
-              <mat-error *ngIf="form.controls.barral.hasError('required')">
-                Específico es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
           </div>
 
           <div class="row bg-section">
             <h3>Tratamiento</h3>
-            <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-              <mat-label>Tratamiento</mat-label>
-              <textarea
-                type="text"
-                matInput
-                formControlName="sedestacion"
-                required="true"
-                autocomplete="off"
-                rows="5"
-              ></textarea>
-              <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
-                Campo <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
+            <div class="col-6">
+              <mat-form-field appearance="outline" appearance="outline" class="w-100">
+                <mat-label>Tratamiento</mat-label>
+                <textarea
+                tabindex="9"
+                  type="text"
+                  matInput
+                  formControlName="sedestacion"
+                  required="true"
+                  autocomplete="off"
+                  rows="5"
+                ></textarea>
+                <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
+                  Campo <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
 
-            <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-              <mat-label>Sugerencias</mat-label>
-              <textarea
-                type="text"
-                matInput
-                formControlName="sugerencias"
-                placeholder="Sugerencias"
-                autocomplete="off"
-                rows="5"
-              ></textarea>
-              <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
-                Sugerencias es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
+              <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Próximo Turno</mat-label>
+                <input
+                  tabindex="11"
+                  matInput
+                  readonly="true"
+                  autocomplete="off"
+                  #dateInputProximo
+                  (dateChange)="changeDate(dateInputProximo,2)"
+                  onclick="changeDate(dateInput)"
+                  [min]="fecha"
+                  [matDatepicker]="proximo"
+                  [value]="form.controls.proximoTurno.value"
+                />
+                <mat-datepicker-toggle
+                  mat-datepicket-toggle
+                  matSuffix
+                  [for]="proximo"
+                ></mat-datepicker-toggle>
+                <mat-datepicker #proximo></mat-datepicker>
+                <mat-error
+                  *ngIf="form.controls.proximoTurno.hasError('required')"
+                >
+                  Próximo Turno es <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-6">
+              <mat-form-field appearance="outline" appearance="outline" class="w-100">
+                <mat-label>Sugerencias</mat-label>
+                <textarea
+                  tabindex="10"
+                  type="text"
+                  matInput
+                  formControlName="sugerencias"
+                  placeholder="Sugerencias"
+                  autocomplete="off"
+                  rows="5"
+                ></textarea>
+                <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
+                  Sugerencias es <strong>obligatorio</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-            <mat-form-field appearance="outline" class="example-full-width">
-              <mat-label>Próximo Turno</mat-label>
-              <input
-                matInput
-                readonly="true"
-                autocomplete="off"
-                #dateInputProximo
-                (dateChange)="changeDate(dateInputProximo,2)"
-                onclick="changeDate(dateInput)"
-                [min]="fecha"
-                [matDatepicker]="proximo"
-                [value]="form.controls.proximoTurno.value"
-              />
-              <mat-datepicker-toggle
-                mat-datepicket-toggle
-                matSuffix
-                [for]="proximo"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #proximo></mat-datepicker>
-              <mat-error
-                *ngIf="form.controls.proximoTurno.hasError('required')"
-              >
-                Próximo Turno es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
+
+
+
+
           </div>
         </div>
       </form>
@@ -203,130 +167,93 @@
     <div class="col pad-15-bis">
       <div class="row">
         <h3>Evaluación</h3>
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Triángulo de la talla</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="triangulo"
-            placeholder="Triángulo de la talla"
-            autocomplete="off"
-          />
-        </mat-form-field>
 
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Altura de Iliacos</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="altura"
-            placeholder="Altura de Iliacos"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.alturaDeIliacos"
-          />
-        </mat-form-field>
+        <div class="col-6">
 
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Barral</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="barral"
-            placeholder="Barral"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.barral"
-          />
-        </mat-form-field>
+          <div class="w-100">
+            <app-inputs [label]="'Triángulo de la talla'" [placeHolder]="'Triángulo de la talla'" [type]="'text'" [tabindex]="1" (cambio)="consulta.trianguloDeTalla = $event; SetConsultaAlta()" ></app-inputs>
+          </div>
+          <div class="w-100">
+            <app-inputs [label]="'Barral'" [placeHolder]="'Barral'" [type]="'text'" [tabindex]="3" (cambio)="consulta.barral = $event; SetConsultaAlta()" ></app-inputs>
+          </div>
+          <div class="w-100">
+            <app-inputs [label]="'Específico'" [placeHolder]="'Específico'" [type]="'text'" [tabindex]="5" (cambio)="consulta.especifico = $event; SetConsultaAlta()"  ></app-inputs>
+          </div>
 
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>3 Esferas DD</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="esferas"
-            placeholder="3 Esferas DD"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.esferas"
-          />
-        </mat-form-field>
+        </div>
+        <div class="col-6">
 
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Específico</mat-label>
-          <input
-            type="text"
-            matInput
-            formControlName="especifico"
-            placeholder="Específico"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.especifico"
-          />
-          <mat-error *ngIf="form.controls.especifico.hasError('required')">
-            Específico es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
+          <div class="w-100">
+            <app-inputs [label]="'Altura de Iliacos'" [placeHolder]="'Altura de Iliacos'" [type]="'text'" [tabindex]="2" (cambio)="consulta.alturaDeIliacos = $event; SetConsultaAlta()" ></app-inputs>
+          </div>
+          <div class="w-100">
+            <app-inputs [label]="'3 Esferas DD'" [placeHolder]="'3 Esferas DD'" [type]="'text'" [tabindex]="4" (cambio)="consulta.esferas = $event; SetConsultaAlta()" ></app-inputs>
+          </div>
+
+        </div>
+
       </div>
 
       <div class="row bg-section">
         <h3>Tratamiento</h3>
 
-        <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-          <mat-label>Tratamiento</mat-label>
-          <textarea
-            type="text"
-            matInput
-            formControlName="sedestacion"
-            required="true"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.sedestacion"
-            rows="5"
-          ></textarea>
-          <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
-            Campo <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
+        <div class="col-6">
+          <mat-form-field appearance="outline" appearance="outline" class="w-100">
+            <mat-label>Tratamiento</mat-label>
+            <textarea
+              type="text"
+              matInput
+              formControlName="sedestacion"
+              required="true"
+              autocomplete="off"
+              (change)="SetConsultaAlta()"
+              [(ngModel)]="consulta.sedestacion"
+              rows="5"
+            ></textarea>
+            <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
+              Campo <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Próximo Turno</mat-label>
+            <input
+              matInput
+              readonly="true"
+              autocomplete="off"
+              #dateInputProximo
+              (dateChange)="changeDate(dateInputProximo,2,true)"
+              onclick="changeDate(dateInput)"
+              [min]="fecha"
+              [matDatepicker]="proximo"
+              [value]="form.controls.proximoTurno.value"
+            />
+            <mat-datepicker-toggle
+              mat-datepicket-toggle
+              matSuffix
+              [for]="proximo"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #proximo></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-6">
+          <mat-form-field appearance="outline" appearance="outline" class="w-100">
+            <mat-label>Sugerencias</mat-label>
+            <textarea
+              type="text"
+              matInput
+              formControlName="sugerencias"
+              placeholder="Sugerencias"
+              rows="5"
+              autocomplete="off"
+              (change)="SetConsultaAlta()"
+              [(ngModel)]="consulta.sugerencias"
+            ></textarea>
+            <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
+              Sugerencias es <strong>obligatorio</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-        <mat-form-field appearance="outline" appearance="outline" class="example-full-width">
-          <mat-label>Sugerencias</mat-label>
-          <textarea
-            type="text"
-            matInput
-            formControlName="sugerencias"
-            placeholder="Sugerencias"
-            rows="5"
-            autocomplete="off"
-            (change)="SetConsultaAlta()"
-            [(ngModel)]="consulta.sugerencias"
-          ></textarea>
-          <mat-error *ngIf="form.controls.sugerencias.hasError('required')">
-            Sugerencias es <strong>obligatorio</strong>
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="example-full-width">
-          <mat-label>Próximo Turno</mat-label>
-          <input
-            matInput
-            readonly="true"
-            autocomplete="off"
-            #dateInputProximo
-            (dateChange)="changeDate(dateInputProximo,2,true)"
-            onclick="changeDate(dateInput)"
-            [min]="fecha"
-            [matDatepicker]="proximo"
-            [value]="form.controls.proximoTurno.value"
-          />
-          <mat-datepicker-toggle
-            mat-datepicket-toggle
-            matSuffix
-            [for]="proximo"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #proximo></mat-datepicker>
-        </mat-form-field>
       </div>
     </div>
   </form>

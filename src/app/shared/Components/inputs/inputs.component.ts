@@ -19,7 +19,7 @@ export class InputsComponent implements OnInit {
   validaRequerido:boolean = false;
   validaMail:boolean = false;
   @Output() cambio = new EventEmitter<any>();
-  msj:string = '';
+  msj:string = 'pepe';
 
   constructor() { }
 
@@ -47,8 +47,8 @@ export class InputsComponent implements OnInit {
     }
     this.validaRequerido = ev.target.value === "";    
 
-    if(this.validaMail) this.msj = `El formato del e-mail es `;
-    else if(this.validaRequerido) this.msj = `${this.label} es `
+    if(this.validaMail) this.msj = `El formato del e-mail es incorrect`;
+    else if(this.validaRequerido) this.msj = `${this.label} es obligatorio`
   }
 
 }

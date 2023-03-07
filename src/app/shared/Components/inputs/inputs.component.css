@@ -5,8 +5,9 @@ mat-form-field::childs{
 .example-full-width {
     width: 100%;
 }
-mat-error{
+.mat-error{
     font-size: 11px;
+    color: #e72828;
 }
 
 .example-full-width .mat-form-field-wrapper {
@@ -15,4 +16,7 @@ mat-error{
 }
 .color-white{
     color: #fff;
+}
+.none{
+    color: transparent;
 }

@@ -26,35 +26,23 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   pacientesFilter: Paciente[] = [];
   pipe = new DatePipe('es-ES');
   tratamiento:Tratamiento = {
-    especifico:'',
     fecha: new Date(),
     idPaciente: 0,
     motivo: '',
-    proximoTurnoIndicado: new Date(),
     sedestacion: '',
-    sugerencias: ''
   }
   @Input("alta") alta: boolean = false;
   @Input("paciente") idPaciente: Paciente = {
     apellido: "",
-    celular: "",
-    fechaNacimiento: new Date(),
-    email: "",
-    nacio: "",
     nombre: "",
-    ocupacion: "",
-    localidad: "",
-    otros:"",
-    deParte: ""
+    fechaNacimiento: new Date(),
+    nacio: ""
   };
   consulta: Tratamiento = {
-    especifico:'',
     fecha: new Date(),
     idPaciente: 0,
     motivo: '',
-    proximoTurnoIndicado: new Date(),
     sedestacion: '',
-    sugerencias: ''
   }
   filtroPaciente:string = '';
   subscribes:any[]=[];

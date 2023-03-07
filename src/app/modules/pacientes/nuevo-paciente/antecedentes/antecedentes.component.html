@@ -31,11 +31,11 @@
               <app-inputs [label]="'Piezas Faltantes Superiores'" [type]="'text'" [placeHolder]="'Piezas Faltantes Superiores'" [readOnly]="edicion"  (cambio)="asignarValor($event,4)" ></app-inputs>
               <div class="example-full-width mb-3 w-24">
       
-                  <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.contencion" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
+                  <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.contencion" class="m-18 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="contencion">Placa de Contención</mat-checkbox>
       
-                  <mat-checkbox [disabled]="edicion" class="mt-20 mr-60" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
+                  <mat-checkbox [disabled]="edicion" class="m-18 mr-60" [(ngModel)]="antecedentes.placaDescanso" color="primary" (change)="CargarAntecedentes()" formControlName="placaDescanso">Placa de Descanso</mat-checkbox>
       
-                  <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.ortodoncia" class="mt-20 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
+                  <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.ortodoncia" class="m-18 mr-60" color="primary" (change)="CargarAntecedentes()" formControlName="ortodoncia">Ortodoncia</mat-checkbox>
       
                 </div>
             </div>
@@ -54,12 +54,19 @@
         <h3 class="mt-20">Salud Femenina</h3>
         <div class="col-6">
 
+          <div class="w-100 mb-38">
 
-              <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.menstruacion" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
+            <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.menstruacion" class="m-18" color="primary" (change)="CargarAntecedentes()" formControlName="menstruacion">Menstruación</mat-checkbox>
+          </div>
+
 
           <app-inputs [label]="'Duración'" [type]="'text'" [placeHolder]="'Duración'" [readOnly]="edicion || !antecedentes.menstruacion"  (cambio)="asignarValor($event,13)" ></app-inputs>
 
-          <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.embarazos" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
+          <div class="w-100 mb-38">
+            
+                      <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.embarazos" class="m-18" color="primary" (change)="CargarAntecedentes()" formControlName="embarazos">Embarazos</mat-checkbox>
+
+          </div>
 
           <app-inputs [label]="'Abortos Espontáneos'" [type]="'text'" [placeHolder]="'Abortos Espontáneos'" [readOnly]="edicion || !antecedentes.embarazos"  (cambio)="asignarValor($event,17)" ></app-inputs>
 
@@ -138,11 +145,15 @@
 
       </div>
       <div class="col-6">
-        <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.diabetes" class="mt-20" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
+        <div class="w-100 mb-38">
+          
+                  <mat-checkbox [disabled]="edicion" [(ngModel)]="antecedentes.diabetes" class="m-18" color="primary" (change)="CargarAntecedentes()" formControlName="diabetes">Diabetes</mat-checkbox>
+
+        </div>
 
         <app-inputs [label]="'Fracturas'" [type]="'text'" [placeHolder]="'Fracturas'" [readOnly]="edicion"  (cambio)="asignarValor($event,30)" ></app-inputs>
 
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field appearance="outline" class="w-100 mb-20">
           <mat-label>Tiroides</mat-label>
           <mat-select formControlName="tiroides" (selectionChange)="CargarAntecedentes()" [(ngModel)]="antecedentes.tiroides" [disabled]="edicion">
             <mat-option
@@ -159,14 +170,6 @@
       </div>
 
     </div>
-
-
-
-
-
-
-
-
 
   </div>
 </form>

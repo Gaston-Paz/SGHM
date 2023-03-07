@@ -67,3 +67,29 @@ h3{
 }
 
 
+
+.mat-form-field-appearance-outline .mat-form-field-subscript-wrapper {
+  padding: 0;
+}
+
+.mat-form-field-subscript-wrapper {
+  margin-top: 0;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-flex {
+  margin-top: 0;
+}
+.mb-38{
+  margin-bottom: 34px;
+  margin-top: 20px;
+}
+.mb-20{
+  margin-bottom: 20px;
+}

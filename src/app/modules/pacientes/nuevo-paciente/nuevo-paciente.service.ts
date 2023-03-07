@@ -13,15 +13,10 @@ import { environment } from "src/environments/environment.prod";
 export class NuevoPacienteService {
   datosPersonales: Paciente = {
     apellido: "",
-    celular: "",
-    fechaNacimiento: new Date(),
-    email: "",
-    nacio: "",
     nombre: "",
-    ocupacion: "",
-    localidad: "",
-    otros:"",
-    deParte: ""
+    fechaNacimiento: new Date(),
+    nacio: ""
+    
   };
   datosPersonlesCompletos: boolean = false;
 
@@ -141,7 +136,7 @@ export class NuevoPacienteService {
         case 10:
         this.datosPersonales.deParte = dato;
         break;
-    }
+    }    
     this.datosPersonlesCompletos = valido;
     
   }
@@ -201,12 +196,16 @@ export class NuevoPacienteService {
             this.consultaInicial.otros = dato;
             break;
     }
+    console.log(this.consultaInicial);
+    
     this.consultaInicialCompleta = valido;
     
   }
 
   CargarAntecedentes(antecedentes: Antecedente) {
     this.antecedente = antecedentes;    
+    console.log(this.antecedente);
+    
   }
 
   FormValid() {
@@ -221,15 +220,9 @@ export class NuevoPacienteService {
   InicializarObjetos(){
     this.datosPersonales = {
       apellido: "",
-      celular: "",
-      fechaNacimiento: new Date(),
-      email: "",
-      nacio: "",
       nombre: "",
-      ocupacion: "",
-      localidad: "",
-      otros:"",
-      deParte: ""
+      fechaNacimiento: new Date(),
+      nacio: ""
     };
     this.consultaInicial = {
       antiguedad: "",
@@ -277,8 +270,6 @@ export class NuevoPacienteService {
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
     this.consulta.fecha = this.consultaInicial.fecha;
     this.alta.tratamiento = this.consulta;
-    console.log(this.alta);
-    
     return this._httpClient.post<Paciente>(
       environment.url + "/api/paciente",
       this.alta

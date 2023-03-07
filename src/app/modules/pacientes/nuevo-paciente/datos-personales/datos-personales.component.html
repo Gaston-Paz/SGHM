@@ -10,7 +10,7 @@
             [placeHolder]="'Nombre del paciente'"
             [valor]="form.controls.nombre.value"
             [requerido]="true"
-            (cambio)="CargarDatosPersonales($event, 1)"
+            (cambio)="CargarDatosPersonales($event, 1, form.controls.nombre)"
           ></app-inputs>
         </div>
 
@@ -47,7 +47,7 @@
             class="w-45"
             [label]="'Edad'"
             [type]="'text'"
-            [placeHolder]="'Apellido del paciente'"
+            [placeHolder]="'Edad'"
             [valor]="edad"
             [requerido]="false"
             [readOnly]="true"
@@ -61,7 +61,7 @@
             [placeHolder]="'Otros comentarios'"
             [valor]="form.controls.otros.value"
             [requerido]="false"
-            (cambio)="CargarDatosPersonales($event, 9)"
+            (cambio)="CargarDatosPersonales($event, 9, form.controls.otros)"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -72,7 +72,7 @@
             [placeHolder]="'Localidad del paciente'"
             [valor]="form.controls.localidad.value"
             [requerido]="false"
-            (cambio)="CargarDatosPersonales($event, 8)"
+            (cambio)="CargarDatosPersonales($event, 8, form.controls.localidad)"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -83,30 +83,32 @@
             [placeHolder]="'E-mail del paciente'"
             [valor]="form.controls.mail.value"
             [requerido]="false"
-            (cambio)="CargarDatosPersonales($event, 5)"
+            (cambio)="CargarDatosPersonales($event, 5, form.controls.mail)"
           ></app-inputs>
         </div>
       </div>
       <div class="col-6">
         <div class="w-100">
           <app-inputs
-          [tabindex]="2"
-          [label]="'Apellido'"
-          [type]="'text'"
-          [placeHolder]="'Apellido del paciente'"
-          [valor]="form.controls.apellido.value"
-          [requerido]="true"
-          (cambio)="CargarDatosPersonales($event, 2)"
-        ></app-inputs>
+            [tabindex]="2"
+            [label]="'Apellido'"
+            [type]="'text'"
+            [placeHolder]="'Apellido del paciente'"
+            [valor]="form.controls.apellido.value"
+            [requerido]="true"
+            (cambio)="CargarDatosPersonales($event, 2, form.controls.apellido)"
+          ></app-inputs>
         </div>
         <div class="w-100 mb-2px">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>¿Cómo nació?</mat-label>
             <mat-select
-            [tabIndex]="4"
+              [tabIndex]="4"
               formControlName="nacimiento"
               required
-              (selectionChange)="CargarDatosPersonales($event, 7)"
+              (selectionChange)="
+                CargarDatosPersonales($event, 7, form.controls.nacimiento)
+              "
             >
               <mat-option *ngFor="let nac of nacimientos" [value]="nac">
                 {{ nac }}
@@ -119,42 +121,40 @@
         </div>
         <div class="w-100">
           <app-inputs
-          [tabindex]="6"
-          [label]="'Ocupación'"
-          [type]="'text'"
-          [placeHolder]="'Ocupación del paciente'"
-          [valor]="form.controls.ocupacion.value"
-          [requerido]="false"
-          (cambio)="CargarDatosPersonales($event, 6)"
-        ></app-inputs>
+            [tabindex]="6"
+            [label]="'Ocupación'"
+            [type]="'text'"
+            [placeHolder]="'Ocupación del paciente'"
+            [valor]="form.controls.ocupacion.value"
+            [requerido]="false"
+            (cambio)="CargarDatosPersonales($event, 6, form.controls.ocupacion)"
+          ></app-inputs>
         </div>
         <div class="w-100">
           <app-inputs
-          [tabindex]="8"
-          [label]="'De parte de'"
-          [type]="'text'"
-          [placeHolder]="'De parte de quién viene'"
-          [valor]="form.controls.deParte.value"
-          [requerido]="false"
-          (cambio)="CargarDatosPersonales($event, 10)"
-        ></app-inputs>
+            [tabindex]="8"
+            [label]="'De parte de'"
+            [type]="'text'"
+            [placeHolder]="'De parte de quién viene'"
+            [valor]="form.controls.deParte.value"
+            [requerido]="false"
+            (cambio)="CargarDatosPersonales($event, 10, form.controls.deParte)"
+          ></app-inputs>
         </div>
         <div class="w-100">
           <div class="row">
             <app-inputs
-            [tabindex]="10"
+              [tabindex]="10"
               [label]="'Celular'"
               [type]="'text'"
               [placeHolder]="'Celular del paciente'"
               [valor]="form.controls.celular.value"
               [requerido]="false"
-              (cambio)="CargarDatosPersonales($event, 4)"
+              (cambio)="CargarDatosPersonales($event, 4, form.controls.celular)"
             ></app-inputs>
+          </div>
         </div>
       </div>
-
-
     </div>
-  </div>
   </div>
 </form>

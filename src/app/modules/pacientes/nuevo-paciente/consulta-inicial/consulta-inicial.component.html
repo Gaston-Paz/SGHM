@@ -11,7 +11,7 @@
               [placeHolder]="'Motivo de la consulta'"
               [requerido]="true"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 9)"
+              (cambio)="CargarConsultaInicial($event, 9,form.controls.motivo)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -22,7 +22,7 @@
               [placeHolder]="'Antigüedad'"
               [requerido]="true"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 2)"
+              (cambio)="CargarConsultaInicial($event, 2,form.controls.antiguedad)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -33,7 +33,7 @@
               [placeHolder]="'Intensidad'"
               [requerido]="false"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 6)"
+              (cambio)="CargarConsultaInicial($event, 6,form.controls.intensidad)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -44,7 +44,7 @@
               [placeHolder]="'Irradiacion'"
               [requerido]="false"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 7)"
+              (cambio)="CargarConsultaInicial($event, 7,form.controls.irradiacion)"
             ></app-inputs>
           </div>
           <div class="w-100 ">
@@ -55,7 +55,7 @@
               [placeHolder]="'Actividad Física'"
               [requerido]="false"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 1)"
+              (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -85,7 +85,7 @@
         </div>
         <div class="col-6">
           <div class="w-100">
-            <mat-form-field [tabindex]="2" appearance="outline" class="w-100">
+            <mat-form-field [tabindex]="2" appearance="outline" class="w-100 mb-20">
               <mat-label>Fecha de Consulta</mat-label>
               <input
                 required="true"
@@ -120,7 +120,7 @@
               [placeHolder]="'Localización'"
               [requerido]="true"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 8)"
+              (cambio)="CargarConsultaInicial($event, 8,form.controls.localizacion)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -131,7 +131,7 @@
               [placeHolder]="'Característica'"
               [requerido]="false"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 5)"
+              (cambio)="CargarConsultaInicial($event, 5,form.controls.caracteristica)"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -142,16 +142,15 @@
               [placeHolder]="'Atenúa'"
               [requerido]="false"
               [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 4)"
+              (cambio)="CargarConsultaInicial($event, 4,form.controls.atenua)"
             ></app-inputs>
           </div>
           <div class="w-100 mb-38">
             <mat-checkbox
               [tabindex]="10"
               [disabled]="edicion"
-              class="mt-20"
               color="primary"
-              (change)="CargarConsultaInicial($event, 10)"
+              (change)="CargarConsultaInicial($event, 10,form.controls.covid)"
               formControlName="covid"
               >Covid</mat-checkbox
             >
@@ -164,7 +163,7 @@
               [placeHolder]="'Otros'"
               [requerido]="false"
               [readOnly]="edicion || !form.controls.covid.value"
-              (cambio)="CargarConsultaInicial($event, 12)"
+              (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
             ></app-inputs>
           </div>
         </div>
