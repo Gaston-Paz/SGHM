@@ -82,7 +82,7 @@ export class DatosPersonalesComponent implements OnInit {
     let valor = "";   
     if(campo === 7) valor = dato.value;
     else valor = dato; 
-    control.setValue(dato);
+    control.setValue(valor);
     this._servicePacienteNuevo.CargarDatosPersonales(valor,campo, this.form.valid);
   }
 
