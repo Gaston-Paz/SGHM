@@ -6,8 +6,9 @@
         <div class="row">
             <h3>Paciente: {{element.paciente.nombre}} {{element.paciente.apellido}}</h3>
         </div>
-        <div class="row height-img">
-            <img class="foto" src="data:image/png;base64,{{element.estudio}}" alt="Sin Foto" />
+        <div class="row">
+            <img [hidden]="element.tipo.includes('pdf')" class="foto" src="data:image/png;base64,{{element.estudio}}" alt="Sin Foto" />
+            <app-pdf [hidden]="!element.tipo.includes('pdf')" [ruta]="element.estudio" ></app-pdf>
         </div>
     </mat-dialog-content>
     <mat-dialog-actions>

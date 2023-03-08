@@ -1,13 +1,26 @@
+mat-label,
+mat-radio-group {
+  padding: 0;
+}
 
-.pad-10{
-    padding: 20px;
-  }
+.pad-10 {
+  padding: 20px;
+}
 
-  img{
-    width: 45%;
-    border-radius: 50px;
-  }
+img {
+  width: 45%;
+  border-radius: 50px;
+}
 
-  .mt-10{
-    margin-top: 10px;
-  }
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+mat-radio-button{
+  margin-left: 10px;
+  margin-right: 10px;
+}

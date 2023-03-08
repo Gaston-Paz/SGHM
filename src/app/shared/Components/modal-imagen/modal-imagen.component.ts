@@ -13,25 +13,23 @@ export class ModalImagenComponent implements OnInit {
     fecha: new Date(),
     idEstudio: 0,
     nombreArchivo: '',
+    tipo:'',
     paciente: {
       apellido:'',
-      celular:'',
-      deParte:'',
-      email:'',
-      localidad:'',
-      nacio:'',
       nombre:'',
-      ocupacion:'',
-      otros:'',
+      nacio:'',
       fechaNacimiento:new Date()
     }
   }
+  ruta:string='';
 
   constructor(@Inject(MAT_DIALOG_DATA) public data:any,
   private _dialogRef: MatDialogRef<ModalImagenComponent>) { }
 
   ngOnInit(): void {
     this.element = this.data.element;
+    console.log(this.element);
+      
   }
 
 }

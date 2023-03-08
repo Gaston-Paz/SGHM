@@ -1,24 +1,21 @@
-
 table {
-    width: 100%;
-  }
-  
-  .mat-mdc-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+  width: 100%;
+}
 
-  .container{
-      display: flex;
-      flex-direction: column;
-      margin-top: 10px;
-  }
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  .foto{
-    width: 205px;
-  }
-  
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
 
+.foto {
+  width: 200px;
+}
 
 th.mat-header-cell {
   text-align: center;
@@ -28,29 +25,39 @@ td {
   text-align: center;
 }
 
-.left{
+.left {
   justify-content: start;
   margin-bottom: 20px;
   display: flex;
 }
 
-.right{
+.right {
   justify-content: end;
   margin-bottom: 20px;
   display: flex;
 }
 
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
 
-
-
-h3{
+h3 {
   font-size: 20px;
-font-weight: 500;
+  font-weight: 500;
 }
 
-.mt-20{
-margin-top: 20px;
+.mt-20 {
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 1205px) and (max-width: 1275px) {
+  .foto {
+    width: 130px;
+  }
+}
+
+@media only screen and (max-width: 1205px) {
+  .foto {
+    width: 70px;
+  }
 }

@@ -3,7 +3,8 @@ import { Paciente } from "./datos-personales.interface";
 export interface Estudios{
     idEstudio:number;
     paciente:Paciente;
-    estudio?: FormData,
+    estudio?: any,
     nombreArchivo:string;
+    tipo:string;
     fecha:Date;
 }

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit, HostListener } from "@angular/core";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -33,7 +33,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "antecedentes",
     "consultaInicial",
     "consultas",
+    "estudios",
     "nuevaConsulta",
+    "nuevaEstudio"
   ];
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
@@ -74,6 +76,11 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   url:any;
 
   mail:string='';
+  textButtonAntecedente:string = 'Antecedentes';
+  textButtonPrimeraConsulta:string = 'Primera Consulta';
+  textButtonConsulta:string = 'Nueva Consulta';
+  textButtonEstudio:string = 'Nuevo Estudio';
+  iconoAgregar:boolean = true;
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
@@ -86,6 +93,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.validarTamañoPantalla(window.innerWidth);
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePacienteNuevo.ObtenerPacientes());
@@ -258,5 +266,32 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this._serviceError.Error(error)
         }
       );
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    console.log(event.target.innerWidth);
+    this.validarTamañoPantalla(event.target.innerWidth);
+  }
+
+  validarTamañoPantalla(innerWidth:number){
+    if(innerWidth < 1580){
+      this.textButtonAntecedente = 'Ant';
+      this.textButtonPrimeraConsulta = '1° Consulta';
+    }else{
+      this.textButtonAntecedente = 'Antecedentes';
+      this.textButtonPrimeraConsulta = 'Primera Consulta';
+    }
+
+    if(innerWidth < 1315){
+      this.textButtonEstudio = "Estudio";
+      this.textButtonConsulta = "Consulta";
+      this.iconoAgregar = false;
+    }else{
+      this.iconoAgregar = true;
+      this.textButtonConsulta = "Nueva Consulta";
+      this.textButtonEstudio = "Nuevo Estudio";
+
+    }
   }
 }

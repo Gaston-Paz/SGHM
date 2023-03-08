@@ -22,6 +22,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatSelectModule } from '@angular/material/select';
     ConsultasModule,
     MatSelectModule,
     PacientesRoutingModule,
-    ComponentsModule
+    ComponentsModule,
+    MatRadioModule
   ],
   providers: [  
     MatDatepickerModule,  

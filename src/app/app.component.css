@@ -65,8 +65,8 @@
   z-index: 100;
     position: absolute;
     top: 10%;
-    left: 15%;
-    width: 75%;
+    left: 11%;
+    width: 88%;
 }
 
 .mt-20{
@@ -106,33 +106,72 @@ a{
   color: #fff;
 }
 
-
-@media only screen and (min-width: 1110px) and (max-width: 1377px){
+@media only screen and (min-width: 1377px) and (max-width: 1765px){
   .router{
     /* z-index: 100; */
       position: absolute;
       top: 10%;
-      left: 18%;
-      width: 75%;
+      left: 12%;
+      width: 87%;
   }
 }
 
-@media only screen and (min-width: 920px) and (max-width: 1110px){
+@media only screen and (min-width: 1377px) and (max-width: 1619px){
   .router{
     /* z-index: 100; */
       position: absolute;
       top: 10%;
-      left: 21%;
-      width: 75%;
+      left: 13%;
+      width: 86%;
   }
 }
 
-@media only screen and (min-width: 0) and (max-width: 920px){
+@media only screen and (min-width: 1377px) and (max-width: 1527px){
   .router{
     /* z-index: 100; */
       position: absolute;
       top: 10%;
-      left: 24%;
-      width: 75%;
+      left: 14%;
+      width: 85%;
+  }
+}
+
+@media only screen and (min-width: 1310px) and (max-width: 1417px){
+  .router{
+    /* z-index: 100; */
+      position: absolute;
+      top: 10%;
+      left: 15%;
+      width: 84%;
+  }
+}
+
+@media only screen and (min-width: 1225px) and (max-width: 1310px){
+  .router{
+    /* z-index: 100; */
+      position: absolute;
+      top: 10%;
+      left: 16%;
+      width: 83%;
+  }
+}
+
+@media only screen and (min-width: 1160px) and (max-width: 1225px){
+  .router{
+    /* z-index: 100; */
+      position: absolute;
+      top: 10%;
+      left: 17%;
+      width: 82%;
+  }
+}
+
+@media only screen and (max-width: 1160px){
+  .router{
+    /* z-index: 100; */
+      position: absolute;
+      top: 10%;
+      left: 20%;
+      width: 84%;
   }
 }

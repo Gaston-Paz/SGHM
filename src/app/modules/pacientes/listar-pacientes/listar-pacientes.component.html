@@ -1,4 +1,4 @@
-<div [hidden]="!pacientesVer" class="container">
+<div [hidden]="!pacientesVer" class="w-100">
   <mat-card>
     <h3 class="mt-20">Pacientes</h3>
   <mat-form-field class="w-100">
@@ -52,33 +52,49 @@
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="antecedentes">
-      <th mat-header-cell *matHeaderCellDef>Antecedentes</th>
+      <th mat-header-cell *matHeaderCellDef> {{textButtonAntecedente}} </th>
       <td mat-cell *matCellDef="let element">
-        <app-button [texto]="'Ver Antecedentes'" (clickButton)="VerAntecedentes(element)"></app-button>
+        <app-button [texto]="textButtonAntecedente" (clickButton)="VerAntecedentes(element)"></app-button>
       </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="consultaInicial">
-      <th mat-header-cell *matHeaderCellDef> Primera Consulta </th>
+      <th mat-header-cell *matHeaderCellDef> {{textButtonPrimeraConsulta}} </th>
       <td mat-cell *matCellDef="let element"> 
-        <app-button [texto]="'Ver Primera Consulta'" (clickButton)="VerConsultas(element)"></app-button>
+        <app-button [texto]="textButtonPrimeraConsulta" (clickButton)="VerConsultas(element)"></app-button>
     </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="consultas">
-      <th mat-header-cell *matHeaderCellDef> Tratamiento </th>
+      <th mat-header-cell *matHeaderCellDef> TTO </th>
       <td mat-cell *matCellDef="let element"> 
-        <app-button [texto]="'Ver TTO'" (clickButton)="verTurnos(element)"></app-button>
+        <app-button [texto]="'TTO'" (clickButton)="verTurnos(element)"></app-button>
+    </td>
+    </ng-container>
+   
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="estudios">
+      <th mat-header-cell *matHeaderCellDef> Estudios </th>
+      <td mat-cell *matCellDef="let element"> 
+        <app-button [texto]="'Estudios'" (clickButton)="verTurnos(element)"></app-button>
     </td>
     </ng-container>
 
      <!-- Symbol Column -->
      <ng-container matColumnDef="nuevaConsulta">
-      <th mat-header-cell *matHeaderCellDef> Nueva Consulta </th>
+      <th mat-header-cell *matHeaderCellDef> {{textButtonConsulta}} </th>
       <td mat-cell *matCellDef="let element"> 
-          <app-button [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(element)"></app-button>
+          <app-button [texto]="textButtonConsulta" [icono]="iconoAgregar" [textoIcono]="'add'" (clickButton)="NuevaConsulta(element)"></app-button>
+    </td>
+    </ng-container>
+
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="nuevaEstudio">
+      <th mat-header-cell *matHeaderCellDef> {{textButtonEstudio}} </th>
+      <td mat-cell *matCellDef="let element"> 
+          <app-button [texto]="textButtonEstudio" [icono]="iconoAgregar" [textoIcono]="'add'" (clickButton)="NuevaConsulta(element)"></app-button>
     </td>
     </ng-container>
 

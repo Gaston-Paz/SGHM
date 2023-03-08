@@ -31,7 +31,7 @@ export class ListarComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = [
     "fecha",
     "nombre",
-    "foto",
+    // "foto",
     "ver"
   ];
   subscribes:any[]=[];
@@ -78,7 +78,7 @@ export class ListarComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscribes.forEach(s => s.unsubscribe());
   }
-  urls: any[] = [];
+
   BuscarEstudios(){
     this.estudiosFiltrados = [];
     this.estudios.forEach(e => {
@@ -104,7 +104,11 @@ export class ListarComponent implements OnInit, OnDestroy {
       data: {
         element: element
       },
-      maxHeight: "800px"
+      // maxHeight: "800px"
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%'
     });
   }
 }

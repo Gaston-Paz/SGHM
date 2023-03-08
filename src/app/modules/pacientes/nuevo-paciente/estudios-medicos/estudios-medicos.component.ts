@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatRadioChange } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
 import { NuevoPacienteService } from '../nuevo-paciente.service';
 
 @Component({
@@ -9,25 +11,35 @@ import { NuevoPacienteService } from '../nuevo-paciente.service';
 })
 export class EstudiosMedicosComponent implements OnInit {
   previsualizacionFoto: string[] = [];
+  previsualizacionPdf: string[] = [];
   archivos: any [] = [];
+  ruta:any;
+  input:number = 0;
 
   constructor(private _sanitizer: DomSanitizer,
-    private _servicePacienteNuevo: NuevoPacienteService) { }
+    private _servicePacienteNuevo: NuevoPacienteService,
+    private pdfService: NgxExtendedPdfViewerService) { }
 
   ngOnInit(): void {
   }
 
   CargarFoto(ev: any) {
-    let cantFotos = ev.target.files.length;
-    for (let index = 0; index < cantFotos; index++) {
-      const fotoCapturada = ev.target.files[index];      
-      this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
-        this.previsualizacionFoto.push(imagen.base);
-        this.SubirEstudio(fotoCapturada);
-      });
-      
-    }
+    let cantFotos = ev.target.files.length;    
     
+    for (let index = 0; index < cantFotos; index++) {
+      const fotoCapturada = ev.target.files[index];          
+
+      this.ExtraerBase64(fotoCapturada).then((imagen: any) => {
+        
+        if(fotoCapturada.type.includes('pdf')){
+          this.ruta= imagen.base.split(',')[1];
+        }else{
+          this.previsualizacionFoto.push(imagen.base);
+        }
+        this.SubirEstudio(fotoCapturada);
+        
+      });
+    }
       
   }
 
@@ -35,10 +47,10 @@ export class EstudiosMedicosComponent implements OnInit {
     new Promise((resolve, reject) => {
       try {
         const unsafeImg = window.URL.createObjectURL($event);
-        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);
+        const image = this._sanitizer.bypassSecurityTrustUrl(unsafeImg);       
         const reader = new FileReader();
         reader.readAsDataURL($event);
-        reader.onload = () => {
+        reader.onload = (event) => {
           resolve({
             base: reader.result,
           });
@@ -61,6 +73,10 @@ export class EstudiosMedicosComponent implements OnInit {
   VaciarFotos(){
     this.previsualizacionFoto = [];
     this.archivos = [];
+  }
+
+  InputCorrecto(ev:MatRadioChange){
+    this.input = parseInt(ev.value);
   }
 
 }

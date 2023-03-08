@@ -1,16 +1,37 @@
 <div class="row pad-10">
-
-    <mat-label>Estudios</mat-label>
-    <input
+  
+  <mat-radio-group color="primary" aria-label="Select an option" (change)="InputCorrecto($event)">
+    <mat-radio-button value="1">PDF</mat-radio-button>
+    <mat-radio-button value="2">Imagen</mat-radio-button>
+  </mat-radio-group>
+  
+  <mat-label class="mt-20">Estudios</mat-label>
+  <input
+  [hidden]="input === 1"
     class="form-control"
-      type="file"
-      placeholder="Foto del paciente"
-      (change)="CargarFoto($event)" 
-      multiple
-      accept="image/png, image/gif, image/jpeg"
-      [(ngModel)]="archivos"
+    type="file"
+    placeholder="Estudio del paciente"
+    (change)="CargarFoto($event)"
+    multiple
+    accept="image/png, image/gif, image/jpeg"
+    [(ngModel)]="archivos"
+  />
+
+  <input
+    [hidden]="input !== 1"
+    class="form-control"
+    type="file"
+    placeholder="Estudio del paciente"
+    (change)="CargarFoto($event)"
+    accept="application/pdf"
     />
 
+  <app-pdf *ngIf="ruta" [ruta]="ruta" ></app-pdf>
 
-      <img class="mt-10" *ngFor="let foto of previsualizacionFoto" [src]="foto" alt="Estudio Médico ">
+  <img
+    class="mt-10"
+    *ngFor="let foto of previsualizacionFoto"
+    [src]="foto"
+    alt="Estudio Médico "
+  />
 </div>
