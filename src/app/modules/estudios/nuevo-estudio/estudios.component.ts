@@ -9,7 +9,7 @@ import { COMMA, ENTER } from "@angular/cdk/keycodes";
 import { MatChipInputEvent } from "@angular/material/chips";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { EstudiosService } from "../estudios.service";
-import { EstudiosMedicosComponent } from "../../pacientes/nuevo-paciente/estudios-medicos/estudios-medicos.component";
+import { EstudiosMedicosComponent } from "../estudios-medicos/estudios-medicos.component";
 import { ErrorService } from "src/app/shared/services/error.service";
 import { UsuarioService } from "../../usuario/usuario.service";
 import { Router } from "@angular/router";
@@ -70,6 +70,10 @@ export class EstudiosComponent implements OnInit, OnDestroy {
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
           else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
           this._serviceError.muestroMenu = true;
+          }
+
+          if(this._serviceEstudio.paciente.idPaciente !== 0){
+            this.form.controls.paciente.setValue(this._serviceEstudio.paciente.idPaciente);
           }
         },
         (error: HttpErrorResponse) => {

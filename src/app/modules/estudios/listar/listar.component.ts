@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { forkJoin, Observable } from 'rxjs';
 import { Paciente } from 'src/app/core/interfaces/datos-personales.interface';
@@ -104,7 +103,6 @@ export class ListarComponent implements OnInit, OnDestroy {
       data: {
         element: element
       },
-      // maxHeight: "800px"
       maxWidth: '100vw',
       maxHeight: '100vh',
       height: '100%',

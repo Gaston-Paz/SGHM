@@ -22,12 +22,12 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    UsuariosRoutingModule,
     MatSelectModule,
     MatCardModule,
-    NgxSpinnerModule,
     MatTableModule,
     MatPaginatorModule,
-    UsuariosRoutingModule,
+    NgxSpinnerModule,
     ComponentsModule
   ]
 })

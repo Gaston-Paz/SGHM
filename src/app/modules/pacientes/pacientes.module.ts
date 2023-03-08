@@ -7,7 +7,6 @@ import { AntecedentesComponent } from './nuevo-paciente/antecedentes/antecedente
 import { ConsultaInicialComponent } from './nuevo-paciente/consulta-inicial/consulta-inicial.component';
 import { ComponentsModule } from 'src/app/shared/Components/components.module';
 import { ListarPacientesComponent } from './listar-pacientes/listar-pacientes.component';
-import { EstudiosMedicosComponent } from './nuevo-paciente/estudios-medicos/estudios-medicos.component';
 import { ConsultasModule } from '../consultas/consultas.module';
 import { PacientesRoutingModule } from './pacientes-routing.module';
 
@@ -22,7 +21,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import {MatRadioModule} from '@angular/material/radio';
+
+import { EstudiosModule } from '../estudios/estudios.module';
 
 @NgModule({
   declarations: [
@@ -30,33 +30,29 @@ import {MatRadioModule} from '@angular/material/radio';
     DatosPersonalesComponent,
     ConsultaInicialComponent,
     AntecedentesComponent,
-    ListarPacientesComponent,
-    EstudiosMedicosComponent
+    ListarPacientesComponent
   ],
   imports: [
+    PacientesRoutingModule,
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatCardModule,
     MatTabsModule,
-    FormsModule,
-    ReactiveFormsModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
     MatTableModule,
-    NgxSpinnerModule,
     MatSortModule,
     MatPaginatorModule,
+    NgxSpinnerModule,
     ConsultasModule,
-    MatSelectModule,
-    PacientesRoutingModule,
     ComponentsModule,
-    MatRadioModule
+    EstudiosModule
   ],
   providers: [  
     MatDatepickerModule,  
-  ],
-  exports:[
-    EstudiosMedicosComponent
   ]
 })
 export class PacientesModule { }

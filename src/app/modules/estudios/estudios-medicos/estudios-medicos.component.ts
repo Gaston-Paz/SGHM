@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
-import { NuevoPacienteService } from '../nuevo-paciente.service';
+import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 
 @Component({
   selector: 'app-estudios-medicos',

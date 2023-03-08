@@ -19,13 +19,13 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    FotosRoutingModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
     MatCardModule,
     MatDialogModule,
     NgxSpinnerModule,
-    FotosRoutingModule,
     ComponentsModule
   ]
 })

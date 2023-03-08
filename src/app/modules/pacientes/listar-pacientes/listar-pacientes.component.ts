@@ -11,6 +11,7 @@ import { ErrorService } from "src/app/shared/services/error.service";
 import { SnackService } from "src/app/shared/services/snack.service";
 import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
+import { EstudiosService } from "../../estudios/estudios.service";
 import { UsuarioService } from "../../usuario/usuario.service";
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
 import { ListadosService } from "./listados.service";
@@ -42,6 +43,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   antecedentes: boolean = false;
   consultaInicial: boolean = false;
   consultaNueva: boolean = false;
+  estudiosNuevos: boolean = false;
+  estudios: boolean = false;
   turnos: boolean = false;
   nombrePaciente: string = "";
   apellidoPaciente: string = "";
@@ -89,7 +92,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _serviceConsulta: ConsultasService,
     private _snack: SnackService,
     private _serviceError:ErrorService,
-    private _usuarioService:UsuarioService
+    private _usuarioService:UsuarioService,
+    private _serviceEstudio:EstudiosService
   ) {}
 
   ngOnInit(): void {
@@ -147,6 +151,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.antecedente = resp;
           this.antecedentes = true;
           this.pacientesVer = false;
+          this.estudiosNuevos = false;
+          this.estudios = false;
           this.consultaInicial = false;
           this.consultaNueva = false;
           this.turnos = false;
@@ -166,6 +172,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.consultas = resp;
         this.antecedentes = false;
         this.pacientesVer = false;
+        this.estudiosNuevos = false;
+        this.estudios = false;
         this.consultaInicial = true;
         this.consultaNueva = false;
         this.turnos = false;
@@ -186,17 +194,13 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.consultaInicial = false;
     this.turnos = false;
     this.consultaNueva = false;
+    this.estudiosNuevos = false;
+    this.estudios = false;
     this._serviceConsulta.paciente = {
       apellido: "",
-      celular: "",
       fechaNacimiento: new Date(),
-      email: "",
-      nacio: "",
       nombre: "",
-      ocupacion: "",
-      localidad: "",
-      otros: "",
-      deParte: "",
+      nacio: ""
     };
   }
 
@@ -205,6 +209,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.antecedentes = false;
     this.pacientesVer = false;
     this.consultaInicial = false;
+    this.estudiosNuevos = false;
+    this.estudios = false;
     this.turnos = true;
     this.consultaNueva = false;
   }
@@ -227,7 +233,33 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.antecedentes = false;
     this.pacientesVer = false;
     this.consultaInicial = false;
+    this.estudiosNuevos = false;
+    this.estudios = false;
     this.turnos = false;
+  }
+
+  Estudios(paciente: Paciente) {
+    this.idPaciente = paciente!;
+    this._serviceEstudio.paciente = paciente;
+    this.consultaNueva = false;
+    this.antecedentes = false;
+    this.pacientesVer = false;
+    this.consultaInicial = false;
+    this.turnos = false;
+    this.estudiosNuevos = false;
+    this.estudios = true;
+  }
+
+  NuevoEstudio(paciente: Paciente) {
+    this.idPaciente = paciente!;
+    this._serviceEstudio.paciente = paciente;
+    this.consultaNueva = false;
+    this.antecedentes = false;
+    this.pacientesVer = false;
+    this.consultaInicial = false;
+    this.turnos = false;
+    this.estudiosNuevos = true;
+    this.estudios = false;
   }
 
   HabilitarEdicion() {

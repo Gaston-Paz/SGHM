@@ -4,19 +4,9 @@ import { CommonModule } from '@angular/common';
 import { ModulesRoutingModule } from './modules-routing.module';
 
 //Material
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatListModule} from '@angular/material/list';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { HttpClientModule } from '@angular/common/http';
 import {ModulesComponent} from './modules.component';
-import { PacientesModule } from "./pacientes/pacientes.module";
-import { ConsultasModule } from './consultas/consultas.module';
-import { FotoPerfilModule } from './foto-perfil/foto-perfil.module';
-import { EstudiosModule } from './estudios/estudios.module';
-import { UsuarioModule } from './usuario/usuario.module';
 import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
@@ -26,18 +16,8 @@ import { MatCardModule } from '@angular/material/card';
     imports: [
         CommonModule,
         ModulesRoutingModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatListModule,
         HttpClientModule,
         NgxSpinnerModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        PacientesModule,
-        ConsultasModule,
-        FotoPerfilModule, 
-        EstudiosModule,
-        UsuarioModule,
         MatCardModule
     ]
 })

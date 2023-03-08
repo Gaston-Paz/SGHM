@@ -24,19 +24,19 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
   ],
   imports: [
     CommonModule,
+    ConsultasRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule,
-    ReactiveFormsModule,
     MatSelectModule,
-    NgxSpinnerModule,
     MatPaginatorModule,
     MatTableModule,
     MatSortModule,
-    ConsultasRoutingModule,
+    NgxSpinnerModule,
     ComponentsModule
   ],
   exports:[ListarConsultasComponent, NuevaConsultaComponent]

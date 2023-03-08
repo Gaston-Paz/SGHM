@@ -21,9 +21,9 @@ import { ComponentsModule } from '../shared/Components/components.module';
     CommonModule,
     LoginRoutingModule,
     HttpClientModule,
-    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
+    MatCardModule,
     NgxSpinnerModule,
     ComponentsModule
   ]
