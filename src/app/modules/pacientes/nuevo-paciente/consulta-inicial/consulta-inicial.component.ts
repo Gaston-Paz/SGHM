@@ -25,12 +25,15 @@ export class ConsultaInicialComponent implements OnInit {
       this._dateAdapter.setLocale('es-ES');
      }
 
-  ngOnInit(): void {   
 
+  ngOnInit(): void {    
     if(this.hayConsulta){
+      this.consulta.fecha = this.parseFecha(this.consulta.fecha.toString());
+      if(this.consulta.fechaCovid !== undefined)this.consulta.fechaCovid = this.parseFecha(this.consulta.fechaCovid!.toString());
+
       this._servicePacienteNuevo.consultaInicial = this.consulta;
       this.form = this._formBuilder.group({
-        fecha: [new Date(this.consulta.fecha), Validators.required],
+        fecha: [this.consulta.fecha, Validators.required],
         motivo: [this.consulta.motivo, Validators.required],
         localizacion: [this.consulta.localizacion, Validators.required],
         antiguedad: [this.consulta.antiguedad, Validators.required],
@@ -59,6 +62,11 @@ export class ConsultaInicialComponent implements OnInit {
         otros: [],
       });
     }
+  }
+
+  parseFecha(fecha:string){
+    let partFecha = fecha.split("-");
+    return new Date(parseInt(partFecha[0]),parseInt(partFecha[1])-1,parseInt(partFecha[2]));
   }
 
   CargarConsultaInicial(ev:any,campo:number, control:any){

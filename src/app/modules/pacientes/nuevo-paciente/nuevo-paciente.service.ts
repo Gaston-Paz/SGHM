@@ -196,7 +196,6 @@ export class NuevoPacienteService {
             this.consultaInicial.otros = dato;
             break;
     }
-    console.log(this.consultaInicial);
     
     this.consultaInicialCompleta = valido;
     
@@ -204,7 +203,6 @@ export class NuevoPacienteService {
 
   CargarAntecedentes(antecedentes: Antecedente) {
     this.antecedente = antecedentes;    
-    console.log(this.antecedente);
     
   }
 
@@ -270,6 +268,8 @@ export class NuevoPacienteService {
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
     this.consulta.fecha = this.consultaInicial.fecha;
     this.alta.tratamiento = this.consulta;
+    console.log(this.alta.paciente);
+    
     return this._httpClient.post<Paciente>(
       environment.url + "/api/paciente",
       this.alta

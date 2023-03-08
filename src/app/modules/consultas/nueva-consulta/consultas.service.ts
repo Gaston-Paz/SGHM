@@ -10,15 +10,9 @@ import { environment } from "src/environments/environment.prod";
 export class ConsultasService {
   paciente: Paciente = {
     apellido: "",
-    celular: "",
     fechaNacimiento: new Date(),
-    email: "",
     nacio: "",
-    nombre: "",
-    ocupacion: "",
-    localidad: "",
-    otros: "",
-    deParte: "",
+    nombre: ""
   };
 
   editartto: Tratamiento = {

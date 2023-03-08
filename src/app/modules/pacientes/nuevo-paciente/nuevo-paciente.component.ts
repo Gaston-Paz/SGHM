@@ -72,7 +72,8 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
     let formData = new FormData();
     formData.append("foto", this._servicePacienteNuevo.imagen);
 
-    this.subscribes.push(this._servicePacienteNuevo.GuardarPaciente().subscribe(
+    this.subscribes.push(this._servicePacienteNuevo.GuardarPaciente()
+    .subscribe(
       (paciente) => {
         this._servicePacienteNuevo.InicializarObjetos();
         this.datosPersonales.form.reset();

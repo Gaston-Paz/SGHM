@@ -61,6 +61,10 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    console.log(this._serviceConsulta.editartto);
+    
+    this._serviceConsulta.editartto.fecha = this.parseFecha(this._serviceConsulta.editartto.fecha.toString());
+    if(this._serviceConsulta.editartto.proximoTurnoIndicado !== null)this._serviceConsulta.editartto.proximoTurnoIndicado = this.parseFecha(this._serviceConsulta.editartto.proximoTurnoIndicado!.toString());
     this.fecha = new Date(Date.now());
       this.form = this._formBuilder.group({
         fecha:[this._serviceConsulta.editartto.fecha,[Validators.required]],
@@ -102,6 +106,11 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
       this._serviceError.Error(error);
     }));
 
+  }
+
+  parseFecha(fecha:string){
+    let partFecha = fecha.split("-");
+    return new Date(parseInt(partFecha[0]),parseInt(partFecha[1])-1,parseInt(partFecha[2]));
   }
 
   ngOnDestroy(): void {
