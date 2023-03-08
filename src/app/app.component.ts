@@ -6,6 +6,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ErrorService } from "./shared/services/error.service";
 import { ConsultasService } from "./modules/consultas/nueva-consulta/consultas.service";
 import { Router } from "@angular/router";
+import { EstudiosService } from "./modules/estudios/estudios.service";
 
 @Component({
   selector: "app-root",
@@ -31,7 +32,8 @@ export class AppComponent implements OnInit {
     private _usuarioService: UsuarioService,
     public _serviceError: ErrorService,
     private _serviceConsulta: ConsultasService,
-    public _router: Router
+    public _router: Router,
+    private _serviceEstudio: EstudiosService
   ) {
     this.mobileQuery = media.matchMedia("(max-width: 600px)");
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -65,6 +67,12 @@ export class AppComponent implements OnInit {
       otros: "",
       deParte: "",
     };
+    this._serviceEstudio.paciente = {
+      nombre:'',
+      apellido:'',
+      nacio:'',
+      fechaNacimiento: new Date()
+    }
     
   }
 
