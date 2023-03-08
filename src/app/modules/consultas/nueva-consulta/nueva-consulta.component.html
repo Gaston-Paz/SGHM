@@ -1,7 +1,7 @@
-<div class="container" *ngIf="!alta">
+<div class="w-100" *ngIf="!alta">
   <mat-card >
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+      <div></div>
       <mat-card-title>Nueva Consulta TTO</mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -156,7 +156,7 @@
   </mat-card>
 </div>
 
-<div class="container" *ngIf="alta">
+<div class="w-100" *ngIf="alta">
   <form [formGroup]="form" autocomplete="off" class="example-form">
 
     <div class="col pad-15-bis">
