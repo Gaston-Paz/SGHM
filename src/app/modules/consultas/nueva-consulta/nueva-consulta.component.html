@@ -206,9 +206,9 @@
               rows="5"
               tabindex="6"
             ></textarea>
-            <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
+            <!-- <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
               Campo <strong>obligatorio</strong>
-            </mat-error>
+            </mat-error> -->
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Próximo Turno</mat-label>
@@ -217,8 +217,9 @@
               readonly="true"
               autocomplete="off"
               #dateInputProximo
+              formControlName="proximoTurno"
               (dateChange)="changeDate(dateInputProximo,2,true)"
-              onclick="changeDate(dateInput)"
+              onclick="changeDate(dateInputProximo)"
               [min]="fecha"
               [matDatepicker]="proximo"
               [value]="form.controls.proximoTurno.value"

@@ -21,7 +21,7 @@ import { ConsultasService } from './consultas.service';
 })
 export class NuevaConsultaComponent implements OnInit, OnDestroy {
   form!: FormGroup;
-  fecha: Date = new Date();
+  fecha: Date = new Date(Date.now());
   pacientes: Paciente[] = [];
   pacientesFilter: Paciente[] = [];
   pipe = new DatePipe('es-ES');
@@ -59,25 +59,26 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     private _usuarioService: UsuarioService) {
       this._dateAdapter.setLocale('es-ES');
   }
+  
+  ngOnInit(): void {   
 
-  ngOnInit(): void {
-    console.log(this._serviceConsulta.editartto);
+    this.mapFechaForm();
+
+
     
-    this._serviceConsulta.editartto.fecha = this.parseFecha(this._serviceConsulta.editartto.fecha.toString());
-    if(this._serviceConsulta.editartto.proximoTurnoIndicado !== null)this._serviceConsulta.editartto.proximoTurnoIndicado = this.parseFecha(this._serviceConsulta.editartto.proximoTurnoIndicado!.toString());
-    this.fecha = new Date(Date.now());
+
       this.form = this._formBuilder.group({
-        fecha:[this._serviceConsulta.editartto.fecha,[Validators.required]],
+        fecha:[this._serviceConsulta.editartto.fecha !== undefined && this._serviceConsulta.editartto.fecha !== null ? this._serviceConsulta.editartto.fecha : '',[Validators.required]],
         paciente:[,[Validators.required]],
-        motivo:[this._serviceConsulta.editartto.motivo,[Validators.required]],
-        triangulo:[this._serviceConsulta.editartto.trianguloDeTalla],
-        altura:[this._serviceConsulta.editartto.alturaDeIliacos],
-        barral:[this._serviceConsulta.editartto.barral],
-        esferas:[this._serviceConsulta.editartto.esferas],
-        especifico:[this._serviceConsulta.editartto.especifico],
-        sugerencias:[this._serviceConsulta.editartto.sugerencias],
-        sedestacion:[this._serviceConsulta.editartto.sedestacion,[Validators.required]],
-        proximoTurno:[this._serviceConsulta.editartto.proximoTurnoIndicado]
+        motivo:[this._serviceConsulta.editartto.motivo !== undefined && this._serviceConsulta.editartto.motivo !== null ? this._serviceConsulta.editartto.motivo : '',[Validators.required]],
+        triangulo:[this._serviceConsulta.editartto.trianguloDeTalla !== undefined && this._serviceConsulta.editartto.trianguloDeTalla !== null ? this._serviceConsulta.editartto.trianguloDeTalla : ''],
+        altura:[this._serviceConsulta.editartto.alturaDeIliacos !== undefined && this._serviceConsulta.editartto.alturaDeIliacos !== null ? this._serviceConsulta.editartto.alturaDeIliacos : ''],
+        barral:[this._serviceConsulta.editartto.barral !== undefined && this._serviceConsulta.editartto.barral !== null ? this._serviceConsulta.editartto.barral!== undefined : ''],
+        esferas:[this._serviceConsulta.editartto.esferas !== undefined && this._serviceConsulta.editartto.esferas !== null ? this._serviceConsulta.editartto.esferas : ''],
+        especifico:[this._serviceConsulta.editartto.especifico !== undefined && this._serviceConsulta.editartto.especifico !== null ? this._serviceConsulta.editartto.especifico : ''],
+        sugerencias:[this._serviceConsulta.editartto.sugerencias !== undefined && this._serviceConsulta.editartto.sugerencias !== null ? this._serviceConsulta.editartto.sugerencias : ''],
+        sedestacion:[this._serviceConsulta.editartto.sedestacion !== undefined && this._serviceConsulta.editartto.sedestacion !== null ? this._serviceConsulta.editartto.sedestacion : '',[Validators.required]],
+        proximoTurno:[this._serviceConsulta.editartto.proximoTurnoIndicado !== undefined && this._serviceConsulta.editartto.proximoTurnoIndicado !== null ? this._serviceConsulta.editartto.proximoTurnoIndicado : '']
       });
 
       let obs: Array<Observable<any>> = [];
@@ -106,6 +107,14 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
       this._serviceError.Error(error);
     }));
 
+  }
+
+  mapFechaForm(){
+    if(this._serviceConsulta.editartto.fecha !== undefined && this._serviceConsulta.editartto.fecha !== null){
+      this._serviceConsulta.editartto.fecha = this.parseFecha(this._serviceConsulta.editartto.fecha.toString());
+
+    }
+    if(this._serviceConsulta.editartto.proximoTurnoIndicado !== null && this._serviceConsulta.editartto.proximoTurnoIndicado !== undefined)this._serviceConsulta.editartto.proximoTurnoIndicado = this.parseFecha(this._serviceConsulta.editartto.proximoTurnoIndicado!.toString());
   }
 
   parseFecha(fecha:string){
