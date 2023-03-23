@@ -1,44 +1,45 @@
 .example-form {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
 
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-  }
-  
-  .example-full-width {
-    width: 48%;
-  }
+.example-full-width {
+  width: 48%;
+}
 
-.pad-15{
+.pad-15 {
   padding: 15px 15px 0 15px;
 }
 
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
 
-h3, h5{
+h3,
+h5 {
   margin: 0;
 }
 
-h3{
+h3 {
   font-weight: 500;
 }
 
-.bg-section{
+.bg-section {
   background-color: rgb(247, 245, 229);
   border-radius: 15px;
 }
 
-.mr-60{
-  margin-right: 60px;;
+.mr-60 {
+  margin-right: 60px;
+  ;
 }
 
-.w-24{
+.w-24 {
   width: 24%;
 }
 
-.mat-checkbox{
+.mat-checkbox {
   display: inherit;
 }
 
@@ -53,6 +54,7 @@ h3{
 .mat-form-field-wrapper {
   padding-bottom: 0;
 }
+
 .mat-form-field-appearance-outline .mat-form-field-wrapper {
   margin: 0;
 }
@@ -60,10 +62,12 @@ h3{
 .mat-form-field-appearance-outline .mat-form-field-flex {
   margin-top: 0;
 }
-.mb-38{
+
+.mb-38 {
   margin-bottom: 34px;
   margin-top: 20px;
 }
-.mb-20{
+
+.mb-20 {
   margin-bottom: 20px;
 }

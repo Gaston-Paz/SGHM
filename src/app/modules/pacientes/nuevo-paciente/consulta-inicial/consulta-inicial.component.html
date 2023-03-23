@@ -3,18 +3,22 @@
     <div class="col pad-15">
       <div class="row">
         <div class="col-6">
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="1"
-              [label]="'Motivo'"
-              [type]="'text'"
-              [placeHolder]="'Motivo de la consulta'"
-              [requerido]="true"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 9,form.controls.motivo)"
-              [valor]="form.controls.motivo.value"
-            ></app-inputs>
-          </div>
+          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+            <mat-label>Motivo</mat-label>
+            <textarea
+              type="text"
+              matInput
+              formControlName="motivo"
+              placeholder="Motivo de la consulta"
+              rows="5"
+              autocomplete="off"
+              (change)="CargarConsultaInicial($event, 9,form.controls.motivo)"
+              tabindex="1"
+              required="true"
+              [value]="form.controls.motivo.value"
+              [readonly]="edicion"
+            ></textarea>
+          </mat-form-field>
           <div class="w-100">
             <app-inputs
               [tabindex]="3"
@@ -90,7 +94,7 @@
         </div>
         <div class="col-6">
           <div class="w-100">
-            <mat-form-field [tabindex]="2" appearance="outline" class="w-100 mb-20">
+            <mat-form-field [tabindex]="2" appearance="outline" class="w-100">
               <mat-label>Fecha de Consulta</mat-label>
               <input
                 required="true"
@@ -117,7 +121,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-          <div class="w-100">
+          <div class="w-100 mt-p4">
             <app-inputs
               [tabindex]="4"
               [label]="'Localización'"

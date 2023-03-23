@@ -1,14 +1,12 @@
 .example-form {
-
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-  }
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
   
 .date-picker-toogle{
   margin-left: 525px;
 }
-
 
 .pad-15{
   padding: 15px 15px 0 15px;
@@ -19,4 +17,7 @@
 }
 .mb-38{
   margin-bottom: 34px;
+}
+.mt-p4{
+  margin-bottom: 4px;
 }

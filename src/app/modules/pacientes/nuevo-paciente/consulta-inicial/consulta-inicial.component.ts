@@ -27,9 +27,9 @@ export class ConsultaInicialComponent implements OnInit {
 
 
   ngOnInit(): void {    
-    if(this.hayConsulta){
+    if(this.hayConsulta){     
       this.consulta.fecha = this.parseFecha(this.consulta.fecha.toString());
-      if(this.consulta.fechaCovid !== undefined)this.consulta.fechaCovid = this.parseFecha(this.consulta.fechaCovid!.toString());
+      if(this.consulta.fechaCovid !== undefined && this.consulta.fechaCovid !== null)this.consulta.fechaCovid = this.parseFecha(this.consulta.fechaCovid!.toString());
 
       this._servicePacienteNuevo.consultaInicial = this.consulta;
       this.form = this._formBuilder.group({
@@ -71,7 +71,8 @@ export class ConsultaInicialComponent implements OnInit {
 
   CargarConsultaInicial(ev:any,campo:number, control:any){
     let valor = "";
-    if(campo !== 10) valor = ev; 
+    if(campo !== 10 && campo !== 9) valor = ev; 
+    else if(campo === 9)valor = ev.target.value; 
     else valor = ev.checked;   
     control.setValue(valor);
     this._servicePacienteNuevo.CargarConsultaInicial(valor,campo,this.form.valid);

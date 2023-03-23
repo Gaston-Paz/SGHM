@@ -355,7 +355,7 @@
             [valor]="form.controls.otros.value"
           ></app-inputs>
 
-          <app-inputs
+          <!-- <app-inputs
             [tabindex]="35"
             [label]="'Pérdidas'"
             [type]="'text'"
@@ -363,7 +363,24 @@
             [readOnly]="edicion"
             (cambio)="asignarValor($event, 35)"
             [valor]="form.controls.perdidas.value"
-          ></app-inputs>
+          ></app-inputs> -->
+
+          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+            <mat-label>Pérdidas</mat-label>
+            <textarea
+              type="text"
+              matInput
+              placeholder="Pérdidas"
+              rows="5"
+              autocomplete="off"
+              (change)="asignarValor('', 35,$event)"
+              tabindex="35"
+              [readonly]="edicion"
+              [value]="form.controls.perdidas.value"
+            ></textarea>
+          </mat-form-field>
+
+
         </div>
         <div class="col-6">
           <div class="w-100 mb-38">

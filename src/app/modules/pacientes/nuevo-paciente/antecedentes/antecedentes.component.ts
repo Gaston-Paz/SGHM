@@ -88,9 +88,11 @@ export class AntecedentesComponent implements OnInit {
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
   }
   
-  asignarValor(valor:string,campo:number){      
-    if(valor !== "" ){
+  asignarValor(valor:string,campo:number,ev:any=undefined){      
+    if(valor !== '' ){
       this.MapAntecedente(valor,campo);  
+    }else if(valor === '' && campo === 35){
+      this.MapAntecedente(ev.target.value,campo);  
     }
     if(!this.antecedente.ortodoncia)this.antecedente.edadOrtodoncia = undefined; 
     if(!this.antecedente.embarazos){
@@ -98,7 +100,6 @@ export class AntecedentesComponent implements OnInit {
       this.antecedente.abortosInducido = undefined; 
       this.antecedente.partos = undefined; 
     }
-    console.log(this.antecedentes);
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
     
   }
