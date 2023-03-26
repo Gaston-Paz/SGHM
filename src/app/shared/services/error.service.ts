@@ -71,12 +71,7 @@ export class ErrorService {
       this._router.navigate(['errores/403']);
     }else if(error.status === 404){
       this._router.navigate(['errores/404']);
-    }else if(error.status === 409){
-      this._snackService.Mensaje(error.error.message,'error');
-    }else if(error.status === 500) {      
-      this.errorFatal = error.error.message;
-      this._router.navigate(['errores/500']);
-    }
+    }else this._snackService.Mensaje(error.error.message,'error');
   }
 
 }

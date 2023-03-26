@@ -19,6 +19,8 @@ export class DatosPersonalesComponent implements OnInit {
   nacimientos: string[] = ['Vaginal','Cesarea'];
   pipe = new DatePipe('es-ES');
   edad:string="";
+  maximo:number = 255;
+  camposNoObligatorios:number [] = [9,8,5,6,10,4];
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -79,11 +81,16 @@ export class DatosPersonalesComponent implements OnInit {
   });
 
   CargarDatosPersonales(dato: any, campo: number,control:any) {   
-    let valor = "";   
+    let valor;   
     if(campo === 7) valor = dato.value;
     else valor = dato; 
-    control.setValue(valor);
-    this._servicePacienteNuevo.CargarDatosPersonales(valor,campo, this.form.valid);
+
+    if(valor === '' && this.camposNoObligatorios.includes(campo)) valor = undefined;
+
+    if(valor !== undefined)control.setValue(valor);
+    else control.reset();
+    
+    this._servicePacienteNuevo.CargarDatosPersonales(valor,campo, this.form.valid); 
   }
 
   SubirImagen(archivo:any){

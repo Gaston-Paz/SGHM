@@ -18,6 +18,8 @@ export class ConsultaInicialComponent implements OnInit {
   @Input("hayConsulta") hayConsulta: boolean = false;
   @Input("edicion") edicion: boolean = false;
   pipe = new DatePipe('es-ES');
+  maximo:number = 255;
+  camposNoObligatorios:number [] = [6,7,1,5,4,12];
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService,
@@ -70,12 +72,17 @@ export class ConsultaInicialComponent implements OnInit {
   }
 
   CargarConsultaInicial(ev:any,campo:number, control:any){
-    let valor = "";
+    let valor;
     if(campo !== 10 && campo !== 9) valor = ev; 
     else if(campo === 9)valor = ev.target.value; 
     else valor = ev.checked;   
-    control.setValue(valor);
-    this._servicePacienteNuevo.CargarConsultaInicial(valor,campo,this.form.valid);
+
+    if(valor === '' && this.camposNoObligatorios.includes(campo)) valor = undefined;
+
+    if(valor !== undefined)control.setValue(valor);
+    else control.reset();
+    this._servicePacienteNuevo.CargarConsultaInicial(valor,campo,this.form.valid);       
+    
   }
 
   changeDate(date:any,campo:number){ 

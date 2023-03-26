@@ -30,14 +30,27 @@
                 >
               </mat-form-field>
 
+              <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                <mat-label>Motivo</mat-label>
+                <textarea
+                  type="text"
+                  matInput
+                  formControlName="motivo"
+                  placeholder="Motivo de la consulta"
+                  rows="5"
+                  autocomplete="off"
+                  (cambio)="form.controls.motivo.setValue($event)"
+                  tabindex="3"
+                  required="true"
+                  [value]="form.controls.motivo.value"
+                ></textarea>
+              </mat-form-field>
+
               <div class="w-100">
-                <app-inputs [tabindex]="3" [label]="'Motivo'" [type]="'text'" [placeHolder]="'Motivo'" [requerido]="true" (cambio)="form.controls.motivo.setValue($event)" [valor]="form.controls.motivo.value" ></app-inputs>
+                <app-inputs [tabindex]="5" [label]="'Altura de Iliacos'" [type]="'text'" [placeHolder]="'Altura de Iliacos'" [requerido]="false" (cambio)="form.controls.altura.setValue($event)" [valor]="form.controls.altura.value" [max]="maximo" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="5" [label]="'Altura de Iliacos'" [type]="'text'" [placeHolder]="'Altura de Iliacos'" [requerido]="false" (cambio)="form.controls.altura.setValue($event)" [valor]="form.controls.altura.value" ></app-inputs>
-              </div>
-              <div class="w-100">
-                <app-inputs [tabindex]="7" [label]="'3 Esferas DD'" [type]="'text'" [placeHolder]="'3 Esferas DD'" [requerido]="false" (cambio)="form.controls.esferas.setValue($event)" [valor]="form.controls.esferas.value" ></app-inputs>
+                <app-inputs [tabindex]="7" [label]="'3 Esferas DD'" [type]="'text'" [placeHolder]="'3 Esferas DD'" [requerido]="false" (cambio)="form.controls.esferas.setValue($event)" [valor]="form.controls.esferas.value" [max]="maximo" ></app-inputs>
               </div>
 
             </div>
@@ -69,13 +82,13 @@
               </mat-form-field>
 
               <div class="w-100">
-                <app-inputs [tabindex]="4" [label]="'Triángulo de la talla'" [type]="'text'" [placeHolder]="'Triángulo de la talla'" [requerido]="false" (cambio)="form.controls.triangulo.setValue($event)" [valor]="form.controls.triangulo.value" ></app-inputs>
+                <app-inputs [tabindex]="4" [label]="'Triángulo de la talla'" [type]="'text'" [placeHolder]="'Triángulo de la talla'" [requerido]="false" (cambio)="form.controls.triangulo.setValue($event)" [valor]="form.controls.triangulo.value" [max]="maximo" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="6" [label]="'Barral'" [type]="'text'" [placeHolder]="'Barral'" [requerido]="false" (cambio)="form.controls.barral.setValue($event)" [valor]="form.controls.barral.value" ></app-inputs>
+                <app-inputs [tabindex]="6" [label]="'Barral'" [type]="'text'" [placeHolder]="'Barral'" [requerido]="false" (cambio)="form.controls.barral.setValue($event)" [valor]="form.controls.barral.value" [max]="maximo" ></app-inputs>
               </div>
               <div class="w-100">
-                <app-inputs [tabindex]="8" [label]="'Específico'" [type]="'text'" [placeHolder]="'Específico'" [requerido]="false" (cambio)="form.controls.especifico.setValue($event)" [valor]="form.controls.especifico.value" ></app-inputs>
+                <app-inputs [tabindex]="8" [label]="'Específico'" [type]="'text'" [placeHolder]="'Específico'" [requerido]="false" (cambio)="form.controls.especifico.setValue($event)" [valor]="form.controls.especifico.value" [max]="maximo" ></app-inputs>
               </div>
             </div>
 
@@ -166,23 +179,23 @@
         <div class="col-6">
 
           <div class="w-100">
-            <app-inputs [label]="'Triángulo de la talla'" [placeHolder]="'Triángulo de la talla'" [type]="'text'" [tabindex]="1" (cambio)="consulta.trianguloDeTalla = $event; SetConsultaAlta()" ></app-inputs>
+            <app-inputs [label]="'Triángulo de la talla'" [placeHolder]="'Triángulo de la talla'" [type]="'text'" [tabindex]="1" (cambio)="consulta.trianguloDeTalla = $event; SetConsultaAlta()" [max]="maximo" ></app-inputs>
           </div>
           <div class="w-100">
-            <app-inputs [label]="'Barral'" [placeHolder]="'Barral'" [type]="'text'" [tabindex]="3" (cambio)="consulta.barral = $event; SetConsultaAlta()" ></app-inputs>
+            <app-inputs [label]="'Barral'" [placeHolder]="'Barral'" [type]="'text'" [tabindex]="3" (cambio)="consulta.barral = $event; SetConsultaAlta()" [max]="maximo" ></app-inputs>
           </div>
           <div class="w-100">
-            <app-inputs [label]="'Específico'" [placeHolder]="'Específico'" [type]="'text'" [tabindex]="5" (cambio)="consulta.especifico = $event; SetConsultaAlta()"  ></app-inputs>
+            <app-inputs [label]="'Específico'" [placeHolder]="'Específico'" [type]="'text'" [tabindex]="5" (cambio)="consulta.especifico = $event; SetConsultaAlta()" [max]="maximo"  ></app-inputs>
           </div>
 
         </div>
         <div class="col-6">
 
           <div class="w-100">
-            <app-inputs [label]="'Altura de Iliacos'" [placeHolder]="'Altura de Iliacos'" [type]="'text'" [tabindex]="2" (cambio)="consulta.alturaDeIliacos = $event; SetConsultaAlta()" ></app-inputs>
+            <app-inputs [label]="'Altura de Iliacos'" [placeHolder]="'Altura de Iliacos'" [type]="'text'" [tabindex]="2" (cambio)="consulta.alturaDeIliacos = $event; SetConsultaAlta()" [max]="maximo" ></app-inputs>
           </div>
           <div class="w-100">
-            <app-inputs [label]="'3 Esferas DD'" [placeHolder]="'3 Esferas DD'" [type]="'text'" [tabindex]="4" (cambio)="consulta.esferas = $event; SetConsultaAlta()" ></app-inputs>
+            <app-inputs [label]="'3 Esferas DD'" [placeHolder]="'3 Esferas DD'" [type]="'text'" [tabindex]="4" (cambio)="consulta.esferas = $event; SetConsultaAlta()" [max]="maximo" ></app-inputs>
           </div>
 
         </div>
@@ -206,9 +219,6 @@
               rows="5"
               tabindex="6"
             ></textarea>
-            <!-- <mat-error *ngIf="form.controls.sedestacion.hasError('required')">
-              Campo <strong>obligatorio</strong>
-            </mat-error> -->
           </mat-form-field>
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Próximo Turno</mat-label>

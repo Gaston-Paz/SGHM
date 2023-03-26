@@ -50,6 +50,12 @@ h3 {
   margin-top: 20px;
 }
 
+.mat-header-cell {
+  text-align: center !important;
+  font-size: 16px;
+}
+
+
 @media only screen and (min-width: 1205px) and (max-width: 1275px) {
   .foto {
     width: 130px;

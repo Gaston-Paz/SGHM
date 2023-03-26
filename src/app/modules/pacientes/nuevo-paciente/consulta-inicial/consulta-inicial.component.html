@@ -29,6 +29,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 2,form.controls.antiguedad)"
               [valor]="form.controls.antiguedad.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -41,6 +42,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 6,form.controls.intensidad)"
               [valor]="form.controls.intensidad.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -53,6 +55,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 7,form.controls.irradiacion)"
               [valor]="form.controls.irradiacion.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100 ">
@@ -65,6 +68,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
               [valor]="form.controls.actividadFisica.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -131,6 +135,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 8,form.controls.localizacion)"
               [valor]="form.controls.localizacion.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -143,6 +148,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 5,form.controls.caracteristica)"
               [valor]="form.controls.caracteristica.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100">
@@ -155,6 +161,7 @@
               [readOnly]="edicion"
               (cambio)="CargarConsultaInicial($event, 4,form.controls.atenua)"
               [valor]="form.controls.atenua.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
           <div class="w-100 mb-38">
@@ -177,6 +184,7 @@
               [readOnly]="edicion || !form.controls.covid.value"
               (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
               [valor]="form.controls.otros.value"
+              [max]="maximo"
             ></app-inputs>
           </div>
         </div>

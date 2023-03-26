@@ -11,6 +11,7 @@
             [valor]="form.controls.nombre.value"
             [requerido]="true"
             (cambio)="CargarDatosPersonales($event, 1, form.controls.nombre)"
+            [max]="maximo"
           ></app-inputs>
         </div>
 
@@ -51,6 +52,7 @@
             [valor]="edad"
             [requerido]="false"
             [readOnly]="true"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -62,6 +64,7 @@
             [valor]="form.controls.otros.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 9, form.controls.otros)"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -73,6 +76,7 @@
             [valor]="form.controls.localidad.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 8, form.controls.localidad)"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -84,6 +88,7 @@
             [valor]="form.controls.mail.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 5, form.controls.mail)"
+            [max]="maximo"
           ></app-inputs>
         </div>
       </div>
@@ -97,6 +102,7 @@
             [valor]="form.controls.apellido.value"
             [requerido]="true"
             (cambio)="CargarDatosPersonales($event, 2, form.controls.apellido)"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100 mb-2px">
@@ -128,6 +134,7 @@
             [valor]="form.controls.ocupacion.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 6, form.controls.ocupacion)"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -139,6 +146,7 @@
             [valor]="form.controls.deParte.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 10, form.controls.deParte)"
+            [max]="maximo"
           ></app-inputs>
         </div>
         <div class="w-100">
@@ -151,6 +159,7 @@
               [valor]="form.controls.celular.value"
               [requerido]="false"
               (cambio)="CargarDatosPersonales($event, 4, form.controls.celular)"
+              [max]="maximo"
             ></app-inputs>
           </div>
         </div>

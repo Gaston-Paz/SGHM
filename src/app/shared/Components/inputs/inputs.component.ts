@@ -12,6 +12,7 @@ export class InputsComponent implements OnInit {
   @Input('label')label:string = '';
   @Input('valor')valor:string = '';
   @Input('tabindex')tabindex:number = 0;
+  @Input('max')max:number = 0;
   @Input('placeHolder')placeHolder:string = '';
   @Input('type')type:string = '';
   @Input('requerido')requerido:boolean = false;
@@ -23,7 +24,7 @@ export class InputsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
   }
 
   cambios(ev:any){           

@@ -1,4 +1,4 @@
-/* Structure */
+
 table {
     width: 100%;
   }
@@ -23,10 +23,6 @@ table {
     color: #ffffff;
 }
 
-th.mat-header-cell {
-  text-align: center;
-}
-
 td {
   text-align: center;
 }
@@ -49,14 +45,20 @@ h3{
   margin-top: 20px;
 }
 
-
 .filtro{
   height: 36px;
-  /* padding-left: 15px; */
   font-size: 14px;
   position: sticky;
   top: 0;
   z-index: 4;
   background-color: #ffffff;
   border-bottom: 1px solid #ccc;
+}
+.over-scroll{
+  overflow: scroll;
+}
+
+.mat-header-cell {
+  text-align: center !important;
+  font-size: 16px;
 }

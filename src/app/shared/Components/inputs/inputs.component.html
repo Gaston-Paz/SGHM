@@ -1,4 +1,22 @@
-<mat-form-field appearance="outline" class="example-full-width">
+<mat-form-field *ngIf="max !== 0" appearance="outline" class="example-full-width">
+  <mat-label> {{ label }} </mat-label>
+  <input
+    [tabIndex]="tabindex"
+    type="text"
+    matInput
+    [placeholder]="placeHolder"
+    [required]="requerido"
+    autocomplete="off"
+    (change)="cambios($event)"
+    (blur)="valido($event)"
+    [type]="type"
+    [value]="valor"
+    [readonly]="readOnly"
+    [maxLength]="max"
+  />
+</mat-form-field>
+
+<mat-form-field *ngIf="max === 0" appearance="outline" class="example-full-width">
   <mat-label> {{ label }} </mat-label>
   <input
     [tabIndex]="tabindex"
