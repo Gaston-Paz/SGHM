@@ -130,7 +130,7 @@
             <mat-error *ngIf="form.controls.nacimiento.hasError('required')">
               ¿Cómo nació? es <strong>obligatorio</strong>
             </mat-error>
-            <button class="clear" *ngIf="form.controls.nacimiento.value" matSuffix mat-icon-button (click)="form.controls.nacimiento.reset(); $event.stopPropagation()">
+            <button class="clear" *ngIf="form.controls.nacimiento.value" matSuffix mat-icon-button (click)="form.controls.nacimiento.reset(); $event.stopPropagation(); datosCompletos();">
               <mat-icon>close</mat-icon>
             </button>
           </mat-form-field>

@@ -35,6 +35,10 @@ export class DatosPersonalesComponent implements OnInit {
     this._dateAdapter.setLocale('es-ES');
   }
 
+  datosCompletos(){
+    this._servicePacienteNuevo.datosPersonlesCompletos = false;
+  }
+
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
     if(this.pacienteEditar === undefined){

@@ -64,8 +64,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.mapFechaForm();
-    
+    // this.mapFechaForm();    
     if(this._serviceConsulta.editartto.paciente?.nombre !== ""){
       this.form = this._formBuilder.group({
         fecha: [
@@ -98,7 +97,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         barral: [
           this._serviceConsulta.editartto.barral !== undefined &&
           this._serviceConsulta.editartto.barral !== null
-            ? this._serviceConsulta.editartto.barral !== undefined
+            ? this._serviceConsulta.editartto.barral
             : "",
         ],
         esferas: [
@@ -276,8 +275,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   SetConsultaAlta() {
     this._servicePaciente.consulta = this.consulta;
-    if (this.consulta.sedestacion !== "")
-      this._servicePaciente.tratamientoCompleto = true;
+    if (this.consulta.sedestacion !== "" && this.consulta.sedestacion !== null && this.consulta.sedestacion !== undefined) this._servicePaciente.tratamientoCompleto = true;
+    else this._servicePaciente.tratamientoCompleto = false;
   }
 
   applyFilterPaciente(espacio: boolean) {

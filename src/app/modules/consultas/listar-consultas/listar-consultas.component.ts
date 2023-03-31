@@ -71,8 +71,18 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
-      console.log(this.tratamientos);
-      
+      this.tratamientos.forEach(t => {
+        let fecha = new Date(t.fecha);
+        fecha.setHours(fecha.getHours()+3);
+        t.fecha = fecha;
+
+        if(t.proximoTurnoIndicado){
+          let proximoTurnoIndicado = new Date(t.proximoTurnoIndicado);
+          proximoTurnoIndicado.setHours(proximoTurnoIndicado.getHours()+3);
+          t.proximoTurnoIndicado = proximoTurnoIndicado;
+        }
+
+      });
       if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.paciente.idPaciente! !== 0)) {
         this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
@@ -122,7 +132,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
       if(a.fecha! > b.fecha!)return -1;
       else return 1;
-    });
+    });        
   }
 
   applyFilterPaciente(espacio:boolean){
@@ -132,7 +142,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
   }
 
-  EditarTto(element:Tratamiento){   
+  EditarTto(element:Tratamiento){       
     this._serviceTratamiento.paciente = {
         apellido:'',
         celular:'',
