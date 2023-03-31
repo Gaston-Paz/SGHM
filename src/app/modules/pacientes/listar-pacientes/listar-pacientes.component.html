@@ -3,7 +3,7 @@
     <mat-card-header>
       <mat-card-title>Pacientes</mat-card-title>
     </mat-card-header>
-  <mat-form-field class="w-100">
+  <mat-form-field class="w-95">
     <mat-label>Buscar</mat-label>
     <input
       autocomplete="off"
@@ -13,19 +13,19 @@
       #input
     />
   </mat-form-field>
+  <!-- <mat-icon matTooltip="Ocultar/Mostrar columnas" [matTooltipPosition]="'above'" (click)="OrdenarColumnas()">view_column</mat-icon> -->
   <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
     <!-- Name Column -->
-    <ng-container matColumnDef="apellido">
+    <!-- <ng-container matColumnDef="apellido">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
       <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
-    </ng-container>
+    </ng-container> -->
 
     <!-- Position Column -->
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
-      <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.nombre }} {{element.apellido}}</td>
     </ng-container>
-
 
     <!-- Weight Column -->
     <ng-container matColumnDef="celular">
@@ -41,7 +41,7 @@
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="foto">
+    <ng-container class="column-foto" matColumnDef="foto">
       <th mat-header-cell *matHeaderCellDef>Foto</th>
       <td mat-cell *matCellDef="let element">
         <img
@@ -53,6 +53,13 @@
     </ng-container>
 
     <!-- Symbol Column -->
+    <ng-container matColumnDef="datos">
+      <th mat-header-cell *matHeaderCellDef> {{textButtonDatos}} </th>
+      <td mat-cell *matCellDef="let element">
+        <app-button [texto]="textButtonDatos" (clickButton)="VerDatos(element)"></app-button>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="antecedentes">
       <th mat-header-cell *matHeaderCellDef> {{textButtonAntecedente}} </th>
       <td mat-cell *matCellDef="let element">
@@ -93,7 +100,7 @@
     </ng-container>
 
      <!-- Symbol Column -->
-     <ng-container matColumnDef="nuevaEstudio">
+     <ng-container matColumnDef="nuevoEstudio">
       <th mat-header-cell *matHeaderCellDef> {{textButtonEstudio}} </th>
       <td mat-cell *matCellDef="let element"> 
           <app-button [texto]="textButtonEstudio" [icono]="iconoAgregar" [textoIcono]="'add'" (clickButton)="NuevoEstudio(element)"></app-button>
@@ -113,6 +120,29 @@
   <mat-paginator [length]="200" [pageSizeOptions]="[10, 50, 100]" aria-label="Select page">
   </mat-paginator>
 </mat-card>
+</div>
+
+<div [hidden]="!datos" class="w-100">
+  <mat-card>
+  <h2>Datos Personales</h2>
+  <app-mini-fab 
+  [textoTooltip]="'Presione para editar el formulario'" 
+  [posicionTooltip]="'right'" 
+  [clase]="'button'"
+  [icon]="'edit'"
+  (click)="HabilitarEdicion()"></app-mini-fab> 
+
+    <app-datos-personales [habilita]="!edicion" [paciente]="pacienteEditar" *ngIf="datos" #datos></app-datos-personales>
+  </mat-card>
+  <div class="row">
+
+    <div class="left w-50 mt-20">
+      <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
+    </div>
+    <div class="right w-50 mt-20">
+      <app-button [habilita]="!edicion" [valido]="edicion" [texto]="'Guardar'" (clickButton)="ActualizarDatos()" ></app-button>
+    </div>
+  </div>
 </div>
 
 <div [hidden]="!antecedentes" class="w-100">

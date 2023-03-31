@@ -199,6 +199,16 @@
 
           <app-inputs
             [tabindex]="16"
+            [label]="'Partos/Cesareas'"
+            [type]="'text'"
+            [placeHolder]="'Partos/Cesareas'"
+            [readOnly]="edicion || !antecedentes.embarazos"
+            (cambio)="asignarValor($event, 18)"
+            [valor]="form.controls.partos.value"
+          ></app-inputs>
+
+          <app-inputs
+            [tabindex]="18"
             [label]="'Abortos Inducidos'"
             [type]="'text'"
             [placeHolder]="'Abortos Inducidos'"
@@ -207,15 +217,6 @@
             [valor]="form.controls.abortoInducido.value"
           ></app-inputs>
 
-          <app-inputs
-            [tabindex]="18"
-            [label]="'Partos/Cesareas'"
-            [type]="'text'"
-            [placeHolder]="'Partos/Cesareas'"
-            [readOnly]="edicion || !antecedentes.embarazos"
-            (cambio)="asignarValor($event, 18)"
-            [valor]="form.controls.partos.value"
-          ></app-inputs>
         </div>
       </div>
 
@@ -318,25 +319,33 @@
       <div class="row bg-section">
         <h3 class="mt-20">Otros</h3>
         <div class="col-6">
-          <app-inputs
-            [tabindex]="27"
-            [label]="'Accidentes'"
-            [type]="'text'"
-            [placeHolder]="'Accidentes'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 27)"
-            [valor]="form.controls.accidentes.value"
-          ></app-inputs>
+          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+            <mat-label>Accidentes</mat-label>
+            <textarea
+              type="text"
+              matInput
+              placeholder="Accidentes"
+              rows="5"
+              autocomplete="off"
+              (change)="asignarValor('', 27,$event)"
+              tabindex="27"
+              [readonly]="edicion"
+              [value]="form.controls.accidentes.value"
+            ></textarea>
+          </mat-form-field>
 
-          <app-inputs
-            [tabindex]="29"
-            [label]="'Medicación'"
-            [type]="'text'"
-            [placeHolder]="'Medicación'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 29)"
-            [valor]="form.controls.medicacion.value"
-          ></app-inputs>
+          <div class="w-100 mb-38">
+            <mat-checkbox
+              tabindex="29"
+              [disabled]="edicion"
+              [(ngModel)]="antecedentes.diabetes"
+              class="m-18"
+              color="primary"
+              (change)="CargarAntecedentes()"
+              formControlName="diabetes"
+              >Diabetes</mat-checkbox
+            >
+          </div>
 
           <app-inputs
             [tabindex]="31"
@@ -376,18 +385,22 @@
 
         </div>
         <div class="col-6">
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="28"
-              [disabled]="edicion"
-              [(ngModel)]="antecedentes.diabetes"
-              class="m-18"
-              color="primary"
-              (change)="CargarAntecedentes()"
-              formControlName="diabetes"
-              >Diabetes</mat-checkbox
-            >
-          </div>
+          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+            <mat-label>Medicación</mat-label>
+            <textarea
+              type="text"
+              matInput
+              placeholder="Medicación"
+              rows="5"
+              autocomplete="off"
+              (change)="asignarValor('', 27,$event)"
+              tabindex="29"
+              [readonly]="edicion"
+              [value]="form.controls.medicacion.value"
+            ></textarea>
+          </mat-form-field>
+
+
 
           <app-inputs
             [tabindex]="30"

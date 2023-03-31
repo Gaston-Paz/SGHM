@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit, ViewChild, AfterViewInit, HostListener } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
@@ -13,6 +14,7 @@ import { SpinnerService } from "src/app/shared/services/spinner.service";
 import { ConsultasService } from "../../consultas/nueva-consulta/consultas.service";
 import { EstudiosService } from "../../estudios/estudios.service";
 import { UsuarioService } from "../../usuario/usuario.service";
+import { DatosPersonalesComponent } from "../nuevo-paciente/datos-personales/datos-personales.component";
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
 import { ListadosService } from "./listados.service";
 
@@ -26,17 +28,68 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = [
-    "apellido",
+    // "apellido",
     "nombre",
     "celular",
     "nacimiento",
     "foto",
+    "datos",
     "antecedentes",
     "consultaInicial",
     "consultas",
     "estudios",
     "nuevaConsulta",
-    "nuevaEstudio"
+    "nuevoEstudio"
+  ];
+  displayedColumnsFilter: any[] = [
+    {
+      value: 'apellido',
+      descripcion: 'Apellido'
+    },
+    {
+      value: 'nombre',
+      descripcion: 'Nombre'
+    },
+    {
+      value: 'celular',
+      descripcion: 'Celular'
+    },
+    {
+      value: 'nacimiento',
+      descripcion: 'Edad'
+    },
+    {
+      value: 'foto',
+      descripcion: 'Foto'
+    },
+    {
+      value: 'datos',
+      descripcion: 'Datos Personales'
+    },
+    {
+      value: 'antecedentes',
+      descripcion: 'Antecedentes'
+    },
+    {
+      value: 'consultaInicial',
+      descripcion: 'Consulta Inicial'
+    },
+    {
+      value: 'consultas',
+      descripcion: 'Tratamiento'
+    },
+    {
+      value: 'estudios',
+      descripcion: 'Estudios'
+    },
+    {
+      value: 'nuevaConsulta',
+      descripcion: 'Nueva Consulta'
+    },
+    {
+      value: 'nuevoEstudio',
+      descripcion: 'Nuevo Estudio'
+    }
   ];
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
@@ -44,6 +97,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   consultaInicial: boolean = false;
   consultaNueva: boolean = false;
   estudiosNuevos: boolean = false;
+  datos: boolean = false;
   estudios: boolean = false;
   turnos: boolean = false;
   nombrePaciente: string = "";
@@ -62,6 +116,18 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     motivo: "",
     covid: false,
     fecha: new Date(),
+  };
+  pacienteEditar: Paciente = {
+    apellido: "",
+    celular: "",
+    fechaNacimiento: new Date(),
+    email: "",
+    nacio: "",
+    nombre: "",
+    ocupacion: "",
+    localidad: "",
+    otros: "",
+    deParte: "",
   };
   idPaciente: Paciente = {
     apellido: "",
@@ -82,8 +148,11 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   textButtonAntecedente:string = 'Antecedentes';
   textButtonPrimeraConsulta:string = 'Primera Consulta';
   textButtonConsulta:string = 'Nueva Consulta';
+  textButtonDatos:string = 'Datos Personales';
   textButtonEstudio:string = 'Nuevo Estudio';
   iconoAgregar:boolean = true;
+
+  @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
@@ -93,7 +162,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _snack: SnackService,
     private _serviceError:ErrorService,
     private _usuarioService:UsuarioService,
-    private _serviceEstudio:EstudiosService
+    private _serviceEstudio:EstudiosService,
+    private dialog:MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -143,6 +213,18 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  VerDatos(element:Paciente){  
+      this.datos = true;
+      this.antecedentes = false;
+      this.pacientesVer = false;
+      this.estudiosNuevos = false;
+      this.estudios = false;
+      this.consultaInicial = false;
+      this.consultaNueva = false;
+      this.turnos = false;
+      this.pacienteEditar = element;
+  }
+
   VerAntecedentes(element: Paciente) {
     this._serviceListados
       .ObtenerAntecedentePorId(element.idPaciente!)
@@ -156,7 +238,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.consultaInicial = false;
           this.consultaNueva = false;
           this.turnos = false;
-  
+          this.datos = false;
           this.nombrePaciente = element.nombre;
           this.apellidoPaciente = element.apellido;
         },
@@ -177,7 +259,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.consultaInicial = true;
         this.consultaNueva = false;
         this.turnos = false;
-
+        this.datos = false;
         this.nombrePaciente = element.nombre;
         this.apellidoPaciente = element.apellido;
       },
@@ -196,6 +278,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.consultaNueva = false;
     this.estudiosNuevos = false;
     this.estudios = false;
+    this.datos = false;
     this._serviceConsulta.paciente = {
       apellido: "",
       fechaNacimiento: new Date(),
@@ -213,6 +296,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.estudios = false;
     this.turnos = true;
     this.consultaNueva = false;
+    this.datos = false;
   }
 
   NuevaConsulta(paciente: Paciente) {
@@ -236,6 +320,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.estudiosNuevos = false;
     this.estudios = false;
     this.turnos = false;
+    this.datos = false;
   }
 
   Estudios(paciente: Paciente) {
@@ -248,6 +333,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.turnos = false;
     this.estudiosNuevos = false;
     this.estudios = true;
+    this.datos = false;
   }
 
   NuevoEstudio(paciente: Paciente) {
@@ -260,10 +346,40 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.turnos = false;
     this.estudiosNuevos = true;
     this.estudios = false;
+    this.datos = false;
   }
 
   HabilitarEdicion() {
     this.edicion = !this.edicion;
+  }
+
+  ActualizarDatos(){
+    this.pacienteEditar.nombre = this.datosPersonales.form.controls.nombre.value;
+    this.pacienteEditar.apellido = this.datosPersonales.form.controls.apellido.value;
+    this.pacienteEditar.fechaNacimiento = this.datosPersonales.form.controls.fechaNacimiento.value;
+    this.pacienteEditar.nacio = this.datosPersonales.form.controls.nacimiento.value;
+    this.pacienteEditar.otros = this.datosPersonales.form.controls.otros.value;
+    this.pacienteEditar.ocupacion = this.datosPersonales.form.controls.ocupacion.value;
+    this.pacienteEditar.localidad = this.datosPersonales.form.controls.localidad.value;
+    this.pacienteEditar.email = this.datosPersonales.form.controls.mail.value;
+    this.pacienteEditar.celular = this.datosPersonales.form.controls.celular.value;
+    this.pacienteEditar.deParte = this.datosPersonales.form.controls.deParte.value;
+    this.pacienteEditar.idPaciente = this.datosPersonales.form.controls.id.value;
+    
+    this._servicePacienteNuevo
+    .ActualizarDatosPersonales(this.pacienteEditar)
+    .subscribe(
+      (paciente) => {
+        this.edicion = false;
+        this._snack.Mensaje(
+          "Los datos personales del paciente se actualizaron con éxito",
+          "success"
+        );
+      },
+      (error: HttpErrorResponse) => {
+        this._serviceError.Error(error)
+      }
+    );
   }
 
   ActualizarAntecedente() {   
@@ -315,7 +431,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       this.textButtonPrimeraConsulta = 'Primera Consulta';
     }
 
-    if(innerWidth < 1315){
+    if(innerWidth < 1418){
       this.textButtonEstudio = "Estudio";
       this.textButtonConsulta = "Consulta";
       this.iconoAgregar = false;
@@ -323,7 +439,44 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       this.iconoAgregar = true;
       this.textButtonConsulta = "Nueva Consulta";
       this.textButtonEstudio = "Nuevo Estudio";
+    }
 
+    if(innerWidth < 1492){
+      this.textButtonDatos = "Datos";
+    }else{
+      this.textButtonDatos = "Datos Personales";
+    }
+
+    if(innerWidth > 1210){
+      this.displayedColumns = [
+        "nombre",
+        "celular",
+        "nacimiento",
+        "foto",
+        "datos",
+        "antecedentes",
+        "consultaInicial",
+        "consultas",
+        "estudios",
+        "nuevaConsulta",
+        "nuevoEstudio"
+    ];
+    }else{
+      this.displayedColumns = [
+        "nombre",
+        "celular",
+        "nacimiento",
+        // "foto",
+        "datos",
+        "antecedentes",
+        "consultaInicial",
+        "consultas",
+        "estudios",
+        "nuevaConsulta",
+        "nuevoEstudio"
+    ];
     }
   }
+
+
 }

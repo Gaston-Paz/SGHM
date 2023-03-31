@@ -23,6 +23,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 
 import { EstudiosModule } from '../estudios/estudios.module';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { EstudiosModule } from '../estudios/estudios.module';
     NgxSpinnerModule,
     ConsultasModule,
     ComponentsModule,
-    EstudiosModule
+    EstudiosModule,
+    MatTooltipModule
   ],
   providers: [  
     MatDatepickerModule,  

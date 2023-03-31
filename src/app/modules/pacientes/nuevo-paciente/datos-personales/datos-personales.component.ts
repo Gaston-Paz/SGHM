@@ -1,8 +1,9 @@
 import { DatePipe } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DateAdapter } from "@angular/material/core";
 import { DomSanitizer } from "@angular/platform-browser";
+import { Paciente } from "src/app/core/interfaces/datos-personales.interface";
 import { NuevoPacienteService } from "../nuevo-paciente.service";
 
 @Component({
@@ -22,6 +23,9 @@ export class DatosPersonalesComponent implements OnInit {
   maximo:number = 255;
   camposNoObligatorios:number [] = [9,8,5,6,10,4];
 
+  @Input('paciente')pacienteEditar:Paciente;
+  @Input('habilita')edicion:boolean = false;
+
   constructor(
     private _formBuilder: FormBuilder,
     private _sanitizer: DomSanitizer,
@@ -33,20 +37,40 @@ export class DatosPersonalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.fecha = new Date(Date.now());
-    this.form = this._formBuilder.group({
-      nombre: ["", Validators.required],
-      apellido: ["", Validators.required],
-      fechaNacimiento: [, Validators.required],
-      nacimiento: ["", Validators.required],
-      otros: [""],
-      ocupacion: [""],
-      localidad: [,],
-      mail: ["", [Validators.email]],
-      celular: [""],
-      deParte: [""],
-      foto: [""],
+    if(this.pacienteEditar === undefined){
+      this.form = this._formBuilder.group({
+        nombre: ["", Validators.required],
+        apellido: ["", Validators.required],
+        fechaNacimiento: [, Validators.required],
+        nacimiento: ["", Validators.required],
+        otros: [""],
+        ocupacion: [""],
+        localidad: [,],
+        mail: ["", [Validators.email]],
+        celular: [""],
+        deParte: [""],
+        foto: [""],
     });
-   
+    }else{
+      this.form = this._formBuilder.group({
+        id: [this.pacienteEditar.idPaciente, Validators.required],
+        nombre: [this.pacienteEditar.nombre, Validators.required],
+        apellido: [this.pacienteEditar.apellido, Validators.required],
+        fechaNacimiento: [this.pacienteEditar.fechaNacimiento, Validators.required],
+        nacimiento: [this.pacienteEditar.nacio, Validators.required],
+        otros: [this.pacienteEditar.otros],
+        ocupacion: [this.pacienteEditar.ocupacion],
+        localidad: [this.pacienteEditar.localidad,],
+        mail: [this.pacienteEditar.email, [Validators.email]],
+        celular: [this.pacienteEditar.celular],
+        deParte: [this.pacienteEditar.deParte]
+    });
+      let fecha = {
+        value: this.pacienteEditar.fechaNacimiento.toLocaleDateString()
+      }  
+      this.changeDate(fecha);
+    }
+
   }
 
   CargarFoto(ev: any) {

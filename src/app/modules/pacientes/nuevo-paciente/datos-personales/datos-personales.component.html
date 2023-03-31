@@ -10,6 +10,7 @@
             [placeHolder]="'Nombre del paciente'"
             [valor]="form.controls.nombre.value"
             [requerido]="true"
+            [readOnly]="edicion"
             (cambio)="CargarDatosPersonales($event, 1, form.controls.nombre)"
             [max]="maximo"
           ></app-inputs>
@@ -32,6 +33,7 @@
               [value]="form.controls.fechaNacimiento.value"
             />
             <mat-datepicker-toggle
+            [disabled]="edicion"
               mat-datepicket-toggle
               matSuffix
               [for]="selector"
@@ -62,6 +64,7 @@
             [type]="'text'"
             [placeHolder]="'Otros comentarios'"
             [valor]="form.controls.otros.value"
+            [readOnly]="edicion"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 9, form.controls.otros)"
             [max]="maximo"
@@ -73,6 +76,7 @@
             [label]="'Localidad'"
             [type]="'text'"
             [placeHolder]="'Localidad del paciente'"
+            [readOnly]="edicion"
             [valor]="form.controls.localidad.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 8, form.controls.localidad)"
@@ -85,6 +89,7 @@
             [label]="'Email'"
             [type]="'email'"
             [placeHolder]="'E-mail del paciente'"
+            [readOnly]="edicion"
             [valor]="form.controls.mail.value"
             [requerido]="false"
             (cambio)="CargarDatosPersonales($event, 5, form.controls.mail)"
@@ -99,6 +104,7 @@
             [label]="'Apellido'"
             [type]="'text'"
             [placeHolder]="'Apellido del paciente'"
+            [readOnly]="edicion"
             [valor]="form.controls.apellido.value"
             [requerido]="true"
             (cambio)="CargarDatosPersonales($event, 2, form.controls.apellido)"
@@ -111,6 +117,7 @@
             <mat-select
               [tabIndex]="4"
               formControlName="nacimiento"
+              [disabled]="edicion"
               required
               (selectionChange)="
                 CargarDatosPersonales($event, 7, form.controls.nacimiento)
@@ -132,6 +139,7 @@
           <app-inputs
             [tabindex]="6"
             [label]="'Ocupación'"
+            [readOnly]="edicion"
             [type]="'text'"
             [placeHolder]="'Ocupación del paciente'"
             [valor]="form.controls.ocupacion.value"
@@ -145,6 +153,7 @@
             [tabindex]="8"
             [label]="'De parte de'"
             [type]="'text'"
+            [readOnly]="edicion"
             [placeHolder]="'De parte de quién viene'"
             [valor]="form.controls.deParte.value"
             [requerido]="false"
@@ -158,6 +167,7 @@
               [tabindex]="10"
               [label]="'Celular'"
               [type]="'text'"
+              [readOnly]="edicion"
               [placeHolder]="'Celular del paciente'"
               [valor]="form.controls.celular.value"
               [requerido]="false"

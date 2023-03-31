@@ -7,6 +7,11 @@ table {
   width: 100%;
 }
 
+.w-95{
+  width: 95%;
+  margin-right: 20px;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -55,15 +60,25 @@ h3 {
   font-size: 16px;
 }
 
-
-@media only screen and (min-width: 1205px) and (max-width: 1275px) {
+@media only screen and (min-width: 1310px) and (max-width: 1402px) {
   .foto {
     width: 130px;
   }
 }
 
-@media only screen and (max-width: 1205px) {
+@media only screen and (min-width: 1280px) and (max-width: 1310px) {
   .foto {
-    width: 70px;
+    width: 100px;
   }
+}
+
+@media only screen and (min-width: 1210px) and (max-width: 1280px) {
+  .foto {
+    width: 50px;
+  }
+}
+  @media only screen and (max-width: 1210px) {
+    .foto {
+      display: none;
+    }
 }
