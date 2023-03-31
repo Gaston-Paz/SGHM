@@ -49,7 +49,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    PdfComponent
+    PdfComponent,
+    MatButtonModule
   ]
 })
 export class ComponentsModule { }

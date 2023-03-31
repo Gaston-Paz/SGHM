@@ -70,6 +70,9 @@
                       {{ rol }}
                     </mat-option>
                   </mat-select>
+                  <button class="clear" *ngIf="form.controls.rol.value" matSuffix mat-icon-button (click)="form.controls.rol.reset(); $event.stopPropagation()">
+                    <mat-icon>close</mat-icon>
+                  </button>
                 </mat-form-field>
                 <mat-error [ngClass]="valida ? '' : 'color-white'">
                   El Rol es <strong>obligatorio</strong>

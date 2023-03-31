@@ -266,6 +266,9 @@
                 {{ fumas }}
               </mat-option>
             </mat-select>
+            <button class="clear" *ngIf="form.controls.fuma.value" matSuffix mat-icon-button (click)="form.controls.fuma.reset(); $event.stopPropagation()">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
         </div>
         <div class="col-6">
@@ -409,6 +412,9 @@
                 {{ tiro }}
               </mat-option>
             </mat-select>
+            <button class="clear" *ngIf="form.controls.tiroides.value" matSuffix mat-icon-button (click)="form.controls.tiroides.reset(); $event.stopPropagation()">
+              <mat-icon>close</mat-icon>
+            </button>
           </mat-form-field>
 
           <app-inputs
