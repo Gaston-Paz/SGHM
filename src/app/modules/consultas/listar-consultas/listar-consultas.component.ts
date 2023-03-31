@@ -71,10 +71,9 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
+      console.log(this.tratamientos);
       
       if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.paciente.idPaciente! !== 0)) {
-        // this._serviceTratamiento.paciente = this._serviceTratamiento.editartto.paciente!;
-        // this.form.controls.paciente.setValue(this._serviceTratamiento.editartto.paciente?.idPaciente!);
         this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
         this._serviceTratamiento.editartto = {
