@@ -4,11 +4,11 @@ export interface Antecedente{
     cirugias?: string;
     implanteSuperior?:string;
     implanteInferior?:string;
-    ortodoncia:boolean;
+    ortodoncia?:boolean;
     edadOrtodoncia?:string;
     piezasFaltantesSup?:string;
     piezasFaltantesInf?:string;
-    placaDescanso:boolean;
+    placaDescanso?:boolean;
     intestinal?:string;
     digestivo?:string;
     cardiaco?:string;
@@ -19,11 +19,11 @@ export interface Antecedente{
     fracturas?:string;
     dolorCabeza?:string;
     alimentacion?:string;
-    embarazos:boolean;
+    embarazos?:boolean;
     partos?:string;
     abortosInducido?:string;
     abortosEspontaneo?:string;
-    menstruacion:boolean;
+    menstruacion?:boolean;
     frecuencia?:string;
     duracion?:string;
     volumen?:string;
@@ -34,6 +34,6 @@ export interface Antecedente{
     otrasDrogas?:string;
     fuma?:string;
     protesis?:string;
-    diabetes:boolean;
-    contencion:boolean;
+    diabetes?:boolean;
+    contencion?:boolean;
 }

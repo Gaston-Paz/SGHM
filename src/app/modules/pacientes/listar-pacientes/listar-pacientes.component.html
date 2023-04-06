@@ -13,28 +13,16 @@
       #input
     />
   </mat-form-field>
-  <!-- <mat-icon matTooltip="Ocultar/Mostrar columnas" [matTooltipPosition]="'above'" (click)="OrdenarColumnas()">view_column</mat-icon> -->
-  <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
-    <!-- Name Column -->
-    <!-- <ng-container matColumnDef="apellido">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
-      <td mat-cell *matCellDef="let element">{{ element.apellido }}</td>
-    </ng-container> -->
 
-    <!-- Position Column -->
+  <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
       <td mat-cell *matCellDef="let element">{{ element.nombre }} {{element.apellido}}</td>
     </ng-container>
 
-    <!-- Weight Column -->
-    <ng-container matColumnDef="celular">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Celular</th>
-      <td mat-cell *matCellDef="let element">{{ element.celular }}</td>
-    </ng-container>
-
     <ng-container matColumnDef="nacimiento">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Edad</th>
+      <th mat-header-cell *matHeaderCellDef >Edad</th>
       <td mat-cell *matCellDef="let element">
         {{ element.edad.toString().split(".")[0] }} años
       </td>

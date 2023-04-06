@@ -85,7 +85,7 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
         this._router.navigate(['home/pacientes/listar-pacientes']);
       });
       },
-      (error: HttpErrorResponse) => {
+      (error: HttpErrorResponse) => {        
         this._serviceError.Error(error);
       }
     ));

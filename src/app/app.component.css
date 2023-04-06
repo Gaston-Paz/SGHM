@@ -22,7 +22,7 @@
   h2.mail{
     display: flex;
     width: 50%;
-    justify-content: end;
+    justify-content: flex-end;
   }
   
   .example-sidenav-container {

@@ -72,7 +72,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
       this.tratamientos.forEach(t => {
-        let fecha = new Date(t.fecha);
+        let fecha = new Date(t.fecha!);
         fecha.setHours(fecha.getHours()+3);
         t.fecha = fecha;
 
@@ -139,7 +139,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     let filter = this.filtroPaciente + "";
     if(espacio) filter += "";
     this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
-    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido!.toUpperCase().includes(filter.toUpperCase()) || x.nombre!.toUpperCase().includes(filter.toUpperCase()))));
   }
 
   EditarTto(element:Tratamiento){       

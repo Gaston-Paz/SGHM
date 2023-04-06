@@ -70,7 +70,7 @@ export class DatosPersonalesComponent implements OnInit {
         deParte: [this.pacienteEditar.deParte]
     });
       let fecha = {
-        value: this.pacienteEditar.fechaNacimiento.toLocaleDateString()
+        value: this.pacienteEditar.fechaNacimiento!.toLocaleDateString()
       }  
       this.changeDate(fecha);
     }
@@ -110,6 +110,7 @@ export class DatosPersonalesComponent implements OnInit {
 
   CargarDatosPersonales(dato: any, campo: number,control:any) {   
     let valor;   
+    dato === "" ? dato = undefined : dato = dato;
     if(campo === 7) valor = dato.value;
     else valor = dato; 
 

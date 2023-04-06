@@ -95,7 +95,7 @@ export class ListarComponent implements OnInit, OnDestroy {
     let filter = this.filtroPaciente + "";
     if(espacio) filter += "";
     this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes));
-    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido.toUpperCase().includes(filter.toUpperCase()) || x.nombre.toUpperCase().includes(filter.toUpperCase()))));
+    if(filter != 'undefined') this.pacientesFilter = JSON.parse(JSON.stringify(this.pacientes.filter(x => x.apellido!.toUpperCase().includes(filter.toUpperCase()) || x.nombre!.toUpperCase().includes(filter.toUpperCase()))));
   }
 
   VerEstudio(element:Estudios){

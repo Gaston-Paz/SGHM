@@ -31,13 +31,13 @@ td {
 }
 
 .left {
-  justify-content: start;
+  justify-content: flex-start;
   margin-bottom: 20px;
   display: flex;
 }
 
 .right {
-  justify-content: end;
+  justify-content: flex-end;
   margin-bottom: 20px;
   display: flex;
 }

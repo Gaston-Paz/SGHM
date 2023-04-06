@@ -12,40 +12,40 @@ import { environment } from "src/environments/environment.prod";
 })
 export class NuevoPacienteService {
   datosPersonales: Paciente = {
-    apellido: "",
-    nombre: "",
-    fechaNacimiento: new Date(),
-    nacio: ""
+    apellido: undefined,
+    nombre: undefined,
+    fechaNacimiento: undefined,
+    nacio: undefined
     
   };
   datosPersonlesCompletos: boolean = false;
 
   consultaInicial: ConsultaInicial = {
-    antiguedad: "",
-    motivo: "",
-    covid: false,
-    fecha: new Date(),
-    localizacion: ""
+    antiguedad: undefined,
+    motivo: undefined,
+    covid: undefined,
+    fecha: undefined,
+    localizacion: undefined
   };
   consultaInicialCompleta: boolean = false;
 
   antecedente: Antecedente = {
-    diabetes: false,
-    embarazos: false,
-    menstruacion: false,
-    ortodoncia: false,
-    placaDescanso: false,
-    contencion: false
+    diabetes: undefined,
+    embarazos: undefined,
+    menstruacion: undefined,
+    ortodoncia: undefined,
+    placaDescanso: undefined,
+    contencion: undefined
   };
 
   consulta: Tratamiento = {
-    especifico:'',
-    fecha: new Date(),
-    idPaciente: 0,
-    motivo: '',
-    proximoTurnoIndicado: new Date(),
-    sedestacion: '',
-    sugerencias: ''
+    especifico:undefined,
+    fecha: undefined,
+    idPaciente: undefined,
+    motivo: undefined,
+    proximoTurnoIndicado: undefined,
+    sedestacion: undefined,
+    sugerencias: undefined
   }
   tratamientoCompleto:boolean = false;
 
@@ -266,10 +266,8 @@ export class NuevoPacienteService {
     this.alta.antecedente = this.antecedente;
     this.alta.consultaInicial = this.consultaInicial;
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
-    this.consulta.fecha = this.consultaInicial.fecha;
-    this.alta.tratamiento = this.consulta;
-    console.log(this.alta.paciente);
-    
+    this.consulta.fecha = this.consultaInicial.fecha!;
+    this.alta.tratamiento = this.consulta;    
     return this._httpClient.post<Paciente>(
       environment.url + "/api/paciente",
       this.alta

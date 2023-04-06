@@ -28,9 +28,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = [
-    // "apellido",
     "nombre",
-    "celular",
     "nacimiento",
     "foto",
     "datos",
@@ -41,56 +39,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "nuevaConsulta",
     "nuevoEstudio"
   ];
-  displayedColumnsFilter: any[] = [
-    {
-      value: 'apellido',
-      descripcion: 'Apellido'
-    },
-    {
-      value: 'nombre',
-      descripcion: 'Nombre'
-    },
-    {
-      value: 'celular',
-      descripcion: 'Celular'
-    },
-    {
-      value: 'nacimiento',
-      descripcion: 'Edad'
-    },
-    {
-      value: 'foto',
-      descripcion: 'Foto'
-    },
-    {
-      value: 'datos',
-      descripcion: 'Datos Personales'
-    },
-    {
-      value: 'antecedentes',
-      descripcion: 'Antecedentes'
-    },
-    {
-      value: 'consultaInicial',
-      descripcion: 'Consulta Inicial'
-    },
-    {
-      value: 'consultas',
-      descripcion: 'Tratamiento'
-    },
-    {
-      value: 'estudios',
-      descripcion: 'Estudios'
-    },
-    {
-      value: 'nuevaConsulta',
-      descripcion: 'Nueva Consulta'
-    },
-    {
-      value: 'nuevoEstudio',
-      descripcion: 'Nuevo Estudio'
-    }
-  ];
+
   dataSource = new MatTableDataSource();
   pacientesVer: boolean = true;
   antecedentes: boolean = false;
@@ -177,7 +126,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     forkJoin(obs).subscribe(
       (resp) => {
         resp[0].forEach((r: Paciente) => {
-          r.fechaNacimiento = new Date(r.fechaNacimiento);
+          r.fechaNacimiento = new Date(r.fechaNacimiento!);
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
           var diff = fechaFin - fechaInicio;
@@ -186,7 +135,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         });
 
         this.dataSource.data = this.pacientes.sort((a, b) => {
-          if (a.apellido < b.apellido) return -1;
+          if (a.apellido! < b.apellido!) return -1;
           else return 1;
         });
 
@@ -226,6 +175,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   VerAntecedentes(element: Paciente) {
+    console.log(element);
+    
     this._serviceListados
       .ObtenerAntecedentePorId(element.idPaciente!)
       .subscribe(
@@ -239,10 +190,12 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.consultaNueva = false;
           this.turnos = false;
           this.datos = false;
-          this.nombrePaciente = element.nombre;
-          this.apellidoPaciente = element.apellido;
+          this.nombrePaciente = element.nombre!;
+          this.apellidoPaciente = element.apellido!;
         },
         (error: HttpErrorResponse) => {
+          console.log(error);
+          
           this._serviceError.Error(error)
         }
       );
@@ -260,8 +213,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.consultaNueva = false;
         this.turnos = false;
         this.datos = false;
-        this.nombrePaciente = element.nombre;
-        this.apellidoPaciente = element.apellido;
+        this.nombrePaciente = element.nombre!;
+        this.apellidoPaciente = element.apellido!;
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error)
@@ -450,7 +403,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     if(innerWidth > 1210){
       this.displayedColumns = [
         "nombre",
-        "celular",
         "nacimiento",
         "foto",
         "datos",
@@ -464,9 +416,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     }else{
       this.displayedColumns = [
         "nombre",
-        "celular",
         "nacimiento",
-        // "foto",
         "datos",
         "antecedentes",
         "consultaInicial",

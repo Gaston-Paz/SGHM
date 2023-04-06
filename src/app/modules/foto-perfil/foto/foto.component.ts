@@ -96,8 +96,8 @@ export class FotoComponent implements OnInit, OnDestroy {
         JSON.stringify(
           this.pacientes.filter(
             (x) =>
-              x.apellido.toUpperCase().includes(filter.toUpperCase()) ||
-              x.nombre.toUpperCase().includes(filter.toUpperCase())
+              x.apellido!.toUpperCase().includes(filter.toUpperCase()) ||
+              x.nombre!.toUpperCase().includes(filter.toUpperCase())
           )
         )
       );

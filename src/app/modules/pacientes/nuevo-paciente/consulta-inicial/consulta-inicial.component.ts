@@ -29,8 +29,8 @@ export class ConsultaInicialComponent implements OnInit {
 
 
   ngOnInit(): void {    
-    if(this.hayConsulta){     
-      this.consulta.fecha = this.parseFecha(this.consulta.fecha.toString());
+    if(this.hayConsulta){  
+      this.consulta.fecha = this.parseFecha(this.consulta.fecha!.toString());
       if(this.consulta.fechaCovid !== undefined && this.consulta.fechaCovid !== null)this.consulta.fechaCovid = this.parseFecha(this.consulta.fechaCovid!.toString());
 
       this._servicePacienteNuevo.consultaInicial = this.consulta;
