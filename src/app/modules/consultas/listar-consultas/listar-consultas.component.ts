@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -13,7 +13,6 @@ import { ErrorService } from 'src/app/shared/services/error.service';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 import { UsuarioService } from '../../usuario/usuario.service';
 import { ConsultasService } from '../nueva-consulta/consultas.service';
-
 @Component({
   selector: 'app-listar-consultas',
   templateUrl: './listar-consultas.component.html',
@@ -24,7 +23,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   dataSource = new MatTableDataSource();
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['fecha', 'motivo', 'sedestacion','sugerencias','proximoTurnoIndicado','edit'];
+  displayedColumns: string[] = ['fecha', 'motivo', 'sedestacion','sugerencias','edit'];
   pacientes:Paciente[]=[];
   pacientesFilter: Paciente[] = [];
   tratamientos:Tratamiento[]=[];
@@ -46,6 +45,8 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   subscribes:any[]=[];
   mail:string='';
 
+  @Output('ocultarTratamientos')ocultarTratamientos = new EventEmitter<Paciente>();
+
   constructor(private _servicePaciente:NuevoPacienteService,
     private _spinnerService: NgxSpinnerService,
     private _serviceTratamiento:ConsultasService,
@@ -58,7 +59,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.subscribes.forEach(s => s.unsubscribe());
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
     this.form = this._formBuilder.group({
       paciente: [this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null ? this._serviceTratamiento.paciente.idPaciente : this.paciente.idPaciente]
     });
@@ -157,6 +158,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     };
     this._serviceTratamiento.editartto = element;
     this._router.navigate(['home/consultas/nueva-consulta']);
+  }
+
+  NuevaConsulta(element:number){
+    let paciente = this.pacientes.find(x => x.idPaciente === element);
+    this.ocultarTratamientos.emit(paciente);
   }
 
 }

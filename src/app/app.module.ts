@@ -30,7 +30,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSidenavModule,
     MatToolbarModule,
     MatListModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    
   ],
   providers: [
     {

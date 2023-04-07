@@ -53,7 +53,6 @@ export class LoginComponent implements OnInit {
         }
       );
     },(error:HttpErrorResponse) => {
-      console.log(error);
       this._snackService.Mensaje('Email o contraseña incorrecta','error');
     });
   }

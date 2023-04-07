@@ -175,8 +175,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   }
 
   VerAntecedentes(element: Paciente) {
-    console.log(element);
-    
     this._serviceListados
       .ObtenerAntecedentePorId(element.idPaciente!)
       .subscribe(
@@ -194,8 +192,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.apellidoPaciente = element.apellido!;
         },
         (error: HttpErrorResponse) => {
-          console.log(error);
-          
           this._serviceError.Error(error)
         }
       );
@@ -238,6 +234,19 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       nombre: "",
       nacio: ""
     };
+  }
+
+  VolverDeConsultaNueva() {
+    this._serviceConsulta.paciente = this.idPaciente;
+    this.edicion = false;
+    this.antecedentes = false;
+    this.pacientesVer = false;
+    this.consultaInicial = false;
+    this.turnos = true;
+    this.consultaNueva = false;
+    this.estudiosNuevos = false;
+    this.estudios = false;
+    this.datos = false;
   }
 
   verTurnos(paciente: Paciente) {
@@ -371,7 +380,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
-    console.log(event.target.innerWidth);
     this.validarTamañoPantalla(event.target.innerWidth);
   }
 

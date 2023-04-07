@@ -4,22 +4,29 @@
       <mat-card-title>Consultas TTO</mat-card-title>
     </mat-card-header>
     <form [formGroup]="form">
-      <mat-form-field class="w-100">
-        <mat-label>Pacientes</mat-label>
-        <mat-select
+      <div class="w-100 row d-flex">
+
+        <mat-form-field class="w-select">
+          <mat-label>Pacientes</mat-label>
+          <mat-select
           formControlName="paciente"
           (selectionChange)="buscarTratamientos()"
-        >
-        <input placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
-  
-          <mat-option
-            *ngFor="let paciente of pacientesFilter"
-            [value]="paciente.idPaciente"
           >
-            {{ paciente.nombre }} {{ paciente.apellido }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+          <input placeholder="Buscar: " class="filtro" matInput #filtro autocomplete="off" [(ngModel)]="filtroPaciente" [ngModelOptions]="{standalone: true}" (ngModelChange)="applyFilterPaciente(false)" (keyup)="$event.stopPropagation; applyFilterPaciente(true)" (keydown)="$event.stopPropagation()">
+          
+          <mat-option
+          *ngFor="let paciente of pacientesFilter"
+          [value]="paciente.idPaciente"
+          >
+          {{ paciente.nombre }} {{ paciente.apellido }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div class="w-button d-flex justify-content-center">
+      
+      <app-button [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(form.controls.paciente.value)"></app-button>
+    </div>
+  </div>
     </form>
     <div class="over-scroll">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -53,15 +60,6 @@
         </td>
       </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="proximoTurnoIndicado">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-          Próximo turno indicado
-        </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.proximoTurnoIndicado | date : "dd/MM/yyyy" }}
-        </td>
-      </ng-container>
 
       <!-- Symbol Column -->
       <ng-container matColumnDef="edit">

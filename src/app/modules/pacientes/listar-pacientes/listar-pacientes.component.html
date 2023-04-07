@@ -176,7 +176,7 @@
 </div>
 
 <div [hidden]="!turnos" class="w-100">
-  <app-listar-consultas *ngIf="turnos" ></app-listar-consultas>
+  <app-listar-consultas (ocultarTratamientos)="turnos = !turnos; consultaNueva = !consultaNueva; idPaciente = $event;" *ngIf="turnos" ></app-listar-consultas>
 
   <div class="left mt-20">
     <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
@@ -187,7 +187,7 @@
   <app-nueva-consulta *ngIf="consultaNueva" [paciente]="idPaciente" ></app-nueva-consulta>
 
   <div class="left mt-20">
-    <app-button [texto]="'Volver'" (clickButton)="Volver()" ></app-button>
+    <app-button [texto]="'Volver'" (clickButton)="VolverDeConsultaNueva()" ></app-button>
   </div>
 </div>
 

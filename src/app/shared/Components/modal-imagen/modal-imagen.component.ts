@@ -28,8 +28,6 @@ export class ModalImagenComponent implements OnInit {
 
   ngOnInit(): void {
     this.element = this.data.element;
-    console.log(this.element);
-      
   }
 
 }

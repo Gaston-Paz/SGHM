@@ -83,10 +83,7 @@ export class EstudiosComponent implements OnInit, OnDestroy {
     );
   }
 
-  GuardarEstudios() {
-    console.log(this._servicePaciente.estudios);
-    console.log(this.nombresNuevos);
-    
+  GuardarEstudios() {   
     if (this._servicePaciente.estudios.length !== this.nombresNuevos.length) {
       this._snack.Mensaje(
         "La cantidad de archivos debe coincidir con la cantidad de nombres ingresados",
