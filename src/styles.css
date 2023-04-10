@@ -1,6 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
-
+/* *{
+    box-sizing: border-box;
+} */
 /* html, body { height: 100%; } */
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -18,3 +18,52 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-align: center !important;
     font-size: 16px;
   }
+
+
+  
+/* .d-flex{
+    display: flex;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.h-75{
+    height: 75%;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.w-100{
+    width: 100%;
+}
+
+.w-25{
+    width: 25%;
+}
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+  }
+  
+
+.container {
+    max-width: 540px;
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-right: auto;
+    margin-left: auto;
+  }
+   */

@@ -2,15 +2,13 @@ mat-form-field::childs{
     padding: 0;
     margin: 0;
 }
-.example-full-width {
-    width: 100%;
-}
+
 .mat-error{
     font-size: 11px;
     color: #e72828;
 }
 
-.example-full-width .mat-form-field-wrapper {
+.w-100 .mat-form-field-wrapper {
     padding: 0;
     margin: 0;
 }

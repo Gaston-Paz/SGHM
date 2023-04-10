@@ -19,10 +19,10 @@
                 <form [formGroup]="form" (ngSubmit)="Login()">
                     <div class="row w-100">
 
-                        <app-inputs [label]="'Email'" [placeHolder]="'Email'" [requerido]="true" [type]="'email'" [valor]="form.controls.mail.value" (cambio)="asignarValor(form.controls.mail, $event)" ></app-inputs>
+                        <app-inputs class="w-100" [label]="'Email'" [placeHolder]="'Email'" [requerido]="true" [type]="'email'" [valor]="form.controls.mail.value" (cambio)="asignarValor(form.controls.mail, $event)" ></app-inputs>
 
 
-                        <app-inputs [label]="'Contraseña'" [type]="'password'" [requerido]="true" [valor]="form.controls.pass.value" (cambio)="asignarValor(form.controls.pass, $event)" ></app-inputs>
+                        <app-inputs class="w-100" [label]="'Contraseña'" [type]="'password'" [requerido]="true" [valor]="form.controls.pass.value" (cambio)="asignarValor(form.controls.pass, $event)" ></app-inputs>
 
                     </div>
                     <!-- <div class="row">
