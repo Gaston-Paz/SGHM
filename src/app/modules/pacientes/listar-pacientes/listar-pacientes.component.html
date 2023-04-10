@@ -3,16 +3,18 @@
     <mat-card-header>
       <mat-card-title>Pacientes</mat-card-title>
     </mat-card-header>
-  <mat-form-field class="w-95">
+
+    <app-inputs class="w-95" [placeHolder]="'Buscar'" [label]="'Buscar'" (presion)="applyFilter($event)" ></app-inputs>
+  <!-- <mat-form-field class="w-95">
     <mat-label>Buscar</mat-label>
     <input
       autocomplete="off"
       matInput
-      (keyup)="applyFilter($event)"
+      (keyup)=""
       placeholder="Buscar"
       #input
     />
-  </mat-form-field>
+  </mat-form-field> -->
 
   <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
 

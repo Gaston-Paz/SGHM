@@ -13,6 +13,7 @@
     [value]="valor"
     [readonly]="readOnly"
     [maxLength]="max"
+    (keyup)="presiona($event)"
   />
 </mat-form-field>
 
@@ -30,6 +31,7 @@
     [type]="type"
     [value]="valor"
     [readonly]="readOnly"
+    (keyup)="presiona($event)"
   />
 </mat-form-field>
 

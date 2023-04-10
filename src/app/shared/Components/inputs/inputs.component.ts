@@ -20,6 +20,7 @@ export class InputsComponent implements OnInit {
   validaRequerido:boolean = false;
   validaMail:boolean = false;
   @Output() cambio = new EventEmitter<any>();
+  @Output() presion = new EventEmitter<any>();
   msj:string = 'pepe';
 
   constructor() { }
@@ -29,6 +30,10 @@ export class InputsComponent implements OnInit {
 
   cambios(ev:any){           
     this.cambio.emit(ev.target.value)
+  }
+
+  presiona(ev:any){
+    this.presion.emit(ev);
   }
 
   valido(ev:any){

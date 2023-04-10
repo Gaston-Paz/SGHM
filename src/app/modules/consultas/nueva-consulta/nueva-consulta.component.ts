@@ -65,6 +65,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.mapFechaForm();    
+    
     if(this._serviceConsulta.editartto.paciente?.nombre !== ""){
       this.form = this._formBuilder.group({
         fecha: [
@@ -236,7 +237,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   }
 
   GuardarConsulta() {
-    this.MapTratamiento();
+    this.MapTratamiento();    
     this.subscribes.push(
       this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(
         (resp) => {
@@ -244,7 +245,9 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
           this.form.reset();
           const espera = timer(1500);
           espera.subscribe(() => {
-            this._serviceConsulta.paciente = this.tratamiento.paciente!;
+            this._servicePaciente.datosPersonlesCompletos = false;          
+            this._servicePaciente.consultaInicialCompleta = false;          
+            this._servicePaciente.tratamientoCompleto = false;          
             this._router.navigate(["home/consultas/listar-consultas"]);
           });
         },

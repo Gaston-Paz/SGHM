@@ -101,6 +101,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   textButtonEstudio:string = 'Nuevo Estudio';
   iconoAgregar:boolean = true;
 
+  buscador:string = '';
+
   @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
 
   constructor(
@@ -116,6 +118,10 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this._servicePacienteNuevo.datosPersonlesCompletos = false;          
+    this._servicePacienteNuevo.consultaInicialCompleta = false;          
+    this._servicePacienteNuevo.tratamientoCompleto = false;  
+
     this.validarTamañoPantalla(window.innerWidth);
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
@@ -157,8 +163,15 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
+  applyFilter(event: any) {
+    if(event.key !== "Backspace")this.buscador += event.key;
+    else this.buscador = this.buscador.substring(0,this.buscador.length-1);
+
+    console.log(this.buscador);
+    
+    const filterValue = this.buscador;
+    console.log(event);
+    
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PdfComponent } from './pdf/pdf.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -36,7 +37,9 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports:[
     ButtonComponent,
