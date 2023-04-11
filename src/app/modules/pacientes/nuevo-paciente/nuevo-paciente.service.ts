@@ -216,36 +216,16 @@ export class NuevoPacienteService {
   }
 
   InicializarObjetos(){
-    this.datosPersonales = {
-      apellido: "",
-      nombre: "",
-      fechaNacimiento: new Date(),
-      nacio: ""
-    };
-    this.consultaInicial = {
-      antiguedad: "",
-      motivo: "",
-      covid: false,
-      fecha: new Date(),
-      localizacion: ""
-    };
-    this.antecedente = {
-      diabetes: false,
-      embarazos: false,
-      menstruacion: false,
-      ortodoncia: false,
-      placaDescanso: false,
-      contencion: false
-    };
+    this.datosPersonales = {};
+    this.consultaInicial = {};
+    this.antecedente = {};
     this.estudios = [];
-    this.consulta = {
-      especifico:'',
-      fecha: new Date(),
-      idPaciente: 0,
-      motivo: '',
-      proximoTurnoIndicado: new Date(),
-      sedestacion: '',
-      sugerencias: ''
+    this.consulta = {}
+    this.alta = {
+      antecedente: {},
+      consultaInicial:{},
+      paciente: {},
+      tratamiento:{}
     }
   }
 

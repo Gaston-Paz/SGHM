@@ -59,7 +59,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.subscribes.forEach(s => s.unsubscribe());
   }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {        
     this.form = this._formBuilder.group({
       paciente: [this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null ? this._serviceTratamiento.paciente.idPaciente : this.paciente.idPaciente]
     });
@@ -87,24 +87,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.paciente.idPaciente! !== 0)) {
         this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
-        this._serviceTratamiento.editartto = {
-          fecha: new Date(),
-          idPaciente: 0,
-          motivo: "",
-          sedestacion: "",
-          paciente:{
-            apellido:'',
-            celular:'',
-            deParte:'',
-            email:'',
-            fechaNacimiento: new Date(),
-            localidad:'',
-            nacio:'',
-            nombre:'',
-            ocupacion:'',
-            otros:''
-          }
-        };
+        this._serviceTratamiento.editartto = {};
       }
 
       if (this.mail !== null){

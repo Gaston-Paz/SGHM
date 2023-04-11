@@ -21,7 +21,7 @@
           </mat-form-field>
           <div class="w-100">
             <app-inputs
-              [tabindex]="3"
+              [tabindex]="4"
               [label]="'Antigüedad'"
               [type]="'text'"
               [placeHolder]="'Antigüedad'"
@@ -34,7 +34,7 @@
           </div>
           <div class="w-100">
             <app-inputs
-              [tabindex]="5"
+              [tabindex]="6"
               [label]="'Intensidad'"
               [type]="'text'"
               [placeHolder]="'Intensidad'"
@@ -47,7 +47,7 @@
           </div>
           <div class="w-100">
             <app-inputs
-              [tabindex]="7"
+              [tabindex]="8"
               [label]="'Irradiacion'"
               [type]="'text'"
               [placeHolder]="'Irradiacion'"
@@ -58,42 +58,28 @@
               [max]="maximo"
             ></app-inputs>
           </div>
-          <div class="w-100 ">
-            <app-inputs
-              [tabindex]="9"
-              [label]="'Actividad Física'"
-              [type]="'text'"
-              [placeHolder]="'Actividad Física'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
-              [valor]="form.controls.actividadFisica.value"
-              [max]="maximo"
-            ></app-inputs>
+          <div class="w-100 mb-38">
+            <mat-checkbox
+              tabindex="10"
+              [disabled]="edicion"
+              color="primary"
+              (change)="CargarConsultaInicial($event, 10,form.controls.covid)"
+              formControlName="covid"
+              >Covid</mat-checkbox
+            >
           </div>
           <div class="w-100">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Fecha Covid</mat-label>
-              <input
-                [tabindex]="11"
-                matInput
-                readonly="true"
-                autocomplete="off"
-                #dateInputCovid
-                (dateChange)="changeDate(dateInputCovid, 2)"
-                onclick="changeDate(dateInputCovid)"
-                [max]="fecha"
-                [matDatepicker]="selectorCovid"
-                [value]="form.controls.fechaCovid.value"
-              />
-              <mat-datepicker-toggle
-                [disabled]="edicion || !form.controls.covid.value"
-                mat-datepicket-toggle
-                matSuffix
-                [for]="selectorCovid"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #selectorCovid></mat-datepicker>
-            </mat-form-field>
+            <app-inputs
+              [tabindex]="12"
+              [label]="'Otros'"
+              [type]="'text'"
+              [placeHolder]="'Otros'"
+              [requerido]="false"
+              [readOnly]="edicion || !form.controls.covid.value"
+              (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
+              [valor]="form.controls.otros.value"
+              [max]="maximo"
+            ></app-inputs>
           </div>
         </div>
         <div class="col-6">
@@ -125,9 +111,22 @@
               </mat-error>
             </mat-form-field>
           </div>
+          <div class="w-100 ">
+            <app-inputs
+              [tabindex]="3"
+              [label]="'Actividad Física'"
+              [type]="'text'"
+              [placeHolder]="'Actividad Física'"
+              [requerido]="false"
+              [readOnly]="edicion"
+              (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
+              [valor]="form.controls.actividadFisica.value"
+              [max]="maximo"
+            ></app-inputs>
+          </div>
           <div class="w-100 mt-p4">
             <app-inputs
-              [tabindex]="4"
+              [tabindex]="5"
               [label]="'Localización'"
               [type]="'text'"
               [placeHolder]="'Localización'"
@@ -140,7 +139,7 @@
           </div>
           <div class="w-100">
             <app-inputs
-              [tabindex]="6"
+              [tabindex]="7"
               [label]="'Característica'"
               [type]="'text'"
               [placeHolder]="'Característica'"
@@ -153,7 +152,7 @@
           </div>
           <div class="w-100">
             <app-inputs
-              [tabindex]="8"
+              [tabindex]="9"
               [label]="'Atenúa'"
               [type]="'text'"
               [placeHolder]="'Atenúa'"
@@ -164,29 +163,31 @@
               [max]="maximo"
             ></app-inputs>
           </div>
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="10"
-              [disabled]="edicion"
-              color="primary"
-              (change)="CargarConsultaInicial($event, 10,form.controls.covid)"
-              formControlName="covid"
-              >Covid</mat-checkbox
-            >
-          </div>
           <div class="w-100">
-            <app-inputs
-              [tabindex]="12"
-              [label]="'Otros'"
-              [type]="'text'"
-              [placeHolder]="'Otros'"
-              [requerido]="false"
-              [readOnly]="edicion || !form.controls.covid.value"
-              (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
-              [valor]="form.controls.otros.value"
-              [max]="maximo"
-            ></app-inputs>
+            <mat-form-field appearance="outline" class="w-100">
+              <mat-label>Fecha Covid</mat-label>
+              <input
+                [tabindex]="11"
+                matInput
+                readonly="true"
+                autocomplete="off"
+                #dateInputCovid
+                (dateChange)="changeDate(dateInputCovid, 2)"
+                onclick="changeDate(dateInputCovid)"
+                [max]="fecha"
+                [matDatepicker]="selectorCovid"
+                [value]="form.controls.fechaCovid.value"
+              />
+              <mat-datepicker-toggle
+                [disabled]="edicion || !form.controls.covid.value"
+                mat-datepicket-toggle
+                matSuffix
+                [for]="selectorCovid"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #selectorCovid></mat-datepicker>
+            </mat-form-field>
           </div>
+
         </div>
       </div>
     </div>

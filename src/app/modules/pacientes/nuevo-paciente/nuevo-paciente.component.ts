@@ -43,6 +43,7 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this._servicePacienteNuevo.InicializarObjetos();    
     this.mail = localStorage.getItem("SGHC-mail")!;
     if (this.mail !== null) {
       this._usuarioService.GetUsuario(this.mail).subscribe(
@@ -72,6 +73,7 @@ export class NuevoPacienteComponent implements OnInit, OnDestroy {
     let formData = new FormData();
     formData.append("foto", this._servicePacienteNuevo.imagen);
 
+    
     this.subscribes.push(this._servicePacienteNuevo.GuardarPaciente()
     .subscribe(
       (paciente) => {

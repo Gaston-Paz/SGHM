@@ -247,7 +247,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
           espera.subscribe(() => {
             this._servicePaciente.datosPersonlesCompletos = false;          
             this._servicePaciente.consultaInicialCompleta = false;          
-            this._servicePaciente.tratamientoCompleto = false;          
+            this._servicePaciente.tratamientoCompleto = false;    
+            this._serviceConsulta.paciente = this.tratamiento.paciente!;      
             this._router.navigate(["home/consultas/listar-consultas"]);
           });
         },

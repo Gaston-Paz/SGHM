@@ -121,6 +121,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this._servicePacienteNuevo.datosPersonlesCompletos = false;          
     this._servicePacienteNuevo.consultaInicialCompleta = false;          
     this._servicePacienteNuevo.tratamientoCompleto = false;  
+    this._servicePacienteNuevo.InicializarObjetos();
 
     this.validarTamañoPantalla(window.innerWidth);
     this.mail = localStorage.getItem("SGHC-mail")!;
@@ -166,11 +167,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   applyFilter(event: any) {
     if(event.key !== "Backspace")this.buscador += event.key;
     else this.buscador = this.buscador.substring(0,this.buscador.length-1);
-
-    console.log(this.buscador);
     
     const filterValue = this.buscador;
-    console.log(event);
     
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }

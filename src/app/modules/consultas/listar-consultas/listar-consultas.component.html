@@ -6,7 +6,7 @@
     <form [formGroup]="form">
       <div class="w-100 row d-flex">
 
-        <mat-form-field class="w-select">
+        <mat-form-field class="w-select" appearance="outline">
           <mat-label>Pacientes</mat-label>
           <mat-select
           formControlName="paciente"
@@ -22,7 +22,7 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <div class="w-button d-flex justify-content-center">
+    <div class="centro-centro w-button d-flex justify-content-center">
       
       <app-button [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(form.controls.paciente.value)"></app-button>
     </div>
@@ -85,6 +85,7 @@
       [length]="200"
       [pageSizeOptions]="[50, 100]"
       aria-label="Select page"
+      
     >
     </mat-paginator>
   </mat-card>
