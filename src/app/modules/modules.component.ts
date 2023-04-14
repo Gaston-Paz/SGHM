@@ -27,6 +27,7 @@ export class ModulesComponent implements OnInit {
           if(this._errorService.Usuario.rol === "Admin")this._errorService.Nav = this._errorService.fillerNav;
           else this._errorService.Nav = this._errorService.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
           this._errorService.muestroMenu = true;
+          this._errorService.rol = user.rol;
         },
         (error: HttpErrorResponse) => {
           this._errorService.Error(error);

@@ -17,6 +17,7 @@ import { UsuarioService } from "../../usuario/usuario.service";
 import { DatosPersonalesComponent } from "../nuevo-paciente/datos-personales/datos-personales.component";
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
 import { ListadosService } from "./listados.service";
+import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
 
 @Component({
   selector: "app-listar-pacientes",
@@ -37,7 +38,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "consultas",
     "estudios",
     "nuevaConsulta",
-    "nuevoEstudio"
+    "nuevoEstudio",
+    "eliminar"
   ];
 
   dataSource = new MatTableDataSource();
@@ -100,7 +102,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   textButtonDatos:string = 'Datos Personales';
   textButtonEstudio:string = 'Nuevo Estudio';
   iconoAgregar:boolean = true;
-
+  noHabilitaEliminar:boolean = true;
   buscador:string = '';
 
   @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
@@ -118,11 +120,14 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this._serviceConsulta.paciente = {};
+    this._serviceConsulta.editartto = {};
+    this._servicePacienteNuevo.InicializarObjetos();
     this._servicePacienteNuevo.datosPersonlesCompletos = false;          
     this._servicePacienteNuevo.consultaInicialCompleta = false;          
     this._servicePacienteNuevo.tratamientoCompleto = false;  
     this._servicePacienteNuevo.InicializarObjetos();
-
+    this.noHabilitaEliminar = this._serviceError.rol === "Secretaria";
     this.validarTamañoPantalla(window.innerWidth);
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
@@ -430,7 +435,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         "consultas",
         "estudios",
         "nuevaConsulta",
-        "nuevoEstudio"
+        "nuevoEstudio",
+        "eliminar"
     ];
     }else{
       this.displayedColumns = [
@@ -442,10 +448,31 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         "consultas",
         "estudios",
         "nuevaConsulta",
-        "nuevoEstudio"
+        "nuevoEstudio",
+        "eliminar"
     ];
     }
   }
 
+  EliminarPaciente(paciente:Paciente){
+    let dialogRef = this.dialog.open(ModalConfirmComponent, {
+      data: {
+        message: "¿Desea eliminar al paciente " + paciente.nombre + " " + paciente.apellido + "?",
+        buttonText: {
+          ok: "Eliminar",
+          cancel: "Cancelar",
+        },
+        action: "Confirmar",
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+          this._snack.Mensaje("Todavia no esta listo","error");
+      }
+      
+    });
+
+  }
 
 }

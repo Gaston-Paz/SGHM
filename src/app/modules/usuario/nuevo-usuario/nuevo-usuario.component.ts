@@ -24,7 +24,7 @@ export class NuevoUsuarioComponent implements OnInit {
     rol:''
   }
 
-  roles:string[]=['Usuario','Admin'];
+  roles:string[]=['Usuario','Admin','Secretaria'];
   UsuarioLogueado:Usuario = {
     apellido:'',
     email: '',

@@ -40,6 +40,7 @@ export class DatosPersonalesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._servicePacienteNuevo.InicializarObjetos();
     this.fecha = new Date(Date.now());
     if(this.pacienteEditar === undefined){
       this.form = this._formBuilder.group({

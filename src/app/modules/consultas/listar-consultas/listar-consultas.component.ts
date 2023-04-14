@@ -59,7 +59,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.subscribes.forEach(s => s.unsubscribe());
   }
 
-  ngOnInit(): void {        
+  ngOnInit(): void {     
+    this._serviceTratamiento.editartto = {};
+    if(this._serviceTratamiento.paciente.idPaciente === undefined || this._serviceTratamiento.paciente.idPaciente === null)this._serviceTratamiento.paciente = {};
+    this._servicePaciente.InicializarObjetos();
+       
     this.form = this._formBuilder.group({
       paciente: [this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null ? this._serviceTratamiento.paciente.idPaciente : this.paciente.idPaciente]
     });

@@ -62,6 +62,7 @@ export class ErrorService {
       url: "/login",
     },
   ];
+  public rol:string = '';
 
   constructor(private _router:Router,
     private _snackService: SnackService) { }

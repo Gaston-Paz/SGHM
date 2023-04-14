@@ -45,6 +45,7 @@ export class ListarComponent implements OnInit, OnDestroy {
     private _usuarioService:UsuarioService) { }
 
   ngOnInit(): void {
+
     this.form = this._formBuilder.group({
       paciente: [,[Validators.required]]
     });

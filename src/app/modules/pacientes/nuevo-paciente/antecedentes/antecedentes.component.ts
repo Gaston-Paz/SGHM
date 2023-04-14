@@ -38,6 +38,7 @@ export class AntecedentesComponent implements OnInit {
     private _servicePacienteNuevo: NuevoPacienteService) { }
 
   ngOnInit(): void {      
+    this._servicePacienteNuevo.InicializarObjetos();
     this.form = this._formBuilder.group({
       cirugias: [this.antecedente.cirugias === undefined ? '' : this.antecedente.cirugias],
       implanteInferior: [this.antecedente.implanteInferior === undefined ? '' : this.antecedente.implanteInferior],

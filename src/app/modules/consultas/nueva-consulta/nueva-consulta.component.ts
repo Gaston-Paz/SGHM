@@ -65,7 +65,9 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // this.mapFechaForm();    
-    
+    this._serviceConsulta.paciente = {};
+    this._serviceConsulta.editartto = {};
+;
     if(this._serviceConsulta.editartto.paciente?.nombre !== ""){
       this.form = this._formBuilder.group({
         fecha: [
@@ -161,7 +163,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         (resp) => {
           this.pacientes = resp[0];
           this.pacientesFilter = resp[0];
-          if (this._serviceConsulta.editartto.idPaciente !== 0) {
+          if (this._serviceConsulta.editartto.idPaciente !== 0 && this._serviceConsulta.editartto.idPaciente !== undefined && this._serviceConsulta.editartto.idPaciente !== null) {
             this.form.controls.paciente.setValue(
               this._serviceConsulta.editartto.paciente!.idPaciente
             );

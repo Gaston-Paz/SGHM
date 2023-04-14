@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgxExtendedPdfViewerService, pdfDefaultOptions } from 'ngx-extended-pdf-viewer';
+import { NgxExtendedPdfViewerService } from 'ngx-extended-pdf-viewer';
 import { NuevoPacienteService } from '../../pacientes/nuevo-paciente/nuevo-paciente.service';
 
 @Component({
@@ -20,8 +20,7 @@ export class EstudiosMedicosComponent implements OnInit {
     private _servicePacienteNuevo: NuevoPacienteService,
     private pdfService: NgxExtendedPdfViewerService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   CargarFoto(ev: any) {
     let cantFotos = ev.target.files.length;    
