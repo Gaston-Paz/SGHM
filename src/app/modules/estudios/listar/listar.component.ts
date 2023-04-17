@@ -83,7 +83,7 @@ export class ListarComponent implements OnInit, OnDestroy {
     this.estudiosFiltrados = [];
     this.estudios.forEach(e => {
       e.fecha = new Date(e.fecha);    
-      if(e.paciente.idPaciente === this.form.controls.paciente.value) this.estudiosFiltrados.push(e);
+      if(e.pacienteId === this.form.controls.paciente.value) this.estudiosFiltrados.push(e);
     });
     this.estudiosFiltrados = this.estudiosFiltrados.sort((a,b)=>{
       if(a.idEstudio > b.idEstudio)return -1;
@@ -102,7 +102,8 @@ export class ListarComponent implements OnInit, OnDestroy {
   VerEstudio(element:Estudios){
     const dialogRef = this._dialog.open(ModalImagenComponent, {
       data: {
-        element: element
+        element: element,
+        paciente: this.pacientesFilter.find(x => x.idPaciente === element.pacienteId)
       },
       maxWidth: '100vw',
       maxHeight: '100vh',

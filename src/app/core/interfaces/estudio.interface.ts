@@ -7,4 +7,5 @@ export interface Estudios{
     nombreArchivo:string;
     tipo:string;
     fecha:Date;
+    pacienteId?:number;
 }

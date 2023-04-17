@@ -92,14 +92,16 @@ export class EstudiosComponent implements OnInit, OnDestroy {
     } else {
       let obs: Array<Observable<any>> = [];
       if (this._servicePaciente.estudios.length > 0) {
-        this._servicePaciente.estudios.forEach((estudio, index) => {
+        this._servicePaciente.estudios.forEach((estudio, index) => {          
           let formData = new FormData();
           formData.append("estudio", estudio);
           obs.push(
             this._serviceEstudio.GuardarEstudio(
               formData,
               this.form.controls.paciente.value,
-              this.nombresNuevos[index]
+              this.nombresNuevos[index],
+              estudio.type.split("/")[1]
+
             )
           );
         });

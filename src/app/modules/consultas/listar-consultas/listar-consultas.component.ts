@@ -61,6 +61,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
 
   ngOnInit(): void {     
     this._serviceTratamiento.editartto = {};
+    
     if(this._serviceTratamiento.paciente.idPaciente === undefined || this._serviceTratamiento.paciente.idPaciente === null)this._serviceTratamiento.paciente = {};
     this._servicePaciente.InicializarObjetos();
        
@@ -72,7 +73,8 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     obs.push(this._servicePaciente.ObtenerPacientes());
     obs.push(this._serviceTratamiento.ObtenerConsultas());
     if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
-    this.subscribes.push(forkJoin(obs).subscribe(resp => {    
+    this.subscribes.push(forkJoin(obs).subscribe(resp => {   
+       
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
       this.tratamientos = resp[1];
@@ -88,7 +90,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
         }
 
       });
-      if((this._serviceTratamiento.paciente.idPaciente !== undefined || this._serviceTratamiento.paciente.idPaciente !== null || this._serviceTratamiento.paciente.idPaciente! !== 0)) {
+      if((this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null && this._serviceTratamiento.paciente.idPaciente! !== 0)) {
         this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
         this._serviceTratamiento.editartto = {};
@@ -112,11 +114,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   buscarTratamientos(){
-    this.paciente = this.pacientes.find(x => x.idPaciente === this._serviceTratamiento.paciente.idPaciente)!;
     this.tratamientosFiltrados = [];
     this.tratamientos.forEach(t => {
-      if(t.paciente?.idPaciente === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
+      if(t.pacienteId === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
     });
+    
     this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
       if(a.fecha! > b.fecha!)return -1;
       else return 1;
@@ -131,18 +133,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
   }
 
   EditarTto(element:Tratamiento){       
-    this._serviceTratamiento.paciente = {
-        apellido:'',
-        celular:'',
-        deParte:'',
-        email:'',
-        fechaNacimiento: new Date(),
-        localidad:'',
-        nacio:'',
-        nombre:'',
-        ocupacion:'',
-        otros:''
-    };
+    this._serviceTratamiento.paciente = {};
     this._serviceTratamiento.editartto = element;
     this._router.navigate(['home/consultas/nueva-consulta']);
   }

@@ -66,6 +66,7 @@ export class EstudiosMedicosComponent implements OnInit {
   });
 
   SubirEstudio(archivo:any){
+    archivo.tipo = this.input === 1 ? "PDF" : "IMAGEN";    
     this._servicePacienteNuevo.estudios.push(archivo);
   }
 

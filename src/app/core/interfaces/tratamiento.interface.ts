@@ -2,7 +2,8 @@ import { Paciente } from "./datos-personales.interface";
 
 export interface Tratamiento{
     idTratamiento?:number;
-    idPaciente?:number;
+    pacienteId?:number;
+    pacienteID?:number;
     fecha?:Date;
     motivo?:string;
     trianguloDeTalla?:string;

@@ -22,9 +22,9 @@ export class EstudiosService {
     return this._httpClient.get<Estudios[]>(environment.url+"/api/estudios");
   }
 
-  GuardarEstudio(estudio: FormData, idPaciente: number, nombre:string) {       
+  GuardarEstudio(estudio: FormData, idPaciente: number, nombre:string, tipo:string) {       
     return this._httpClient.post<Estudios>(
-      environment.url + "/api/estudios/" + idPaciente + "/" + nombre,
+      environment.url + "/api/estudios/" + idPaciente + "/" + nombre + "/" + tipo,
       estudio
     );
   }

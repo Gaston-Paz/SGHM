@@ -17,7 +17,7 @@ export class ConsultasService {
 
   editartto: Tratamiento = {
     fecha: new Date(),
-    idPaciente: 0,
+    pacienteId: 0,
     motivo: "",
     sedestacion: "",
     paciente:{

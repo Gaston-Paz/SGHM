@@ -41,7 +41,7 @@ export class NuevoPacienteService {
   consulta: Tratamiento = {
     especifico:undefined,
     fecha: undefined,
-    idPaciente: undefined,
+    pacienteId: undefined,
     motivo: undefined,
     proximoTurnoIndicado: undefined,
     sedestacion: undefined,
@@ -82,7 +82,7 @@ export class NuevoPacienteService {
     tratamiento: {
       especifico:'',
       fecha: new Date(),
-      idPaciente: 0,
+      pacienteId: 0,
       motivo: '',
       proximoTurnoIndicado: new Date(),
       sedestacion: '',
@@ -248,6 +248,8 @@ export class NuevoPacienteService {
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
     this.consulta.fecha = this.consultaInicial.fecha!;
     this.alta.tratamiento = this.consulta;    
+    console.log(this.alta);
+    
     return this._httpClient.post<Paciente>(
       environment.url + "/api/paciente",
       this.alta

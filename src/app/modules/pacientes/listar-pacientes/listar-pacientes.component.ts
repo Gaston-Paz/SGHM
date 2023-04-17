@@ -215,7 +215,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
 
   VerConsultas(element: Paciente) {
     this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(
-      (resp) => {
+      (resp) => {        
         this.consultas = resp;
         this.antecedentes = false;
         this.pacientesVer = false;
@@ -244,12 +244,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.estudiosNuevos = false;
     this.estudios = false;
     this.datos = false;
-    this._serviceConsulta.paciente = {
-      apellido: "",
-      fechaNacimiento: new Date(),
-      nombre: "",
-      nacio: ""
-    };
+    this._serviceConsulta.paciente = {};
   }
 
   VolverDeConsultaNueva() {
@@ -281,7 +276,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.idPaciente = paciente!;
     this._serviceConsulta.editartto = {
       fecha: new Date(),
-      idPaciente: 0,
+      pacienteId: 0,
       motivo: "",
       sedestacion: "",
       paciente:{

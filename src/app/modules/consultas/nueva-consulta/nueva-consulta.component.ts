@@ -27,7 +27,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   pipe = new DatePipe("es-ES");
   tratamiento: Tratamiento = {
     fecha: new Date(),
-    idPaciente: 0,
+    pacienteId: 0,
     motivo: "",
     sedestacion: "",
   };
@@ -40,7 +40,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   };
   consulta: Tratamiento = {
     fecha: new Date(),
-    idPaciente: 0,
+    pacienteId: 0,
     motivo: "",
     sedestacion: "",
   };
@@ -66,8 +66,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // this.mapFechaForm();    
     this._serviceConsulta.paciente = {};
-    this._serviceConsulta.editartto = {};
-;
+    // this._serviceConsulta.editartto = {};
+    
     if(this._serviceConsulta.editartto.paciente?.nombre !== ""){
       this.form = this._formBuilder.group({
         fecha: [
@@ -77,7 +77,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
             : null,
           [Validators.required],
         ],
-        paciente: [, [Validators.required]],
+        paciente: [this._serviceConsulta.editartto.pacienteId, [Validators.required]],
         motivo: [
           this._serviceConsulta.editartto.motivo !== undefined &&
           this._serviceConsulta.editartto.motivo !== null
@@ -135,6 +135,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
             : "",
         ],
       });
+      
     }else{
       this.form = this._formBuilder.group({
         fecha: [,[Validators.required],],
@@ -163,9 +164,9 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         (resp) => {
           this.pacientes = resp[0];
           this.pacientesFilter = resp[0];
-          if (this._serviceConsulta.editartto.idPaciente !== 0 && this._serviceConsulta.editartto.idPaciente !== undefined && this._serviceConsulta.editartto.idPaciente !== null) {
+          if (this._serviceConsulta.editartto.pacienteId !== 0 && this._serviceConsulta.editartto.pacienteId !== undefined && this._serviceConsulta.editartto.pacienteId !== null) {
             this.form.controls.paciente.setValue(
-              this._serviceConsulta.editartto.paciente!.idPaciente
+              this._serviceConsulta.editartto.pacienteId
             );
             this.tratamiento.idTratamiento =
               this._serviceConsulta.editartto.idTratamiento;
@@ -240,6 +241,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   GuardarConsulta() {
     this.MapTratamiento();    
+    console.log(this.tratamiento);
+    
     this.subscribes.push(
       this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(
         (resp) => {
@@ -263,9 +266,10 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
 
   MapTratamiento() {
     this.tratamiento.fecha = this.form.controls.fecha.value;
-    this.tratamiento.idPaciente = this.form.controls.paciente.value;
+    this.tratamiento.pacienteId = this.form.controls.paciente.value;
+    this.tratamiento.pacienteID = this.form.controls.paciente.value;
     this.tratamiento.paciente = this.pacientes.find(
-      (x) => x.idPaciente === this.tratamiento.idPaciente
+      (x) => x.idPaciente === this.tratamiento.pacienteId
     );
     this.tratamiento.motivo = this.form.controls.motivo.value;
     this.tratamiento.trianguloDeTalla = this.form.controls.triangulo.value;
