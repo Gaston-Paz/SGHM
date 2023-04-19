@@ -29,7 +29,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
   usuarios: Usuario[] = [];
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<Usuario>;
   displayedColumns: string[] = ["apellido", "nombre", "mail", "rol", "delete"];
 
   constructor(
@@ -39,7 +39,9 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
     private _usuarioService: UsuarioService,
     private _dialog: MatDialog,
     private _serviceError:ErrorService
-  ) {}
+  ) {
+    this.dataSource = new MatTableDataSource();
+  }
 
   ngOnInit(): void {
     let obs: Array<Observable<any>> = [];
@@ -59,6 +61,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
           this._serviceError.muestroMenu = true;
         this.usuarios = resp[1];
         this.dataSource.data = this.usuarios;
+        this.postNewMatTable();
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error);
@@ -69,6 +72,31 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  postNewMatTable(){
+    this.dataSource.filterPredicate = (data,filter:string) => {
+      const accumulator = (currentTerm:any,key:any) => {          
+          return this.nestedFilterCheck(currentTerm,data,key);
+        
+      };
+      const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+      const tranformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(tranformedFilter) !== -1;
+    }
+  }
+
+  nestedFilterCheck(search:any,data:any,key:any){
+    if(key === 'nombre' || key === 'apellido'){
+      if(typeof data[key] === 'object'){
+        for(const k in data[key]){               
+          search = this.nestedFilterCheck(search,data[key],k);
+        }
+      }else{
+        search += data[key];
+      }
+    }
+    return search;
   }
 
   applyFilter(event: Event) {

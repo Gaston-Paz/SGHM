@@ -33,8 +33,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "nacimiento",
     "foto",
     "datos",
-    "antecedentes",
     "consultaInicial",
+    "antecedentes",
     "consultas",
     "estudios",
     "nuevaConsulta",
@@ -42,7 +42,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     "eliminar"
   ];
 
-  dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<Paciente>;
+
   pacientesVer: boolean = true;
   antecedentes: boolean = false;
   consultaInicial: boolean = false;
@@ -117,7 +118,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _usuarioService:UsuarioService,
     private _serviceEstudio:EstudiosService,
     private dialog:MatDialog
-  ) {}
+  ) {
+    this.dataSource = new MatTableDataSource();
+  }
 
   ngOnInit(): void {
     this._serviceConsulta.paciente = {};
@@ -150,7 +153,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           if (a.apellido! < b.apellido!) return -1;
           else return 1;
         });
-
+        this.postNewMatTable();
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
         if (this.mail !== null){
           this._serviceError.Usuario = resp[1];
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
@@ -169,12 +174,33 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  postNewMatTable(){
+    this.dataSource.filterPredicate = (data,filter:string) => {
+      const accumulator = (currentTerm:any,key:any) => {          
+          return this.nestedFilterCheck(currentTerm,data,key);
+        
+      };
+      const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
+      const tranformedFilter = filter.trim().toLowerCase();
+      return dataStr.indexOf(tranformedFilter) !== -1;
+    }
+  }
+
+  nestedFilterCheck(search:any,data:any,key:any){
+    if(key === 'nombre' || key === 'apellido'){
+      if(typeof data[key] === 'object'){
+        for(const k in data[key]){               
+          search = this.nestedFilterCheck(search,data[key],k);
+        }
+      }else{
+        search += data[key];
+      }
+    }
+    return search;
+  }
+  
   applyFilter(event: any) {
-    if(event.key !== "Backspace")this.buscador += event.key;
-    else this.buscador = this.buscador.substring(0,this.buscador.length-1);
-    
-    const filterValue = this.buscador;
-    
+    const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 

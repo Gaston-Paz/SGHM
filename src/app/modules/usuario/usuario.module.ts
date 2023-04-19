@@ -10,6 +10,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { ComponentsModule } from 'src/app/shared/Components/components.module';
+import { MatSortModule } from '@angular/material/sort';
 
 
 
@@ -28,7 +29,8 @@ import { ComponentsModule } from 'src/app/shared/Components/components.module';
     MatTableModule,
     MatPaginatorModule,
     NgxSpinnerModule,
-    ComponentsModule
+    ComponentsModule,
+    MatSortModule
   ]
 })
 export class UsuarioModule { }
