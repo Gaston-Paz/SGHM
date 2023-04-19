@@ -140,7 +140,12 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
 
   NuevaConsulta(element:number){
     let paciente = this.pacientes.find(x => x.idPaciente === element);
-    this.ocultarTratamientos.emit(paciente);
+    if(this._router.url.includes('consultas/listar-consultas')){
+      this._serviceTratamiento.paciente = paciente!;
+      this._router.navigate(['consultas/nueva-consulta']);
+    }else{
+      this.ocultarTratamientos.emit(paciente);
+    }
   }
 
 }

@@ -263,6 +263,12 @@ export class NuevoPacienteService {
     );
   }
 
+  EliminarPaciente(paciente:Paciente) {
+    return this._httpClient.post<Paciente[]>(
+      environment.url + "/api/paciente/eliminar", paciente
+    );
+  }
+
   ActualizarAntecedentes(antecedente:Antecedente){
     return this._httpClient.post<Antecedente>(
       environment.url + "/api/antecedentes/actualizar",

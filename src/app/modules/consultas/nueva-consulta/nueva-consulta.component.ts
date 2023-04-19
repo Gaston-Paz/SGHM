@@ -63,10 +63,8 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
     this._dateAdapter.setLocale("es-ES");
   }
 
-  ngOnInit(): void {
-    // this.mapFechaForm();    
-    this._serviceConsulta.paciente = {};
-    // this._serviceConsulta.editartto = {};
+  ngOnInit(): void {    
+    this._serviceConsulta.editartto.paciente = this._serviceConsulta.paciente;
     
     if(this._serviceConsulta.editartto.paciente?.nombre !== ""){
       this.form = this._formBuilder.group({
@@ -164,13 +162,17 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         (resp) => {
           this.pacientes = resp[0];
           this.pacientesFilter = resp[0];
-          if (this._serviceConsulta.editartto.pacienteId !== 0 && this._serviceConsulta.editartto.pacienteId !== undefined && this._serviceConsulta.editartto.pacienteId !== null) {
+          if (this._serviceConsulta.editartto.pacienteId !== 0 && this._serviceConsulta.editartto.pacienteId !== undefined && this._serviceConsulta.editartto.pacienteId !== null) {            
             this.form.controls.paciente.setValue(
               this._serviceConsulta.editartto.pacienteId
             );
             this.tratamiento.idTratamiento =
               this._serviceConsulta.editartto.idTratamiento;
-          } else {
+          } else if(this._serviceConsulta.editartto.paciente?.idPaciente !== 0 && this._serviceConsulta.editartto.paciente?.idPaciente !== undefined && this._serviceConsulta.editartto.paciente?.idPaciente !== null){
+            this.form.controls.paciente.setValue(
+              this._serviceConsulta.editartto.paciente?.idPaciente
+            );
+          }else{
             this.form.controls.paciente.setValue(this.idPaciente.idPaciente);
           }
 

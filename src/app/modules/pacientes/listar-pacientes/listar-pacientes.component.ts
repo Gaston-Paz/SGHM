@@ -463,7 +463,25 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe(result =>{
       if(result){
-          this._snack.Mensaje("Todavia no esta listo","error");
+          this._servicePacienteNuevo.EliminarPaciente(paciente).subscribe(resp => {
+            this.pacientes = [];
+            this._snack.Mensaje("El paciente se eliminó con éxito","success");
+            resp.forEach((r: Paciente) => {
+              r.fechaNacimiento = new Date(r.fechaNacimiento!);
+              var fechaInicio = new Date(r.fechaNacimiento).getTime();
+              var fechaFin = new Date().getTime();
+              var diff = fechaFin - fechaInicio;
+              r.edad = diff / (1000 * 60 * 60 * 24 * 365);
+              this.pacientes.push(r);
+            });
+    
+            this.dataSource.data = this.pacientes.sort((a, b) => {
+              if (a.apellido! < b.apellido!) return -1;
+              else return 1;
+            });
+          },(error) => {
+            this._serviceError.Error(error);
+          });
       }
       
     });
