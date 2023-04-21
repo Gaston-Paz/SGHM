@@ -445,7 +445,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       this.textButtonDatos = "Datos Personales";
     }
 
-    if(innerWidth > 1210){
+    if(innerWidth > 1160){
       this.displayedColumns = [
         "nombre",
         "nacimiento",

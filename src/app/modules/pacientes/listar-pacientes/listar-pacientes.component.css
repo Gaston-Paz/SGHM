@@ -19,7 +19,7 @@ table {
 }
 
 .foto {
-  width: 200px;
+  width: 110px;
 }
 
 th.mat-header-cell {
@@ -60,13 +60,13 @@ h3 {
   font-size: 16px;
 }
 
-@media only screen and (min-width: 1310px) and (max-width: 1402px) {
+@media only screen and (min-width:1161px) and (max-width: 1402px) {
   .foto {
-    width: 130px;
+    width: 100px;
   }
 }
 
-@media only screen and (min-width: 1280px) and (max-width: 1310px) {
+/* @media only screen and (min-width: 1280px) and (max-width: 1310px) {
   .foto {
     width: 100px;
   }
@@ -76,8 +76,8 @@ h3 {
   .foto {
     width: 50px;
   }
-}
-  @media only screen and (max-width: 1210px) {
+} */
+  @media only screen and (max-width: 1160px) {
     .foto {
       display: none;
     }
