@@ -13,7 +13,6 @@ import { SnackService } from "src/app/shared/services/snack.service";
 import { NuevoPacienteService } from "../../pacientes/nuevo-paciente/nuevo-paciente.service";
 import { UsuarioService } from "../../usuario/usuario.service";
 import { ConsultasService } from "./consultas.service";
-
 @Component({
   selector: "app-nueva-consulta",
   templateUrl: "./nueva-consulta.component.html",
@@ -306,4 +305,5 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
         )
       );
   }
+
 }

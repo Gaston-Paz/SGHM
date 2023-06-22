@@ -105,6 +105,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   iconoAgregar:boolean = true;
   noHabilitaEliminar:boolean = true;
   buscador:string = '';
+  filtro:string = '';
 
   @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
 
@@ -161,6 +162,12 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
           else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
           this._serviceError.muestroMenu = true;
+        }
+
+        if(this._servicePacienteNuevo.filtro !== ''){
+          this.filtro = this._servicePacienteNuevo.filtro;
+          this.dataSource.filter = this.filtro.trim().toLowerCase();
+          this._servicePacienteNuevo.filtro = '';
         }
       },
       (error: HttpErrorResponse) => {

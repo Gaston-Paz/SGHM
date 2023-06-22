@@ -11,6 +11,8 @@ import { environment } from "src/environments/environment.prod";
   providedIn: "root",
 })
 export class NuevoPacienteService {
+  filtro:string = '';
+  
   datosPersonales: Paciente = {
     apellido: undefined,
     nombre: undefined,

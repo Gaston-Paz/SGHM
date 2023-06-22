@@ -89,6 +89,9 @@
     >
     </mat-paginator>
   </mat-card>
+  <div class="mt-2">
+    <app-button [habilita]="!(form.controls.paciente.value !== '' && form.controls.paciente.value !== undefined && form.controls.paciente.value !== null)" [texto]="'Volver'" (clickButton)="volverPacientes(form.controls.paciente.value)"></app-button>
+  </div>
 </div>
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0.8)"
