@@ -41,8 +41,8 @@ export class ListarPacientesComponent implements OnInit {
   ];
   titulosTabla:string[] = [
     '',
-    'Nombre y Apellido',
     'Foto',
+    'Nombre y Apellido',
     'Edad',
     '¿Cómo nació?',
     'Ocupación',
