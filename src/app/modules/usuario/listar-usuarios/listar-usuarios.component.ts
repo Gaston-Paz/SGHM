@@ -18,7 +18,7 @@ import { UsuarioService } from "../usuario.service";
   templateUrl: "./listar-usuarios.component.html",
   styleUrls: ["./listar-usuarios.component.css"],
 })
-export class ListarUsuariosComponent implements OnInit, AfterViewInit {
+export class ListarUsuariosComponent implements OnInit {
   UsuarioLogueado: Usuario = {
     apellido: "",
     email: "",
@@ -27,10 +27,8 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
     rol: "",
   };
   usuarios: Usuario[] = [];
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource: MatTableDataSource<Usuario>;
-  displayedColumns: string[] = ["apellido", "nombre", "mail", "rol", "delete"];
+  seleccionado: Usuario;
+  displayedColumns: string[] = ['select','apellido', 'nombre', 'email', 'rol'];
 
   constructor(
     private _router: Router,
@@ -39,9 +37,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
     private _usuarioService: UsuarioService,
     private _dialog: MatDialog,
     private _serviceError:ErrorService
-  ) {
-    this.dataSource = new MatTableDataSource();
-  }
+  ) {}
 
   ngOnInit(): void {
     let obs: Array<Observable<any>> = [];
@@ -60,8 +56,7 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
           else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
           this._serviceError.muestroMenu = true;
         this.usuarios = resp[1];
-        this.dataSource.data = this.usuarios;
-        this.postNewMatTable();
+
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error);
@@ -69,49 +64,15 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
 
-  postNewMatTable(){
-    this.dataSource.filterPredicate = (data,filter:string) => {
-      const accumulator = (currentTerm:any,key:any) => {          
-          return this.nestedFilterCheck(currentTerm,data,key);
-        
-      };
-      const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-      const tranformedFilter = filter.trim().toLowerCase();
-      return dataStr.indexOf(tranformedFilter) !== -1;
-    }
-  }
-
-  nestedFilterCheck(search:any,data:any,key:any){
-    if(key === 'nombre' || key === 'apellido'){
-      if(typeof data[key] === 'object'){
-        for(const k in data[key]){               
-          search = this.nestedFilterCheck(search,data[key],k);
-        }
-      }else{
-        search += data[key];
-      }
-    }
-    return search;
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  EliminarUsuario(usuario: Usuario) {
+  EliminarUsuario() {
     const dialogRef = this._dialog.open(ModalConfirmComponent, {
       data: {
         message:
           "¿Desea eliminar al usuario " +
-          usuario.nombre +
+          this.seleccionado.nombre +
           " " +
-          usuario.apellido +
+          this.seleccionado.apellido +
           "?",
         buttonText: {
           ok: "Eliminar",
@@ -123,12 +84,12 @@ export class ListarUsuariosComponent implements OnInit, AfterViewInit {
 
     dialogRef.afterClosed().subscribe((confirm: boolean) => {
       if (confirm) {
-        this._usuarioService.EliminarUsuario(usuario.id!).subscribe(
+        this._usuarioService.EliminarUsuario(this.seleccionado.id!).subscribe(
           (resp) => {
             this._snack.Mensaje("Usuario eliminado con éxito", "success");
             this._usuarioService.GetUsuarios().subscribe(
               (users) => {
-                this.dataSource.data = users;
+
                 this.usuarios = users;
               },
               (error: HttpErrorResponse) => {

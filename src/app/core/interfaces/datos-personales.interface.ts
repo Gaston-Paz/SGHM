@@ -2,6 +2,7 @@ export interface Paciente{
     idPaciente?:number;
     nombre?: string,
     apellido?: string,
+    nombreYapellido?:string,
     fechaNacimiento?: Date,
     nacio?: string,
     otros?: string,

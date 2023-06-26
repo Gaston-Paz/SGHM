@@ -241,9 +241,7 @@ export class NuevaConsultaComponent implements OnInit, OnDestroy {
   }
 
   GuardarConsulta() {
-    this.MapTratamiento();    
-    console.log(this.tratamiento);
-    
+    this.MapTratamiento();        
     this.subscribes.push(
       this._serviceConsulta.GuardarConsultas(this.tratamiento).subscribe(
         (resp) => {

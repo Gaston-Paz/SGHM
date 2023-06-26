@@ -1,0 +1,24 @@
+table {
+  width: 100%;
+}
+
+.foto {
+  width: 110px;
+}
+
+td {
+  text-align: center;
+}
+
+
+@media only screen and (min-width:1161px) and (max-width: 1402px) {
+  .foto {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 1160px) {
+  .foto {
+    display: none;
+  }
+}

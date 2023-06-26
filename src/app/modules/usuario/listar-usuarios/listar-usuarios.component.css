@@ -6,7 +6,16 @@ table {
   font-size: 14px;
   width: 100%;
 }
+app-button{
+  padding: 0;
+}
+.ml-4{
+  margin-left: 1em;
+}
 
+.w-12{
+  width: 12%;
+}
 .container {
   display: flex;
   flex-direction: column;

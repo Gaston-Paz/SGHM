@@ -52,7 +52,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     private _serviceTratamiento:ConsultasService,
     private _formBuilder:FormBuilder,
     private _serviceError:ErrorService,
-    private _router:Router,
+    public _router:Router,
     private _usuarioService: UsuarioService) { }
 
   ngOnDestroy(): void {

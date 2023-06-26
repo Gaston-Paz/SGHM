@@ -18,31 +18,39 @@ import { DatosPersonalesComponent } from "../nuevo-paciente/datos-personales/dat
 import { NuevoPacienteService } from "../nuevo-paciente/nuevo-paciente.service";
 import { ListadosService } from "./listados.service";
 import { ModalConfirmComponent } from "src/app/shared/Components/modal-confirm/modal-confirm.component";
+import { SelectionModel } from "@angular/cdk/collections";
 
 @Component({
   selector: "app-listar-pacientes",
   templateUrl: "./listar-pacientes.component.html",
   styleUrls: ["./listar-pacientes.component.css"],
 })
-export class ListarPacientesComponent implements OnInit, AfterViewInit {
+export class ListarPacientesComponent implements OnInit {
   pacientes: Paciente[] = [];
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   displayedColumns: string[] = [
-    "nombre",
-    "nacimiento",
-    "foto",
-    "datos",
-    "consultaInicial",
-    "antecedentes",
-    "consultas",
-    "estudios",
-    "nuevaConsulta",
-    "nuevoEstudio",
-    "eliminar"
+    'select',
+    'foto',
+    'nombreYapellido',
+    'edad',
+    'nacio',
+    'ocupacion',
+    'localidad',
+    'email',
+    'celular',
+    'deParte'
   ];
-
-  dataSource: MatTableDataSource<Paciente>;
+  titulosTabla:string[] = [
+    '',
+    'Nombre y Apellido',
+    'Foto',
+    'Edad',
+    '¿Cómo nació?',
+    'Ocupación',
+    'Localidad',
+    'Email',
+    'Celular',
+    'De parte de'
+  ]
 
   pacientesVer: boolean = true;
   antecedentes: boolean = false;
@@ -53,6 +61,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   estudios: boolean = false;
   turnos: boolean = false;
   nombrePaciente: string = "";
+  iconAdd: string = "add";
   apellidoPaciente: string = "";
   antecedente: Antecedente = {
     diabetes: false,
@@ -100,13 +109,14 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
   textButtonAntecedente:string = 'Antecedentes';
   textButtonPrimeraConsulta:string = 'Primera Consulta';
   textButtonConsulta:string = 'Nueva Consulta';
+  textButtonTTO:string = 'Tratamientos';
   textButtonDatos:string = 'Datos Personales';
   textButtonEstudio:string = 'Nuevo Estudio';
   iconoAgregar:boolean = true;
   noHabilitaEliminar:boolean = true;
   buscador:string = '';
-  filtro:string = '';
-
+  filtro:string='';
+  itemSeleccionado:any;
   @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
 
   constructor(
@@ -119,13 +129,12 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     private _usuarioService:UsuarioService,
     private _serviceEstudio:EstudiosService,
     private dialog:MatDialog
-  ) {
-    this.dataSource = new MatTableDataSource();
-  }
+  ) {}
 
   ngOnInit(): void {
     this._serviceConsulta.paciente = {};
     this._serviceConsulta.editartto = {};
+    this.filtro = this._servicePacienteNuevo.filtro;
     this._servicePacienteNuevo.InicializarObjetos();
     this._servicePacienteNuevo.datosPersonlesCompletos = false;          
     this._servicePacienteNuevo.consultaInicialCompleta = false;          
@@ -146,17 +155,11 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           var fechaInicio = new Date(r.fechaNacimiento).getTime();
           var fechaFin = new Date().getTime();
           var diff = fechaFin - fechaInicio;
-          r.edad = diff / (1000 * 60 * 60 * 24 * 365);
+          r.edad = parseInt((diff / (1000 * 60 * 60 * 24 * 365)).toFixed(0));
+          r.nombreYapellido = `${r.nombre} ${r.apellido}`
           this.pacientes.push(r);
         });
 
-        this.dataSource.data = this.pacientes.sort((a, b) => {
-          if (a.apellido! < b.apellido!) return -1;
-          else return 1;
-        });
-        this.postNewMatTable();
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
         if (this.mail !== null){
           this._serviceError.Usuario = resp[1];
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
@@ -164,11 +167,6 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this._serviceError.muestroMenu = true;
         }
 
-        if(this._servicePacienteNuevo.filtro !== ''){
-          this.filtro = this._servicePacienteNuevo.filtro;
-          this.dataSource.filter = this.filtro.trim().toLowerCase();
-          this._servicePacienteNuevo.filtro = '';
-        }
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error)
@@ -176,42 +174,7 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     );
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-  }
-
-  postNewMatTable(){
-    this.dataSource.filterPredicate = (data,filter:string) => {
-      const accumulator = (currentTerm:any,key:any) => {          
-          return this.nestedFilterCheck(currentTerm,data,key);
-        
-      };
-      const dataStr = Object.keys(data).reduce(accumulator, '').toLowerCase();
-      const tranformedFilter = filter.trim().toLowerCase();
-      return dataStr.indexOf(tranformedFilter) !== -1;
-    }
-  }
-
-  nestedFilterCheck(search:any,data:any,key:any){
-    if(key === 'nombre' || key === 'apellido'){
-      if(typeof data[key] === 'object'){
-        for(const k in data[key]){               
-          search = this.nestedFilterCheck(search,data[key],k);
-        }
-      }else{
-        search += data[key];
-      }
-    }
-    return search;
-  }
-  
-  applyFilter(event: any) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  VerDatos(element:Paciente){  
+  VerDatos(){  
       this.datos = true;
       this.antecedentes = false;
       this.pacientesVer = false;
@@ -220,12 +183,12 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       this.consultaInicial = false;
       this.consultaNueva = false;
       this.turnos = false;
-      this.pacienteEditar = element;
+      this.pacienteEditar = this.itemSeleccionado;
   }
 
-  VerAntecedentes(element: Paciente) {
+  VerAntecedentes() {
     this._serviceListados
-      .ObtenerAntecedentePorId(element.idPaciente!)
+      .ObtenerAntecedentePorId(this.itemSeleccionado.idPaciente!)
       .subscribe(
         (resp) => {         
           this.antecedente = resp;
@@ -237,8 +200,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
           this.consultaNueva = false;
           this.turnos = false;
           this.datos = false;
-          this.nombrePaciente = element.nombre!;
-          this.apellidoPaciente = element.apellido!;
+          this.nombrePaciente = this.itemSeleccionado.nombre!;
+          this.apellidoPaciente = this.itemSeleccionado.apellido!;
         },
         (error: HttpErrorResponse) => {
           this._serviceError.Error(error)
@@ -246,8 +209,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       );
   }
 
-  VerConsultas(element: Paciente) {
-    this._serviceListados.ObtenerConsultaPorId(element.idPaciente!).subscribe(
+  VerConsultas() { 
+    this._serviceListados.ObtenerConsultaPorId(this.itemSeleccionado.idPaciente).subscribe(
       (resp) => {        
         this.consultas = resp;
         this.antecedentes = false;
@@ -258,8 +221,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
         this.consultaNueva = false;
         this.turnos = false;
         this.datos = false;
-        this.nombrePaciente = element.nombre!;
-        this.apellidoPaciente = element.apellido!;
+        this.nombrePaciente = this.itemSeleccionado.nombre!;
+        this.apellidoPaciente = this.itemSeleccionado.apellido!;
       },
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error)
@@ -293,8 +256,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.datos = false;
   }
 
-  verTurnos(paciente: Paciente) {
-    this._serviceConsulta.paciente = paciente;
+  verTurnos() {
+    this._serviceConsulta.paciente = this.itemSeleccionado;
     this.antecedentes = false;
     this.pacientesVer = false;
     this.consultaInicial = false;
@@ -305,8 +268,8 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.datos = false;
   }
 
-  NuevaConsulta(paciente: Paciente) {
-    this.idPaciente = paciente!;
+  NuevaConsulta() {
+    this.idPaciente = this.itemSeleccionado;
     this._serviceConsulta.editartto = {
       fecha: new Date(),
       pacienteId: 0,
@@ -329,9 +292,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.datos = false;
   }
 
-  Estudios(paciente: Paciente) {
-    this.idPaciente = paciente!;
-    this._serviceEstudio.paciente = paciente;
+  Estudios() {
+    this.idPaciente = this.itemSeleccionado;
+    this._serviceEstudio.paciente = this.itemSeleccionado;
     this.consultaNueva = false;
     this.antecedentes = false;
     this.pacientesVer = false;
@@ -342,9 +305,9 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     this.datos = false;
   }
 
-  NuevoEstudio(paciente: Paciente) {
-    this.idPaciente = paciente!;
-    this._serviceEstudio.paciente = paciente;
+  NuevoEstudio() {
+    this.idPaciente = this.itemSeleccionado;
+    this._serviceEstudio.paciente = this.itemSeleccionado;
     this.consultaNueva = false;
     this.antecedentes = false;
     this.pacientesVer = false;
@@ -422,6 +385,50 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
       );
   }
 
+  EliminarPaciente(){
+    let paciente = this.itemSeleccionado;
+    let dialogRef = this.dialog.open(ModalConfirmComponent, {
+      data: {
+        message: "¿Desea eliminar al paciente " + paciente.nombre + " " + paciente.apellido + "?",
+        buttonText: {
+          ok: "Eliminar",
+          cancel: "Cancelar",
+        },
+        action: "Confirmar",
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+          this._servicePacienteNuevo.EliminarPaciente(paciente).subscribe(resp => {
+            this.pacientes = [];
+            this._snack.Mensaje("El paciente se eliminó con éxito","success");
+            resp.forEach((r: Paciente) => {
+              r.fechaNacimiento = new Date(r.fechaNacimiento!);
+              var fechaInicio = new Date(r.fechaNacimiento).getTime();
+              var fechaFin = new Date().getTime();
+              var diff = fechaFin - fechaInicio;
+              r.edad = diff / (1000 * 60 * 60 * 24 * 365);
+              this.pacientes.push(r);
+            });
+    
+            this.pacientes = this.pacientes.sort((a, b) => {
+              if (a.apellido! < b.apellido!) return -1;
+              else return 1;
+            });
+          },(error) => {
+            this._serviceError.Error(error);
+          });
+      }
+      
+    });
+
+  }
+
+  resetFilter(ev:any){
+    this._servicePacienteNuevo.filtro = ev;
+  }
+
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
     this.validarTamañoPantalla(event.target.innerWidth);
@@ -453,72 +460,38 @@ export class ListarPacientesComponent implements OnInit, AfterViewInit {
     }
 
     if(innerWidth > 1160){
+      this.textButtonTTO = "Tratamientos";
       this.displayedColumns = [
-        "nombre",
-        "nacimiento",
-        "foto",
-        "datos",
-        "antecedentes",
-        "consultaInicial",
-        "consultas",
-        "estudios",
-        "nuevaConsulta",
-        "nuevoEstudio",
-        "eliminar"
+        'select',
+        'foto',
+        'nombreYapellido',
+        'edad',
+        'nacio',
+        'ocupacion',
+        'localidad',
+        'email',
+        'celular',
+        'deParte'
     ];
     }else{
+      this.iconAdd = '';
+      this.textButtonTTO = "TTO";
       this.displayedColumns = [
-        "nombre",
-        "nacimiento",
-        "datos",
-        "antecedentes",
-        "consultaInicial",
-        "consultas",
-        "estudios",
-        "nuevaConsulta",
-        "nuevoEstudio",
-        "eliminar"
+        'select',
+        'nombreYapellido',
+        'edad',
+        'nacio',
+        'ocupacion',
+        'localidad',
+        'email',
+        'celular',
+        'deParte'
     ];
     }
-  }
 
-  EliminarPaciente(paciente:Paciente){
-    let dialogRef = this.dialog.open(ModalConfirmComponent, {
-      data: {
-        message: "¿Desea eliminar al paciente " + paciente.nombre + " " + paciente.apellido + "?",
-        buttonText: {
-          ok: "Eliminar",
-          cancel: "Cancelar",
-        },
-        action: "Confirmar",
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result =>{
-      if(result){
-          this._servicePacienteNuevo.EliminarPaciente(paciente).subscribe(resp => {
-            this.pacientes = [];
-            this._snack.Mensaje("El paciente se eliminó con éxito","success");
-            resp.forEach((r: Paciente) => {
-              r.fechaNacimiento = new Date(r.fechaNacimiento!);
-              var fechaInicio = new Date(r.fechaNacimiento).getTime();
-              var fechaFin = new Date().getTime();
-              var diff = fechaFin - fechaInicio;
-              r.edad = diff / (1000 * 60 * 60 * 24 * 365);
-              this.pacientes.push(r);
-            });
-    
-            this.dataSource.data = this.pacientes.sort((a, b) => {
-              if (a.apellido! < b.apellido!) return -1;
-              else return 1;
-            });
-          },(error) => {
-            this._serviceError.Error(error);
-          });
-      }
-      
-    });
-
+    if(innerWidth < 1120){
+      this.textButtonPrimeraConsulta = '1° Cons';
+    }
   }
 
 }

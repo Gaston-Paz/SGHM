@@ -16,6 +16,11 @@ import { MatInputModule } from '@angular/material/input';
 import { PdfComponent } from './pdf/pdf.component';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableSelectComponent } from './table-select/table-select.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -27,7 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MiniFabComponent,
     StrokedComponent,
     InputsComponent,
-    PdfComponent
+    PdfComponent,
+    TableSelectComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +45,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     NgxExtendedPdfViewerModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports:[
     ButtonComponent,
@@ -53,7 +63,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
     MatIconModule,
     PdfComponent,
-    MatButtonModule
+    MatButtonModule,
+    TableSelectComponent
   ]
 })
 export class ComponentsModule { }
