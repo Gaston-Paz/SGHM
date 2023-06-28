@@ -41,6 +41,7 @@ export class TableSelectComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.dataSource.data = this.data;  
+    this.postNewMatTable();
     if(this.filtrado !== ''){      
       this.filtro = this.filtrado;
       this.dataSource.filter = this.filtro.trim().toLowerCase();
@@ -77,7 +78,7 @@ export class TableSelectComponent implements OnInit, AfterViewInit {
   }
 
   nestedFilterCheck(search:any,data:any,key:any){
-    if(key === 'nombre' || key === 'apellido'){
+    if(key === 'nombre' || key === 'apellido'){;
       if(typeof data[key] === 'object'){
         for(const k in data[key]){               
           search = this.nestedFilterCheck(search,data[key],k);
