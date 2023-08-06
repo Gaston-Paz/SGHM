@@ -37,6 +37,12 @@ export class ConsultasService {
     );
   }
 
+  ObtenerPorPaciente(paciente:Paciente) {
+    return this._httpClient.patch<Tratamiento[]>(
+      environment.url + "/api/tratamiento/obtenerPorPaciente",paciente
+    );
+  }
+
   GuardarConsultas(tratamiento: Tratamiento) {
     return this._httpClient.post<Tratamiento>(
       environment.url + "/api/tratamiento",

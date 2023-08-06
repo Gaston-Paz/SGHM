@@ -28,4 +28,10 @@ export class EstudiosService {
       estudio
     );
   }
+
+  ObtenerPorPaciente(paciente:Paciente) {
+    return this._httpClient.patch<Estudios[]>(
+      environment.url + "/api/estudios/obtenerPorPaciente",paciente
+    );
+  }
 }

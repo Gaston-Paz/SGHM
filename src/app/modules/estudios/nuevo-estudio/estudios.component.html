@@ -35,11 +35,11 @@
       </mat-chip-list>
     </mat-form-field>
     </form>
-    <div class="end mt-20">
+    <mat-card-actions align="end">
 
       <app-button [valido]="form.valid && GetEstudio()" [habilita]="!form.valid" [texto]="'Guardar Estudios'" (clickButton)="GuardarEstudios()" ></app-button>
 
-      </div>
+    </mat-card-actions>
 </mat-card>
 </div>
 <ngx-spinner

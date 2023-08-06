@@ -16,14 +16,14 @@
           
           <mat-option
           *ngFor="let paciente of pacientesFilter"
-          [value]="paciente.idPaciente"
+          [value]="paciente"
           >
           {{ paciente.nombre }} {{ paciente.apellido }}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <div class="centro-centro w-button d-flex justify-content-center">
-      <app-button [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(form.controls.paciente.value)"></app-button>
+      <app-button class="w-100" [texto]="'Nueva Consulta'" (clickButton)="NuevaConsulta(form.controls.paciente.value)"></app-button>
     </div>
   </div>
     </form>

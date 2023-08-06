@@ -71,25 +71,25 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
-    obs.push(this._serviceTratamiento.ObtenerConsultas());
+    // obs.push(this._serviceTratamiento.ObtenerConsultas());
     if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {   
        
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
-      this.tratamientos = resp[1];
-      this.tratamientos.forEach(t => {
-        let fecha = new Date(t.fecha!);
-        fecha.setHours(fecha.getHours()+3);
-        t.fecha = fecha;
+      // this.tratamientos = resp[1];
+      // this.tratamientos.forEach(t => {
+      //   let fecha = new Date(t.fecha!);
+      //   fecha.setHours(fecha.getHours()+3);
+      //   t.fecha = fecha;
 
-        if(t.proximoTurnoIndicado){
-          let proximoTurnoIndicado = new Date(t.proximoTurnoIndicado);
-          proximoTurnoIndicado.setHours(proximoTurnoIndicado.getHours()+3);
-          t.proximoTurnoIndicado = proximoTurnoIndicado;
-        }
+      //   if(t.proximoTurnoIndicado){
+      //     let proximoTurnoIndicado = new Date(t.proximoTurnoIndicado);
+      //     proximoTurnoIndicado.setHours(proximoTurnoIndicado.getHours()+3);
+      //     t.proximoTurnoIndicado = proximoTurnoIndicado;
+      //   }
 
-      });
+      // });
       if((this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null && this._serviceTratamiento.paciente.idPaciente! !== 0)) {
         this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
         this.buscarTratamientos();
@@ -97,7 +97,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
       }
 
       if (this.mail !== null){
-        this._serviceError.Usuario = resp[2];
+        this._serviceError.Usuario = resp[1];
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
           else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
           this._serviceError.muestroMenu = true;
@@ -115,14 +115,22 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
 
   buscarTratamientos(){
     this.tratamientosFiltrados = [];
-    this.tratamientos.forEach(t => {
-      if(t.pacienteId === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
-    });
+    this._serviceTratamiento.ObtenerPorPaciente(this.form.controls.paciente.value).subscribe({
+      next: (next) => {
+        this.dataSource.data = next.sort((a,b) => {
+          if(a.fecha! > b.fecha!)return -1;
+          else return 1;
+        });        
+      }
+    })
+    // this.tratamientos.forEach(t => {
+    //   if(t.pacienteId === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
+    // });
     
-    this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
-      if(a.fecha! > b.fecha!)return -1;
-      else return 1;
-    });        
+    // this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
+    //   if(a.fecha! > b.fecha!)return -1;
+    //   else return 1;
+    // });        
   }
 
   applyFilterPaciente(espacio:boolean){

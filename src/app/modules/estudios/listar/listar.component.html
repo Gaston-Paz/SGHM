@@ -25,7 +25,7 @@
 
           <mat-option
             *ngFor="let paciente of pacientesFilter"
-            [value]="paciente.idPaciente"
+            [value]="paciente"
           >
             {{ paciente.nombre }} {{ paciente.apellido }}
           </mat-option>

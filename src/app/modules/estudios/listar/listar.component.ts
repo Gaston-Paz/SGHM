@@ -52,20 +52,20 @@ export class ListarComponent implements OnInit, OnDestroy {
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientes());
-    obs.push(this._serviceEstudio.ObtenerEstudios());
+    // obs.push(this._serviceEstudio.ObtenerEstudios());
     if (this.mail !== null)obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
       this.pacientesFilter = resp[0]; 
-      this.estudios = resp[1];    
+      // this.estudios = resp[1];    
       if (this.mail !== null){
-        this._serviceError.Usuario = resp[2];
+        this._serviceError.Usuario = resp[1];
         if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
         else this._serviceError.Nav = this._serviceError.fillerNav.filter((f:any) => !f.text.toUpperCase().includes('USUARIO'));
         this._serviceError.muestroMenu = true;
       }
       
-      if(this._serviceEstudio.paciente.idPaciente !== 0){
+      if(this._serviceEstudio.paciente.idPaciente !== 0 && this._serviceEstudio.paciente.idPaciente !== undefined){
         this.form.controls.paciente.setValue(this._serviceEstudio.paciente.idPaciente);
         this.BuscarEstudios();
       }
@@ -81,15 +81,24 @@ export class ListarComponent implements OnInit, OnDestroy {
 
   BuscarEstudios(){
     this.estudiosFiltrados = [];
-    this.estudios.forEach(e => {
-      e.fecha = new Date(e.fecha);    
-      if(e.pacienteId === this.form.controls.paciente.value) this.estudiosFiltrados.push(e);
-    });
-    this.estudiosFiltrados = this.estudiosFiltrados.sort((a,b)=>{
-      if(a.idEstudio > b.idEstudio)return -1;
-      else return 1;
-    });
-    this.dataSource.data = this.estudiosFiltrados;
+    this._serviceEstudio.ObtenerPorPaciente(this.form.controls.paciente.value).subscribe({
+      next: (next) => {
+        this.estudiosFiltrados = next;
+        this.dataSource.data = this.estudiosFiltrados.sort((a,b) => {
+          if(a.fecha! > b.fecha!)return -1;
+          else return 1;
+        });        
+      }
+    })
+    // this.estudios.forEach(e => {
+    //   e.fecha = new Date(e.fecha);    
+    //   if(e.pacienteId === this.form.controls.paciente.value) this.estudiosFiltrados.push(e);
+    // });
+    // this.estudiosFiltrados = this.estudiosFiltrados.sort((a,b)=>{
+    //   if(a.idEstudio > b.idEstudio)return -1;
+    //   else return 1;
+    // });
+    // this.dataSource.data = this.estudiosFiltrados;
   }
 
   applyFilterPaciente(espacio:boolean){
