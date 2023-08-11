@@ -23,6 +23,7 @@ export class TableSelectComponent implements OnInit, AfterViewInit {
   @Input("titulos") titulos: string[] = [];
   @Input("data") data: any[] = [];
   @Input("filtrado") filtrado: string='';
+  @Input("pagina") pagina: number = 0;
   selection = new SelectionModel<Paciente>(true, []);
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -34,6 +35,7 @@ export class TableSelectComponent implements OnInit, AfterViewInit {
 
   @Output() onEmitSelection = new EventEmitter<any>();
   @Output() onFilter = new EventEmitter<any>();
+  @Output() onPage = new EventEmitter<any>();
 
   constructor() {
     this.dataSource = new MatTableDataSource();
@@ -88,5 +90,8 @@ export class TableSelectComponent implements OnInit, AfterViewInit {
       }
     }
     return search;
+  }
+  cambioDePagina(pagina:number){
+    this.onPage.emit(pagina);
   }
 }

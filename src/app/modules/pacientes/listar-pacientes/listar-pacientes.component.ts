@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit, ViewChild, AfterViewInit, HostListener } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit, HostListener, OnDestroy } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
@@ -25,7 +25,7 @@ import { SelectionModel } from "@angular/cdk/collections";
   templateUrl: "./listar-pacientes.component.html",
   styleUrls: ["./listar-pacientes.component.css"],
 })
-export class ListarPacientesComponent implements OnInit {
+export class ListarPacientesComponent implements OnInit, OnDestroy {
   pacientes: Paciente[] = [];
   displayedColumns: string[] = [
     'select',
@@ -116,8 +116,11 @@ export class ListarPacientesComponent implements OnInit {
   noHabilitaEliminar:boolean = true;
   buscador:string = '';
   filtro:string='';
+  filtroAux:string='-';
   itemSeleccionado:any;
   @ViewChild('datos')datosPersonales:DatosPersonalesComponent;
+  subscribes:any[]=[];
+  pagina:number = 0;
 
   constructor(
     private _servicePacienteNuevo: NuevoPacienteService,
@@ -131,10 +134,15 @@ export class ListarPacientesComponent implements OnInit {
     private dialog:MatDialog
   ) {}
 
+  ngOnDestroy(): void {
+    this.subscribes.forEach(s => s.unsubscribe());
+  }
+
   ngOnInit(): void {
     this._serviceConsulta.paciente = {};
     this._serviceConsulta.editartto = {};
     this.filtro = this._servicePacienteNuevo.filtro;
+    this.filtroAux = this.filtro === '' ? '-' : this.filtro;
     this._servicePacienteNuevo.InicializarObjetos();
     this._servicePacienteNuevo.datosPersonlesCompletos = false;          
     this._servicePacienteNuevo.consultaInicialCompleta = false;          
@@ -144,22 +152,14 @@ export class ListarPacientesComponent implements OnInit {
     this.validarTamañoPantalla(window.innerWidth);
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
-    obs.push(this._servicePacienteNuevo.ObtenerPacientes());
+    obs.push(this._servicePacienteNuevo.ObtenerPacientesPaginado(this.pagina, this.filtroAux ));
     if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
-  
 
-    forkJoin(obs).subscribe(
-      (resp) => {
-        resp[0].forEach((r: Paciente) => {
-          r.fechaNacimiento = new Date(r.fechaNacimiento!);
-          var fechaInicio = new Date(r.fechaNacimiento).getTime();
-          var fechaFin = new Date().getTime();
-          var diff = fechaFin - fechaInicio;
-          r.edad = parseInt((diff / (1000 * 60 * 60 * 24 * 365)).toFixed(0));
-          r.nombreYapellido = `${r.nombre} ${r.apellido}`
-          this.pacientes.push(r);
-        });
+    this.subscribes.push(forkJoin(obs).subscribe(
+      (resp) => {        
+        this.parsearFechaDeNacimientoConListado(resp[0]);
 
+        
         if (this.mail !== null){
           this._serviceError.Usuario = resp[1];
           if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
@@ -171,7 +171,7 @@ export class ListarPacientesComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this._serviceError.Error(error)
       }
-    );
+    ));
   }
 
   VerDatos(){  
@@ -187,10 +187,12 @@ export class ListarPacientesComponent implements OnInit {
   }
 
   VerAntecedentes() {
+    console.log(this.itemSeleccionado.idPaciente!)
     this._serviceListados
       .ObtenerAntecedentePorId(this.itemSeleccionado.idPaciente!)
       .subscribe(
-        (resp) => {         
+        (resp) => { 
+          console.log(resp)        
           this.antecedente = resp;
           this.antecedentes = true;
           this.pacientesVer = false;
@@ -416,6 +418,8 @@ export class ListarPacientesComponent implements OnInit {
               if (a.apellido! < b.apellido!) return -1;
               else return 1;
             });
+
+            this.filtro = '';
           },(error) => {
             this._serviceError.Error(error);
           });
@@ -492,6 +496,53 @@ export class ListarPacientesComponent implements OnInit {
     if(innerWidth < 1120){
       this.textButtonPrimeraConsulta = '1° Cons';
     }
+  }
+
+  onPage(pagina:number){
+    pagina == 1 ? this.pagina += 5 : this.pagina-=5;
+    if(this.pagina < 0)this.pagina = 0;
+    this.pacientes = [];
+    this._servicePacienteNuevo.ObtenerPacientesPaginado(this.pagina, this.filtroAux).subscribe({
+      next: (resp) => {
+        this.parsearFechaDeNacimientoConListado(resp);
+      },
+      error: (error) => {
+        this._serviceError.Error(error);
+      }
+    })
+  }
+
+  buscarPorNombre(){
+    this.filtroAux = this.filtro === '' ? '-' : this.filtro;
+    this.pagina = 0;
+    this.pacientes = [];
+    this._servicePacienteNuevo.ObtenerPacientesPaginado(this.pagina,this.filtroAux).subscribe({
+      next: (resp) => {
+        this.parsearFechaDeNacimientoConListado(resp);
+      this.filtro = '';
+    },
+      error: (error) => {
+        this._serviceError.Error(error);
+      }});
+    
+  }
+
+  parsearFechaDeNacimientoConListado(lista:any[]){
+    lista.forEach((r: Paciente) => {
+      r.fechaNacimiento = new Date(r.fechaNacimiento!);
+      var fechaInicio = new Date(r.fechaNacimiento).getTime();
+      var fechaFin = new Date().getTime();
+      var diff = fechaFin - fechaInicio;
+      r.edad = parseInt((diff / (1000 * 60 * 60 * 24 * 365)).toFixed(0));
+      r.nombreYapellido = `${r.nombre} ${r.apellido}`
+      this.pacientes.push(r);
+    });
+  }
+
+  onKeyPressBuscar(ev:any){
+    if(ev.keyCode == 13) this.buscarPorNombre();
+    else if(ev.keyCode == 8) this.filtro = this.filtro.slice(0, -1);
+    else this.filtro += ev.key;
   }
 
 }

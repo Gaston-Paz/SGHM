@@ -70,7 +70,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     });
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
-    obs.push(this._servicePaciente.ObtenerPacientes());
+    obs.push(this._servicePaciente.ObtenerPacientesSelector());
     // obs.push(this._serviceTratamiento.ObtenerConsultas());
     if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {   

@@ -65,7 +65,7 @@ export class FotoComponent implements OnInit, OnDestroy {
     });
     let obs: Array<Observable<any>> = [];
     if (this.mail !== null)this.mail = localStorage.getItem("SGHC-mail")!;
-    obs.push(this._servicePaciente.ObtenerPacientes());
+    obs.push(this._servicePaciente.ObtenerPacientesSelector());
     obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(
       forkJoin(obs).subscribe(

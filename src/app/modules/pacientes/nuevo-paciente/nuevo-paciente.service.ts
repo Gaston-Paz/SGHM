@@ -243,6 +243,18 @@ export class NuevoPacienteService {
     return this._httpClient.get<Paciente[]>(environment.url + "/api/paciente");
   }
 
+  ObtenerPacientesPorNombre(nombre:string) {
+    return this._httpClient.get<Paciente[]>(environment.url + "/api/paciente/porNombre/" + nombre);
+  }
+
+  ObtenerPacientesPaginado(pagina:number,nombre:string) {
+    return this._httpClient.get<Paciente[]>(environment.url + "/api/paciente/paginado/paciente/" + pagina + "/" + nombre);
+  }
+
+  ObtenerPacientesSelector() {
+    return this._httpClient.get<Paciente[]>(environment.url + "/api/selectores/pacientes");
+  }
+
   GuardarPaciente() {
     this.alta.paciente = this.datosPersonales;
     this.alta.antecedente = this.antecedente;

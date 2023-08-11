@@ -51,7 +51,7 @@ export class ListarComponent implements OnInit, OnDestroy {
     });
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
-    obs.push(this._servicePaciente.ObtenerPacientes());
+    obs.push(this._servicePaciente.ObtenerPacientesSelector());
     // obs.push(this._serviceEstudio.ObtenerEstudios());
     if (this.mail !== null)obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    

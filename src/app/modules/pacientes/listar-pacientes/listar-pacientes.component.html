@@ -5,7 +5,6 @@
     </mat-card-header>
 
     <div class="d-flex row w-100 justify-content-start mb-2 mt-2">
-
       <div class="col-3 mt-2">
         <app-button
           [texto]="textButtonDatos"
@@ -63,16 +62,35 @@
       </div>
     </div>
 
+    <div class="w-100 row d-flex align-self-center">
+      <app-inputs
+        class="w-75"
+        [placeHolder]="'Buscar'"
+        [label]="'Buscar'"
+        [valor]="filtro"
+        (presion)="onKeyPressBuscar($event)"
+      ></app-inputs>
+
+      <div class="w-25 row d-flex justify-content-center h-3 mt-8">
+
+        <button class="bg-warning" mat-button type="submit" (click)="buscarPorNombre()">
+          Buscar
+          <mat-icon>search</mat-icon>
+        </button>
+      </div>
+    </div>
+
     <app-table-select
       *ngIf="pacientes.length > 0"
       [filtrado]="filtro"
       [data]="pacientes"
       [columns]="displayedColumns"
       [titulos]="titulosTabla"
+      [pagina]="pagina"
       (onEmitSelection)="itemSeleccionado = $event"
       (onFilter)="resetFilter($event)"
+      (onPage)="onPage($event)"
     ></app-table-select>
-
   </mat-card>
 </div>
 
