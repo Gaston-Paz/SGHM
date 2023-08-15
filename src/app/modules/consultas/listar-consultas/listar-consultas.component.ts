@@ -141,8 +141,7 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
 
   
   volverPacientes(ev:any){
-    let paciente = this.pacientes.find(x => x.idPaciente === ev);
-    this._servicePaciente.filtro = paciente!.nombre!;
+    this._servicePaciente.filtro = ev.nombre!;
     this._router.navigate(['home/pacientes/listar-pacientes']);
     
   }
