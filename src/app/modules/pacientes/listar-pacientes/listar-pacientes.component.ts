@@ -544,4 +544,8 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     this.buscarPorNombre();
   }
 
+  Descargar(){
+    this._servicePacienteNuevo.DescargarExcel();
+  }
+
 }

@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { map } from "rxjs/internal/operators/map";
 import { AltaPaciente } from "src/app/core/interfaces/alta-paciente.interface";
 import { Antecedente } from "src/app/core/interfaces/antecedentes.interface";
 import { ConsultaInicial } from "src/app/core/interfaces/consulta-inicial.interface";
@@ -295,6 +296,25 @@ export class NuevoPacienteService {
       environment.url + "/api/consulta-inicial/actualizar",
       consulta
     );
+  }
+
+  DescargarExcel(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'text/html',
+        'Content-Type': 'text/plain; charset=utf-8'
+      }),
+      responseType: 'blob' as 'json'
+    };
+    this._httpClient.get<any>(
+      environment.url + "/api/excel",httpOptions).subscribe(response => {
+        const blob = new Blob([response], { type: 'blob' });
+        const url = window.URL.createObjectURL(blob);
+        const anchor = document.createElement('a');
+        anchor.download = 'prueba.xlsx';
+        anchor.href = url;
+        anchor.click();
+      });
   }
 
 }
