@@ -71,27 +71,15 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientesSelector());
-    // obs.push(this._serviceTratamiento.ObtenerConsultas());
     if (this.mail !== null) obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {   
        
       this.pacientes = resp[0];
       this.pacientesFilter = resp[0];
-      // this.tratamientos = resp[1];
-      // this.tratamientos.forEach(t => {
-      //   let fecha = new Date(t.fecha!);
-      //   fecha.setHours(fecha.getHours()+3);
-      //   t.fecha = fecha;
-
-      //   if(t.proximoTurnoIndicado){
-      //     let proximoTurnoIndicado = new Date(t.proximoTurnoIndicado);
-      //     proximoTurnoIndicado.setHours(proximoTurnoIndicado.getHours()+3);
-      //     t.proximoTurnoIndicado = proximoTurnoIndicado;
-      //   }
-
-      // });
+      
       if((this._serviceTratamiento.paciente.idPaciente !== undefined && this._serviceTratamiento.paciente.idPaciente !== null && this._serviceTratamiento.paciente.idPaciente! !== 0)) {
-        this.form.controls.paciente.setValue(this._serviceTratamiento.paciente.idPaciente!);
+        this._serviceTratamiento.paciente = this.pacientes.find(x => x.idPaciente == this._serviceTratamiento.paciente.idPaciente)!;
+        this.form.controls.paciente.setValue(this._serviceTratamiento.paciente);
         this.buscarTratamientos();
         this._serviceTratamiento.editartto = {};
       }
@@ -121,16 +109,11 @@ export class ListarConsultasComponent implements OnInit, AfterViewInit, OnDestro
           if(a.fecha! > b.fecha!)return -1;
           else return 1;
         });        
+      },
+      error: (error) => {
+        this._serviceError.Error(error);
       }
-    })
-    // this.tratamientos.forEach(t => {
-    //   if(t.pacienteId === this.form.controls.paciente.value)this.tratamientosFiltrados.push(t);
-    // });
-    
-    // this.dataSource.data = this.tratamientosFiltrados.sort((a,b) => {
-    //   if(a.fecha! > b.fecha!)return -1;
-    //   else return 1;
-    // });        
+    })     
   }
 
   applyFilterPaciente(espacio:boolean){

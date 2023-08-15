@@ -540,9 +540,8 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
   }
 
   onKeyPressBuscar(ev:any){
-    if(ev.keyCode == 13) this.buscarPorNombre();
-    else if(ev.keyCode == 8) this.filtro = this.filtro.slice(0, -1);
-    else this.filtro += ev.key;
+    this.filtro = ev;
+    this.buscarPorNombre();
   }
 
 }

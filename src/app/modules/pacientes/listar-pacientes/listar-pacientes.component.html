@@ -68,12 +68,12 @@
         [placeHolder]="'Buscar'"
         [label]="'Buscar'"
         [valor]="filtro"
-        (presion)="onKeyPressBuscar($event)"
+        (cambio)="onKeyPressBuscar($event)"
       ></app-inputs>
 
       <div class="w-25 row d-flex justify-content-center h-3 mt-8">
 
-        <button class="bg-warning" mat-button type="submit" (click)="buscarPorNombre()">
+        <button class="bg-warning" mat-button (click)="buscarPorNombre()">
           Buscar
           <mat-icon>search</mat-icon>
         </button>

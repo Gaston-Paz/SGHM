@@ -52,12 +52,10 @@ export class ListarComponent implements OnInit, OnDestroy {
     this.mail = localStorage.getItem("SGHC-mail")!;
     let obs: Array<Observable<any>> = [];
     obs.push(this._servicePaciente.ObtenerPacientesSelector());
-    // obs.push(this._serviceEstudio.ObtenerEstudios());
     if (this.mail !== null)obs.push(this._usuarioService.GetUsuario(this.mail));
     this.subscribes.push(forkJoin(obs).subscribe(resp => {    
       this.pacientes = resp[0]; 
       this.pacientesFilter = resp[0]; 
-      // this.estudios = resp[1];    
       if (this.mail !== null){
         this._serviceError.Usuario = resp[1];
         if(this._serviceError.Usuario.rol === "Admin")this._serviceError.Nav = this._serviceError.fillerNav;
@@ -66,7 +64,8 @@ export class ListarComponent implements OnInit, OnDestroy {
       }
       
       if(this._serviceEstudio.paciente.idPaciente !== 0 && this._serviceEstudio.paciente.idPaciente !== undefined){
-        this.form.controls.paciente.setValue(this._serviceEstudio.paciente.idPaciente);
+        this._serviceEstudio.paciente = this.pacientes.find(x => x.idPaciente == this._serviceEstudio.paciente.idPaciente)!;
+        this.form.controls.paciente.setValue(this._serviceEstudio.paciente);
         this.BuscarEstudios();
       }
         
