@@ -1,193 +1,205 @@
 <mat-card>
-  <form [formGroup]="form" autocomplete="off" class="example-form">
-    <div class="col pad-15">
-      <div class="row">
-        <div class="col-6">
-          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
-            <mat-label>Motivo</mat-label>
-            <textarea
-              type="text"
-              matInput
-              formControlName="motivo"
-              placeholder="Motivo de la consulta"
-              rows="5"
-              autocomplete="off"
-              (change)="CargarConsultaInicial($event, 9,form.controls.motivo)"
-              tabindex="1"
-              required="true"
-              [value]="form.controls.motivo.value"
-              [readonly]="edicion"
-            ></textarea>
-          </mat-form-field>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="4"
-              [label]="'Antigüedad'"
-              [type]="'text'"
-              [placeHolder]="'Antigüedad'"
-              [requerido]="true"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 2,form.controls.antiguedad)"
-              [valor]="form.controls.antiguedad.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="6"
-              [label]="'Intensidad'"
-              [type]="'text'"
-              [placeHolder]="'Intensidad'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 6,form.controls.intensidad)"
-              [valor]="form.controls.intensidad.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="8"
-              [label]="'Irradiacion'"
-              [type]="'text'"
-              [placeHolder]="'Irradiacion'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 7,form.controls.irradiacion)"
-              [valor]="form.controls.irradiacion.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="10"
-              [disabled]="edicion"
-              (change)="CargarConsultaInicial($event, 10,form.controls.covid)"
-              formControlName="covid"
-              >Covid</mat-checkbox
-            >
-          </div>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="12"
-              [label]="'Otros'"
-              [type]="'text'"
-              [placeHolder]="'Otros'"
-              [requerido]="false"
-              [readOnly]="edicion || !form.controls.covid.value"
-              (cambio)="CargarConsultaInicial($event, 12,form.controls.otros)"
-              [valor]="form.controls.otros.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="w-100">
-            <mat-form-field [tabindex]="2" appearance="outline" class="w-100">
-              <mat-label>Fecha de Consulta</mat-label>
-              <input
-                required="true"
-                matInput
-                readonly="true"
-                autocomplete="off"
-                #dateInput
-                (dateChange)="changeDate(dateInput, 1)"
-                onclick="changeDate(dateInput)"
-                [matDatepicker]="selector"
-                [value]="form.controls.fecha.value"
-              />
-              <mat-datepicker-toggle
-                [disabled]="edicion"
-                mat-datepicket-toggle
-                matSuffix
-                [for]="selector"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #selector></mat-datepicker>
+  <form [formGroup]="form" autocomplete="off" class="example-form d-flex row">
+    <div class="d-flex row w-100">
+      <mat-form-field
+        appearance="outline"
+        appearance="outline"
+        class="w-50 mb-20"
+      >
+        <mat-label>Motivo</mat-label>
+        <textarea
+          type="text"
+          matInput
+          formControlName="motivo"
+          placeholder="Motivo de la consulta"
+          rows="5"
+          autocomplete="off"
+          (change)="CargarConsultaInicial($event, 9, form.controls.motivo)"
+          tabindex="1"
+          required="true"
+          [value]="form.controls.motivo.value"
+          [readonly]="edicion"
+        ></textarea>
+      </mat-form-field>
 
-              <mat-error *ngIf="form.controls.fecha.hasError('required')">
-                Fecha es <strong>obligatorio</strong>
-              </mat-error>
-            </mat-form-field>
-          </div>
-          <div class="w-100 ">
-            <app-inputs
-              [tabindex]="3"
-              [label]="'Actividad Física'"
-              [type]="'text'"
-              [placeHolder]="'Actividad Física'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 1,form.controls.actividadFisica)"
-              [valor]="form.controls.actividadFisica.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100 mt-p4">
-            <app-inputs
-              [tabindex]="5"
-              [label]="'Localización'"
-              [type]="'text'"
-              [placeHolder]="'Localización'"
-              [requerido]="true"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 8,form.controls.localizacion)"
-              [valor]="form.controls.localizacion.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="7"
-              [label]="'Característica'"
-              [type]="'text'"
-              [placeHolder]="'Característica'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 5,form.controls.caracteristica)"
-              [valor]="form.controls.caracteristica.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100">
-            <app-inputs
-              [tabindex]="9"
-              [label]="'Atenúa'"
-              [type]="'text'"
-              [placeHolder]="'Atenúa'"
-              [requerido]="false"
-              [readOnly]="edicion"
-              (cambio)="CargarConsultaInicial($event, 4,form.controls.atenua)"
-              [valor]="form.controls.atenua.value"
-              [max]="maximo"
-            ></app-inputs>
-          </div>
-          <div class="w-100">
-            <mat-form-field appearance="outline" class="w-100">
-              <mat-label>Fecha Covid</mat-label>
-              <input
-                [tabindex]="11"
-                matInput
-                readonly="true"
-                autocomplete="off"
-                #dateInputCovid
-                (dateChange)="changeDate(dateInputCovid, 2)"
-                onclick="changeDate(dateInputCovid)"
-                [max]="fecha"
-                [matDatepicker]="selectorCovid"
-                [value]="form.controls.fechaCovid.value"
-              />
-              <mat-datepicker-toggle
-                [disabled]="edicion || !form.controls.covid.value"
-                mat-datepicket-toggle
-                matSuffix
-                [for]="selectorCovid"
-              ></mat-datepicker-toggle>
-              <mat-datepicker #selectorCovid></mat-datepicker>
-            </mat-form-field>
-          </div>
+      <div class="col">
+        <mat-form-field [tabindex]="2" appearance="outline" class="w-100">
+          <mat-label>Fecha de Consulta</mat-label>
+          <input
+            required="true"
+            matInput
+            readonly="true"
+            autocomplete="off"
+            #dateInput
+            (dateChange)="changeDate(dateInput, 1)"
+            onclick="changeDate(dateInput)"
+            [matDatepicker]="selector"
+            [value]="form.controls.fecha.value"
+          />
+          <mat-datepicker-toggle
+            [disabled]="edicion"
+            mat-datepicket-toggle
+            matSuffix
+            [for]="selector"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #selector></mat-datepicker>
 
-        </div>
+          <mat-error *ngIf="form.controls.fecha.hasError('required')">
+            Fecha es <strong>obligatorio</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <app-inputs
+          [tabindex]="3"
+          [label]="'Actividad Física'"
+          [type]="'text'"
+          [placeHolder]="'Actividad Física'"
+          [requerido]="false"
+          [readOnly]="edicion"
+          (cambio)="
+            CargarConsultaInicial($event, 1, form.controls.actividadFisica)
+          "
+          [valor]="form.controls.actividadFisica.value"
+          [max]="maximo"
+        ></app-inputs>
       </div>
+    </div>
+
+    <div class="d-flex row w-100">
+      <app-inputs
+        class="w-50"
+        [tabindex]="4"
+        [label]="'Antigüedad'"
+        [type]="'text'"
+        [placeHolder]="'Antigüedad'"
+        [requerido]="true"
+        [readOnly]="edicion"
+        (cambio)="CargarConsultaInicial($event, 2, form.controls.antiguedad)"
+        [valor]="form.controls.antiguedad.value"
+        [max]="maximo"
+      ></app-inputs>
+
+      <app-inputs
+        class="w-50"
+        [tabindex]="5"
+        [label]="'Localización'"
+        [type]="'text'"
+        [placeHolder]="'Localización'"
+        [requerido]="true"
+        [readOnly]="edicion"
+        (cambio)="CargarConsultaInicial($event, 8, form.controls.localizacion)"
+        [valor]="form.controls.localizacion.value"
+        [max]="maximo"
+      ></app-inputs>
+    </div>
+
+    <div class="d-flex row w-100">
+      <app-inputs
+        class="w-50"
+        [tabindex]="6"
+        [label]="'Intensidad'"
+        [type]="'text'"
+        [placeHolder]="'Intensidad'"
+        [requerido]="false"
+        [readOnly]="edicion"
+        (cambio)="CargarConsultaInicial($event, 6, form.controls.intensidad)"
+        [valor]="form.controls.intensidad.value"
+        [max]="maximo"
+      ></app-inputs>
+
+      <app-inputs
+        class="w-50"
+        [tabindex]="7"
+        [label]="'Característica'"
+        [type]="'text'"
+        [placeHolder]="'Característica'"
+        [requerido]="false"
+        [readOnly]="edicion"
+        (cambio)="
+          CargarConsultaInicial($event, 5, form.controls.caracteristica)
+        "
+        [valor]="form.controls.caracteristica.value"
+        [max]="maximo"
+      ></app-inputs>
+    </div>
+
+    <div class="d-flex row w-100">
+      <app-inputs
+        class="w-50"
+        [tabindex]="8"
+        [label]="'Irradiacion'"
+        [type]="'text'"
+        [placeHolder]="'Irradiacion'"
+        [requerido]="false"
+        [readOnly]="edicion"
+        (cambio)="CargarConsultaInicial($event, 7, form.controls.irradiacion)"
+        [valor]="form.controls.irradiacion.value"
+        [max]="maximo"
+      ></app-inputs>
+
+      <app-inputs
+        class="w-50"
+        [tabindex]="9"
+        [label]="'Atenúa'"
+        [type]="'text'"
+        [placeHolder]="'Atenúa'"
+        [requerido]="false"
+        [readOnly]="edicion"
+        (cambio)="CargarConsultaInicial($event, 4, form.controls.atenua)"
+        [valor]="form.controls.atenua.value"
+        [max]="maximo"
+      ></app-inputs>
+    </div>
+
+    <div class="d-flex row w-100">
+
+      <div class="d-flex justify-content-center align-items-center h-63 w-10">
+        <mat-checkbox
+        tabindex="10"
+        [disabled]="edicion"
+        (change)="CargarConsultaInicial($event, 10, form.controls.covid)"
+        formControlName="covid"
+        >Covid</mat-checkbox
+        >
+      </div>
+
+      <div class="w-40">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Fecha Covid</mat-label>
+          <input
+            [tabindex]="11"
+            matInput
+            readonly="true"
+            autocomplete="off"
+            #dateInputCovid
+            (dateChange)="changeDate(dateInputCovid, 2)"
+            onclick="changeDate(dateInputCovid)"
+            [max]="fecha"
+            [matDatepicker]="selectorCovid"
+            [value]="form.controls.fechaCovid.value"
+          />
+          <mat-datepicker-toggle
+            [disabled]="edicion || !form.controls.covid.value"
+            mat-datepicket-toggle
+            matSuffix
+            [for]="selectorCovid"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #selectorCovid></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <app-inputs
+        class="w-50"
+        [tabindex]="12"
+        [label]="'Otros'"
+        [type]="'text'"
+        [placeHolder]="'Otros'"
+        [requerido]="false"
+        [readOnly]="edicion || !form.controls.covid.value"
+        (cambio)="CargarConsultaInicial($event, 12, form.controls.otros)"
+        [valor]="form.controls.otros.value"
+        [max]="maximo"
+      ></app-inputs>
     </div>
   </form>
 </mat-card>
