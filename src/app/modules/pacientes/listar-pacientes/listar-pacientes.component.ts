@@ -519,7 +519,7 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     this._servicePacienteNuevo.ObtenerPacientesPaginado(this.pagina,this.filtroAux).subscribe({
       next: (resp) => {
         this.parsearFechaDeNacimientoConListado(resp);
-      this.filtro = '';
+      // this.filtro = '';
     },
       error: (error) => {
         this._serviceError.Error(error);
