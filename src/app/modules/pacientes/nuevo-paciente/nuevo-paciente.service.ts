@@ -298,7 +298,7 @@ export class NuevoPacienteService {
     );
   }
 
-  DescargarExcel(){
+  DescargarExcel(paciente:Paciente){
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'text/html',
@@ -307,11 +307,11 @@ export class NuevoPacienteService {
       responseType: 'blob' as 'json'
     };
     this._httpClient.get<any>(
-      environment.url + "/api/excel",httpOptions).subscribe(response => {
+      environment.url + "/api/excel/"+paciente.idPaciente,httpOptions).subscribe(response => {
         const blob = new Blob([response], { type: 'blob' });
         const url = window.URL.createObjectURL(blob);
         const anchor = document.createElement('a');
-        anchor.download = 'prueba.xlsx';
+        anchor.download = `Historia Clínica-${paciente.nombre}-${paciente.apellido}.xlsx`;
         anchor.href = url;
         anchor.click();
       });

@@ -112,7 +112,7 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
   textButtonTTO:string = 'Tratamientos';
   textButtonDatos:string = 'Datos Personales';
   textButtonEstudio:string = 'Nuevo Estudio';
-  iconoAgregar:boolean = true;
+  iconoAgregar:boolean = false;
   noHabilitaEliminar:boolean = true;
   buscador:string = '';
   filtro:string='';
@@ -450,9 +450,9 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     if(innerWidth < 1418){
       this.textButtonEstudio = "Estudio";
       this.textButtonConsulta = "Consulta";
-      this.iconoAgregar = false;
+      // this.iconoAgregar = false;
     }else{
-      this.iconoAgregar = true;
+      // this.iconoAgregar = true;
       this.textButtonConsulta = "Nueva Consulta";
       this.textButtonEstudio = "Nuevo Estudio";
     }
@@ -478,7 +478,7 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
         'deParte'
     ];
     }else{
-      this.iconAdd = '';
+      // this.iconAdd = '';
       this.textButtonTTO = "TTO";
       this.displayedColumns = [
         'select',
@@ -545,7 +545,8 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
   }
 
   Descargar(){
-    this._servicePacienteNuevo.DescargarExcel();
+    let paciente = this.itemSeleccionado;
+    this._servicePacienteNuevo.DescargarExcel(paciente);
   }
 
 }

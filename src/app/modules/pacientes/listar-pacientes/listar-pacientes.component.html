@@ -1,6 +1,3 @@
-
-<!-- <button (click)="Descargar()">Descargar Excel</button> -->
-
 <div [hidden]="!pacientesVer" class="w-100">
   <mat-card class="mb-5">
     <mat-card-header>
@@ -8,37 +5,37 @@
     </mat-card-header>
 
     <div class="d-flex row w-100 justify-content-start mb-2 mt-2">
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonDatos"
           (clickButton)="VerDatos()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonPrimeraConsulta"
           (clickButton)="VerConsultas()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonAntecedente"
           (clickButton)="VerAntecedentes()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonTTO"
           (clickButton)="verTurnos()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="'Estudios'"
           (clickButton)="Estudios()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonConsulta"
           [icono]="iconoAgregar"
@@ -46,7 +43,7 @@
           (clickButton)="NuevaConsulta()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonEstudio"
           [icono]="iconoAgregar"
@@ -54,13 +51,21 @@
           (clickButton)="NuevoEstudio()"
         ></app-button>
       </div>
-      <div class="col-3 mt-2">
+      <div class="col-2 mt-2">
         <app-button
           [habilita]="noHabilitaEliminar"
-          [texto]="' '"
+          [texto]="'Eliminar'"
           [icono]="false"
           [textoIcono]="'delete'"
           (clickButton)="EliminarPaciente()"
+        ></app-button>
+      </div>
+      <div class="col-2 mt-2">
+        <app-button
+          [texto]="'Exportar'"
+          [icono]="false"
+          [textoIcono]="'get_app'"
+          (clickButton)="Descargar()"
         ></app-button>
       </div>
     </div>
