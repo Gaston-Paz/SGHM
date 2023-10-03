@@ -546,7 +546,23 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
 
   Descargar(){
     let paciente = this.itemSeleccionado;
-    this._servicePacienteNuevo.DescargarExcel(paciente);
+    let dialogRef = this.dialog.open(ModalConfirmComponent, {
+      data: {
+        message: "¿Desea descargar la historia del paciente " + paciente.nombre + " " + paciente.apellido + "?",
+        buttonText: {
+          ok: "Descargar",
+          cancel: "Cancelar",
+        },
+        action: "Confirmar",
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result =>{
+      if(result){
+        this._servicePacienteNuevo.DescargarExcel(paciente);
+
+      }
+    });
   }
 
 }

@@ -8,30 +8,35 @@
       <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonDatos"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="VerDatos()"
         ></app-button>
       </div>
       <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonPrimeraConsulta"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="VerConsultas()"
         ></app-button>
       </div>
       <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonAntecedente"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="VerAntecedentes()"
         ></app-button>
       </div>
       <div class="col-2 mt-2">
         <app-button
           [texto]="textButtonTTO"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="verTurnos()"
         ></app-button>
       </div>
       <div class="col-2 mt-2">
         <app-button
           [texto]="'Estudios'"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="Estudios()"
         ></app-button>
       </div>
@@ -40,6 +45,7 @@
           [texto]="textButtonConsulta"
           [icono]="iconoAgregar"
           [textoIcono]="iconAdd"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="NuevaConsulta()"
         ></app-button>
       </div>
@@ -48,6 +54,7 @@
           [texto]="textButtonEstudio"
           [icono]="iconoAgregar"
           [textoIcono]="iconAdd"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="NuevoEstudio()"
         ></app-button>
       </div>
@@ -57,6 +64,7 @@
           [texto]="'Eliminar'"
           [icono]="false"
           [textoIcono]="'delete'"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="EliminarPaciente()"
         ></app-button>
       </div>
@@ -65,6 +73,7 @@
           [texto]="'Exportar'"
           [icono]="false"
           [textoIcono]="'get_app'"
+          [habilita]="itemSeleccionado === undefined || itemSeleccionado === null"
           (clickButton)="Descargar()"
         ></app-button>
       </div>
