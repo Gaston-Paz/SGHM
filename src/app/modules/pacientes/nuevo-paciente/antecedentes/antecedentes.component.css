@@ -71,3 +71,7 @@ h3 {
 .mb-20 {
   margin-bottom: 20px;
 }
+
+.cursor-pointer{
+  cursor: pointer;
+}

@@ -64,10 +64,6 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
   iconAdd: string = "add";
   apellidoPaciente: string = "";
   antecedente: Antecedente = {
-    diabetes: false,
-    embarazos: false,
-    menstruacion: false,
-    ortodoncia: false,
     placaDescanso: false,
     contencion: false,
   };
@@ -75,7 +71,6 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
     antiguedad: "",
     localizacion: "",
     motivo: "",
-    covid: false,
     fecha: new Date(),
   };
   pacienteEditar: Paciente = {

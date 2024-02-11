@@ -34,4 +34,5 @@ export class UsuarioService {
   RecuperarContraseña(recupero: Recuperacion){
     return this._httpClient.post<any>(environment.url + "/api/recuperacion", recupero);
   }
+
 }

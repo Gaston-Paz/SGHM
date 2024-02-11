@@ -10,8 +10,6 @@ export interface ConsultaInicial{
     irradiacion?: string;
     atenua?: string;
     actividadFisica?: string;
-    covid?: boolean;
-    fechaCovid?: Date;
     otros?: string;
     
 }

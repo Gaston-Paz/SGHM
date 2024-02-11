@@ -32,7 +32,6 @@ export class ConsultaInicialComponent implements OnInit {
     this._servicePacienteNuevo.InicializarObjetos();  
     if(this.hayConsulta){  
       this.consulta.fecha = this.parseFecha(this.consulta.fecha!.toString());
-      if(this.consulta.fechaCovid !== undefined && this.consulta.fechaCovid !== null)this.consulta.fechaCovid = this.parseFecha(this.consulta.fechaCovid!.toString());
 
       this._servicePacienteNuevo.consultaInicial = this.consulta;
       this.form = this._formBuilder.group({
@@ -44,10 +43,8 @@ export class ConsultaInicialComponent implements OnInit {
         caracteristica: [this.consulta.caracteristica],
         irradiacion: [this.consulta.irradiacion],
         atenua: [this.consulta.atenua],
-        actividadFisica: [this.consulta.actividadFisica],
-        covid: [this.consulta.covid],
-        fechaCovid: [this.consulta.fechaCovid !== undefined && this.consulta.fechaCovid !== null ?new Date(this.consulta.fechaCovid!):""],
         otros: [this.consulta.otros],
+        actividadFisica: [this.consulta.actividadFisica]
       });
     }else{
       this.form = this._formBuilder.group({
@@ -59,10 +56,8 @@ export class ConsultaInicialComponent implements OnInit {
         caracteristica: [],
         irradiacion: [],
         atenua: [],
-        actividadFisica: [],
-        covid: [false],
-        fechaCovid: [],
         otros: [],
+        actividadFisica: []
       });
     }
   }

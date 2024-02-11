@@ -26,17 +26,12 @@ export class NuevoPacienteService {
   consultaInicial: ConsultaInicial = {
     antiguedad: undefined,
     motivo: undefined,
-    covid: undefined,
     fecha: undefined,
     localizacion: undefined
   };
   consultaInicialCompleta: boolean = false;
 
   antecedente: Antecedente = {
-    diabetes: undefined,
-    embarazos: undefined,
-    menstruacion: undefined,
-    ortodoncia: undefined,
     placaDescanso: undefined,
     contencion: undefined
   };
@@ -70,12 +65,10 @@ export class NuevoPacienteService {
     consultaInicial: {
       antiguedad: "",
       motivo: "",
-      covid: false,
       fecha: new Date(),
       localizacion: ""
     },
     antecedente: {
-      diabetes: false,
       embarazos: false,
       menstruacion: false,
       ortodoncia: false,
@@ -181,23 +174,9 @@ export class NuevoPacienteService {
       case 9:
         this.consultaInicial.motivo = dato;
         break;
-      case 10:
-        this.consultaInicial.covid = !this.consultaInicial.covid;
-        break;
-        case 11:
-          let fechaAux = new Date(dato);
-        let fechas = new Date(
-          fechaAux.getFullYear() +
-            "/" +
-            (fechaAux.getMonth() + 1) +
-            "/" +
-            (fechaAux.getDate())
-        );
-          this.consultaInicial.fechaCovid = fechas;
-        break;
-          case 12:
-            this.consultaInicial.otros = dato;
-            break;
+      case 12:
+        this.consultaInicial.otros = dato;
+      break;
     }
     
     this.consultaInicialCompleta = valido;
@@ -263,7 +242,6 @@ export class NuevoPacienteService {
     this.consulta.motivo = this.consultaInicial.motivo + " - " + this.consultaInicial.localizacion;
     this.consulta.fecha = this.consultaInicial.fecha!;
     this.alta.tratamiento = this.consulta;    
-    console.log(this.alta);
     
     return this._httpClient.post<Paciente>(
       environment.url + "/api/paciente",

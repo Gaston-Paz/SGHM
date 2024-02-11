@@ -13,7 +13,6 @@ export class AntecedentesComponent implements OnInit {
 
   form!: FormGroup;
   antecedentes: Antecedente = {
-    diabetes:false,
     embarazos:false,
     menstruacion:false,
     ortodoncia:false,
@@ -25,7 +24,6 @@ export class AntecedentesComponent implements OnInit {
   tiroides: string[]=['Hipotiroidismo','Hipertiroidismo'];
   @Input("antecedente") antecedente: Antecedente = {
     contencion: false,
-    diabetes: false,
     embarazos: false,
     menstruacion: false,
     ortodoncia: false,
@@ -33,6 +31,17 @@ export class AntecedentesComponent implements OnInit {
   };
   @Input("hayAntecedente") hayAntecedente: boolean = false;
   @Input("edicion") edicion: boolean = false;
+
+  verCirugias = true;
+  iconoCirugias = 'arrow_drop_up';
+  verOdontologia = true;
+  iconoOdontologia = 'arrow_drop_up';
+  verFemenina = true;
+  iconoFemenina = 'arrow_drop_up';
+  verSistemas = true;
+  iconoSistemas = 'arrow_drop_up';
+  verOtros = true;
+  iconoOtros = 'arrow_drop_up';
 
   constructor(private _formBuilder: FormBuilder,
     private _servicePacienteNuevo: NuevoPacienteService) { }
@@ -73,8 +82,12 @@ export class AntecedentesComponent implements OnInit {
       fuma: [this.antecedente.fuma === undefined ? '' : this.antecedente.fuma],
       otrasDrogas: [this.antecedente.otrasDrogas === undefined ? '' : this.antecedente.otrasDrogas],
       contencion: [this.antecedente.contencion],
-      diabetes: [this.antecedente.diabetes],
       embarazos: [this.antecedente.embarazos],
+      diabetes: [this.antecedente.diabetes === undefined ? '' : this.antecedente.diabetes],
+      alteracionesVision: [this.antecedente.alteracionesVision === undefined ? '' : this.antecedente.alteracionesVision],
+      covid: [this.antecedente.covid === undefined ? '' : this.antecedente.covid],
+      menopausia: [this.antecedente.menopausia === undefined ? '' : this.antecedente.menopausia],
+      observacionesOdontologicas: [this.antecedente.observacionesOdontologicas === undefined ? '' : this.antecedente.observacionesOdontologicas],
     });
     if(this.hayAntecedente)this.antecedentes = this.antecedente;    
   }
@@ -89,20 +102,7 @@ export class AntecedentesComponent implements OnInit {
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
   }
   
-  asignarValor(valor:string,campo:number,ev:any=undefined){     
-    if(valor !== '' ){
-      this.MapAntecedente(valor,campo);  
-    }else if(valor === '' && campo === 35){
-      this.MapAntecedente(ev.target.value,campo);  
-    }else if(valor === ''){     
-      this.MapAntecedente(undefined,campo); 
-    }
-    if(!this.antecedente.ortodoncia)this.antecedente.edadOrtodoncia = undefined; 
-    if(!this.antecedente.embarazos){
-      this.antecedente.abortosEspontaneo = undefined; 
-      this.antecedente.abortosInducido = undefined; 
-      this.antecedente.partos = undefined; 
-    }
+  asignarValor(){    
     this._servicePacienteNuevo.CargarAntecedentes(this.antecedentes);
   }
 
@@ -144,6 +144,36 @@ export class AntecedentesComponent implements OnInit {
       case 34:this.antecedentes.alimentacion = valor;break;
       case 35:this.antecedentes.perdidas = valor;break;
     }
+  }
+
+  ocultarCirugias(){
+    this.verCirugias = !this.verCirugias;
+    if(this.verCirugias)this.iconoCirugias = 'arrow_drop_up';
+    else this.iconoCirugias = 'arrow_drop_down';
+  }
+
+  ocultarOdontologia(){
+    this.verOdontologia = !this.verOdontologia;
+    if(this.verOdontologia)this.iconoOdontologia = 'arrow_drop_up';
+    else this.iconoOdontologia = 'arrow_drop_down';
+  }
+
+  ocultarFemenina(){
+    this.verFemenina = !this.verFemenina;
+    if(this.verFemenina)this.iconoFemenina = 'arrow_drop_up';
+    else this.iconoFemenina = 'arrow_drop_down';
+  }
+
+  ocultarSistemas(){
+    this.verSistemas = !this.verSistemas;
+    if(this.verSistemas)this.iconoSistemas = 'arrow_drop_up';
+    else this.iconoSistemas = 'arrow_drop_down';
+  }
+
+  ocultarOtros(){
+    this.verOtros = !this.verOtros;
+    if(this.verOtros)this.iconoOtros = 'arrow_drop_up';
+    else this.iconoOtros = 'arrow_drop_down';
   }
 
 }

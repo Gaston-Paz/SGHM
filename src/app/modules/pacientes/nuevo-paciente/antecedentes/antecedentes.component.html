@@ -1,446 +1,528 @@
-<mat-card>
-  <form [formGroup]="form" autocomplete="off" class="example-form">
-    <div class="col pad-15">
-      <!-- Cirugias -->
-      <div class="row bg-section">
-        <h3>Cirugías</h3>
-        <app-inputs
-          [tabindex]="1"
-          [label]="'Cirugías'"
-          [type]="'text'"
-          [placeHolder]="'Año, localización'"
-          [readOnly]="edicion"
-          (cambio)="asignarValor($event, 1)"
-          [valor]="form.controls.cirugias.value"
-        ></app-inputs>
-      </div>
 
-      <!-- Odontologia -->
-      <div class="row">
-        <h3 class="mt-20">Odontología</h3>
-        <h5>Implantes y piezas</h5>
-        <div class="col-6">
-          <div class="row w-100 d-flex">
-            <div class="w-50">
-              <app-inputs
+  <div class="d-flex row w-100">
+    <mat-card class="w-100">
+      <div class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+        <form [formGroup]="form" autocomplete="off" class="example-form">
+
+          <mat-card class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bg-section ">
+            <mat-card-title>Cirugías <mat-icon class="cursor-pointer" (click)="ocultarCirugias()">{{iconoCirugias}}</mat-icon></mat-card-title>
+            <div *ngIf="verCirugias">
+              <mat-form-field appearance="outline" appearance="outline" class="w-100">
+                <mat-label>Cirugías</mat-label>
+                <textarea
+                  type="text"
+                  matInput
+                  placeholder="Cirugías"
+                  rows="2"
+                  autocomplete="off"
+                  tabindex="1"
+                  [readonly]="edicion"
+                  formControlName="cirugias"
+                  [(ngModel)]="antecedentes.cirugias"
+                  (change)="asignarValor()"
+                ></textarea>
+              </mat-form-field>
+            </div>
+          </mat-card>
+
+          <mat-card class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-card-title>Odontología <mat-icon class="cursor-pointer" (click)="ocultarOdontologia()">{{iconoOdontologia}}</mat-icon></mat-card-title>
+            <div *ngIf="verOdontologia" class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
                 [tabindex]="2"
                 [label]="'Implantes Superiores'"
                 [type]="'text'"
                 [placeHolder]="'Implantes Superiores'"
                 [readOnly]="edicion"
-                (cambio)="asignarValor($event, 2)"
                 [valor]="form.controls.implanteSuperior.value"
+                (cambio)="antecedentes.implanteSuperior = $event;asignarValor()"
               ></app-inputs>
-            </div>
-            <div class="w-50">
-              <app-inputs
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
                 [tabindex]="3"
                 [label]="'Implantes Inferiores'"
                 [type]="'text'"
                 [placeHolder]="'Implantes Inferiores'"
                 [readOnly]="edicion"
-                (cambio)="asignarValor($event, 3)"
                 [valor]="form.controls.implanteInferior.value"
+                (cambio)="antecedentes.implanteInferior = $event;asignarValor()"
               ></app-inputs>
-            </div>
-            <app-inputs
-              [tabindex]="6"
-              [label]="'Prótesis'"
-              [type]="'text'"
-              [placeHolder]="'Prótesis'"
-              [readOnly]="edicion"
-              (cambio)="asignarValor($event, 6)"
-              [valor]="form.controls.protesis.value"
-            ></app-inputs>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="row w-100 d-flex">
-            <div class="w-50">
-              <app-inputs
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
                 [tabindex]="4"
                 [label]="'Piezas Faltantes Superiores'"
                 [type]="'text'"
                 [placeHolder]="'Piezas Faltantes Superiores'"
                 [readOnly]="edicion"
-                (cambio)="asignarValor($event, 4)"
+                (cambio)="antecedentes.piezasFaltantesSup = $event;asignarValor()"
                 [valor]="form.controls.piezasfaltantesSup.value"
               ></app-inputs>
-              <div class="width-48 mb-3 w-24">
-                <mat-checkbox
-                  tabindex="7"
-                  [disabled]="edicion"
-                  [(ngModel)]="antecedentes.contencion"
-                  class="m-18 mr-60"
-                  
-                  (change)="CargarAntecedentes()"
-                  formControlName="contencion"
-                  >Placa de Contención</mat-checkbox
-                >
-
-                <mat-checkbox
-                  tabindex="8"
-                  [disabled]="edicion"
-                  class="m-18 mr-60"
-                  [(ngModel)]="antecedentes.placaDescanso"
-                  
-                  (change)="CargarAntecedentes()"
-                  formControlName="placaDescanso"
-                  >Placa de Descanso</mat-checkbox
-                >
-
-                <mat-checkbox
-                  tabindex="9"
-                  [disabled]="edicion"
-                  [(ngModel)]="antecedentes.ortodoncia"
-                  class="m-18 mr-60"
-                  
-                  (change)="CargarAntecedentes()"
-                  formControlName="ortodoncia"
-                  >Ortodoncia</mat-checkbox
-                >
               </div>
-            </div>
-            <div class="w-50">
-              <app-inputs
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
                 [tabindex]="5"
                 [label]="'Piezas Faltantes Inferiores'"
                 [type]="'text'"
                 [placeHolder]="'Piezas Faltantes Inferiores'"
                 [readOnly]="edicion"
-                (cambio)="asignarValor($event, 5)"
+                (cambio)="antecedentes.piezasFaltantesInf = $event;asignarValor()"
                 [valor]="form.controls.piezasfaltantesInf.value"
               ></app-inputs>
+              </div>
 
-              <app-inputs
-                [tabindex]="10"
-                [label]="'Edad Ortodoncia'"
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="6"
+                [label]="'Prótesis'"
                 [type]="'text'"
-                [placeHolder]="'Edad Ortodoncia'"
-                [readOnly]="edicion || !antecedentes.ortodoncia"
-                (cambio)="asignarValor($event, 10)"
-                [valor]="form.controls.EdadOrtodoncia.value"
+                [placeHolder]="'Prótesis'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.protesis = $event;asignarValor()"
+                [valor]="form.controls.protesis.value"
               ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="7"
+                [label]="'Ortodoncia'"
+                [type]="'text'"
+                [placeHolder]="'Ortodoncia'"
+                (cambio)="antecedentes.ortodoncia = $event;asignarValor()"
+                [valor]="form.controls.ortodoncia.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-checkbox
+                tabindex="8"
+                [disabled]="edicion"
+                [(ngModel)]="antecedentes.contencion"
+                class="m-18 mr-60"
+                (change)="CargarAntecedentes()"
+                formControlName="contencion"
+                >Placa de Contención</mat-checkbox
+              >
+
+              <mat-checkbox
+                tabindex="9"
+                [disabled]="edicion"
+                class="m-18 mr-60"
+                [(ngModel)]="antecedentes.placaDescanso"
+                (change)="CargarAntecedentes()"
+                formControlName="placaDescanso"
+                >Placa de Descanso</mat-checkbox
+              >
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+                <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                  <mat-label>Observaciones Odontológicas</mat-label>
+                  <textarea
+                  type="text"
+                  matInput
+                  placeholder="Observaciones Odontológicas"
+                  rows="2"
+                  autocomplete="off"
+                  [(ngModel)]="antecedentes.observacionesOdontologicas"
+                  tabindex="10"
+                  [readonly]="edicion"
+                  formControlName="observacionesOdontologicas"
+                  (change)="asignarValor()"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+
             </div>
-          </div>
-        </div>
-      </div>
+          </mat-card>
 
-      <!-- Salud Femenina -->
-      <div class="row bg-section">
-        <h3 class="mt-20">Salud Femenina</h3>
-        <div class="col-6">
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="11"
-              [disabled]="edicion"
-              [(ngModel)]="antecedentes.menstruacion"
-              class="m-18"
+          <mat-card class="bg-section d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-card-title>Salud Femenina <mat-icon class="cursor-pointer" (click)="ocultarFemenina()">{{iconoFemenina}}</mat-icon></mat-card-title>
+            <div *ngIf="verFemenina" class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="11"
+                [label]="'Menstruación'"
+                [type]="'text'"
+                [placeHolder]="'Menstruación'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.menstruacion = $event;asignarValor()"
+                [valor]="form.controls.menstruacion.value"
+              ></app-inputs>
+              </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="12"
+                  [label]="'Menopausia'"
+                  [type]="'text'"
+                  [placeHolder]="'Menopausia'"
+                  [readOnly]="edicion"
+                  (cambio)="antecedentes.menopausia = $event;asignarValor()"
+                  [valor]="form.controls.menopausia.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="13"
+                  [label]="'Frecuencia'"
+                  [type]="'text'"
+                  [placeHolder]="'Frecuencia'"
+                  [readOnly]="edicion || !antecedentes.menstruacion"
+                  (cambio)="antecedentes.frecuencia = $event;asignarValor()"
+                  [valor]="form.controls.frecuencia.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="14"
+                  [label]="'Duración'"
+                  [type]="'text'"
+                  [placeHolder]="'Duración'"
+                  [readOnly]="edicion || !antecedentes.menstruacion"
+                  (cambio)="antecedentes.duracion = $event;asignarValor()"
+                  [valor]="form.controls.duracion.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="15"
+                  [label]="'Volumen'"
+                  [type]="'text'"
+                  [placeHolder]="'Volumen'"
+                  [readOnly]="edicion || !antecedentes.menstruacion"
+                  (cambio)="antecedentes.volumen = $event;asignarValor()"
+                  [valor]="form.controls.volumen.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="16"
+                  [label]="'Embarazos'"
+                  [type]="'text'"
+                  [placeHolder]="'Embarazos'"
+                  (cambio)="antecedentes.embarazos = $event;asignarValor()"
+                  [valor]="form.controls.abortoEspontaneo.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="17"
+                  [label]="'Partos/Cesareas'"
+                  [type]="'text'"
+                  [placeHolder]="'Partos/Cesareas'"
+                  (cambio)="antecedentes.partos = $event;asignarValor()"
+                  [valor]="form.controls.partos.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="18"
+                  [label]="'Abortos Espontáneos'"
+                  [type]="'text'"
+                  [placeHolder]="'Abortos Espontáneos'"
+                  (cambio)="antecedentes.abortosEspontaneo = $event;asignarValor()"
+                  [valor]="form.controls.abortoEspontaneo.value"
+                ></app-inputs>
+                </div>
+
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <app-inputs
+                  [tabindex]="19"
+                  [label]="'Abortos Inducidos'"
+                  [type]="'text'"
+                  [placeHolder]="'Abortos Inducidos'"
+                  (cambio)="antecedentes.abortosInducido = $event;asignarValor()"
+                  [valor]="form.controls.abortoInducido.value"
+                ></app-inputs>
+                </div>
+
+            </div>
+          </mat-card>
+
+          <mat-card class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-card-title>Sistemas <mat-icon class="cursor-pointer" (click)="ocultarSistemas()">{{iconoSistemas}}</mat-icon></mat-card-title>
+            <div *ngIf="verSistemas" class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="20"
+                [label]="'Intestinal'"
+                [type]="'text'"
+                [placeHolder]="'Intestinal'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.intestinal = $event;asignarValor()"
+                [valor]="form.controls.intestinal.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="21"
+                [label]="'Cardíaco'"
+                [type]="'text'"
+                [placeHolder]="'Cardíaco'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.cardiaco = $event;asignarValor()"
+                [valor]="form.controls.cardiaco.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="22"
+                [label]="'Respiratorio'"
+                [type]="'text'"
+                [placeHolder]="'Respiratorio'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.respiratorio = $event;asignarValor()"
+                [valor]="form.controls.respiratorio.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="23"
+                [label]="'Digestivo'"
+                [type]="'text'"
+                [placeHolder]="'Digestivo'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.digestivo = $event;asignarValor()"
+                [valor]="form.controls.digestivo.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="24"
+                [label]="'Urogenital'"
+                [type]="'text'"
+                [placeHolder]="'Urogenital'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.urogenital = $event;asignarValor()"
+                [valor]="form.controls.urogenital.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="25"
+                [label]="'Óseo'"
+                [type]="'text'"
+                [placeHolder]="'Óseo'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.oseo = $event;asignarValor()"
+                [valor]="form.controls.oseo.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-form-field appearance="outline" class="w-100">
+                  <mat-label>Fuma</mat-label>
+                  <mat-select
+                    tabindex="26"
+                    formControlName="fuma"
+                    (selectionChange)="CargarAntecedentes()"
+                    [disabled]="edicion"
+                    [(ngModel)]="antecedentes.fuma"
+                  >
+                    <mat-option *ngFor="let fumas of fumador" [value]="fumas">
+                      {{ fumas }}
+                    </mat-option>
+                  </mat-select>
+                  <button class="clear" *ngIf="form.controls.fuma.value" matSuffix mat-icon-button (click)="form.controls.fuma.reset(); $event.stopPropagation()">
+                    <mat-icon>close</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="27"
+                [label]="'Otras drogas'"
+                [type]="'text'"
+                [placeHolder]="'Otras drogas'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.otrasDrogas = $event;asignarValor()"
+                [valor]="form.controls.otrasDrogas.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="28"
+                [label]="'Alteraciones en la visión'"
+                [type]="'text'"
+                [placeHolder]="'Alteraciones en la visión'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.alteracionesVision = $event;asignarValor()"
+                [valor]="form.controls.alteracionesVision.value"
+              ></app-inputs>
+              </div>
+            </div>
+          </mat-card>
+
+          <mat-card class="bg-section d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 mt-2">
+            <mat-card-title>Otros <mat-icon class="cursor-pointer" (click)="ocultarOtros()">{{iconoOtros}}</mat-icon></mat-card-title>
+            <div *ngIf="verOtros" class="d-flex row col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="29"
+                [label]="'Diabetes'"
+                [type]="'text'"
+                [placeHolder]="'Diabetes'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.diabetes = $event;asignarValor()"
+                [valor]="form.controls.diabetes.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="30"
+                [label]="'Dolores de Cabeza'"
+                [type]="'text'"
+                [placeHolder]="'Dolores de Cabeza'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.dolorCabeza = $event;asignarValor()"
+                [valor]="form.controls.dolorCabeza.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="31"
+                [label]="'Fracturas'"
+                [type]="'text'"
+                [placeHolder]="'Fracturas'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.fracturas = $event;asignarValor()"
+                [valor]="form.controls.fracturas.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="32"
+                [label]="'Tiroides'"
+                [type]="'text'"
+                [placeHolder]="'Tiroides'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.tiroides = $event;asignarValor()"
+                [valor]="form.controls.tiroides.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="33"
+                [label]="'Alimentación'"
+                [type]="'text'"
+                [placeHolder]="'Alimentación'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.alimentacion = $event;asignarValor()"
+                [valor]="form.controls.alimentacion.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <app-inputs
+                [tabindex]="34"
+                [label]="'Covid'"
+                [type]="'text'"
+                [placeHolder]="'Covid'"
+                [readOnly]="edicion"
+                (cambio)="antecedentes.covid = $event;asignarValor()"
+                [valor]="form.controls.covid.value"
+              ></app-inputs>
+              </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                  <mat-label>Accidentes</mat-label>
+                  <textarea
+                    type="text"
+                    matInput
+                    placeholder="Accidentes"
+                    rows="5"
+                    autocomplete="off"
+                    tabindex="35"
+                    [readonly]="edicion"
+                    [(ngModel)]="antecedentes.accidentes"
+                    formControlName="accidentes"
+                    (change)="asignarValor()"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+
               
-              (change)="CargarAntecedentes()"
-              formControlName="menstruacion"
-              >Menstruación</mat-checkbox
-            >
-          </div>
-
-          <app-inputs
-            [tabindex]="13"
-            [label]="'Duración'"
-            [type]="'text'"
-            [placeHolder]="'Duración'"
-            [readOnly]="edicion || !antecedentes.menstruacion"
-            (cambio)="asignarValor($event, 13)"
-            [valor]="form.controls.duracion.value"
-          ></app-inputs>
-
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="15"
-              [disabled]="edicion"
-              [(ngModel)]="antecedentes.embarazos"
-              class="m-18"
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                  <mat-label>Pérdidas</mat-label>
+                  <textarea
+                  type="text"
+                  matInput
+                  placeholder="Pérdidas"
+                  rows="5"
+                  autocomplete="off"
+                  tabindex="36"
+                  [readonly]="edicion"
+                  [(ngModel)]="antecedentes.perdidas"
+                  formControlName="perdidas"
+                  (change)="asignarValor()"
+                  ></textarea>
+                </mat-form-field>
+              </div>
               
-              (change)="CargarAntecedentes()"
-              formControlName="embarazos"
-              >Embarazos</mat-checkbox
-            >
-          </div>
-
-          <app-inputs
-            [tabindex]="17"
-            [label]="'Abortos Espontáneos'"
-            [type]="'text'"
-            [placeHolder]="'Abortos Espontáneos'"
-            [readOnly]="edicion || !antecedentes.embarazos"
-            (cambio)="asignarValor($event, 17)"
-            [valor]="form.controls.abortoEspontaneo.value"
-          ></app-inputs>
-        </div>
-        <div class="col-6">
-          <app-inputs
-            [tabindex]="12"
-            [label]="'Frecuencia'"
-            [type]="'text'"
-            [placeHolder]="'Frecuencia'"
-            [readOnly]="edicion || !antecedentes.menstruacion"
-            (cambio)="asignarValor($event, 12)"
-            [valor]="form.controls.frecuencia.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="14"
-            [label]="'Volumen'"
-            [type]="'text'"
-            [placeHolder]="'Volumen'"
-            [readOnly]="edicion || !antecedentes.menstruacion"
-            (cambio)="asignarValor($event, 14)"
-            [valor]="form.controls.volumen.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="16"
-            [label]="'Partos/Cesareas'"
-            [type]="'text'"
-            [placeHolder]="'Partos/Cesareas'"
-            [readOnly]="edicion || !antecedentes.embarazos"
-            (cambio)="asignarValor($event, 18)"
-            [valor]="form.controls.partos.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="18"
-            [label]="'Abortos Inducidos'"
-            [type]="'text'"
-            [placeHolder]="'Abortos Inducidos'"
-            [readOnly]="edicion || !antecedentes.embarazos"
-            (cambio)="asignarValor($event, 16)"
-            [valor]="form.controls.abortoInducido.value"
-          ></app-inputs>
-
-        </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                  <mat-label>Medicación</mat-label>
+                  <textarea
+                  type="text"
+                  matInput
+                  placeholder="Medicación"
+                  rows="5"
+                  autocomplete="off"
+                  tabindex="37"
+                  [readonly]="edicion"
+                  [(ngModel)]="antecedentes.medicacion"
+                  formControlName="medicacion"
+                  (change)="asignarValor()"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
+                  <mat-label>Otros</mat-label>
+                  <textarea
+                    type="text"
+                    matInput
+                    placeholder="Otros"
+                    rows="5"
+                    autocomplete="off"
+                    tabindex="38"
+                    [readonly]="edicion"
+                    [(ngModel)]="antecedentes.otros"
+                    (change)="asignarValor()"
+                    formControlName="otros"
+                  ></textarea>
+                </mat-form-field>
+              </div>
+            </div>
+          </mat-card>
+        </form>
       </div>
-
-      <!-- Sistemas -->
-      <div class="row">
-        <h3 class="mt-20">Sistemas</h3>
-        <div class="col-6">
-          <app-inputs
-            [tabindex]="19"
-            [label]="'Intestinal'"
-            [type]="'text'"
-            [placeHolder]="'Intestinal'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 19)"
-            [valor]="form.controls.intestinal.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="21"
-            [label]="'Cardíaco'"
-            [type]="'text'"
-            [placeHolder]="'Cardíaco'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 21)"
-            [valor]="form.controls.cardiaco.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="23"
-            [label]="'Respiratorio'"
-            [type]="'text'"
-            [placeHolder]="'Respiratorio'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 23)"
-            [valor]="form.controls.respiratorio.value"
-          ></app-inputs>
-
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Fuma</mat-label>
-            <mat-select
-              tabindex="25"
-              formControlName="fuma"
-              (selectionChange)="CargarAntecedentes()"
-              [disabled]="edicion"
-              [(ngModel)]="antecedentes.fuma"
-            >
-              <mat-option *ngFor="let fumas of fumador" [value]="fumas">
-                {{ fumas }}
-              </mat-option>
-            </mat-select>
-            <button class="clear" *ngIf="form.controls.fuma.value" matSuffix mat-icon-button (click)="form.controls.fuma.reset(); $event.stopPropagation()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div class="col-6">
-          <app-inputs
-            [tabindex]="20"
-            [label]="'Digestivo'"
-            [type]="'text'"
-            [placeHolder]="'Digestivo'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 20)"
-            [valor]="form.controls.digestivo.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="22"
-            [label]="'Urogenital'"
-            [type]="'text'"
-            [placeHolder]="'Urogenital'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 22)"
-            [valor]="form.controls.urogenital.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="24"
-            [label]="'Óseo'"
-            [type]="'text'"
-            [placeHolder]="'Óseo'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 24)"
-            [valor]="form.controls.oseo.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="26"
-            [label]="'Otras drogas'"
-            [type]="'text'"
-            [placeHolder]="'Otras drogas'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 26)"
-            [valor]="form.controls.otrasDrogas.value"
-          ></app-inputs>
-        </div>
-      </div>
-
-      <!-- Otros -->
-      <div class="row bg-section">
-        <h3 class="mt-20">Otros</h3>
-        <div class="col-6">
-          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
-            <mat-label>Accidentes</mat-label>
-            <textarea
-              type="text"
-              matInput
-              placeholder="Accidentes"
-              rows="5"
-              autocomplete="off"
-              (change)="asignarValor('', 27,$event)"
-              tabindex="27"
-              [readonly]="edicion"
-              [value]="form.controls.accidentes.value"
-            ></textarea>
-          </mat-form-field>
-
-          <div class="w-100 mb-38">
-            <mat-checkbox
-              tabindex="29"
-              [disabled]="edicion"
-              [(ngModel)]="antecedentes.diabetes"
-              class="m-18"
-              
-              (change)="CargarAntecedentes()"
-              formControlName="diabetes"
-              >Diabetes</mat-checkbox
-            >
-          </div>
-
-          <app-inputs
-            [tabindex]="31"
-            [label]="'Dolores de Cabeza'"
-            [type]="'text'"
-            [placeHolder]="'Dolores de Cabeza'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 31)"
-            [valor]="form.controls.dolorCabeza.value"
-          ></app-inputs>
-
-          <app-inputs
-            [tabindex]="33"
-            [label]="'Otros'"
-            [type]="'text'"
-            [placeHolder]="'Otros'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 33)"
-            [valor]="form.controls.otros.value"
-          ></app-inputs>
-
-          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
-            <mat-label>Pérdidas</mat-label>
-            <textarea
-              type="text"
-              matInput
-              placeholder="Pérdidas"
-              rows="5"
-              autocomplete="off"
-              (change)="asignarValor('', 35,$event)"
-              tabindex="35"
-              [readonly]="edicion"
-              [value]="form.controls.perdidas.value"
-            ></textarea>
-          </mat-form-field>
-
-
-        </div>
-        <div class="col-6">
-          <mat-form-field appearance="outline" appearance="outline" class="w-100 mb-20">
-            <mat-label>Medicación</mat-label>
-            <textarea
-              type="text"
-              matInput
-              placeholder="Medicación"
-              rows="5"
-              autocomplete="off"
-              (change)="asignarValor('', 27,$event)"
-              tabindex="29"
-              [readonly]="edicion"
-              [value]="form.controls.medicacion.value"
-            ></textarea>
-          </mat-form-field>
-
-
-
-          <app-inputs
-            [tabindex]="30"
-            [label]="'Fracturas'"
-            [type]="'text'"
-            [placeHolder]="'Fracturas'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 30)"
-            [valor]="form.controls.fracturas.value"
-          ></app-inputs>
-
-          <mat-form-field appearance="outline" class="w-100 mb-20">
-            <mat-label>Tiroides</mat-label>
-            <mat-select
-              tabindex="32"
-              formControlName="tiroides"
-              (selectionChange)="CargarAntecedentes()"
-              [(ngModel)]="antecedentes.tiroides"
-              [disabled]="edicion"
-            >
-              <mat-option *ngFor="let tiro of tiroides" [value]="tiro">
-                {{ tiro }}
-              </mat-option>
-            </mat-select>
-            <button class="clear" *ngIf="form.controls.tiroides.value" matSuffix mat-icon-button (click)="form.controls.tiroides.reset(); $event.stopPropagation()">
-              <mat-icon>close</mat-icon>
-            </button>
-          </mat-form-field>
-
-          <app-inputs
-            [tabindex]="34"
-            [label]="'Alimentación'"
-            [type]="'text'"
-            [placeHolder]="'Alimentación'"
-            [readOnly]="edicion"
-            (cambio)="asignarValor($event, 34)"
-            [valor]="form.controls.alimentacion.value"
-          ></app-inputs>
-        </div>
-      </div>
-    </div>
-  </form>
-</mat-card>
+    </mat-card>
+  </div>

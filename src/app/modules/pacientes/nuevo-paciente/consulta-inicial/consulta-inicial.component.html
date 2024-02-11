@@ -153,41 +153,6 @@
 
     <div class="d-flex row w-100">
 
-      <div class="d-flex justify-content-center align-items-center h-63 w-10">
-        <mat-checkbox
-        tabindex="10"
-        [disabled]="edicion"
-        (change)="CargarConsultaInicial($event, 10, form.controls.covid)"
-        formControlName="covid"
-        >Covid</mat-checkbox
-        >
-      </div>
-
-      <div class="w-40">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Fecha Covid</mat-label>
-          <input
-            [tabindex]="11"
-            matInput
-            readonly="true"
-            autocomplete="off"
-            #dateInputCovid
-            (dateChange)="changeDate(dateInputCovid, 2)"
-            onclick="changeDate(dateInputCovid)"
-            [max]="fecha"
-            [matDatepicker]="selectorCovid"
-            [value]="form.controls.fechaCovid.value"
-          />
-          <mat-datepicker-toggle
-            [disabled]="edicion || !form.controls.covid.value"
-            mat-datepicket-toggle
-            matSuffix
-            [for]="selectorCovid"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #selectorCovid></mat-datepicker>
-        </mat-form-field>
-      </div>
-
       <app-inputs
         class="w-50"
         [tabindex]="12"
@@ -195,7 +160,6 @@
         [type]="'text'"
         [placeHolder]="'Otros'"
         [requerido]="false"
-        [readOnly]="edicion || !form.controls.covid.value"
         (cambio)="CargarConsultaInicial($event, 12, form.controls.otros)"
         [valor]="form.controls.otros.value"
         [max]="maximo"

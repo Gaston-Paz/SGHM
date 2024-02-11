@@ -34,6 +34,10 @@ export interface Antecedente{
     otrasDrogas?:string;
     fuma?:string;
     protesis?:string;
-    diabetes?:boolean;
+    diabetes?:string;
     contencion?:boolean;
+    alteracionesVision?:string;
+    covid?:string;
+    menopausia?:string;
+    observacionesOdontologicas?:string;
 }
