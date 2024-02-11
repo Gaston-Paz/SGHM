@@ -182,7 +182,6 @@ export class ListarPacientesComponent implements OnInit, OnDestroy {
   }
 
   VerAntecedentes() {
-    console.log(this.itemSeleccionado.idPaciente!)
     this._serviceListados
       .ObtenerAntecedentePorId(this.itemSeleccionado.idPaciente!)
       .subscribe(
